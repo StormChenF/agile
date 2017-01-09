@@ -1,0 +1,186 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.agile</groupId>
+  <artifactId>agile</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>agile Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+<!--资源库-->
+  <repositories>
+    <repository>
+      <id>aliyun</id>
+      <layout>default</layout>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>maven</id>
+      <url>http://repo1.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>springframework</id>
+      <url>http://maven.springframework.org/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>mvnrepository</id>
+      <url>http://mvnrepository.com/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
+<!--依赖资源包-->
+  <dependencies>
+    <!--servlet api支持-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.0-b01</version>
+    </dependency>
+    <!--spring Spring context的扩展支持，用于MVC方面-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>5.0.0.M4</version>
+    </dependency>
+    <!--spring MVC 框架-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>5.0.0.M4</version>
+    </dependency>
+    <!--xml 视图解析-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-oxm</artifactId>
+      <version>5.0.0.M4</version>
+    </dependency>
+    <!--json 视图解析-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+    <!--xml解析工具-->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.4.9</version>
+    </dependency>
+    <!--pdf 视图解析-->
+    <dependency>
+      <groupId>com.lowagie</groupId>
+      <artifactId>itext</artifactId>
+      <version>4.2.2</version>
+    </dependency>
+    <!--xls 试图解析-->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.16-beta1</version>
+    </dependency>
+    <!--日志-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <version>2.7</version>
+    </dependency>
+    <!--文件上传-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+
+    <!--&lt;!&ndash;spring 连库包&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-jdbc</artifactId>-->
+      <!--<version>5.0.0.M4</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash;spring 整合第三方的orm实现，如hibernate，ibatis，jdo以及spring 的jpa实现&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-orm</artifactId>-->
+      <!--<version>5.0.0.M4</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash;spring 为JDBC、Hibernate、JDO、JPA、Beans等提供的一致的声明式和编程式事务管理支持&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-tx</artifactId>-->
+      <!--<version>5.0.0.M4</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash;spring websocket支持&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-websocket</artifactId>-->
+      <!--<version>5.0.0.M4</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash;spring redis支持&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.data</groupId>-->
+      <!--<artifactId>spring-data-redis</artifactId>-->
+      <!--<version>2.0.0.M1</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash;spring webservice支持&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.ws</groupId>-->
+      <!--<artifactId>spring-ws-core</artifactId>-->
+      <!--<version>2.4.0.RELEASE</version>-->
+    <!--</dependency>-->
+    <!--spring webservice的xml支持-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.ws</groupId>-->
+      <!--<artifactId>spring-xml</artifactId>-->
+      <!--<version>2.4.0.RELEASE</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash;spring webservice相关支持&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.jvnet.jax-ws-commons.spring</groupId>-->
+      <!--<artifactId>jaxws-spring</artifactId>-->
+      <!--<version>1.9</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash;mybatis与spring整合&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.mybatis</groupId>-->
+      <!--<artifactId>mybatis-spring</artifactId>-->
+      <!--<version>1.3.0</version>-->
+    <!--</dependency>-->
+
+
+    <!--单元测试-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>agile</finalName>
+  </build>
+</project>
