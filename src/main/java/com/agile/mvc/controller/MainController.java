@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 /**
  * Created by tongmeng on 2017/1/6.
@@ -37,6 +39,7 @@ public class MainController {
     private String authToken;
     //服务对象
     private InterfaceBusiness service;
+
 
 
     /**
@@ -63,7 +66,11 @@ public class MainController {
 
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
         service =  StringUtil.lineToCamel(service);//设置服务名
-        method =  StringUtil.lineToCamel(method);//设置服务名
+        method =  StringUtil.urlToMethod(method);//设置服务名
+        String ip = request.getRemoteAddr();
+        StringBuffer url = request.getRequestURL();
+
+        //-------------------------------参数校验-----------------------------------
         if (!StringUtil.isEmpty(forward)){//如果存在转发请求则将其放入返回结果信息当中
             modelAndView.setViewName(URLEncoder.encode(forward, "UTF-8"));
         }
@@ -75,11 +82,18 @@ public class MainController {
             modelAndView.addObject(new Return(RETURN.NO_METHOD,null));
             return modelAndView;
         }else {
-            //驼峰式首字母转小写获取方法名
-            method = method.substring(0,1).toLowerCase()+method.substring(1);
-            //调用请求方法
+
+            //调用目标方法前处理入参
+            handleRequestUrl(request,authToken,service,method);
+
+            //调用目标方法
             RETURN returnState = this.getService().excuteMethod(method);
+
+            //调用目标方法后处理视图
             modelAndView.addObject(new Return(returnState,this.getService().getOutParam()));
+
+            //响应数据装填
+//            modelAndView.addObject(this.getService().getOutParam());
         }
         return modelAndView;
     }
@@ -98,6 +112,28 @@ public class MainController {
         }catch (Exception e){
             return null;
         }
+    }
+
+    private void handleRequestUrl(HttpServletRequest request, String authToken,String service,String method) throws UnsupportedEncodingException {
+        HashMap<String, Object> inParam = new HashMap<String, Object>();
+        inParam.put("authoken",authToken);
+        inParam.put("service",service);
+        inParam.put("method",method);
+        inParam.put("ip", request.getRemoteAddr());
+        inParam.put("url", request.getRequestURL());
+
+        String queryString = request.getQueryString();
+        if (!StringUtil.isEmpty(queryString)){
+            String[] params = queryString.split("&"),paramContainer=null;
+            for (String param:params) {
+                paramContainer = param.split("=");
+                if (paramContainer.length == 2){
+                    inParam.put(paramContainer[0],paramContainer[1]);
+                }
+            }
+        }
+        //将处理过的所有请求参数传入调用服务对象
+        this.getService().setInParam(inParam);
     }
 
     public ApplicationContext getApplicationContext() {
@@ -123,4 +159,5 @@ public class MainController {
     public void setService(InterfaceBusiness service) {
         this.service = service;
     }
+
 }

@@ -4,6 +4,7 @@ import com.agile.constant.RETURN;
 import com.agile.util.ObjectUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class AbstractBusiness implements InterfaceBusiness {
      * @return  返回执行结果
      * @throws Exception
      */
+    @Transactional("txManagerLocal")
     public RETURN excuteMethod(String methodName) {
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);

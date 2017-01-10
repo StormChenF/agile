@@ -5,35 +5,55 @@ package com.agile.constant;
  */
 public final class RETURN {
     //响应状态码
-    private String errorCode = "00000";
+    private String code = "00000";
     //响应信息
-    private String errorMsg = "操作执行成功";
+    private String msg = "操作执行成功";
+    //请求地址
+    private String url = "";
+    //请求IP
+    private String ip = "";
 
     public static RETURN SUCCESS = new RETURN("000000","服务执行成功！");
     public static RETURN NO_SERVICE = new RETURN("100000","请求服务不存在！");
     public static RETURN NO_METHOD = new RETURN("200000","请求方法不存在！");
 
-    private RETURN(String errorCode, String errorMsg) {
-        this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
+    public RETURN(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
     public RETURN() {
     }
 
-    public String getErrorCode() {
-        return errorCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

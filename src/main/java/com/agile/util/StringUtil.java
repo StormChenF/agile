@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public final class StringUtil extends StringUtils{
 
     public static String lineToCamel(String param){
-        if (param == null || "".equals(param.trim())){
+        if (isEmpty(param)){
             return "";
         }else{
             param = param.toLowerCase();
@@ -25,5 +25,14 @@ public final class StringUtil extends StringUtils{
             cacheStr.replace(position-1,position+1,cacheStr.substring(position,position+1).toUpperCase());
         }
         return cacheStr.toString();
+    }
+
+    public static String urlToMethod(String param){
+        String method = lineToCamel(param);
+        if (isEmpty(method)){
+            return "";
+        }else{
+            return method.substring(0,1).toLowerCase()+method.substring(1);
+        }
     }
 }
