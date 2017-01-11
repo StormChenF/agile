@@ -2,7 +2,7 @@ package com.agile.mvc.controller;
 
 
 import com.agile.constant.RETURN;
-import com.agile.format.Return;
+import com.agile.format.HEAD;
 import com.agile.mvc.service.InterfaceBusiness;
 import com.agile.util.ObjectUtil;
 import com.agile.util.StringUtil;
@@ -65,21 +65,19 @@ public class MainController {
     ) throws Exception {
 
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
-        service =  StringUtil.lineToCamel(service);//设置服务名
-        method =  StringUtil.urlToMethod(method);//设置服务名
-        String ip = request.getRemoteAddr();
-        StringBuffer url = request.getRequestURL();
+        service =  StringUtil.toServerName(service);//设置服务名
+        method =  StringUtil.toMethodName(method);//设置服务名
 
         //-------------------------------参数校验-----------------------------------
         if (!StringUtil.isEmpty(forward)){//如果存在转发请求则将其放入返回结果信息当中
             modelAndView.setViewName(URLEncoder.encode(forward, "UTF-8"));
         }
         if (StringUtil.isEmpty(service) || ObjectUtil.isEmpty(this.getService(service))){//判断服务存在
-            modelAndView.addObject(new Return(RETURN.NO_SERVICE,null));
+            modelAndView.addObject("head",new HEAD(RETURN.NO_SERVICE,request));
             return modelAndView;
         }
         if (StringUtil.isEmpty(method)){//判断方法存在
-            modelAndView.addObject(new Return(RETURN.NO_METHOD,null));
+            modelAndView.addObject("head",new HEAD(RETURN.NO_METHOD,request));
             return modelAndView;
         }else {
 
@@ -90,10 +88,10 @@ public class MainController {
             RETURN returnState = this.getService().excuteMethod(method);
 
             //调用目标方法后处理视图
-            modelAndView.addObject(new Return(returnState,this.getService().getOutParam()));
+            modelAndView.addObject("head",new HEAD(returnState,request));
 
             //响应数据装填
-//            modelAndView.addObject(this.getService().getOutParam());
+            modelAndView.addObject("result",this.getService().getOutParam());
         }
         return modelAndView;
     }
@@ -113,7 +111,7 @@ public class MainController {
             return null;
         }
     }
-
+    //处理入参
     private void handleRequestUrl(HttpServletRequest request, String authToken,String service,String method) throws UnsupportedEncodingException {
         HashMap<String, Object> inParam = new HashMap<String, Object>();
         inParam.put("authoken",authToken);

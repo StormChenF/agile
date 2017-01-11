@@ -15,19 +15,11 @@ import java.util.LinkedHashMap;
  */
 public class AbstractBusiness implements InterfaceBusiness {
     //日志工具
-    protected Logger logger = LogManager.getLogger(this.getClass());
+    private Logger logger = LogManager.getLogger(this.getClass());
     //输入
     private HashMap<String, Object> inParam = new LinkedHashMap<String, Object>();
     //输出
     private HashMap<String, Object> outParam = new LinkedHashMap<String, Object>();
-
-    public void setInParam(HashMap<String, Object> inParam) {
-        this.inParam = inParam;
-    }
-
-    public HashMap<String, Object> getOutParam() {
-        return this.outParam;
-    }
 
     /**
      * 根据对象及方法名通过反射执行该对象的指定方法
@@ -43,6 +35,18 @@ public class AbstractBusiness implements InterfaceBusiness {
         }catch (Exception e){
             return RETURN.NO_METHOD;
         }
+    }
+
+    public final void setInParam(HashMap<String, Object> inParam) {
+        this.inParam = inParam;
+    }
+
+    public HashMap<String, Object> getOutParam() {
+        return this.outParam;
+    }
+
+    public void setOutParam(HashMap<String, Object> outParam) {
+        this.outParam = outParam;
     }
 
 }

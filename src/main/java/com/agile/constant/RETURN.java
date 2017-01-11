@@ -8,10 +8,6 @@ public final class RETURN {
     private String code = "00000";
     //响应信息
     private String msg = "操作执行成功";
-    //请求地址
-    private String url = "";
-    //请求IP
-    private String ip = "";
 
     public static RETURN SUCCESS = new RETURN("000000","服务执行成功！");
     public static RETURN NO_SERVICE = new RETURN("100000","请求服务不存在！");
@@ -20,9 +16,6 @@ public final class RETURN {
     public RETURN(String code, String msg) {
         this.code = code;
         this.msg = msg;
-    }
-
-    public RETURN() {
     }
 
     public String getCode() {
@@ -39,21 +32,5 @@ public final class RETURN {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
     }
 }

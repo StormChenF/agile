@@ -10,15 +10,15 @@ import java.util.regex.Pattern;
  */
 public final class StringUtil extends StringUtils{
 
-    public static String lineToCamel(String param){
-        if (isEmpty(param)){
-            return "";
-        }else{
-            param = param.toLowerCase();
-        }
+    public static String signToCamel(String param){
+        if (isEmpty(param))return "";
+
+        Matcher testMc = Pattern.compile("[-_*%#$@+=()&^!~`|.,]").matcher(param);
+        if(!testMc.find())return param;
+
+        param = param.toLowerCase();
         StringBuffer cacheStr = new StringBuffer(param);
-        cacheStr.replace(0,1,cacheStr.substring(0,1).toUpperCase());
-        Matcher mc = Pattern.compile("[-_*%]").matcher(param);
+        Matcher mc = Pattern.compile("[-_*%#$@+=()&^!~`|.,]").matcher(param);
         int i = 0;
         while (mc.find()){
             int position=mc.end()-(i++);
@@ -27,12 +27,15 @@ public final class StringUtil extends StringUtils{
         return cacheStr.toString();
     }
 
-    public static String urlToMethod(String param){
-        String method = lineToCamel(param);
-        if (isEmpty(method)){
-            return "";
-        }else{
-            return method.substring(0,1).toLowerCase()+method.substring(1);
-        }
+    public static String toServerName(String param){
+        if (isEmpty(param)) return "";
+        String service = signToCamel(param);
+        return service.substring(0,1).toUpperCase()+service.substring(1);
+    }
+
+    public static String toMethodName(String param){
+        if (isEmpty(param)) return "";
+        String method = signToCamel(param);
+        return method.substring(0,1).toLowerCase()+method.substring(1);
     }
 }
