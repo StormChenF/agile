@@ -16,13 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by tongmeng on 2017/1/6.
@@ -80,7 +85,6 @@ public class MainController {
             modelAndView.addObject("head",new HEAD(RETURN.NO_METHOD,request));
             return modelAndView;
         }else {
-
             //调用目标方法前处理入参
             handleRequestUrl(request,authToken,service,method);
 
@@ -119,7 +123,28 @@ public class MainController {
         inParam.put("method",method);
         inParam.put("ip", request.getRemoteAddr());
         inParam.put("url", request.getRequestURL());
-
+        //---------------------------------文件上传解析------------------------------------
+        //创建一个通用的多部分解析器
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        if (multipartResolver.isMultipart(request)){
+            HashMap<String, Object> inParamFile = new HashMap<String, Object>();
+            //转换成多部分request
+            MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+            //获取所有文件提交的input名
+            Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+            while (iterator.hasNext()){
+                MultipartFile file = multipartHttpServletRequest.getFile(iterator.next());
+                if (ObjectUtil.isEmpty(file)){
+                    //取得当前文件名
+                    String fileName = file.getOriginalFilename();
+                    //判断文件是否存在
+                    if (StringUtil.isEmpty(fileName)){
+                        inParamFile.put(fileName,file);
+                    }
+                }
+            }
+        }
+        //---------------------------------请求参数解析------------------------------------
         String queryString = request.getQueryString();
         if (!StringUtil.isEmpty(queryString)){
             String[] params = queryString.split("&"),paramContainer=null;
