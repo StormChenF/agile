@@ -11,10 +11,11 @@ import java.util.HashMap;
  */
 @Service("SystemService")
 public class SystemService extends AbstractBusiness {
-    public RETURN addDictionary() throws Exception {
-        HashMap<String,Object> s = new HashMap<String, Object>();
-        s.put("aa","bb");
-        this.setOutParam(s);
+    public RETURN homepage() throws Exception {
         return RETURN.SUCCESS;
+    }
+
+    public RETURN unLogin() throws Exception {
+        return RETURN.NO_LOGIN;
     }
 }

@@ -6,9 +6,10 @@ import com.agile.format.HEAD;
 import com.agile.mvc.service.InterfaceBusiness;
 import com.agile.util.ObjectUtil;
 import com.agile.util.StringUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -39,13 +39,20 @@ public class MainController {
     @Autowired
     ApplicationContext applicationContext;
     //日志工具
-    protected Logger logger = LogManager.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //认证令牌
     private String authToken;
     //服务对象
     private InterfaceBusiness service;
-
-
+    //工程名
+    @Value("${agile.project.name}")
+    private String appName;
+    //免认证模块
+    @Value("${agile.project.nonAuthrnticationMoudule}")
+    private String nonAuthrnticationMoudule;
+    //免认证服务
+    @Value("${agile.project.nonAuthrnticationService}")
+    private String nonAuthrnticationService;
 
     /**
      *
@@ -58,10 +65,11 @@ public class MainController {
      * @param cacheToken 缓存令牌
      * @return
      */
-    @RequestMapping(value = "/{service}/{method}",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/{module}/{service}/{method}",method = {RequestMethod.POST,RequestMethod.GET})
     public ModelAndView processor(
             HttpServletRequest request,
             HttpServletResponse response,
+            @PathVariable String module,
             @PathVariable String service,
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
@@ -73,7 +81,6 @@ public class MainController {
         service =  StringUtil.toServerName(service);//设置服务名
         method =  StringUtil.toMethodName(method);//设置服务名
 
-        //-------------------------------参数校验-----------------------------------
         if (!StringUtil.isEmpty(forward)){//如果存在转发请求则将其放入返回结果信息当中
             modelAndView.setViewName(URLEncoder.encode(forward, "UTF-8"));
         }
@@ -115,10 +122,19 @@ public class MainController {
             return null;
         }
     }
-    //处理入参
+
+    /**
+     * 根据servlet请求、认证信息、目标服务名、目标方法名处理入参
+     * @param request   servlet请求
+     * @param authToken 认证信息
+     * @param service   目标服务名
+     * @param method    目标方法名
+     * @throws UnsupportedEncodingException
+     */
     private void handleRequestUrl(HttpServletRequest request, String authToken,String service,String method) throws UnsupportedEncodingException {
         HashMap<String, Object> inParam = new HashMap<String, Object>();
         inParam.put("authoken",authToken);
+        inParam.put("app",appName);
         inParam.put("service",service);
         inParam.put("method",method);
         inParam.put("ip", request.getRemoteAddr());
