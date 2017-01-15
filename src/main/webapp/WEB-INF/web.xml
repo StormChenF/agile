@@ -71,7 +71,7 @@
     <!--log4j2 配置-->
     <context-param>
         <param-name>log4jConfiguration</param-name>
-        <param-value>classpath:com/agile/configure/log4j2.properties</param-value>
+        <param-value>classpath:com/agile/configure/agile-log4j2.properties</param-value>
     </context-param>
     <context-param>
         <param-name>isLog4jAutoInitializationDisabled</param-name>

@@ -9,11 +9,11 @@
 " default-autowire="byName" default-lazy-init="true">
 
     <!--免认证-->
-    <security:http pattern="*.png" security="none"/>
-    <security:http pattern="*.jpeg" security="none"/>
-    <security:http pattern="*.gif" security="none"/>
-    <security:http pattern="/${agile.project.name}/systemService/unLogin*" security="none"/>
-
+    <security:http pattern="/**/*.png" security="none"/>
+    <security:http pattern="/**/*.jpg" security="none"/>
+    <security:http pattern="/**/*.jpeg" security="none"/>
+    <security:http pattern="/**/*.gif" security="none"/>
+    <security:http pattern="${agile.security.unloginURL}" security="none"/>
     <security:http use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint">
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
         <security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
@@ -52,4 +52,9 @@
 
     <bean id="authenticationProvider" class="com.agile.security.AgileAuthenticationProvider"/>
     <bean id="userDetailsService" class="com.agile.security.AgileUserDetailsService"/>
+
+    <!-- 定义上下文返回的消息的国际化 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="com.agile.configure.agile-security-message"/>
+    </bean>
 </beans>

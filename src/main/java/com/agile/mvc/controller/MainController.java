@@ -76,7 +76,7 @@ public class MainController {
             @RequestParam(value = "auth-token", required = false) String authToken,
             @RequestParam(value = "cache-token", required = false) String cacheToken
     ) throws Exception {
-
+        logger.info("开始");
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
         service =  StringUtil.toServerName(service);//设置服务名
         method =  StringUtil.toMethodName(method);//设置服务名
