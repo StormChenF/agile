@@ -193,7 +193,6 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-context</artifactId>
         </exclusion>
-
       </exclusions>
     </dependency>
     <!--spring超媒体资源-->
@@ -312,19 +311,28 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>6.0.5</version>
     </dependency>
+    <!--消息队列-->
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+      <version>1.1.2.RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
-    <!--&lt;!&ndash;spring 连库包&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework</groupId>-->
-      <!--<artifactId>spring-jdbc</artifactId>-->
-      <!--<version>5.0.0.M4</version>-->
-    <!--</dependency>-->
-    <!--&lt;!&ndash;spring 整合第三方的orm实现，如hibernate，ibatis，jdo以及spring 的jpa实现&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework</groupId>-->
-      <!--<artifactId>spring-orm</artifactId>-->
-      <!--<version>5.0.0.M4</version>-->
-    <!--</dependency>-->
+
     <!--&lt;!&ndash;spring websocket支持&ndash;&gt;-->
     <!--<dependency>-->
       <!--<groupId>org.springframework</groupId>-->
@@ -355,12 +363,7 @@
       <!--<artifactId>jaxws-spring</artifactId>-->
       <!--<version>1.9</version>-->
     <!--</dependency>-->
-    <!--&lt;!&ndash;mybatis与spring整合&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.mybatis</groupId>-->
-      <!--<artifactId>mybatis-spring</artifactId>-->
-      <!--<version>1.3.0</version>-->
-    <!--</dependency>-->
+
 
 
     <!--单元测试-->
