@@ -1,4 +1,4 @@
-package com.agile.security;
+package com.agile.common.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

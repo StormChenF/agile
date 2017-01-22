@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--数据库链接信息-->
+        <property name="driverClassName" value="${agile.druid.driver_class_name}"/>
+        <property name="url" value="${agile.druid.jdbc_url}"/>
+        <property name="username" value="${agile.druid.username}"/>
+        <property name="password" value="${agile.druid.password}"/>
+        
+        <!--初始化连接数量-->
+        <property name="initialSize" value="${agile.druid.initia_size}"/>
+
+        <!--最小空闲数量-->
+        <property name="minIdle" value="${agile.druid.min_idle}"/>
+
+        <!--最大并发量-->
+        <property name="maxActive" value="${agile.druid.max_active}"/>
+        
+        <!--配置获取链接等待超时时间-->
+        <property name="maxWait" value="${agile.druid.max_wait}"/>
+
+        <!--超过时间限制是否回收-->
+        <property name="removeAbandoned" value="${agile.druid.remove_abandoned}"/>
+
+        <!--上述回收超时时间-->
+        <property name="removeAbandonedTimeout" value="${agile.druid.remove_abandoned_timeout}"/>
+
+        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒-->
+        <property name="timeBetweenEvictionRunsMillis" value="${agile.druid.time_between_eviction_runs_millis}"/>
+
+        <!--配置一个连接在池中最小生存的时间，单位是毫秒-->
+        <property name="minEvictableIdleTimeMillis" value="${agile.druid.min_evictabel_idle_time_millis}"/>
+
+        <!--用来检测连接是否有效的sql，要求是一个查询语句-->
+        <property name="validationQuery" value="${agile.druid.validation_query}"/>
+
+        <!--申请连接的时候检测-->
+        <property name="testWhileIdle" value="${agile.druid.test_while_idle}"/>
+
+        <!--申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能-->
+        <property name="testOnBorrow" value="${agile.druid.test_on_borrow}"/>
+
+        <!--归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能-->
+        <property name="testOnReturn" value="${agile.druid.test_on_return}"/>
+
+        <!--打开PScache-->
+        <property name="poolPreparedStatements" value="${agile.druid.pool_prepared_statements}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${agile.druid.max_pool_prepared_statement_per_connection_size}"/>
+
+        <!--配置监控统计拦截filter，去掉后监控界面sql无法统计-->
+        <property name="filters" value="${agile.druid.filters}"/>
+    </bean>
+</beans>

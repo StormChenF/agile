@@ -3,23 +3,20 @@
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
          updateCheck="false">
 
-    <diskStore path="java.io.tmpdir"/>
+    <diskStore path="com.agile.common.temp"/>
 
-    <defaultCache eternal="false"
-                  maxEntriesLocalHeap="1000"
-                  overflowToDisk="false"
-                  diskPersistent="false"
-                  timeToIdleSeconds="3600"
-                  timeToLiveSeconds="3600"/>
+    <defaultCache eternal="true"
+                  maxEntriesLocalHeap="30000"
+                  overflowToDisk="false"/>
 
-    <cache name="baseCache"
+    <cache name="securityCache"
            eternal="false"
-           maxEntriesLocalHeap="200"
-           overflowToDisk="false"
-           diskPersistent="false"
-           timeToIdleSeconds="600"
-           statistics="true"
-           timeToLiveSeconds="600"/>
+           maxElementsInMemory="10000"
+           overflowToDisk="true"
+           diskPersistent="true"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           diskExpiryThreadIntervalSeconds="600"/>
 
     <!--
         eternal="false"   // 元素是否永恒,如果是就永不过期(必须设置)

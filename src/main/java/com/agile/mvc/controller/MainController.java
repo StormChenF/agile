@@ -1,11 +1,11 @@
 package com.agile.mvc.controller;
 
 
-import com.agile.constant.RETURN;
-import com.agile.format.HEAD;
-import com.agile.mvc.service.InterfaceBusiness;
-import com.agile.util.ObjectUtil;
-import com.agile.util.StringUtil;
+import com.agile.common.base.RETURN;
+import com.agile.common.base.HEAD;
+import com.agile.common.base.InterfaceBusiness;
+import com.agile.common.util.ObjectUtil;
+import com.agile.common.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +48,10 @@ public class MainController {
     @Value("${agile.project.name}")
     private String appName;
     //免认证模块
-    @Value("${agile.project.nonAuthrnticationMoudule}")
+    @Value("${agile.project.non_authrntication_moudule}")
     private String nonAuthrnticationMoudule;
     //免认证服务
-    @Value("${agile.project.nonAuthrnticationService}")
+    @Value("${agile.project.non_authrntication_service}")
     private String nonAuthrnticationService;
 
     /**

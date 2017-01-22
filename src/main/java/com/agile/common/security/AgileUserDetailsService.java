@@ -1,15 +1,9 @@
-package com.agile.security;
+package com.agile.common.security;
 
-import com.agile.mvc.model.entity.AdminUserDetails;
-import com.agile.util.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import javax.annotation.Resource;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by tongmeng on 2017/1/13.
@@ -19,8 +13,8 @@ public class AgileUserDetailsService implements UserDetailsService {
 //    @Resource
 //    private AdminService adminService;
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AdminUserDetails userDetails = new AdminUserDetails();
+    public AgileUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AgileUserDetails userDetails = new AgileUserDetails();
 //        userDetails.getUsername(username);
 //
 //        ///加载用户基本信息

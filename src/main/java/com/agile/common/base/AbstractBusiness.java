@@ -1,7 +1,5 @@
-package com.agile.mvc.service;
+package com.agile.common.base;
 
-import com.agile.constant.RETURN;
-import com.agile.util.ObjectUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +25,7 @@ public class AbstractBusiness implements InterfaceBusiness {
      * @return  返回执行结果
      * @throws Exception
      */
-    @Transactional("txManagerLocal")
+    @Transactional("transationManager")
     public RETURN excuteMethod(String methodName) {
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);

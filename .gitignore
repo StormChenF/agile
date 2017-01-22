@@ -61,3 +61,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.idea/
+src/main/java/com/agile/common/base/HEAD.java
+src/main/java/com/agile/common/service/
+src/main/java/com/agile/common/util/BeanUtil.java

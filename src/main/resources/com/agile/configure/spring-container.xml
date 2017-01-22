@@ -11,4 +11,6 @@
     <import resource="classpath:com/agile/configure/spring-web-mvc.xml"/>
     <import resource="classpath:com/agile/configure/spring-security.xml"/>
     <import resource="classpath:com/agile/configure/spring-cache.xml"/>
+    <import resource="classpath:com/agile/configure/spring-druid.xml"/>
+    <import resource="classpath:com/agile/configure/spring-jpa.xml"/>
 </beans>

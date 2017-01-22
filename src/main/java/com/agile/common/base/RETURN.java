@@ -1,4 +1,4 @@
-package com.agile.constant;
+package com.agile.common.base;
 
 /**
  * Created by tongmeng on 2017/1/9.

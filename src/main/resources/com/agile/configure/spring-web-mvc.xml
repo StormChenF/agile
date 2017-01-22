@@ -8,6 +8,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd
 ">
     <!--扫描主控制器注解-->
+    <context:component-scan base-package="com.agile.common.service"/>
     <context:component-scan base-package="com.agile.mvc"/>
 
     <!--ContentNegotiatingViewResolver视图解析器路由配置-->

@@ -9,13 +9,12 @@
 
     <cache:annotation-driven cache-manager="cacheManager"/>
     <!-- 启用用户的缓存功能 -->
-    <bean id="userCache"
-          class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
+    <bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
         <property name="cache" ref="userEhCache" />
     </bean>
 
     <bean id="userEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-        <property name="cacheName" value="userCache" />
+        <property name="cacheName" value="securityCache" />
         <property name="cacheManager" ref="ehcacheManager" />
     </bean>
 
@@ -26,5 +25,6 @@
 
     <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:com/agile/configure/agile-ehcache.xml"/>
+        <property name="shared" value="true"/>
     </bean>
 </beans>

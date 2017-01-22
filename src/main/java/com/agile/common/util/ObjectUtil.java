@@ -1,4 +1,4 @@
-package com.agile.util;
+package com.agile.common.util;
 
 import org.springframework.util.ObjectUtils;
 
