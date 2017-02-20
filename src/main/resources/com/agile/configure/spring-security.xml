@@ -56,6 +56,6 @@
 
     <!-- 定义上下文返回的消息的国际化 -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="com.agile.configure.agile-security-message"/>
+        <property name="basename" value="com.agile.configure.agile-message"/>
     </bean>
 </beans>
