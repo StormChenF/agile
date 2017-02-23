@@ -15,6 +15,8 @@ public final class RETURN {
     public static RETURN NO_METHOD = new RETURN("300000","请求方法不存在！");
     public static RETURN NO_LOGIN = new RETURN("400000","账号尚未登陆！");
     public static RETURN LOGIN_OUT = new RETURN("500000","账号成功登出！");
+    public static RETURN ERROR_LOGIN = new RETURN("500000","账号成功登出！");
+    public static RETURN INVALID_SESSION = new RETURN("500000","账号成功登出！");
 
     public RETURN(String code, String msg) {
         this.code = code;

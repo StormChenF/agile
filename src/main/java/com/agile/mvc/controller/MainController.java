@@ -133,6 +133,7 @@ public class MainController {
      */
     private InterfaceBusiness getService(String serviceName){
         try {
+            this.getApplicationContext().getBeanDefinitionNames();
             Object serviceTry = this.getApplicationContext().getBean(serviceName);
             service = (InterfaceBusiness) serviceTry;
             this.setService(service);
