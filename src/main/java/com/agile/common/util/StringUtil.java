@@ -32,22 +32,11 @@ public final class StringUtil extends StringUtils{
     }
 
     /**
-     * 字符串转服务类名
-     * @param param 任意字符串
-     * @return
-     */
-    public static String toServerName(String param){
-        if (isEmpty(param)) return "";
-        String service = signToCamel(param);
-        return service.substring(0,1).toUpperCase()+service.substring(1);
-    }
-
-    /**
      * 字符串转方法名
      * @param param 任意字符串
      * @return
      */
-    public static String toMethodName(String param){
+    public static String toName(String param){
         if (isEmpty(param)) return "";
         String method = signToCamel(param);
         return method.substring(0,1).toLowerCase()+method.substring(1);

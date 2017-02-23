@@ -86,8 +86,8 @@ public class MainController {
 
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
-        service =  StringUtil.toServerName(service);//设置服务名
-        method =  StringUtil.toMethodName(method);//设置服务名
+        service =  StringUtil.toName(service);//设置服务名
+        method =  StringUtil.toName(method);//设置服务名
 
         //判断模块存在
         if (StringUtil.isEmpty(module) || !module.equals(moduleName)){

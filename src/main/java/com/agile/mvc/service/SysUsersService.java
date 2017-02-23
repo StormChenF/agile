@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by tongmeng on 2017/1/18.
  */
-@Service("SysUsersService")
+@Service
 public class SysUsersService extends AbstractBusiness {
 
     @Autowired
