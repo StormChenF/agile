@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 /**
  * Created by tongmeng on 2017/2/23.
  */
-public class ServerUtil {
+public class ServletUtil {
     /**
      * 获取http请求的真实IP地址
      * @param request

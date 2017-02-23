@@ -1,5 +1,6 @@
 package com.agile.common.base;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 public interface InterfaceBusiness {
@@ -10,5 +11,5 @@ public interface InterfaceBusiness {
 	//系统缓存
 	public void setOutParam(HashMap<String, Object> outParam);
 	//调用请求方法
-	public RETURN excuteMethod(String methodName) throws Exception;
+	public RETURN excuteMethod(String methodName) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,NoSuchMethodException, SecurityException;
 }

@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.ParameterExpression;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -26,13 +28,10 @@ public class AbstractBusiness implements InterfaceBusiness {
      * @throws Exception
      */
     @Transactional("transationManager")
-    public RETURN excuteMethod(String methodName) {
-        try {
-            Method method = this.getClass().getDeclaredMethod(methodName);
-            return (RETURN) method.invoke(this);
-        }catch (Exception e){
-            return RETURN.NO_METHOD;
-        }
+    public RETURN excuteMethod(String methodName) throws IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException,NoSuchMethodException, SecurityException {
+        Method method = this.getClass().getDeclaredMethod(methodName);
+        return (RETURN) method.invoke(this);
     }
 
     public final void setInParam(HashMap<String, Object> inParam) {

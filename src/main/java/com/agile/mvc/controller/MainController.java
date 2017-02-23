@@ -1,13 +1,16 @@
 package com.agile.mvc.controller;
 
 
+import com.agile.common.base.AgileExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.base.HEAD;
 import com.agile.common.base.InterfaceBusiness;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
+import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -25,21 +28,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Created by tongmeng on 2017/1/6.
+ * Created by tongmeng on 2017/1/6
  */
 @Controller
 @Scope("prototype")
-public class MainController {
-    //spring上下文
-    @Autowired
-    ApplicationContext applicationContext;
+public class MainController extends AgileExceptionHandler{
+    //上下文
+    private final ApplicationContext applicationContext;
     //日志工具
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     //认证令牌
     private String authToken;
     //服务对象
@@ -54,8 +57,13 @@ public class MainController {
     @Value("${agile.project.non_authrntication_service}")
     private String nonAuthrnticationService;
 
+    @Autowired
+    public MainController(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
     /**
-     *
+     * agile框架处理器
      * @param request 请求对象
      * @param response 响应对象
      * @param service 服务名
@@ -63,7 +71,13 @@ public class MainController {
      * @param forward 转发信息
      * @param authToken 认证令牌
      * @param cacheToken 缓存令牌
-     * @return
+     * @return 响应试图数据
+     * @throws IOException 流异常
+     * @throws IllegalAccessException 非法访问异常
+     * @throws IllegalArgumentException 非法参数异常
+     * @throws InvocationTargetException 调用目标异常
+     * @throws NoSuchMethodException 没有这样的方法异常
+     * @throws SecurityException 安全异常
      */
     @RequestMapping(value = "/{module}/{service}/{method}",method = {RequestMethod.POST,RequestMethod.GET})
     public ModelAndView processor(
@@ -77,7 +91,7 @@ public class MainController {
             @RequestParam(value = "cache-token", required = false) String cacheToken,
             @RequestParam(value = "file-path", required = false) String filePath,
             @RequestParam(value = "file-name", required = false) String fileName
-    ) throws Exception {
+    ) throws IOException,IllegalAccessException, IllegalArgumentException, InvocationTargetException,NoSuchMethodException, SecurityException{
         //判断文件下载
         if(!StringUtil.isEmpty(filePath) && !StringUtil.isEmpty(fileName)){
             this.downLoadFile(response,filePath,fileName);
@@ -107,7 +121,7 @@ public class MainController {
             return modelAndView;
         }else {
             //调用目标方法前处理入参
-            handleRequestUrl(request,response,authToken,service,method);
+            handleRequestUrl(request,authToken,service,method);
 
             //调用目标方法
             RETURN returnState = this.getService().excuteMethod(method);
@@ -131,16 +145,11 @@ public class MainController {
      * @param serviceName   服务名
      * @return  服务bean
      */
-    private InterfaceBusiness getService(String serviceName){
-        try {
-            this.getApplicationContext().getBeanDefinitionNames();
-            Object serviceTry = this.getApplicationContext().getBean(serviceName);
-            service = (InterfaceBusiness) serviceTry;
-            this.setService(service);
-            return service;
-        }catch (Exception e){
-            return null;
-        }
+    private InterfaceBusiness getService(String serviceName) throws BeansException,NullPointerException,ClassCastException {
+        Object serviceTry = this.applicationContext.getBean(serviceName);
+        service = (InterfaceBusiness) serviceTry;
+        this.setService(service);
+        return service;
     }
 
     /**
@@ -149,10 +158,10 @@ public class MainController {
      * @param authToken 认证信息
      * @param service   目标服务名
      * @param method    目标方法名
-     * @throws UnsupportedEncodingException
+     * @throws IOException 流异常
      */
-    private void handleRequestUrl(HttpServletRequest request,HttpServletResponse response, String authToken,String service,String method) throws IOException {
-        HashMap<String, Object> inParam = new HashMap<String, Object>();
+    private void handleRequestUrl(HttpServletRequest request, String authToken,String service,String method) throws IOException {
+        HashMap<String, Object> inParam = new HashMap<>();
         inParam.put("authoken",authToken);
         inParam.put("app",moduleName);
         inParam.put("service",service);
@@ -163,7 +172,7 @@ public class MainController {
         //---------------------------------请求参数解析------------------------------------
         String queryString = request.getQueryString();
         if (!StringUtil.isEmpty(queryString)){
-            String[] params = queryString.split("&"),paramContainer=null;
+            String[] params = queryString.split("&"),paramContainer;
             for (String param:params) {
                 paramContainer = param.split("=");
                 if (paramContainer.length == 2){
@@ -202,9 +211,9 @@ public class MainController {
      * @param response  响应对象
      * @param path  文件存储路径
      * @param name  文件名
-     * @throws IOException
+     * @throws IOException 流异常
      */
-    public void downLoadFile(HttpServletResponse response,String path,String name) throws IOException {
+    private void downLoadFile(HttpServletResponse response,String path,String name) throws IOException {
         java.io.BufferedInputStream bis = null;
         java.io.BufferedOutputStream bos = null;
         try {
@@ -230,14 +239,6 @@ public class MainController {
         }
     }
 
-    public ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
-
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
-
     public String getAuthToken() {
         return authToken;
     }
@@ -246,11 +247,12 @@ public class MainController {
         this.authToken = authToken;
     }
 
-    public InterfaceBusiness getService() {
+    @Contract(pure = true)
+    private InterfaceBusiness getService() {
         return service;
     }
 
-    public void setService(InterfaceBusiness service) {
+    private void setService(InterfaceBusiness service) {
         this.service = service;
     }
 

@@ -19,7 +19,7 @@
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
         <security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
         <security:custom-filter ref="loginFilter"  position="FORM_LOGIN_FILTER" />
-        <security:logout logout-url="${agile.security.login_out_url}" logout-success-url="${agile.security.login_success_url}" delete-cookies="JSESSIONID" invalidate-session="true"/>
+        <security:logout logout-url="/agile/loginService/loginout" logout-success-url="${agile.security.login_success_url}" delete-cookies="JSESSIONID" invalidate-session="true"/>
         <security:session-management invalid-session-url="${agile.security.invalid_session_url}"/>
     </security:http>
     <!-- 未登录的切入点 -->
