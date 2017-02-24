@@ -38,7 +38,7 @@ import java.util.Iterator;
  */
 @Controller
 @Scope("prototype")
-public class MainController extends AgileExceptionHandler{
+public class MainController{
     //上下文
     private final ApplicationContext applicationContext;
     //日志工具
@@ -129,8 +129,10 @@ public class MainController extends AgileExceptionHandler{
             //调用目标方法后处理视图
             modelAndView.addObject("head",new HEAD(returnState,request));
 
-            //响应数据装填
-            modelAndView.addObject("result",this.getService().getOutParam());
+            if(RETURN.SUCCESS.equals(returnState)){
+                //响应数据装填
+                modelAndView.addObject("result",this.getService().getOutParam());
+            }
         }
 
         //判断转发存在
@@ -146,10 +148,14 @@ public class MainController extends AgileExceptionHandler{
      * @return  服务bean
      */
     private InterfaceBusiness getService(String serviceName) throws BeansException,NullPointerException,ClassCastException {
-        Object serviceTry = this.applicationContext.getBean(serviceName);
-        service = (InterfaceBusiness) serviceTry;
-        this.setService(service);
-        return service;
+        try {
+            Object serviceTry = this.applicationContext.getBean(serviceName);
+            service = (InterfaceBusiness) serviceTry;
+            this.setService(service);
+            return service;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     /**

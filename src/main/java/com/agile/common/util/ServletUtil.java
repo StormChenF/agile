@@ -1,18 +1,21 @@
 package com.agile.common.util;
 
+import org.jetbrains.annotations.Contract;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Created by tongmeng on 2017/2/23.
+ * Created by tongmeng on 2017/2/23
  */
 public class ServletUtil {
     /**
      * 获取http请求的真实IP地址
-     * @param request
-     * @return
+     * @param request 请求对象
+     * @return 返回IP地址
      */
+    @Contract("null -> null")
     public static String getIPAddr(HttpServletRequest request){
         if (request == null)
             return null;
@@ -32,6 +35,7 @@ public class ServletUtil {
                 ip = InetAddress.getLocalHost().getHostAddress();
             }
             catch (UnknownHostException unknownhostexception) {
+                ip = "未知IP地址";
             }
         return ip;
     }

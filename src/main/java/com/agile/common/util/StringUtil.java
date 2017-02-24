@@ -1,18 +1,19 @@
 package com.agile.common.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.util.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by tongmeng on 2017/1/9.
+ * Created by tongmeng on 2017/1/9
  */
 public final class StringUtil extends StringUtils{
     /**
      * 特殊符号转驼峰式
      * @param param 任意字符串
-     * @return
+     * @return 返回驼峰字符串
      */
     public static String signToCamel(String param){
         if (isEmpty(param))return "";
@@ -21,7 +22,7 @@ public final class StringUtil extends StringUtils{
         if(!testMc.find())return param;
 
         param = param.toLowerCase();
-        StringBuffer cacheStr = new StringBuffer(param);
+        StringBuilder cacheStr = new StringBuilder(param);
         Matcher mc = Pattern.compile("[-_*%#$@+=()&^!~`|.,]").matcher(param);
         int i = 0;
         while (mc.find()){
@@ -32,10 +33,11 @@ public final class StringUtil extends StringUtils{
     }
 
     /**
-     * 字符串转方法名
+     * 字符串转首字母小写驼峰名
      * @param param 任意字符串
-     * @return
+     * @return 返回首字母小写的驼峰字符串
      */
+    @NotNull
     public static String toName(String param){
         if (isEmpty(param)) return "";
         String method = signToCamel(param);

@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 /**
- * Created by tongmeng on 2017/1/13.
+ * Created by tongmeng on 2017/1/13
  */
 public class AgileAuthenticationProvider implements AuthenticationProvider {
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private AgileUserDetailsService userDetailsService = null;
 
@@ -23,7 +23,7 @@ public class AgileAuthenticationProvider implements AuthenticationProvider {
         super();
     }
     /**
-     * @param userDetailsService
+     * @param userDetailsService 用户详情
      */
     public AgileAuthenticationProvider(AgileUserDetailsService userDetailsService) {
         super();
@@ -74,7 +74,7 @@ public class AgileAuthenticationProvider implements AuthenticationProvider {
 //        }
 //        throw new BadCredentialsException("没有分配权限");
     }
-    protected void doLogin(Authentication authentication) throws AuthenticationException {
+    private void doLogin(Authentication authentication) throws AuthenticationException {
     }
     public boolean supports(Class<?> authentication) {
         // TODO Auto-generated method stub
