@@ -1,9 +1,8 @@
 package com.agile.mvc.controller;
 
 
-import com.agile.common.base.AgileExceptionHandler;
 import com.agile.common.base.RETURN;
-import com.agile.common.base.HEAD;
+import com.agile.common.base.AgileHead;
 import com.agile.common.base.InterfaceBusiness;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
@@ -105,19 +104,19 @@ public class MainController{
 
         //判断模块存在
         if (StringUtil.isEmpty(module) || !module.equals(moduleName)){
-            modelAndView.addObject("head",new HEAD(RETURN.NO_MODULE,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.NO_MODULE,request));
             return modelAndView;
         }
 
         //判断服务存在
         if (StringUtil.isEmpty(service) || ObjectUtil.isEmpty(this.getService(service))){
-            modelAndView.addObject("head",new HEAD(RETURN.NO_SERVICE,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.NO_SERVICE,request));
             return modelAndView;
         }
 
         //判断方法存在
         if (StringUtil.isEmpty(method)){
-            modelAndView.addObject("head",new HEAD(RETURN.NO_METHOD,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.NO_METHOD,request));
             return modelAndView;
         }else {
             //调用目标方法前处理入参
@@ -127,7 +126,7 @@ public class MainController{
             RETURN returnState = this.getService().excuteMethod(method);
 
             //调用目标方法后处理视图
-            modelAndView.addObject("head",new HEAD(returnState,request));
+            modelAndView.addObject("head",new AgileHead(returnState,request));
 
             if(RETURN.SUCCESS.equals(returnState)){
                 //响应数据装填

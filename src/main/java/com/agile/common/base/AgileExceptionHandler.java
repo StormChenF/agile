@@ -23,52 +23,52 @@ public class AgileExceptionHandler implements HandlerExceptionResolver{
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
         if(e instanceof ParameterExpression){
-            modelAndView.addObject("head",new HEAD(RETURN.PARAMETER_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.PARAMETER_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof SQLException){
-            modelAndView.addObject("head",new HEAD(RETURN.SQL_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.SQL_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof HibernateException){
-            modelAndView.addObject("head",new HEAD(RETURN.HIBERNATE_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.HIBERNATE_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof DateTimeException){
-            modelAndView.addObject("head",new HEAD(RETURN.DATETIME_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.DATETIME_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof NullPointerException){
-            modelAndView.addObject("head",new HEAD(RETURN.NULL_POINTER_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.NULL_POINTER_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof ParseException){
-            modelAndView.addObject("head",new HEAD(RETURN.PARSE_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.PARSE_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof IOException){
-            modelAndView.addObject("head",new HEAD(RETURN.IO_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.IO_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof TimeoutException){
-            modelAndView.addObject("head",new HEAD(RETURN.TIMEOUT_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.TIMEOUT_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof IllegalAccessException){
-            modelAndView.addObject("head",new HEAD(RETURN.IIIEGAL_ACCESS_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.IIIEGAL_ACCESS_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof IllegalArgumentException){
-            modelAndView.addObject("head",new HEAD(RETURN.IIIEGAL_ARGUMENT_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.IIIEGAL_ARGUMENT_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof InvocationTargetException){
-            modelAndView.addObject("head",new HEAD(RETURN.INVOCATION_TARGET_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.INVOCATION_TARGET_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof NoSuchMethodException){
-            modelAndView.addObject("head",new HEAD(RETURN.NO_SUCH_METHOD_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.NO_SUCH_METHOD_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof SecurityException){
-            modelAndView.addObject("head",new HEAD(RETURN.SECURITY_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.SECURITY_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof ClassCastException){
-            modelAndView.addObject("head",new HEAD(RETURN.CLASS_CAST_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.CLASS_CAST_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof BeansException){
-            modelAndView.addObject("head",new HEAD(RETURN.BEAN_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.BEAN_EXPRESSION,request));
             return modelAndView;
         }else {
-            modelAndView.addObject("head",new HEAD(RETURN.EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.EXPRESSION,request));
             return modelAndView;
         }
     }
