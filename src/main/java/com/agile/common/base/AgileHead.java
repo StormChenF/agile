@@ -1,5 +1,7 @@
 package com.agile.common.base;
 
+import com.agile.common.util.ServletUtil;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -13,7 +15,7 @@ public class AgileHead {
 
     public AgileHead(RETURN returnState, HttpServletRequest request) {
         this.url = String.valueOf(request.getRequestURL());
-        this.ip = request.getRemoteAddr();
+        this.ip = ServletUtil.getIPAddr(request);
         this.code = returnState.getCode();
         this.msg = returnState.getMsg();
     }
