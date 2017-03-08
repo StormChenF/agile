@@ -3,10 +3,9 @@ package com.agile.mvc.controller;
 
 import com.agile.common.base.RETURN;
 import com.agile.common.base.AgileHead;
-import com.agile.common.base.InterfaceBusiness;
+import com.agile.common.base.AgileServiceInterface;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
-import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -37,7 +35,7 @@ import java.util.Iterator;
  */
 @Controller
 @Scope("prototype")
-public class MainController{
+public class AgileMainController {
     //上下文
     private final ApplicationContext applicationContext;
     //日志工具
@@ -45,7 +43,7 @@ public class MainController{
     //认证令牌
     private String authToken;
     //服务对象
-    private InterfaceBusiness service;
+    private AgileServiceInterface service;
     //工程名
     @Value("${agile.project.name}")
     private String moduleName;
@@ -57,7 +55,7 @@ public class MainController{
     private String freeAuthenticationService;
 
     @Autowired
-    public MainController(ApplicationContext applicationContext) {
+    public AgileMainController(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
@@ -146,10 +144,10 @@ public class MainController{
      * @param serviceName   服务名
      * @return  服务bean
      */
-    private InterfaceBusiness getService(String serviceName) throws BeansException,NullPointerException,ClassCastException {
+    private AgileServiceInterface getService(String serviceName) throws BeansException,NullPointerException,ClassCastException {
         try {
             Object serviceTry = this.applicationContext.getBean(serviceName);
-            service = (InterfaceBusiness) serviceTry;
+            service = (AgileServiceInterface) serviceTry;
             this.setService(service);
             return service;
         }catch (Exception e){
@@ -252,11 +250,11 @@ public class MainController{
         this.authToken = authToken;
     }
 
-    private InterfaceBusiness getService() {
+    private AgileServiceInterface getService() {
         return service;
     }
 
-    private void setService(InterfaceBusiness service) {
+    private void setService(AgileServiceInterface service) {
         this.service = service;
     }
 

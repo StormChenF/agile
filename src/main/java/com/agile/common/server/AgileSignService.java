@@ -1,6 +1,6 @@
 package com.agile.common.server;
 
-import com.agile.common.base.AbstractBusiness;
+import com.agile.common.base.AgileMainService;
 import com.agile.common.base.RETURN;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * Created by mydeathtrial on 2017/3/2
  */
 @Service
-public class LoginService extends AbstractBusiness{
+public class AgileSignService extends AgileMainService {
     public RETURN successSignOut(){
         return RETURN.LOGIN_OUT;
     }

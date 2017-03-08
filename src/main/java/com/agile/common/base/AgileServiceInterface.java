@@ -3,7 +3,7 @@ package com.agile.common.base;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-public interface InterfaceBusiness {
+public interface AgileServiceInterface {
 	//设置请求参数
 	public void setInParam(HashMap<String, Object> inParam);
 	//提取响应参数

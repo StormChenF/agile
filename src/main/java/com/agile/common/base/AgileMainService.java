@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public class AbstractBusiness implements InterfaceBusiness {
+public abstract class AgileMainService implements AgileServiceInterface {
     //日志工具
     private Logger logger = LogManager.getLogger(this.getClass());
     //输入
@@ -25,13 +25,19 @@ public class AbstractBusiness implements InterfaceBusiness {
      * @param methodName 服务内部的具体方法名
      * @return 返回执行结果
      */
-//    @Transactional("transationManager")
     public RETURN executeMethod(String methodName){
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);
-            return (RETURN) method.invoke(this);
+            return execute(method);
         }catch (NoSuchMethodException e){
             return RETURN.NO_METHOD;
+        }
+
+    }
+    @Transactional
+    private RETURN execute(Method method){
+        try {
+            return (RETURN) method.invoke(this);
         }catch (IllegalAccessException e){
             return RETURN.IIIEGAL_ACCESS_EXPRESSION;
         }catch (IllegalArgumentException e){
@@ -43,7 +49,6 @@ public class AbstractBusiness implements InterfaceBusiness {
         }
 
     }
-
     /**
      * 控制层中调用该方法设置服务入参
      * @param inParam 参数集
