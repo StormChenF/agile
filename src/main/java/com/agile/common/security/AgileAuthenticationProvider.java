@@ -3,45 +3,33 @@ package com.agile.common.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
  * Created by tongmeng on 2017/1/13
  */
+@Service
 public class AgileAuthenticationProvider implements AuthenticationProvider {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final AgileUserDetailsService userDetailsService;
 
-    private AgileUserDetailsService userDetailsService = null;
-
-    public AgileAuthenticationProvider() {
-        super();
-    }
-    /**
-     * @param userDetailsService 用户详情
-     */
+    @Autowired
     public AgileAuthenticationProvider(AgileUserDetailsService userDetailsService) {
         super();
-        this.userDetailsService = userDetailsService;
-    }
-
-    public AgileUserDetailsService getUserDetailsService() {
-        return userDetailsService;
-    }
-
-    public void setUserDetailsService(AgileUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     /**
      * provider的authenticate()方法，用于登录验证
      */
-    @SuppressWarnings("unchecked")
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         // 1. Check username and password

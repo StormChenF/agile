@@ -9,6 +9,7 @@
 ">
     <!--扫描主控制器注解-->
     <context:component-scan base-package="com.agile.common.server"/>
+    <context:component-scan base-package="com.agile.common.security"/>
     <context:component-scan base-package="com.agile.mvc"/>
 
     <!--ContentNegotiatingViewResolver视图解析器路由配置-->

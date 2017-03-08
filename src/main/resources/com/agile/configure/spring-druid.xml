@@ -12,7 +12,7 @@
         <property name="password" value="${agile.druid.password}"/>
         
         <!--初始化连接数量-->
-        <property name="initialSize" value="${agile.druid.initia_size}"/>
+        <property name="initialSize" value="${agile.druid.init_size}"/>
 
         <!--最小空闲数量-->
         <property name="minIdle" value="${agile.druid.min_idle}"/>
@@ -33,7 +33,7 @@
         <property name="timeBetweenEvictionRunsMillis" value="${agile.druid.time_between_eviction_runs_millis}"/>
 
         <!--配置一个连接在池中最小生存的时间，单位是毫秒-->
-        <property name="minEvictableIdleTimeMillis" value="${agile.druid.min_evictabel_idle_time_millis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${agile.druid.min_evictable_idle_time_millis}"/>
 
         <!--用来检测连接是否有效的sql，要求是一个查询语句-->
         <property name="validationQuery" value="${agile.druid.validation_query}"/>

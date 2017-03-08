@@ -50,11 +50,11 @@ public class MainController{
     @Value("${agile.project.name}")
     private String moduleName;
     //免认证模块
-    @Value("${agile.project.non_authrntication_moudule}")
-    private String nonAuthrnticationMoudule;
+    @Value("${agile.project.non_authentication_module}")
+    private String freeAuthenticationModule;
     //免认证服务
-    @Value("${agile.project.non_authrntication_service}")
-    private String nonAuthrnticationService;
+    @Value("${agile.project.non_authentication_service}")
+    private String freeAuthenticationService;
 
     @Autowired
     public MainController(ApplicationContext applicationContext) {
@@ -78,7 +78,7 @@ public class MainController{
      * @throws NoSuchMethodException 没有这样的方法异常
      * @throws SecurityException 安全异常
      */
-    @RequestMapping(value = "/{module}/{service}/{method}",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/{module}/{service}/{method}")
     public ModelAndView processor(
             HttpServletRequest request,
             HttpServletResponse response,
