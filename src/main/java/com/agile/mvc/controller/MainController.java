@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Created by tongmeng on 2017/1/6
+ * Created by 佟盟 on 2017/1/6
  */
 @Controller
 @Scope("prototype")
@@ -53,7 +53,7 @@ public class MainController{
     @Value("${agile.project.non_authentication_module}")
     private String freeAuthenticationModule;
     //免认证服务
-    @Value("${agile.project.non_authentication_service}")
+    @Value("${agile.project.non_authentication_}")
     private String freeAuthenticationService;
 
     @Autowired
@@ -123,7 +123,7 @@ public class MainController{
             handleRequestUrl(request,authToken,service,method);
 
             //调用目标方法
-            RETURN returnState = this.getService().excuteMethod(method);
+            RETURN returnState = this.getService().executeMethod(method);
 
             //调用目标方法后处理视图
             modelAndView.addObject("head",new AgileHead(returnState,request));
@@ -252,7 +252,6 @@ public class MainController{
         this.authToken = authToken;
     }
 
-    @Contract(pure = true)
     private InterfaceBusiness getService() {
         return service;
     }

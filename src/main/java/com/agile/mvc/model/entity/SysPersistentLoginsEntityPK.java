@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * Created by tongmeng on 2017/1/17.
+ * Created by 佟盟 on 2017/1/17.
  */
 public class SysPersistentLoginsEntityPK implements Serializable {
     private Integer id;

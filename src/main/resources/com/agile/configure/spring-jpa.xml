@@ -17,8 +17,8 @@
 
     <description>数据持久化框架JPA配置</description>
 
-    <!--JPA dao包扫描，自动完成DAO注入，添加事物-->
-    <jpa:repositories base-package="com.agile.mvc.model.dao" transaction-manager-ref="transationManager" entity-manager-factory-ref="entityManagerFactory"/>
+    <!--JPA dao包扫描，自动完成DAO注入，添加事务-->
+    <jpa:repositories base-package="com.agile.mvc.model.dao" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <!--注入数据源-->
@@ -27,18 +27,14 @@
         <!--指定Jpa持久化实现厂商类,这里以Hibernate为例-->
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="${agile.jpa.generateDdl}"/>
+                <property name="generateDdl" value="${agile.jpa.generate_ddl}"/>
                 <property name="database" value="${agile.jpa.db}"/>
-                <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+                <property name="databasePlatform" value="${agile.jpa.database_platform}"/>
             </bean>
         </property>
         
         <!--指定自动扫描的注解实体类包-->
         <property name="packagesToScan" value="com.agile.mvc.model.entity"/>
-
-        <property name="jpaDialect">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-        </property>
 
         <!--JPA属性-->
         <property name="jpaProperties">
@@ -58,16 +54,11 @@
         </property>
     </bean>
     
-    <!--hibernate对jpa实现-->
-    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-
-    <!--事物处理-->
-    <bean id="transationManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <!--事务处理-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <bean class="org.springframework.data.web.config.HateoasAwareSpringDataWebConfiguration" />
-
     <!--事务注解驱动-->
-    <tx:annotation-driven transaction-manager="transationManager" proxy-target-class="true"/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 </beans>

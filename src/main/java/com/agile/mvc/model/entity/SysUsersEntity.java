@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by tongmeng on 2017/1/17.
+ * Created by 佟盟 on 2017/1/17.
  */
 @Entity
 @Table(name = "sys_users", schema = "agile_db", catalog = "")

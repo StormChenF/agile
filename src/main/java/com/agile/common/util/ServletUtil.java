@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * Created by tongmeng on 2017/2/23
+ * Created by 佟盟 on 2017/2/23
  */
 public class ServletUtil {
     /**

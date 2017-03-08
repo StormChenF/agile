@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 /**
- * Created by tongmeng on 2017/1/17
+ * Created by 佟盟 on 2017/1/17
  */
 public class AgileUserDetails implements UserDetails {
 

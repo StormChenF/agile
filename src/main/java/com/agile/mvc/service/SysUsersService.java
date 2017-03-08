@@ -9,9 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
- * Created by tongmeng on 2017/1/18
+ * Created by 佟盟 on 2017/1/18
  */
 @Service
 public class SysUsersService extends AbstractBusiness {
@@ -19,8 +20,10 @@ public class SysUsersService extends AbstractBusiness {
     private AgileRepository agileRepository;
 
     public RETURN aa(){
+
+        this.getInParam("a");
         Iterable d = agileRepository.findAll(new PageRequest(0,10));
-        this.getOutParam().put("userList",d);
+        this.setOutParam("a",d);
         return RETURN.SUCCESS;
     }
 }

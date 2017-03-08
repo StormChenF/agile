@@ -5,7 +5,7 @@ import com.agile.common.util.ServletUtil;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by tongmeng on 2017/1/9
+ * Created by 佟盟 on 2017/1/9
  */
 public class AgileHead {
     private String url = "";

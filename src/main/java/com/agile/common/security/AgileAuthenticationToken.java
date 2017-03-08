@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * Created by tongmeng on 2017/1/13
+ * Created by 佟盟 on 2017/1/13
  */
 public class AgileAuthenticationToken extends AbstractAuthenticationToken {
 

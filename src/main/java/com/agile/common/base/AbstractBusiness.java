@@ -1,5 +1,6 @@
 package com.agile.common.base;
 
+import com.agile.common.util.ObjectUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
- * Created by tongmeng on 2017/1/9
+ * Created by 佟盟 on 2017/1/9
  */
 public class AbstractBusiness implements InterfaceBusiness {
     //日志工具
@@ -24,8 +25,8 @@ public class AbstractBusiness implements InterfaceBusiness {
      * @param methodName 服务内部的具体方法名
      * @return 返回执行结果
      */
-    @Transactional("transationManager")
-    public RETURN excuteMethod(String methodName){
+//    @Transactional("transationManager")
+    public RETURN executeMethod(String methodName){
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);
             return (RETURN) method.invoke(this);
@@ -43,16 +44,40 @@ public class AbstractBusiness implements InterfaceBusiness {
 
     }
 
+    /**
+     * 控制层中调用该方法设置服务入参
+     * @param inParam 参数集
+     */
     public final void setInParam(HashMap<String, Object> inParam) {
         this.inParam = inParam;
     }
 
+    /**
+     * 服务中调用该方法获取入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected Object getInParam(String key) {
+        return inParam.get(key);
+    }
+
+    /**
+     * 控制层中调用该方法获取响应参数
+     * @return 响应参数集
+     */
     public HashMap<String, Object> getOutParam() {
         return this.outParam;
     }
 
-    public void setOutParam(HashMap<String, Object> outParam) {
-        this.outParam = outParam;
+    /**
+     * 服务中调用该方法设置响应参数
+     * @param key 参数索引字符串
+     * @param value 参数值
+     */
+    protected void setOutParam(String key, Object value) {
+        if(ObjectUtil.isEmpty(this.outParam)){
+            this.outParam = new HashMap<>();
+        }
+        this.outParam.put(key,value);
     }
-
 }

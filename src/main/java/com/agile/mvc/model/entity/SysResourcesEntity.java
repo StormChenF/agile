@@ -3,7 +3,7 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by tongmeng on 2017/1/17.
+ * Created by 佟盟 on 2017/1/17.
  */
 @Entity
 @Table(name = "sys_resources", schema = "agile_db", catalog = "")
