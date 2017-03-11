@@ -51,7 +51,7 @@ public class AgileMainController {
     @Value("${agile.project.non_authentication_module}")
     private String freeAuthenticationModule;
     //免认证服务
-    @Value("${agile.project.non_authentication_}")
+    @Value("${agile.project.non_authentication_service}")
     private String freeAuthenticationService;
 
     @Autowired
