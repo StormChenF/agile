@@ -46,13 +46,14 @@ public class DaoGenerator {
         try {
             Map data = new HashMap();
             for (String tableName:dataSet) {
-                String tableNameOfJava = StringUtil.toName(tableName);
-                data.put("package","package com.agile.mvc.model.dao;");
-                data.put("tableName","import com.agile.mvc.model.entity."+tableNameOfJava);
+                String tableNameOfJava = StringUtil.toName(tableName)+"Entity";
+                data.put("package","com.agile.mvc.model.dao");
+                data.put("tableName",tableNameOfJava);
+                data.put("keyType",PropertiesUtil.getProperties("agile.generator.key_type"));
                 Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
                 cfg.setDirectoryForTemplateLoading(new File("D:\\workspace\\agile\\src\\main\\java\\com\\agile\\common\\tools\\"));
                 cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-                Template temp = cfg.getTemplate("daohome.ftl");
+                Template temp = cfg.getTemplate("Repository.ftl");
                 String fileName = tableNameOfJava+"Repository.java";
                 File file = new File("D:/" + fileName);
                 FileWriter fw = new FileWriter(file);
