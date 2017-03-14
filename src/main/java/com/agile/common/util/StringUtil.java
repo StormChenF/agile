@@ -41,7 +41,7 @@ public final class StringUtil extends StringUtils{
     public static String toName(String param){
         if (isEmpty(param)) return "";
         String method = signToCamel(param);
-        return method.substring(0,1).toLowerCase()+method.substring(1);
+        return method.substring(0,1).toUpperCase()+method.substring(1);
     }
 
 

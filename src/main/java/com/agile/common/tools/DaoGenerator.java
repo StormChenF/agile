@@ -1,6 +1,7 @@
 package com.agile.common.tools;
 
 import com.agile.common.util.PropertiesUtil;
+import com.agile.common.util.StringUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -43,25 +44,23 @@ public class DaoGenerator {
         DaoGenerator generator = new DaoGenerator();
         List<String> dataSet = generator.getTables(PropertiesUtil.getProperties("agile.generator.sql"));
         try {
-            Map root = new HashMap();
-            root.put("str", "hello world!");
-            List data = new ArrayList();
-            data.add("11");
-            data.add("12");
-            data.add("13");
-            root.put("data", data);
-
-            Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-            cfg.setDirectoryForTemplateLoading(new File(DaoGenerator.class.getResource("/").toString()));
-            cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-            Template temp = cfg.getTemplate("daohome.ftl");
-            String fileName = "demo.java";
-            File file = new File("D:/" + fileName);
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            temp.process(root, bw);
-            bw.flush();
-            fw.close();
+            Map data = new HashMap();
+            for (String tableName:dataSet) {
+                String tableNameOfJava = StringUtil.toName(tableName);
+                data.put("package","package com.agile.mvc.model.dao;");
+                data.put("tableName","import com.agile.mvc.model.entity."+tableNameOfJava);
+                Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+                cfg.setDirectoryForTemplateLoading(new File("D:\\workspace\\agile\\src\\main\\java\\com\\agile\\common\\tools\\"));
+                cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
+                Template temp = cfg.getTemplate("daohome.ftl");
+                String fileName = tableNameOfJava+"Repository.java";
+                File file = new File("D:/" + fileName);
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                temp.process(data, bw);
+                bw.flush();
+                fw.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
