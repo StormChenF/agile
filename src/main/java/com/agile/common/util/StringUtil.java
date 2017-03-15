@@ -40,8 +40,8 @@ public final class StringUtil extends StringUtils{
     @NotNull
     public static String toName(String param){
         if (isEmpty(param)) return "";
-        String method = signToCamel(param);
-        return method.substring(0,1).toUpperCase()+method.substring(1);
+        String camelString = signToCamel(param);
+        return camelString.substring(0,1).toUpperCase()+camelString.substring(1);
     }
 
 
