@@ -19,9 +19,8 @@ public class DaoGenerator {
         List<String> tableNames = new ArrayList<>();
         //加载数据库驱动类
         Class.forName(PropertiesUtil.getProperties("agile.druid.driver_class_name")) ;
-
         //建立数据库连接
-        Connection connection =  DriverManager.getConnection(PropertiesUtil.getProperties("agile.druid.jdbc_url") , PropertiesUtil.getProperties("agile.druid.username") , PropertiesUtil.getProperties("agile.druid.password") ) ;
+        Connection connection =  DriverManager.getConnection(PropertiesUtil.getProperties("agile.druid.jdbc_url_prefix")+PropertiesUtil.getProperties("agile.druid.data_base_ip")+":"+PropertiesUtil.getProperties("agile.druid.data_base_post")+"/"+PropertiesUtil.getProperties("agile.druid.data_base_name")+"?"+PropertiesUtil.getProperties("agile.druid.data_base_url_param") , PropertiesUtil.getProperties("agile.druid.data_base_username") , PropertiesUtil.getProperties("agile.druid.data_base_password") ) ;
 
         Statement statement = connection.createStatement();
 
