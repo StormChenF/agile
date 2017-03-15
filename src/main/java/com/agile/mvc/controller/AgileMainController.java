@@ -5,6 +5,7 @@ import com.agile.common.base.RETURN;
 import com.agile.common.base.AgileHead;
 import com.agile.common.base.AgileServiceInterface;
 import com.agile.common.util.ObjectUtil;
+import com.agile.common.util.ServletUtil;
 import com.agile.common.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -123,18 +125,26 @@ public class AgileMainController {
             //调用目标方法
             RETURN returnState = this.getService().executeMethod(method);
 
-            //调用目标方法后处理视图
-            modelAndView.addObject("head",new AgileHead(returnState,request));
+            //判断转发存在
+            if(StringUtil.isEmpty(forward)){
+
+                //调用目标方法后处理视图
+                modelAndView.addObject("head",new AgileHead(returnState,request));
+            }
 
             if(RETURN.SUCCESS.equals(returnState)){
-                //响应数据装填
-                modelAndView.addObject("result",this.getService().getOutParam());
-            }
-        }
 
-        //判断转发存在
-        if (!StringUtil.isEmpty(forward)){//如果存在转发请求则将其放入返回结果信息当中
-            modelAndView.setViewName(URLEncoder.encode(forward, "UTF-8"));
+                //判断转发存在
+                if(StringUtil.isEmpty(forward)){
+
+                    //响应数据装填
+                    modelAndView.addObject("result",this.getService().getOutParam());
+                }else{
+
+                    //转发
+                    modelAndView.setView(new RedirectView(forward+"?"+request.getQueryString().replaceFirst("forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]","")));
+                }
+            }
         }
         return modelAndView;
     }
@@ -165,11 +175,11 @@ public class AgileMainController {
      */
     private void handleRequestUrl(HttpServletRequest request, String authToken,String service,String method) throws IOException {
         HashMap<String, Object> inParam = new HashMap<>();
-        inParam.put("authoken",authToken);
+        inParam.put("authToken",authToken);
         inParam.put("app",moduleName);
         inParam.put("service",service);
         inParam.put("method",method);
-        inParam.put("ip", request.getRemoteAddr());
+        inParam.put("ip", ServletUtil.getIPAddr(request));
         inParam.put("url", request.getRequestURL());
 
         //---------------------------------请求参数解析------------------------------------

@@ -4,7 +4,7 @@ import com.agile.mvc.model.entity.SysRolesEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
-* Created by 佟盟 on 2017/1/16
+* Created by 佟盟
 */
 public interface SysRolesEntityRepository extends PagingAndSortingRepository<SysRolesEntity,Integer> {
 
