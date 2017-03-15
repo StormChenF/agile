@@ -19,29 +19,28 @@ public final class RETURN {
     public static RETURN ERROR_LOGIN = new RETURN("100002","账号成功登出！");
     public static RETURN INVALID_SESSION = new RETURN("100003","账号成功登出！");
 
-    public static RETURN EXPRESSION = new RETURN("200000","程序错误！");
-    public static RETURN SQL_EXPRESSION = new RETURN("200001","SQL错误！");
-    public static RETURN HIBERNATE_EXPRESSION = new RETURN("200002","HIBERNATE错误！");
-    public static RETURN DATETIME_EXPRESSION = new RETURN("200003","时间错误！");
-    public static RETURN NULL_POINTER_EXPRESSION = new RETURN("200004","空指针错误！");
-    public static RETURN PARSE_EXPRESSION = new RETURN("200005","转换错误！");
-    public static RETURN IO_EXPRESSION = new RETURN("200006","IO流错误！");
-    public static RETURN TIMEOUT_EXPRESSION = new RETURN("200007","IO流错误！");
-    public static RETURN PARAMETER_EXPRESSION = new RETURN("200008","参数错误！");
-    public static RETURN IIIEGAL_ACCESS_EXPRESSION = new RETURN("200009","非法访问错误！");
-    public static RETURN IIIEGAL_ARGUMENT_EXPRESSION = new RETURN("200010","非法参数错误！");
-    public static RETURN INVOCATION_TARGET_EXPRESSION = new RETURN("200011","调用目标错误！");
-    public static RETURN NO_SUCH_METHOD_EXPRESSION = new RETURN("200012","没有这样的方法错误！");
-    public static RETURN SECURITY_EXPRESSION = new RETURN("200013","安全错误！");
-    public static RETURN CLASS_CAST_EXPRESSION = new RETURN("200014","对象强制转换错误！");
-    public static RETURN BEAN_EXPRESSION = new RETURN("200015","BEAN错误！");
+    static RETURN EXPRESSION = new RETURN("200000","程序错误！");
+    static RETURN SQL_EXPRESSION = new RETURN("200001","SQL错误！");
+    static RETURN HIBERNATE_EXPRESSION = new RETURN("200002","HIBERNATE错误！");
+    static RETURN DATETIME_EXPRESSION = new RETURN("200003","时间错误！");
+    static RETURN NULL_POINTER_EXPRESSION = new RETURN("200004","空指针错误！");
+    static RETURN PARSE_EXPRESSION = new RETURN("200005","转换错误！");
+    static RETURN IO_EXPRESSION = new RETURN("200006","IO流错误！");
+    static RETURN TIMEOUT_EXPRESSION = new RETURN("200007","IO流错误！");
+    static RETURN PARAMETER_EXPRESSION = new RETURN("200008","参数错误！");
+    static RETURN IIIEGAL_ACCESS_EXPRESSION = new RETURN("200009","非法访问错误！");
+    static RETURN IIIEGAL_ARGUMENT_EXPRESSION = new RETURN("200010","非法参数错误！");
+    static RETURN INVOCATION_TARGET_EXPRESSION = new RETURN("200011","调用目标错误！");
+    static RETURN SECURITY_EXPRESSION = new RETURN("200013","安全错误！");
+    static RETURN CLASS_CAST_EXPRESSION = new RETURN("200014","对象强制转换错误！");
+    static RETURN BEAN_EXPRESSION = new RETURN("200015","BEAN错误！");
 
     public RETURN(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public String getCode() {
+    String getCode() {
         return code;
     }
 
@@ -49,7 +48,7 @@ public final class RETURN {
         this.code = code;
     }
 
-    public String getMsg() {
+    String getMsg() {
         return msg;
     }
 

@@ -56,7 +56,7 @@ public class AgileExceptionHandler implements HandlerExceptionResolver{
             modelAndView.addObject("head",new AgileHead(RETURN.INVOCATION_TARGET_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof NoSuchMethodException){
-            modelAndView.addObject("head",new AgileHead(RETURN.NO_SUCH_METHOD_EXPRESSION,request));
+            modelAndView.addObject("head",new AgileHead(RETURN.NO_METHOD,request));
             return modelAndView;
         }else if(e instanceof SecurityException){
             modelAndView.addObject("head",new AgileHead(RETURN.SECURITY_EXPRESSION,request));

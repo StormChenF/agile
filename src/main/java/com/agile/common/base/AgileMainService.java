@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public abstract class AgileMainService implements AgileServiceInterface {
+public abstract class AgileMainService extends AgileExceptionHandler implements AgileServiceInterface {
     //日志工具
     private Logger logger = LogManager.getLogger(this.getClass());
     //输入
@@ -25,29 +25,13 @@ public abstract class AgileMainService implements AgileServiceInterface {
      * @param methodName 服务内部的具体方法名
      * @return 返回执行结果
      */
-    public RETURN executeMethod(String methodName){
-        try {
+    public RETURN executeMethod(String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
             Method method = this.getClass().getDeclaredMethod(methodName);
             return execute(method);
-        }catch (NoSuchMethodException e){
-            return RETURN.NO_METHOD;
-        }
-
     }
     @Transactional
-    private RETURN execute(Method method){
-        try {
+    private RETURN execute(Method method) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
             return (RETURN) method.invoke(this);
-        }catch (IllegalAccessException e){
-            return RETURN.IIIEGAL_ACCESS_EXPRESSION;
-        }catch (IllegalArgumentException e){
-            return RETURN.IIIEGAL_ARGUMENT_EXPRESSION;
-        }catch (InvocationTargetException e){
-            return RETURN.INVOCATION_TARGET_EXPRESSION;
-        }catch (SecurityException e){
-            return RETURN.SECURITY_EXPRESSION;
-        }
-
     }
     /**
      * 控制层中调用该方法设置服务入参
