@@ -3,12 +3,12 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_roles", schema = "agile_db", catalog = "")
 public class SysRolesEntity {
-    private Integer roleId;
+    private int roleId;
     private String roleName;
     private String roleDesc;
     private Boolean enable;
@@ -16,12 +16,13 @@ public class SysRolesEntity {
     private String moduleId;
 
     @Id
+    @GeneratedValue
     @Column(name = "ROLE_ID", nullable = false)
-    public Integer getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
@@ -82,7 +83,7 @@ public class SysRolesEntity {
 
         SysRolesEntity that = (SysRolesEntity) o;
 
-        if (roleId != null ? !roleId.equals(that.roleId) : that.roleId != null) return false;
+        if (roleId != that.roleId) return false;
         if (roleName != null ? !roleName.equals(that.roleName) : that.roleName != null) return false;
         if (roleDesc != null ? !roleDesc.equals(that.roleDesc) : that.roleDesc != null) return false;
         if (enable != null ? !enable.equals(that.enable) : that.enable != null) return false;
@@ -94,7 +95,7 @@ public class SysRolesEntity {
 
     @Override
     public int hashCode() {
-        int result = roleId != null ? roleId.hashCode() : 0;
+        int result = roleId;
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         result = 31 * result + (roleDesc != null ? roleDesc.hashCode() : 0);
         result = 31 * result + (enable != null ? enable.hashCode() : 0);

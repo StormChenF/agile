@@ -1,6 +1,5 @@
 package com.agile.common.security;
 
-import com.agile.mvc.model.entity.SysUsersEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

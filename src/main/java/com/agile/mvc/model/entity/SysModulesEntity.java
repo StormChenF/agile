@@ -3,12 +3,12 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_modules", schema = "agile_db", catalog = "")
 public class SysModulesEntity {
-    private Integer moduleId;
+    private int moduleId;
     private String moduleName;
     private String moduleDesc;
     private String moduleType;
@@ -18,16 +18,17 @@ public class SysModulesEntity {
     private String leaf;
     private String application;
     private String controller;
-    private Byte enable;
+    private Boolean enable;
     private String priority;
 
     @Id
+    @GeneratedValue
     @Column(name = "MODULE_ID", nullable = false)
-    public Integer getModuleId() {
+    public int getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(Integer moduleId) {
+    public void setModuleId(int moduleId) {
         this.moduleId = moduleId;
     }
 
@@ -123,11 +124,11 @@ public class SysModulesEntity {
 
     @Basic
     @Column(name = "ENABLE", nullable = true)
-    public Byte getEnable() {
+    public Boolean getEnable() {
         return enable;
     }
 
-    public void setEnable(Byte enable) {
+    public void setEnable(Boolean enable) {
         this.enable = enable;
     }
 
@@ -148,7 +149,7 @@ public class SysModulesEntity {
 
         SysModulesEntity that = (SysModulesEntity) o;
 
-        if (moduleId != null ? !moduleId.equals(that.moduleId) : that.moduleId != null) return false;
+        if (moduleId != that.moduleId) return false;
         if (moduleName != null ? !moduleName.equals(that.moduleName) : that.moduleName != null) return false;
         if (moduleDesc != null ? !moduleDesc.equals(that.moduleDesc) : that.moduleDesc != null) return false;
         if (moduleType != null ? !moduleType.equals(that.moduleType) : that.moduleType != null) return false;
@@ -166,7 +167,7 @@ public class SysModulesEntity {
 
     @Override
     public int hashCode() {
-        int result = moduleId != null ? moduleId.hashCode() : 0;
+        int result = moduleId;
         result = 31 * result + (moduleName != null ? moduleName.hashCode() : 0);
         result = 31 * result + (moduleDesc != null ? moduleDesc.hashCode() : 0);
         result = 31 * result + (moduleType != null ? moduleType.hashCode() : 0);

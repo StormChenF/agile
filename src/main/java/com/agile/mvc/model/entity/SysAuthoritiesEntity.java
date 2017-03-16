@@ -3,12 +3,12 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_authorities", schema = "agile_db", catalog = "")
 public class SysAuthoritiesEntity {
-    private Integer authorityId;
+    private int authorityId;
     private String authorityMark;
     private String authorityName;
     private String authorityDesc;
@@ -18,12 +18,13 @@ public class SysAuthoritiesEntity {
     private String moduleId;
 
     @Id
+    @GeneratedValue
     @Column(name = "AUTHORITY_ID", nullable = false)
-    public Integer getAuthorityId() {
+    public int getAuthorityId() {
         return authorityId;
     }
 
-    public void setAuthorityId(Integer authorityId) {
+    public void setAuthorityId(int authorityId) {
         this.authorityId = authorityId;
     }
 
@@ -104,7 +105,7 @@ public class SysAuthoritiesEntity {
 
         SysAuthoritiesEntity that = (SysAuthoritiesEntity) o;
 
-        if (authorityId != null ? !authorityId.equals(that.authorityId) : that.authorityId != null) return false;
+        if (authorityId != that.authorityId) return false;
         if (authorityMark != null ? !authorityMark.equals(that.authorityMark) : that.authorityMark != null)
             return false;
         if (authorityName != null ? !authorityName.equals(that.authorityName) : that.authorityName != null)
@@ -121,7 +122,7 @@ public class SysAuthoritiesEntity {
 
     @Override
     public int hashCode() {
-        int result = authorityId != null ? authorityId.hashCode() : 0;
+        int result = authorityId;
         result = 31 * result + (authorityMark != null ? authorityMark.hashCode() : 0);
         result = 31 * result + (authorityName != null ? authorityName.hashCode() : 0);
         result = 31 * result + (authorityDesc != null ? authorityDesc.hashCode() : 0);

@@ -3,12 +3,12 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_resources", schema = "agile_db", catalog = "")
 public class SysResourcesEntity {
-    private Integer resourceId;
+    private int resourceId;
     private String resourceType;
     private String resourceName;
     private String resourceDesc;
@@ -19,12 +19,13 @@ public class SysResourcesEntity {
     private Integer moduleId;
 
     @Id
+    @GeneratedValue
     @Column(name = "RESOURCE_ID", nullable = false)
-    public Integer getResourceId() {
+    public int getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Integer resourceId) {
+    public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -115,7 +116,7 @@ public class SysResourcesEntity {
 
         SysResourcesEntity that = (SysResourcesEntity) o;
 
-        if (resourceId != null ? !resourceId.equals(that.resourceId) : that.resourceId != null) return false;
+        if (resourceId != that.resourceId) return false;
         if (resourceType != null ? !resourceType.equals(that.resourceType) : that.resourceType != null) return false;
         if (resourceName != null ? !resourceName.equals(that.resourceName) : that.resourceName != null) return false;
         if (resourceDesc != null ? !resourceDesc.equals(that.resourceDesc) : that.resourceDesc != null) return false;
@@ -130,7 +131,7 @@ public class SysResourcesEntity {
 
     @Override
     public int hashCode() {
-        int result = resourceId != null ? resourceId.hashCode() : 0;
+        int result = resourceId;
         result = 31 * result + (resourceType != null ? resourceType.hashCode() : 0);
         result = 31 * result + (resourceName != null ? resourceName.hashCode() : 0);
         result = 31 * result + (resourceDesc != null ? resourceDesc.hashCode() : 0);

@@ -3,42 +3,43 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_bt_authorities_resources", schema = "agile_db", catalog = "")
 public class SysBtAuthoritiesResourcesEntity {
-    private Integer id;
-    private Integer resourceId;
-    private Integer authorityId;
+    private int id;
+    private int resourceId;
+    private int authorityId;
 
     @Id
+    @GeneratedValue
     @Column(name = "ID", nullable = false)
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "RESOURCE_ID", nullable = false)
-    public Integer getResourceId() {
+    public int getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Integer resourceId) {
+    public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
     }
 
     @Basic
     @Column(name = "AUTHORITY_ID", nullable = false)
-    public Integer getAuthorityId() {
+    public int getAuthorityId() {
         return authorityId;
     }
 
-    public void setAuthorityId(Integer authorityId) {
+    public void setAuthorityId(int authorityId) {
         this.authorityId = authorityId;
     }
 
@@ -49,18 +50,18 @@ public class SysBtAuthoritiesResourcesEntity {
 
         SysBtAuthoritiesResourcesEntity that = (SysBtAuthoritiesResourcesEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (resourceId != null ? !resourceId.equals(that.resourceId) : that.resourceId != null) return false;
-        if (authorityId != null ? !authorityId.equals(that.authorityId) : that.authorityId != null) return false;
+        if (id != that.id) return false;
+        if (resourceId != that.resourceId) return false;
+        if (authorityId != that.authorityId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (resourceId != null ? resourceId.hashCode() : 0);
-        result = 31 * result + (authorityId != null ? authorityId.hashCode() : 0);
+        int result = id;
+        result = 31 * result + resourceId;
+        result = 31 * result + authorityId;
         return result;
     }
 }

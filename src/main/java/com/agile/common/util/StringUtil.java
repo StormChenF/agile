@@ -2,7 +2,7 @@ package com.agile.common.util;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.util.StringUtils;
-
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,5 +44,12 @@ public final class StringUtil extends StringUtils{
         return camelString.substring(0,1).toUpperCase()+camelString.substring(1);
     }
 
-
+    public static String fromMapToUrl(HashMap<String,Object> map){
+        StringBuffer mapOfString = new StringBuffer();
+        for (HashMap.Entry<String, Object> entity : map.entrySet()) {
+            mapOfString.append("&").append(entity.getKey());
+            mapOfString.append("=").append(entity.getValue());
+        }
+        return String.valueOf(mapOfString);
+    }
 }

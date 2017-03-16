@@ -3,42 +3,43 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_bt_roles_moudles", schema = "agile_db", catalog = "")
 public class SysBtRolesMoudlesEntity {
-    private Integer id;
-    private Integer moduleId;
-    private Integer roleId;
+    private int id;
+    private int moduleId;
+    private int roleId;
 
     @Id
+    @GeneratedValue
     @Column(name = "ID", nullable = false)
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "MODULE_ID", nullable = false)
-    public Integer getModuleId() {
+    public int getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(Integer moduleId) {
+    public void setModuleId(int moduleId) {
         this.moduleId = moduleId;
     }
 
     @Basic
     @Column(name = "ROLE_ID", nullable = false)
-    public Integer getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
@@ -49,18 +50,18 @@ public class SysBtRolesMoudlesEntity {
 
         SysBtRolesMoudlesEntity that = (SysBtRolesMoudlesEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (moduleId != null ? !moduleId.equals(that.moduleId) : that.moduleId != null) return false;
-        if (roleId != null ? !roleId.equals(that.roleId) : that.roleId != null) return false;
+        if (id != that.id) return false;
+        if (moduleId != that.moduleId) return false;
+        if (roleId != that.roleId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
-        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
+        int result = id;
+        result = 31 * result + moduleId;
+        result = 31 * result + roleId;
         return result;
     }
 }

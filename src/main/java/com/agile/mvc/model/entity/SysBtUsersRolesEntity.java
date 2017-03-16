@@ -3,42 +3,43 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_bt_users_roles", schema = "agile_db", catalog = "")
 public class SysBtUsersRolesEntity {
-    private Integer id;
-    private Integer roleId;
-    private Integer userId;
+    private int id;
+    private int roleId;
+    private int userId;
 
     @Id
+    @GeneratedValue
     @Column(name = "ID", nullable = false)
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "ROLE_ID", nullable = false)
-    public Integer getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
     @Basic
     @Column(name = "USER_ID", nullable = false)
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -49,18 +50,18 @@ public class SysBtUsersRolesEntity {
 
         SysBtUsersRolesEntity that = (SysBtUsersRolesEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (roleId != null ? !roleId.equals(that.roleId) : that.roleId != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (id != that.id) return false;
+        if (roleId != that.roleId) return false;
+        if (userId != that.userId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        int result = id;
+        result = 31 * result + roleId;
+        result = 31 * result + userId;
         return result;
     }
 }

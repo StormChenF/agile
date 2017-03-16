@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by 佟盟 on 2017/1/17.
+ * Created by mydeathtrial on 2017/3/16.
  */
 @Entity
 @Table(name = "sys_users", schema = "agile_db", catalog = "")
 public class SysUsersEntity {
-    private Integer userId;
+    private int userId;
     private String username;
     private String name;
     private String password;
@@ -27,12 +27,13 @@ public class SysUsersEntity {
     private Boolean credentialsNonExpired;
 
     @Id
+    @GeneratedValue
     @Column(name = "USER_ID", nullable = false)
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -193,7 +194,7 @@ public class SysUsersEntity {
 
         SysUsersEntity that = (SysUsersEntity) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (userId != that.userId) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
@@ -218,7 +219,7 @@ public class SysUsersEntity {
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
+        int result = userId;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
