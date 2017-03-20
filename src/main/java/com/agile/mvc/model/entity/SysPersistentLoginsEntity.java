@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mydeathtrial on 2017/3/16.
+ * Created by mydeathtrial on 2017/3/20.
  */
 @Entity
 @Table(name = "sys_persistent_logins", schema = "agile_db", catalog = "")
-@IdClass(SysPersistentLoginsEntityPK.class)
 public class SysPersistentLoginsEntity {
     private int id;
     private String username;
@@ -17,7 +16,7 @@ public class SysPersistentLoginsEntity {
     private Timestamp lastUsed;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     public int getId() {
         return id;
@@ -37,7 +36,7 @@ public class SysPersistentLoginsEntity {
         this.username = username;
     }
 
-    @Id
+    @Basic
     @Column(name = "SERIES", nullable = false, length = 64)
     public String getSeries() {
         return series;

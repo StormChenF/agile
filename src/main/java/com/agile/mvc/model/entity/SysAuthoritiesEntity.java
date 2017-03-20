@@ -3,7 +3,7 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/16.
+ * Created by mydeathtrial on 2017/3/20.
  */
 @Entity
 @Table(name = "sys_authorities", schema = "agile_db", catalog = "")
@@ -18,7 +18,7 @@ public class SysAuthoritiesEntity {
     private String moduleId;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "AUTHORITY_ID", nullable = false)
     public int getAuthorityId() {
         return authorityId;

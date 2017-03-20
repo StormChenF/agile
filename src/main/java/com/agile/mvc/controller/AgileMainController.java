@@ -140,10 +140,11 @@ public class AgileMainController {
                     //响应数据装填
                     modelAndView.addObject("result",this.getService().getOutParam());
                 }else{
-                    String afterParam = request.getQueryString().replaceFirst("forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]","");
+                    String afterParam = request.getQueryString().replaceFirst("forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]?","");
                     String beforeParam = StringUtil.fromMapToUrl(this.getService().getOutParam());
+
                     //转发
-                    modelAndView.setView(new RedirectView(forward+"?"+afterParam+beforeParam));
+                    modelAndView.setView(new RedirectView(forward+(StringUtil.isEmpty(afterParam+beforeParam)?"":"?"+afterParam+beforeParam)));
                 }
             }
         }

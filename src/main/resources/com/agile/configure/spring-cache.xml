@@ -15,15 +15,15 @@
 
     <bean id="userEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
         <property name="cacheName" value="securityCache" />
-        <property name="cacheManager" ref="ehcacheManager" />
+        <property name="cacheManager" ref="cacheManagerFactory" />
     </bean>
 
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="ehcacheManager"/>
+        <property name="cacheManager" ref="cacheManagerFactory"/>
         <property name="transactionAware" value="true"/>
     </bean>
 
-    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:com/agile/configure/agile-ehcache.xml"/>
         <property name="shared" value="true"/>
     </bean>

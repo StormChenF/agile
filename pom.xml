@@ -237,18 +237,6 @@
       <artifactId>commons-beanutils</artifactId>
       <version>1.9.3</version>
     </dependency>
-    <!--缓存-->
-    <dependency>
-      <groupId>net.sf.ehcache.internal</groupId>
-      <artifactId>ehcache-core</artifactId>
-      <version>2.10.3</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
     <!--hibernate二级缓存-->
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -362,6 +350,39 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!--spring 与 ehcache注解化-->
+    <dependency>
+      <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+      <artifactId>ehcache-spring-annotations</artifactId>
+      <version>1.2.0</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-aop</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-expression</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-core</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-context</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-beans</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
     <!--&lt;!&ndash;spring websocket支持&ndash;&gt;-->
     <!--<dependency>-->
       <!--<groupId>org.springframework</groupId>-->

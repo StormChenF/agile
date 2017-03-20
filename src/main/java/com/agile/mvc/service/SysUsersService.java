@@ -4,7 +4,8 @@ import com.agile.common.base.AgileMainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.mvc.model.dao.SysAuthoritiesEntityRepository;
-import org.springframework.data.domain.PageRequest;
+import com.agile.mvc.model.entity.SysAuthoritiesEntity;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,10 +15,18 @@ import org.springframework.stereotype.Service;
 public class SysUsersService extends AgileMainService {
 
     public RETURN aa(){
-        SysAuthoritiesEntityRepository agileRepository = (SysAuthoritiesEntityRepository) FactoryUtil.getBean("SysAuthoritiesEntityRepository");
-        this.getInParam("a");
-        Iterable d = agileRepository.findAll(new PageRequest(0,10));
-        this.setOutParam("a",d);
+        SysAuthoritiesEntityRepository dao = (SysAuthoritiesEntityRepository) FactoryUtil.getBean("SysAuthoritiesEntityRepository");
+
+        SysAuthoritiesEntity s = new SysAuthoritiesEntity();
+        s.setAuthorityDesc("1111111111");
+        s.setAuthorityMark("2222222222");
+        s.setAuthorityName("3333333333");
+        s.setEnable(true);
+        s.setIssys(true);
+        s.setMessage("4444444444");
+        s.setModuleId("12");
+        dao.save(s);
+
         return RETURN.SUCCESS;
     }
 }

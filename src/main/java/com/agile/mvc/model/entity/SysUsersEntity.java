@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mydeathtrial on 2017/3/16.
+ * Created by mydeathtrial on 2017/3/20.
  */
 @Entity
 @Table(name = "sys_users", schema = "agile_db", catalog = "")
@@ -27,7 +27,7 @@ public class SysUsersEntity {
     private Boolean credentialsNonExpired;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "USER_ID", nullable = false)
     public int getUserId() {
         return userId;

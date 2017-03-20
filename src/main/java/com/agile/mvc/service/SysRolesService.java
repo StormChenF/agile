@@ -15,18 +15,8 @@ import org.springframework.stereotype.Service;
 public class SysRolesService extends AgileMainService {
     public RETURN bb(){
         SysAuthoritiesEntityRepository dao = (SysAuthoritiesEntityRepository) FactoryUtil.getBean("SysAuthoritiesEntityRepository");
-
-        SysAuthoritiesEntity s = new SysAuthoritiesEntity();
-        s.setAuthorityDesc("1111111111");
-        s.setAuthorityMark("2222222222");
-        s.setAuthorityName("3333333333");
-        s.setEnable(true);
-        s.setIssys(true);
-        s.setMessage("4444444444");
-        s.setModuleId("12");
-        Object a = dao.save(s);
-        Iterable d = dao.findAll(new PageRequest(0,10));
-        this.setOutParam("b",d);
+        Iterable b = dao.findAll(new PageRequest(0,10));
+        this.setOutParam("b",b);
         return RETURN.SUCCESS;
     }
 }
