@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -40,10 +39,6 @@ import java.util.Iterator;
 public class AgileMainController {
     //上下文
     private final ApplicationContext applicationContext;
-    //日志工具
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    //认证令牌
-    private String authToken;
     //服务对象
     private AgileServiceInterface service;
     //工程名
@@ -69,7 +64,6 @@ public class AgileMainController {
      * @param method 方法名
      * @param forward 转发信息
      * @param authToken 认证令牌
-     * @param cacheToken 缓存令牌
      * @return 响应试图数据
      * @throws IOException 流异常
      * @throws IllegalAccessException 非法访问异常
@@ -87,7 +81,6 @@ public class AgileMainController {
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
             @RequestParam(value = "auth-token", required = false) String authToken,
-            @RequestParam(value = "cache-token", required = false) String cacheToken,
             @RequestParam(value = "file-path", required = false) String filePath,
             @RequestParam(value = "file-name", required = false) String fileName
     ) throws IOException,IllegalAccessException, IllegalArgumentException, InvocationTargetException,NoSuchMethodException, SecurityException{
@@ -118,36 +111,35 @@ public class AgileMainController {
         if (StringUtil.isEmpty(method)){
             modelAndView.addObject("head",new AgileHead(RETURN.NO_METHOD,request));
             return modelAndView;
-        }else {
-            //调用目标方法前处理入参
-            handleRequestUrl(request,authToken,service,method);
-
-            //调用目标方法
-            RETURN returnState = this.getService().executeMethod(method);
-
-            //判断转发存在
-            if(StringUtil.isEmpty(forward)){
-
-                //调用目标方法后处理视图
-                modelAndView.addObject("head",new AgileHead(returnState,request));
-            }
-
-            if(RETURN.SUCCESS.equals(returnState)){
-
-                //判断转发存在
-                if(StringUtil.isEmpty(forward)){
-
-                    //响应数据装填
-                    modelAndView.addObject("result",this.getService().getOutParam());
-                }else{
-                    String afterParam = request.getQueryString().replaceFirst("forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]?","");
-                    String beforeParam = StringUtil.fromMapToUrl(this.getService().getOutParam());
-
-                    //转发
-                    modelAndView.setView(new RedirectView(forward+(StringUtil.isEmpty(afterParam+beforeParam)?"":"?"+afterParam+beforeParam)));
-                }
-            }
         }
+
+        //调用目标方法前处理入参
+        handleRequestUrl(request,authToken,service,method);
+
+        //调用目标方法
+        RETURN returnState = this.getService().executeMethod(method);
+
+        //判断是否转发
+        if(!StringUtil.isEmpty(forward) && RETURN.SUCCESS.equals(returnState)){
+
+            //过滤转发并获取请求参数，避免重复转发
+            String afterParam = request.getQueryString().replaceFirst("forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]?","");
+
+            //服务间参数传递
+            String beforeParam = StringUtil.fromMapToUrl(this.getService().getOutParam());
+
+            //转发
+            modelAndView.setView(new RedirectView(forward+(StringUtil.isEmpty(afterParam+beforeParam)?"":"?"+afterParam+beforeParam)));
+
+            return modelAndView;
+        }
+
+        //调用目标方法后处理视图
+        modelAndView.addObject("head",new AgileHead(returnState,request));
+
+        //响应数据装填
+        modelAndView.addObject("result",this.getService().getOutParam());
+
         return modelAndView;
     }
 
@@ -252,14 +244,6 @@ public class AgileMainController {
             if (bos != null)
                 bos.close();
         }
-    }
-
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
     }
 
     private AgileServiceInterface getService() {
