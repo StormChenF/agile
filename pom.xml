@@ -92,11 +92,22 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.8.5</version>
     </dependency>
-    <!--xml解析工具-->
+    <!--xml序列化工具-->
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
       <version>1.4.9</version>
+    </dependency>
+    <!--proto序列化工具-->
+    <dependency>
+      <groupId>com.dyuproject.protostuff</groupId>
+      <artifactId>protostuff-core</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.dyuproject.protostuff</groupId>
+      <artifactId>protostuff-runtime</artifactId>
+      <version>1.1.1</version>
     </dependency>
     <!--pdf 视图解析-->
     <dependency>
@@ -382,7 +393,12 @@
         </exclusion>
       </exclusions>
     </dependency>
-
+    <!--对象属性拷贝-->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.2.5</version>
+    </dependency>
     <!--&lt;!&ndash;spring websocket支持&ndash;&gt;-->
     <!--<dependency>-->
       <!--<groupId>org.springframework</groupId>-->

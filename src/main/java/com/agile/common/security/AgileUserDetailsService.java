@@ -22,7 +22,7 @@ public class AgileUserDetailsService implements UserDetailsService {
 //        ///加载用户基本信息
 //        AdminModel adminModel = adminService.getAdminByAdminId(username);
 //        try {
-//            BeanUtil.copyProperties(userDetails, adminModel);
+//            BeansUtil.copyProperties(userDetails, adminModel);
 //        } catch (IllegalAccessException e) {
 //            logger.error("用户信息复制到userDetails出错",e);
 //        } catch (InvocationTargetException e) {
