@@ -1,6 +1,5 @@
 package com.agile.common.util;
 
-import com.agile.mvc.model.entity.SysAuthoritiesEntity;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.util.ObjectUtils;
 import java.lang.reflect.InvocationTargetException;
@@ -32,9 +31,17 @@ public class ObjectUtil extends ObjectUtils {
      * @return 是否相同
      */
     public static Boolean compareClass(Object source,Object target){
-        Class<?> a = source.getClass();
-        Class<?> b = target.getClass();
-        return a.equals(b);
+        return isEmpty(source)?isEmpty(target):(!isEmpty(target) && source.getClass().equals(target.getClass()));
+    }
+
+    /**
+     * 比较两个对象属性是否相同
+     * @param source 源对象
+     * @param target 目标对象
+     * @return 是否相同
+     */
+    public static boolean compareValue(Object source, Object target) {
+        return isEmpty(source)?isEmpty(target):(source.equals(target));
     }
 
     /**
@@ -46,23 +53,26 @@ public class ObjectUtil extends ObjectUtils {
      * @throws InvocationTargetException 调用目标异常
      */
     public static List<Map<String,Object>> getDifferenceProperties(Object source,Object target) throws IllegalAccessException,InvocationTargetException {
-        if(compareClass(source, target) && !source.equals(target)){
+        if(((compareClass(source, target) && !compareValue(source, target)) || isEmpty(source)) != isEmpty(target)){
             List<Map<String,Object>> rList = new ArrayList<>();
-            Class sourceClass = source.getClass();
+            Object object = isEmpty(source)?target:source;
+            Class sourceClass = object.getClass();
             Method[] methods = sourceClass.getMethods();
             for (Method method : methods) {
                 String methodName = method.getName();
                 if (!methodName.startsWith("get")) {
                     continue;
                 }
-                Object sourceValue = method.invoke(source);
-                Object targetValue = method.invoke(target);
-                if (sourceValue.equals(targetValue)) {
+                Object sourceValue = isEmpty(source)?null:method.invoke(source);
+                Object targetValue = isEmpty(target)?null:method.invoke(target);
+                Object objectValue = isEmpty(sourceValue)?targetValue:sourceValue;
+
+                if (compareValue(sourceValue,targetValue)) {
                     continue;
                 }
                 rList.add(new HashMap<String,Object>() {{
                     put("propertyName", methodName.replace("get", ""));
-                    put("propertyType",sourceValue.getClass().getName());
+                    put("propertyType",objectValue.getClass().getName());
                     put("oldValue", sourceValue);
                     put("newValue", targetValue);
                 }});
@@ -70,26 +80,5 @@ public class ObjectUtil extends ObjectUtils {
             return rList;
         }
         return null;
-    }
-
-
-    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
-        SysAuthoritiesEntity s = new SysAuthoritiesEntity();
-        s.setAuthorityDesc("1111111111");
-        s.setAuthorityMark("2222222222");
-        s.setAuthorityName("3333333333");
-        s.setEnable(true);
-        s.setIssys(true);
-        s.setMessage("4444444444");
-        s.setModuleId("12");
-        SysAuthoritiesEntity s1 = new SysAuthoritiesEntity();
-        s1.setAuthorityDesc("1111111112");
-        s1.setAuthorityMark("2222222223");
-        s1.setAuthorityName("3333333333");
-        s1.setEnable(true);
-        s1.setIssys(true);
-        s1.setMessage("4444444444");
-        s1.setModuleId("12");
-        List<Map<String, Object>> d = getDifferenceProperties(s, s1);
     }
 }
