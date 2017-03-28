@@ -39,12 +39,16 @@
         <!--JPA属性-->
         <property name="jpaProperties">
             <props>
+                <!--基本配置-->
+                <prop key="hibernate.hbm2ddl.auto">${agile.jpa.hbm2ddl}</prop>
+
                 <!--二级缓存-->
                 <prop key="hibernate.current_session_context_class">${agile.jpa.current_session_context_class}</prop>
                 <prop key="hibernate.cache.use_second_level_cache">${agile.jpa.use_second_level_cache}</prop>
                 <prop key="hibernate.cache.use_structured_entries">${agile.jpa.use_structured_entries}</prop>
                 <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
-                <prop key="hibernate.net.sf.ehcache.configurationResourceName">com.agile.configure.agile-ehcache.xml</prop>
+                <prop key="hibernate.net.sf.ehcache.configurationResourceName">agile-ehcache.xml</prop>
+
                 <!--查询缓存-->
                 <prop key="hibernate.cache.use_query_cache">${agile.jpa.use_query_cache}</prop>
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
