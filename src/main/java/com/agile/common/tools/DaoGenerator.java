@@ -45,21 +45,34 @@ public class DaoGenerator {
         try {
             Map<String,String> data = new HashMap<>();
             for (String tableName:dataSet) {
-                String tableNameOfJava = StringUtil.toName(tableName)+"Entity";
-                data.put("package","com.agile.mvc.model.dao");
+                String tableNameOfJava = StringUtil.toName(tableName);
+                data.put("repositoryPackage","com.agile.mvc.model.dao");
+                data.put("servicePackage","com.agile.mvc.service");
                 data.put("tableName",tableNameOfJava);
                 data.put("keyType",PropertiesUtil.getProperties("agile.generator.key_type"));
                 Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
                 cfg.setDirectoryForTemplateLoading(new File("./src/main/java/com/agile/common/tools"));
                 cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-                Template temp = cfg.getTemplate("Repository.ftl");
-                String fileName = tableNameOfJava+"Repository.java";
-                File file = new File("./src/main/java/com/agile/mvc/model/dao/" + fileName);
-                FileWriter fw = new FileWriter(file);
-                BufferedWriter bw = new BufferedWriter(fw);
-                temp.process(data, bw);
-                bw.flush();
-                fw.close();
+
+                //DAO生成器
+                Template repositoryTemp = cfg.getTemplate("Repository.ftl");
+                String repositoryFileName = tableNameOfJava+"Repository.java";
+                File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
+                FileWriter repositoryFileFw = new FileWriter(repositoryFile);
+                BufferedWriter repositoryFileBw = new BufferedWriter(repositoryFileFw);
+                repositoryTemp.process(data, repositoryFileBw);
+                repositoryFileBw.flush();
+                repositoryFileFw.close();
+
+                //service生成器
+                Template serviceTemp = cfg.getTemplate("Service.ftl");
+                String ServiceFileName = tableNameOfJava+"Service.java";
+                File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
+                FileWriter serviceFileFw = new FileWriter(serviceFile);
+                BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);
+                serviceTemp.process(data, serviceFileBw);
+                serviceFileBw.flush();
+                serviceFileFw.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
