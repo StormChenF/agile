@@ -56,7 +56,7 @@ public class DictionaryMainService extends AgileMainService {
      */
     public RETURN query(){
         DictionaryMainRepository dao = (DictionaryMainRepository) FactoryUtil.getBean("DictionaryMainRepository");
-        dao.findAll(new PageRequest(Integer.parseInt(this.getInParam("page").toString()),Integer.parseInt(this.getInParam("size").toString())));
+        dao.findAll(this.getPageInfo());
         return RETURN.SUCCESS;
     }
 }

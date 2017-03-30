@@ -56,7 +56,7 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      */
     public RETURN query(){
         SysBtAuthoritiesResourcesRepository dao = (SysBtAuthoritiesResourcesRepository) FactoryUtil.getBean("SysBtAuthoritiesResourcesRepository");
-        dao.findAll(new PageRequest(Integer.parseInt(this.getInParam("page").toString()),Integer.parseInt(this.getInParam("size").toString())));
+        dao.findAll(this.getPageInfo());
         return RETURN.SUCCESS;
     }
 }

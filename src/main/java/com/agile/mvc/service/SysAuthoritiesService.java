@@ -56,7 +56,7 @@ public class SysAuthoritiesService extends AgileMainService {
      */
     public RETURN query(){
         SysAuthoritiesRepository dao = (SysAuthoritiesRepository) FactoryUtil.getBean("SysAuthoritiesRepository");
-        dao.findAll(new PageRequest(Integer.parseInt(this.getInParam("page").toString()),Integer.parseInt(this.getInParam("size").toString())));
+        dao.findAll(this.getPageInfo());
         return RETURN.SUCCESS;
     }
 }

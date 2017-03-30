@@ -3,9 +3,11 @@ package com.agile.common.base;
 import com.agile.common.util.ObjectUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -53,6 +55,70 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
     }
 
     /**
+     * 服务中调用该方法获取字符串入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected String getInParamOfString(String key) {
+        return String.valueOf(inParam.get(key));
+    }
+
+    /**
+     * 服务中调用该方法获取整数入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected int getInParamOfInteger(String key) {
+        return Integer.parseInt(getInParamOfString(key));
+    }
+
+    /**
+     * 服务中调用该方法获取浮点入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected float getInParamOfFloat(String key) {
+        return Float.parseFloat(getInParamOfString(key));
+    }
+
+    /**
+     * 服务中调用该方法获取日期入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected Date getInParamOfDate(String key) {
+        return Date.valueOf(getInParamOfString(key));
+    }
+
+    /**
+     * 服务中调用该方法获取长整形入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected long getInParamOfLong(String key) {
+        return Long.valueOf(getInParamOfString(key));
+    }
+
+    /**
+     * 服务中调用该方法获取布尔形入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected boolean getInParamOfBoolean(String key) {
+        return Boolean.valueOf(getInParamOfString(key));
+    }
+
+
+    /**
+     * 服务中调用该方判断是否存在入参
+     * @param key 入参索引字符串
+     * @return 入参值
+     */
+    protected boolean containsKey(String key) {
+        return inParam.containsKey(key);
+    }
+
+    /**
      * 服务中调用该方法获取入参集合
      * @return 入参集合
      */
@@ -78,5 +144,17 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
             this.outParam = new HashMap<>();
         }
         this.outParam.put(key,value);
+    }
+
+    public PageRequest getPageInfo(){
+        int page = 1,size =10;
+
+        if(this.containsKey("page")){
+            page = this.getInParamOfInteger("page");
+        }
+        if(this.containsKey("size")){
+            size = this.getInParamOfInteger("size");
+        }
+        return new PageRequest(page,size);
     }
 }
