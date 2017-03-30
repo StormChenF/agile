@@ -1,13 +1,23 @@
 package com.agile.common.util;
 
+import com.agile.mvc.model.entity.LogMainEntity;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.cglib.beans.BeanCopier;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
+
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.String.*;
 
 /**
  * Created by 佟盟 on 2017/1/9
@@ -80,5 +90,83 @@ public class ObjectUtil extends ObjectUtils {
             return rList;
         }
         return null;
+    }
+
+    /**
+     * 从Map对象中获取指定类型对象
+     * @param clazz 想要获取的对象类型
+     * @param map 属性集合
+     * @return 返回指定对象类型对象
+     * @throws IllegalAccessException 非法访问
+     * @throws InstantiationException 实例化异常
+     * @throws NoSuchFieldException 没有指定方法
+     */
+    public static Object getObjectFromMap(Class<?> clazz,HashMap<String, Object> map) throws IllegalAccessException, InstantiationException, NoSuchFieldException{
+        return getObjectFromMap(clazz,map,null);
+    }
+
+    /**
+     * 从Map对象中获取指定类型对象
+     * @param clazz 想要获取的对象类型
+     * @param map 属性集合
+     * @param prefix 属性前缀
+     * @return 返回指定对象类型对象
+     * @throws IllegalAccessException 非法访问
+     * @throws InstantiationException 实例化异常
+     */
+    public static Object getObjectFromMap(Class<?> clazz,HashMap<String, Object> map, String prefix) throws IllegalAccessException, InstantiationException {
+        Object object = clazz.newInstance();
+        for (Map.Entry<String, Object> entry : map.entrySet()){
+            if (!isEmpty(entry.getValue())) {
+                String fieldName = entry.getKey();
+                if(!isEmpty(prefix) && fieldName.startsWith(prefix)){
+                    fieldName = fieldName.replaceFirst(prefix, "");
+                }
+
+                try {
+                    Field field = clazz.getDeclaredField(fieldName);
+                    field.setAccessible(true);
+                    Class<?> fieldType = field.getType();
+                    Object propertyValue = entry.getValue();
+                    field.set(object,cast(fieldType,propertyValue));
+                }catch (NoSuchFieldException e){
+                    continue;
+                }
+
+            }
+        }
+        return object;
+    }
+
+    /**
+     * 对象类型转换
+     * @param clazz 类型
+     * @param propertyValue 值
+     * @return 转换后的值
+     */
+    public static Object cast(Class<?> clazz, Object propertyValue) {
+        String propertyValueStr = String.valueOf(propertyValue);
+        if(clazz == Date.class){
+            return Date.valueOf(propertyValueStr);
+        }
+        if(clazz == Long.class|| clazz == long.class ){
+            return Long.parseLong(propertyValueStr);
+        }
+        if(clazz == Integer.class || clazz == int.class ){
+            return Integer.parseInt(propertyValueStr);
+        }
+        if(clazz == BigDecimal.class){
+            return new BigDecimal(propertyValueStr);
+        }
+        if(clazz == Double.class){
+            return Double.parseDouble(propertyValueStr);
+        }
+        if(clazz == Float.class){
+            return Float.parseFloat(propertyValueStr);
+        }
+        if(clazz == Boolean.class){
+            return Boolean.parseBoolean(propertyValueStr);
+        }
+        return propertyValueStr;
     }
 }

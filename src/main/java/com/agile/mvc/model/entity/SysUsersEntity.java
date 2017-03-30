@@ -25,16 +25,17 @@ public class SysUsersEntity {
     private Boolean accountNonExpired;
     private Boolean accountNonLocked;
     private Boolean credentialsNonExpired;
+    private int sysUsersId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "USER_ID", nullable = false)
-    public int getUserId() {
-        return userId;
+    @Column(name = "SYS_USERS_ID")
+    public int getSysUsersId() {
+        return sysUsersId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setSysUsersId(int sysUsersId) {
+        this.sysUsersId = sysUsersId;
     }
 
     @Basic

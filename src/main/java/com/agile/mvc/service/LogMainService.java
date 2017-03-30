@@ -1,4 +1,4 @@
-package ${servicePackage};
+package com.agile.mvc.service;
 
 import com.agile.common.base.AgileMainService;
 import com.agile.common.base.RETURN;
@@ -6,32 +6,32 @@ import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
-import com.agile.mvc.model.dao.${tableName}Repository;
-import com.agile.mvc.model.entity.${tableName}Entity;
+import com.agile.mvc.model.dao.LogMainRepository;
+import com.agile.mvc.model.entity.LogMainEntity;
 
 /**
 * Created by 佟盟
 */
 @Service
-public class ${tableName}Service extends AgileMainService {
+public class LogMainService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/${tableName}Service/save
+     * 地址：http://localhost:8080/agile/LogMainService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        ${tableName}Repository dao = (${tableName}Repository) FactoryUtil.getBean("${tableName}Repository");
-        ${tableName}Entity entity = (${tableName}Entity)ObjectUtil.getObjectFromMap(${tableName}Entity.class, this.getInParam());
+        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
+        LogMainEntity entity = (LogMainEntity)ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/${tableName}Service/delete
+     * 地址：http://localhost:8080/agile/LogMainService/delete
      */
     public RETURN delete(){
-        ${tableName}Repository dao = (${tableName}Repository) FactoryUtil.getBean("${tableName}Repository");
+        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
         String[] ids = this.getInParam("id").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id));
@@ -44,18 +44,18 @@ public class ${tableName}Service extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        ${tableName}Repository dao = (${tableName}Repository) FactoryUtil.getBean("${tableName}Repository");
-        ${tableName}Entity entity = (${tableName}Entity)ObjectUtil.getObjectFromMap(${tableName}Entity.class, this.getInParam());
+        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
+        LogMainEntity entity = (LogMainEntity)ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/${tableName}Service/query
+     * 地址：http://localhost:8080/agile/LogMainService/query
      */
     public RETURN query(){
-        ${tableName}Repository dao = (${tableName}Repository) FactoryUtil.getBean("${tableName}Repository");
+        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
         dao.findAll(new PageRequest(Integer.parseInt(this.getInParam("page").toString()),Integer.parseInt(this.getInParam("size").toString())));
         return RETURN.SUCCESS;
     }

@@ -17,16 +17,17 @@ public class SysResourcesEntity {
     private Boolean enable;
     private Boolean issys;
     private Integer moduleId;
+    private int sysResourcesId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "RESOURCE_ID", nullable = false)
-    public int getResourceId() {
-        return resourceId;
+    @Column(name = "SYS_RESOURCES_ID")
+    public int getSysResourcesId() {
+        return sysResourcesId;
     }
 
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setSysResourcesId(int sysResourcesId) {
+        this.sysResourcesId = sysResourcesId;
     }
 
     @Basic

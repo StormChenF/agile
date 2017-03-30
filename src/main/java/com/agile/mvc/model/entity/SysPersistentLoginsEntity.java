@@ -8,22 +8,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "sys_persistent_logins", schema = "agile_db", catalog = "")
+@IdClass(SysPersistentLoginsEntityPK.class)
 public class SysPersistentLoginsEntity {
     private int id;
     private String username;
     private String series;
     private String token;
     private Timestamp lastUsed;
+    private int sysPersistentLoginsId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    public int getId() {
-        return id;
+    @Column(name = "SYS_PERSISTENT_LOGINS_ID")
+    public int getSysPersistentLoginsId() {
+        return sysPersistentLoginsId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSysPersistentLoginsId(int sysPersistentLoginsId) {
+        this.sysPersistentLoginsId = sysPersistentLoginsId;
     }
 
     @Basic
@@ -36,6 +38,7 @@ public class SysPersistentLoginsEntity {
         this.username = username;
     }
 
+    @Id
     @Basic
     @Column(name = "SERIES", nullable = false, length = 64)
     public String getSeries() {

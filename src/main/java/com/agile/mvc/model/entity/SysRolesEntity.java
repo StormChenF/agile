@@ -14,16 +14,17 @@ public class SysRolesEntity {
     private Boolean enable;
     private Boolean issys;
     private String moduleId;
+    private int sysRolesId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "ROLE_ID", nullable = false)
-    public int getRoleId() {
-        return roleId;
+    @Column(name = "SYS_ROLES_ID")
+    public int getSysRolesId() {
+        return sysRolesId;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setSysRolesId(int sysRolesId) {
+        this.sysRolesId = sysRolesId;
     }
 
     @Basic

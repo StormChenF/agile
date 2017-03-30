@@ -20,16 +20,17 @@ public class SysModulesEntity {
     private String controller;
     private Boolean enable;
     private String priority;
+    private int sysModulesId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "MODULE_ID", nullable = false)
-    public int getModuleId() {
-        return moduleId;
+    @Column(name = "SYS_MODULES_ID")
+    public int getSysModulesId() {
+        return sysModulesId;
     }
 
-    public void setModuleId(int moduleId) {
-        this.moduleId = moduleId;
+    public void setSysModulesId(int sysModulesId) {
+        this.sysModulesId = sysModulesId;
     }
 
     @Basic

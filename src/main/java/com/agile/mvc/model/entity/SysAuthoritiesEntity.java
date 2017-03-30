@@ -16,16 +16,17 @@ public class SysAuthoritiesEntity {
     private Boolean enable;
     private Boolean issys;
     private String moduleId;
+    private int sysAuthorityId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "AUTHORITY_ID", nullable = false)
-    public int getAuthorityId() {
-        return authorityId;
+    @Column(name = "SYS_AUTHORITY_ID")
+    public int getSysAuthorityId() {
+        return sysAuthorityId;
     }
 
-    public void setAuthorityId(int authorityId) {
-        this.authorityId = authorityId;
+    public void setSysAuthorityId(int sysAuthorityId) {
+        this.sysAuthorityId = sysAuthorityId;
     }
 
     @Basic
@@ -132,4 +133,5 @@ public class SysAuthoritiesEntity {
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
         return result;
     }
+
 }

@@ -26,12 +26,14 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 返回执行结果
      */
     public RETURN executeMethod(String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-            Method method = this.getClass().getDeclaredMethod(methodName);
-            return execute(method);
+        Method method = this.getClass().getDeclaredMethod(methodName);
+        return execute(method);
     }
     @Transactional
     private RETURN execute(Method method) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
-            return (RETURN) method.invoke(this);
+        //取消安全检测，提高性能
+        method.setAccessible(true);
+        return (RETURN) method.invoke(this);
     }
     /**
      * 控制层中调用该方法设置服务入参
@@ -48,6 +50,14 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      */
     protected Object getInParam(String key) {
         return inParam.get(key);
+    }
+
+    /**
+     * 服务中调用该方法获取入参集合
+     * @return 入参集合
+     */
+    protected HashMap<String, Object> getInParam() {
+        return inParam;
     }
 
     /**

@@ -11,16 +11,17 @@ public class SysBtUsersRolesEntity {
     private int id;
     private int roleId;
     private int userId;
+    private int sysBtUsersRolesId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    public int getId() {
-        return id;
+    @Column(name = "SYS_BT_USERS_ROLES_ID")
+    public int getSysBtUsersRolesId() {
+        return sysBtUsersRolesId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSysBtUsersRolesId(int sysBtUsersRolesId) {
+        this.sysBtUsersRolesId = sysBtUsersRolesId;
     }
 
     @Basic
