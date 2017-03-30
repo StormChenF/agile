@@ -5,7 +5,6 @@ import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.PageRequest;
 import com.agile.mvc.model.dao.SysRolesRepository;
 import com.agile.mvc.model.entity.SysRolesEntity;
 
