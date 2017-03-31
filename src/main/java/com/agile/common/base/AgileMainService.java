@@ -64,12 +64,42 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
     }
 
     /**
+     * 服务中调用该方法获取字符串入参
+     * @param key 入参索引字符串
+     * @param defaultValue 默认值
+     * @return 入参值
+     */
+    protected String getInParamOfString(String key,String defaultValue) {
+        return containsKey(key)?String.valueOf(inParam.get(key)):defaultValue;
+    }
+
+    /**
      * 服务中调用该方法获取整数入参
      * @param key 入参索引字符串
      * @return 入参值
      */
     protected int getInParamOfInteger(String key) {
         return Integer.parseInt(getInParamOfString(key));
+    }
+
+    /**
+     * 服务中调用该方法获取整数入参
+     * @param key 入参索引字符串
+     * @param defaultValue 默认值
+     * @return 入参值
+     */
+    protected int getInParamOfInteger(String key,int defaultValue) {
+        return containsKey(key)?Integer.parseInt(getInParamOfString(key)):defaultValue;
+    }
+
+    /**
+     * 服务中调用该方法获取浮点入参
+     * @param key 入参索引字符串
+     * @param defaultValue 默认值
+     * @return 入参值
+     */
+    protected float getInParamOfFloat(String key,float defaultValue) {
+        return containsKey(key)?Float.parseFloat(getInParamOfString(key)):defaultValue;
     }
 
     /**
@@ -84,6 +114,16 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
     /**
      * 服务中调用该方法获取日期入参
      * @param key 入参索引字符串
+     * @param defaultValue 默认值
+     * @return 入参值
+     */
+    protected Date getInParamOfDate(String key,Date defaultValue) {
+        return containsKey(key)?Date.valueOf(getInParamOfString(key)):defaultValue;
+    }
+
+    /**
+     * 服务中调用该方法获取日期入参
+     * @param key 入参索引字符串
      * @return 入参值
      */
     protected Date getInParamOfDate(String key) {
@@ -93,10 +133,29 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
     /**
      * 服务中调用该方法获取长整形入参
      * @param key 入参索引字符串
+     * @param defaultValue 默认值
+     * @return 入参值
+     */
+    protected long getInParamOfLong(String key,long defaultValue) {
+        return containsKey(key)?Long.valueOf(getInParamOfString(key)):defaultValue;
+    }
+
+    /**
+     * 服务中调用该方法获取长整形入参
+     * @param key 入参索引字符串
      * @return 入参值
      */
     protected long getInParamOfLong(String key) {
         return Long.valueOf(getInParamOfString(key));
+    }
+
+    /**
+     * 服务中调用该方法获取布尔形入参
+     * @param defaultValue 默认值
+     * @return 入参值
+     */
+    protected boolean getInParamOfBoolean(String key,boolean defaultValue) {
+        return containsKey(key)?Boolean.valueOf(getInParamOfString(key)):defaultValue;
     }
 
     /**
