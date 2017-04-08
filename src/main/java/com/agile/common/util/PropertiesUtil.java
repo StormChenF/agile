@@ -1,16 +1,10 @@
 package com.agile.common.util;
 
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -23,10 +17,13 @@ public class PropertiesUtil {
 
     private static PropertiesUtil propertiesUtil;
 
+    /**
+     * 构造函数，读取相对路径下的参数文件
+     */
     private PropertiesUtil() {
         try {
             this.properties = new Properties();
-            InputStream in = new BufferedInputStream(new FileInputStream("D:\\workspace\\agile\\src\\main\\resources\\com\\agile\\configure\\agile.properties"));
+            InputStream in = new BufferedInputStream(new FileInputStream("./src/main/resources/com/agile/configure/agile.properties"));
             properties.load(in);
             in.close();
         } catch (IOException e) {
@@ -34,6 +31,10 @@ public class PropertiesUtil {
         }
     }
 
+    /**
+     * 获取单利模式工具对象
+     * @return 工具对象
+     */
     private static PropertiesUtil getObject(){
         if(ObjectUtil.isEmpty(PropertiesUtil.propertiesUtil)){
             PropertiesUtil.propertiesUtil = new PropertiesUtil();
@@ -41,6 +42,11 @@ public class PropertiesUtil {
         return PropertiesUtil.propertiesUtil;
     }
 
+    /**
+     * 根据key获取参数文件当中value值
+     * @param key key值
+     * @return value值
+     */
     public static String getProperties(String key){
         PropertiesUtil propertiesUtil = PropertiesUtil.getObject();
         return propertiesUtil.properties.getProperty(key);
