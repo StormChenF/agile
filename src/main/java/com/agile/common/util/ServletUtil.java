@@ -1,7 +1,6 @@
 package com.agile.common.util;
 
 import org.jetbrains.annotations.Contract;
-
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
