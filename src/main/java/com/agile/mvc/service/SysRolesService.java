@@ -55,7 +55,7 @@ public class SysRolesService extends AgileMainService {
      */
     public RETURN query(){
         SysRolesRepository dao = (SysRolesRepository) FactoryUtil.getBean("SysRolesRepository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

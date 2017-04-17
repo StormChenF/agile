@@ -55,7 +55,7 @@ public class SysModulesService extends AgileMainService {
      */
     public RETURN query(){
         SysModulesRepository dao = (SysModulesRepository) FactoryUtil.getBean("SysModulesRepository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

@@ -10,6 +10,17 @@
   <!--资源库-->
   <repositories>
     <repository>
+      <id>central</id>
+      <layout>default</layout>
+      <url>http://central.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
       <id>aliyun</id>
       <layout>default</layout>
       <url>http://maven.aliyun.com/nexus/content/groups/public</url>
@@ -61,6 +72,7 @@
       </releases>
     </repository>
   </repositories>
+
   <dependencies>
     <!--servlet api支持-->
     <dependency>
@@ -266,30 +278,30 @@
       <artifactId>spring-data-jpa</artifactId>
       <version>2.0.0.M1</version>
       <exclusions>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-context</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-beans</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-aop</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-tx</artifactId>
-        </exclusion>
+      <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      </exclusion>
+      <exclusion>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      </exclusion>
+      <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      </exclusion>
+      <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      </exclusion>
+      <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      </exclusion>
+      <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      </exclusion>
       </exclusions>
     </dependency>
     <!--JPA与hibernate桥接-->
@@ -399,12 +411,6 @@
       <artifactId>cglib</artifactId>
       <version>3.2.5</version>
     </dependency>
-    <!--spring data-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.data</groupId>-->
-      <!--<artifactId>spring-data-releasetrain</artifactId>-->
-      <!--<version>Hopper-SR8</version>-->
-    <!--</dependency>-->
     <!--&lt;!&ndash;spring websocket支持&ndash;&gt;-->
     <!--<dependency>-->
       <!--<groupId>org.springframework</groupId>-->

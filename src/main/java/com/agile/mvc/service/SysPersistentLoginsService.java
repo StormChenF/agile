@@ -55,7 +55,7 @@ public class SysPersistentLoginsService extends AgileMainService {
      */
     public RETURN query(){
         SysPersistentLoginsRepository dao = (SysPersistentLoginsRepository) FactoryUtil.getBean("SysPersistentLoginsRepository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

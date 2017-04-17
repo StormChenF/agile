@@ -55,7 +55,7 @@ public class LogTableService extends AgileMainService {
      */
     public RETURN query(){
         LogTableRepository dao = (LogTableRepository) FactoryUtil.getBean("LogTableRepository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

@@ -55,7 +55,7 @@ public class ${tableName}Service extends AgileMainService {
      */
     public RETURN query(){
         ${tableName}Repository dao = (${tableName}Repository) FactoryUtil.getBean("${tableName}Repository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

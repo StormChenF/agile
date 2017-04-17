@@ -55,7 +55,7 @@ public class LogColumnService extends AgileMainService {
      */
     public RETURN query(){
         LogColumnRepository dao = (LogColumnRepository) FactoryUtil.getBean("LogColumnRepository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

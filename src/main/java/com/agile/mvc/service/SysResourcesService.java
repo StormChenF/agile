@@ -55,7 +55,7 @@ public class SysResourcesService extends AgileMainService {
      */
     public RETURN query(){
         SysResourcesRepository dao = (SysResourcesRepository) FactoryUtil.getBean("SysResourcesRepository");
-        dao.findAll(this.getPageInfo());
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
 }

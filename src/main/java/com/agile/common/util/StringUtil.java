@@ -33,17 +33,34 @@ public final class StringUtil extends StringUtils{
     }
 
     /**
-     * 字符串转首字母小写驼峰名
+     * 字符串转首字母大写驼峰名
      * @param param 任意字符串
-     * @return 返回首字母小写的驼峰字符串
+     * @return 返回首字母大写的驼峰字符串
      */
     @NotNull
-    public static String toName(String param){
+    public static String toUpperName(String param){
         if (isEmpty(param)) return "";
         String camelString = signToCamel(param);
         return camelString.substring(0,1).toUpperCase()+camelString.substring(1);
     }
 
+    /**
+     * 字符串转首字母小写驼峰名
+     * @param param 任意字符串
+     * @return 返回首字母小写的驼峰字符串
+     */
+    @NotNull
+    public static String toLowerName(String param){
+        if (isEmpty(param)) return "";
+        String camelString = signToCamel(param);
+        return camelString.substring(0,1).toLowerCase()+camelString.substring(1);
+    }
+
+    /**
+     * map格式转url参数路径
+     * @param map 参数集合
+     * @return url
+     */
     public static String fromMapToUrl(HashMap<String,Object> map){
         StringBuffer mapOfString = new StringBuffer();
         for (HashMap.Entry<String, Object> entity : map.entrySet()) {
