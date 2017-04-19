@@ -1,12 +1,12 @@
 package ${repositoryPackage};
 
-import com.agile.mvc.model.entity.${tableName}Entity;
+import com.agile.mvc.model.entity.${className}Entity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 /**
 * Created by 佟盟
 */
-public interface ${tableName}Repository extends JpaRepository<${tableName}Entity,${keyType}> ,JpaSpecificationExecutor{
+public interface ${className}Repository extends JpaRepository<${className}Entity,${primaryKeyPropertyType}>,QuerydslPredicateExecutor<${className}Entity> {
 
 }

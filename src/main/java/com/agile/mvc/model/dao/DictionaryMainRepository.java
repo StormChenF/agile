@@ -2,11 +2,11 @@ package com.agile.mvc.model.dao;
 
 import com.agile.mvc.model.entity.DictionaryMainEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 /**
 * Created by 佟盟
 */
-public interface DictionaryMainRepository extends JpaRepository<DictionaryMainEntity,Integer> ,JpaSpecificationExecutor{
+public interface DictionaryMainRepository extends JpaRepository<DictionaryMainEntity,Integer>,QuerydslPredicateExecutor<DictionaryMainEntity> {
 
 }

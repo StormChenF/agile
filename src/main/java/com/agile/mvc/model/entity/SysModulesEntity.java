@@ -3,12 +3,11 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_modules", schema = "agile_db", catalog = "")
 public class SysModulesEntity {
-    private int moduleId;
     private String moduleName;
     private String moduleDesc;
     private String moduleType;
@@ -22,19 +21,8 @@ public class SysModulesEntity {
     private String priority;
     private int sysModulesId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_MODULES_ID")
-    public int getSysModulesId() {
-        return sysModulesId;
-    }
-
-    public void setSysModulesId(int sysModulesId) {
-        this.sysModulesId = sysModulesId;
-    }
-
     @Basic
-    @Column(name = "MODULE_NAME", nullable = false, length = 100)
+    @Column(name = "MODULE_NAME")
     public String getModuleName() {
         return moduleName;
     }
@@ -44,7 +32,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "MODULE_DESC", nullable = true, length = 200)
+    @Column(name = "MODULE_DESC")
     public String getModuleDesc() {
         return moduleDesc;
     }
@@ -54,7 +42,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "MODULE_TYPE", nullable = true, length = 100)
+    @Column(name = "MODULE_TYPE")
     public String getModuleType() {
         return moduleType;
     }
@@ -64,7 +52,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "PARENT", nullable = true, length = 100)
+    @Column(name = "PARENT")
     public String getParent() {
         return parent;
     }
@@ -74,7 +62,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "MODULE_URL", nullable = true, length = 100)
+    @Column(name = "MODULE_URL")
     public String getModuleUrl() {
         return moduleUrl;
     }
@@ -84,7 +72,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "I_LEVEL", nullable = true, length = 4)
+    @Column(name = "I_LEVEL")
     public String getiLevel() {
         return iLevel;
     }
@@ -94,7 +82,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "LEAF", nullable = true, length = 4)
+    @Column(name = "LEAF")
     public String getLeaf() {
         return leaf;
     }
@@ -104,7 +92,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "APPLICATION", nullable = true, length = 100)
+    @Column(name = "APPLICATION")
     public String getApplication() {
         return application;
     }
@@ -114,7 +102,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "CONTROLLER", nullable = true, length = 100)
+    @Column(name = "CONTROLLER")
     public String getController() {
         return controller;
     }
@@ -124,7 +112,7 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "ENABLE", nullable = true)
+    @Column(name = "ENABLE")
     public Boolean getEnable() {
         return enable;
     }
@@ -134,13 +122,23 @@ public class SysModulesEntity {
     }
 
     @Basic
-    @Column(name = "PRIORITY", nullable = true, length = 4)
+    @Column(name = "PRIORITY")
     public String getPriority() {
         return priority;
     }
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    @Id
+    @Column(name = "SYS_MODULES_ID")
+    public int getSysModulesId() {
+        return sysModulesId;
+    }
+
+    public void setSysModulesId(int sysModulesId) {
+        this.sysModulesId = sysModulesId;
     }
 
     @Override
@@ -150,7 +148,7 @@ public class SysModulesEntity {
 
         SysModulesEntity that = (SysModulesEntity) o;
 
-        if (moduleId != that.moduleId) return false;
+        if (sysModulesId != that.sysModulesId) return false;
         if (moduleName != null ? !moduleName.equals(that.moduleName) : that.moduleName != null) return false;
         if (moduleDesc != null ? !moduleDesc.equals(that.moduleDesc) : that.moduleDesc != null) return false;
         if (moduleType != null ? !moduleType.equals(that.moduleType) : that.moduleType != null) return false;
@@ -168,8 +166,7 @@ public class SysModulesEntity {
 
     @Override
     public int hashCode() {
-        int result = moduleId;
-        result = 31 * result + (moduleName != null ? moduleName.hashCode() : 0);
+        int result = moduleName != null ? moduleName.hashCode() : 0;
         result = 31 * result + (moduleDesc != null ? moduleDesc.hashCode() : 0);
         result = 31 * result + (moduleType != null ? moduleType.hashCode() : 0);
         result = 31 * result + (parent != null ? parent.hashCode() : 0);
@@ -180,6 +177,7 @@ public class SysModulesEntity {
         result = 31 * result + (controller != null ? controller.hashCode() : 0);
         result = 31 * result + (enable != null ? enable.hashCode() : 0);
         result = 31 * result + (priority != null ? priority.hashCode() : 0);
+        result = 31 * result + sysModulesId;
         return result;
     }
 }

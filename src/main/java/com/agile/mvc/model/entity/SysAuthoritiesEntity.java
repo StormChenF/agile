@@ -3,12 +3,11 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_authorities", schema = "agile_db", catalog = "")
 public class SysAuthoritiesEntity {
-    private int authorityId;
     private String authorityMark;
     private String authorityName;
     private String authorityDesc;
@@ -18,19 +17,8 @@ public class SysAuthoritiesEntity {
     private String moduleId;
     private int sysAuthorityId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_AUTHORITY_ID")
-    public int getSysAuthorityId() {
-        return sysAuthorityId;
-    }
-
-    public void setSysAuthorityId(int sysAuthorityId) {
-        this.sysAuthorityId = sysAuthorityId;
-    }
-
     @Basic
-    @Column(name = "AUTHORITY_MARK", nullable = true, length = 100)
+    @Column(name = "AUTHORITY_MARK")
     public String getAuthorityMark() {
         return authorityMark;
     }
@@ -40,7 +28,7 @@ public class SysAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_NAME", nullable = false, length = 100)
+    @Column(name = "AUTHORITY_NAME")
     public String getAuthorityName() {
         return authorityName;
     }
@@ -50,7 +38,7 @@ public class SysAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_DESC", nullable = true, length = 200)
+    @Column(name = "AUTHORITY_DESC")
     public String getAuthorityDesc() {
         return authorityDesc;
     }
@@ -60,7 +48,7 @@ public class SysAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "MESSAGE", nullable = true, length = 100)
+    @Column(name = "MESSAGE")
     public String getMessage() {
         return message;
     }
@@ -70,7 +58,7 @@ public class SysAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "ENABLE", nullable = true)
+    @Column(name = "ENABLE")
     public Boolean getEnable() {
         return enable;
     }
@@ -80,7 +68,7 @@ public class SysAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "ISSYS", nullable = true)
+    @Column(name = "ISSYS")
     public Boolean getIssys() {
         return issys;
     }
@@ -90,13 +78,23 @@ public class SysAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "MODULE_ID", nullable = true, length = 100)
+    @Column(name = "MODULE_ID")
     public String getModuleId() {
         return moduleId;
     }
 
     public void setModuleId(String moduleId) {
         this.moduleId = moduleId;
+    }
+
+    @Id
+    @Column(name = "SYS_AUTHORITY_ID")
+    public int getSysAuthorityId() {
+        return sysAuthorityId;
+    }
+
+    public void setSysAuthorityId(int sysAuthorityId) {
+        this.sysAuthorityId = sysAuthorityId;
     }
 
     @Override
@@ -106,7 +104,7 @@ public class SysAuthoritiesEntity {
 
         SysAuthoritiesEntity that = (SysAuthoritiesEntity) o;
 
-        if (authorityId != that.authorityId) return false;
+        if (sysAuthorityId != that.sysAuthorityId) return false;
         if (authorityMark != null ? !authorityMark.equals(that.authorityMark) : that.authorityMark != null)
             return false;
         if (authorityName != null ? !authorityName.equals(that.authorityName) : that.authorityName != null)
@@ -123,15 +121,14 @@ public class SysAuthoritiesEntity {
 
     @Override
     public int hashCode() {
-        int result = authorityId;
-        result = 31 * result + (authorityMark != null ? authorityMark.hashCode() : 0);
+        int result = authorityMark != null ? authorityMark.hashCode() : 0;
         result = 31 * result + (authorityName != null ? authorityName.hashCode() : 0);
         result = 31 * result + (authorityDesc != null ? authorityDesc.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (enable != null ? enable.hashCode() : 0);
         result = 31 * result + (issys != null ? issys.hashCode() : 0);
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
+        result = 31 * result + sysAuthorityId;
         return result;
     }
-
 }

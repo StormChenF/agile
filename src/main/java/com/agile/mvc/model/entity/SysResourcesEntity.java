@@ -3,12 +3,11 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_resources", schema = "agile_db", catalog = "")
 public class SysResourcesEntity {
-    private int resourceId;
     private String resourceType;
     private String resourceName;
     private String resourceDesc;
@@ -19,19 +18,8 @@ public class SysResourcesEntity {
     private Integer moduleId;
     private int sysResourcesId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_RESOURCES_ID")
-    public int getSysResourcesId() {
-        return sysResourcesId;
-    }
-
-    public void setSysResourcesId(int sysResourcesId) {
-        this.sysResourcesId = sysResourcesId;
-    }
-
     @Basic
-    @Column(name = "RESOURCE_TYPE", nullable = true, length = 100)
+    @Column(name = "RESOURCE_TYPE")
     public String getResourceType() {
         return resourceType;
     }
@@ -41,7 +29,7 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "RESOURCE_NAME", nullable = true, length = 100)
+    @Column(name = "RESOURCE_NAME")
     public String getResourceName() {
         return resourceName;
     }
@@ -51,7 +39,7 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "RESOURCE_DESC", nullable = true, length = 200)
+    @Column(name = "RESOURCE_DESC")
     public String getResourceDesc() {
         return resourceDesc;
     }
@@ -61,7 +49,7 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "RESOURCE_PATH", nullable = true, length = 200)
+    @Column(name = "RESOURCE_PATH")
     public String getResourcePath() {
         return resourcePath;
     }
@@ -71,7 +59,7 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "PRIORITY", nullable = true, length = 100)
+    @Column(name = "PRIORITY")
     public String getPriority() {
         return priority;
     }
@@ -81,7 +69,7 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "ENABLE", nullable = true)
+    @Column(name = "ENABLE")
     public Boolean getEnable() {
         return enable;
     }
@@ -91,7 +79,7 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "ISSYS", nullable = true)
+    @Column(name = "ISSYS")
     public Boolean getIssys() {
         return issys;
     }
@@ -101,13 +89,23 @@ public class SysResourcesEntity {
     }
 
     @Basic
-    @Column(name = "MODULE_ID", nullable = true)
+    @Column(name = "MODULE_ID")
     public Integer getModuleId() {
         return moduleId;
     }
 
     public void setModuleId(Integer moduleId) {
         this.moduleId = moduleId;
+    }
+
+    @Id
+    @Column(name = "SYS_RESOURCES_ID")
+    public int getSysResourcesId() {
+        return sysResourcesId;
+    }
+
+    public void setSysResourcesId(int sysResourcesId) {
+        this.sysResourcesId = sysResourcesId;
     }
 
     @Override
@@ -117,7 +115,7 @@ public class SysResourcesEntity {
 
         SysResourcesEntity that = (SysResourcesEntity) o;
 
-        if (resourceId != that.resourceId) return false;
+        if (sysResourcesId != that.sysResourcesId) return false;
         if (resourceType != null ? !resourceType.equals(that.resourceType) : that.resourceType != null) return false;
         if (resourceName != null ? !resourceName.equals(that.resourceName) : that.resourceName != null) return false;
         if (resourceDesc != null ? !resourceDesc.equals(that.resourceDesc) : that.resourceDesc != null) return false;
@@ -132,8 +130,7 @@ public class SysResourcesEntity {
 
     @Override
     public int hashCode() {
-        int result = resourceId;
-        result = 31 * result + (resourceType != null ? resourceType.hashCode() : 0);
+        int result = resourceType != null ? resourceType.hashCode() : 0;
         result = 31 * result + (resourceName != null ? resourceName.hashCode() : 0);
         result = 31 * result + (resourceDesc != null ? resourceDesc.hashCode() : 0);
         result = 31 * result + (resourcePath != null ? resourcePath.hashCode() : 0);
@@ -141,6 +138,7 @@ public class SysResourcesEntity {
         result = 31 * result + (enable != null ? enable.hashCode() : 0);
         result = 31 * result + (issys != null ? issys.hashCode() : 0);
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
+        result = 31 * result + sysResourcesId;
         return result;
     }
 }

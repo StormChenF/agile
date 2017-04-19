@@ -3,32 +3,22 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/29.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "dictionary_main", schema = "agile_db", catalog = "")
 public class DictionaryMainEntity {
-    private int dictionaryMainId;
-    private String code;
+    private int code;
     private String name;
+    private boolean isConstant;
 
     @Id
-    @Column(name = "dictionary_main_id")
-    public int getDictionaryMainId() {
-        return dictionaryMainId;
-    }
-
-    public void setDictionaryMainId(int dictionaryMainId) {
-        this.dictionaryMainId = dictionaryMainId;
-    }
-
-    @Basic
     @Column(name = "code")
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -42,6 +32,16 @@ public class DictionaryMainEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "is_constant")
+    public boolean isConstant() {
+        return isConstant;
+    }
+
+    public void setConstant(boolean constant) {
+        isConstant = constant;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,8 +49,8 @@ public class DictionaryMainEntity {
 
         DictionaryMainEntity that = (DictionaryMainEntity) o;
 
-        if (dictionaryMainId != that.dictionaryMainId) return false;
-        if (code != null ? !code.equals(that.code) : that.code != null) return false;
+        if (code != that.code) return false;
+        if (isConstant != that.isConstant) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -58,9 +58,9 @@ public class DictionaryMainEntity {
 
     @Override
     public int hashCode() {
-        int result = dictionaryMainId;
-        result = 31 * result + (code != null ? code.hashCode() : 0);
+        int result = code;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (isConstant ? 1 : 0);
         return result;
     }
 }

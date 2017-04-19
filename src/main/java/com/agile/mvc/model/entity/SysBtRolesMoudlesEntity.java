@@ -3,29 +3,17 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_bt_roles_moudles", schema = "agile_db", catalog = "")
 public class SysBtRolesMoudlesEntity {
-    private int id;
     private int moduleId;
     private int roleId;
     private int sysBtRolesMoudlesId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_BT_ROLES_MOUDLES_ID")
-    public int getSysBtRolesMoudlesId() {
-        return sysBtRolesMoudlesId;
-    }
-
-    public void setSysBtRolesMoudlesId(int sysBtRolesMoudlesId) {
-        this.sysBtRolesMoudlesId = sysBtRolesMoudlesId;
-    }
-
     @Basic
-    @Column(name = "MODULE_ID", nullable = false)
+    @Column(name = "MODULE_ID")
     public int getModuleId() {
         return moduleId;
     }
@@ -35,13 +23,23 @@ public class SysBtRolesMoudlesEntity {
     }
 
     @Basic
-    @Column(name = "ROLE_ID", nullable = false)
+    @Column(name = "ROLE_ID")
     public int getRoleId() {
         return roleId;
     }
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    @Id
+    @Column(name = "SYS_BT_ROLES_MOUDLES_ID")
+    public int getSysBtRolesMoudlesId() {
+        return sysBtRolesMoudlesId;
+    }
+
+    public void setSysBtRolesMoudlesId(int sysBtRolesMoudlesId) {
+        this.sysBtRolesMoudlesId = sysBtRolesMoudlesId;
     }
 
     @Override
@@ -51,18 +49,18 @@ public class SysBtRolesMoudlesEntity {
 
         SysBtRolesMoudlesEntity that = (SysBtRolesMoudlesEntity) o;
 
-        if (id != that.id) return false;
         if (moduleId != that.moduleId) return false;
         if (roleId != that.roleId) return false;
+        if (sysBtRolesMoudlesId != that.sysBtRolesMoudlesId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + moduleId;
+        int result = moduleId;
         result = 31 * result + roleId;
+        result = 31 * result + sysBtRolesMoudlesId;
         return result;
     }
 }

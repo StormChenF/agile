@@ -4,32 +4,20 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_persistent_logins", schema = "agile_db", catalog = "")
 @IdClass(SysPersistentLoginsEntityPK.class)
 public class SysPersistentLoginsEntity {
-    private int id;
     private String username;
     private String series;
     private String token;
     private Timestamp lastUsed;
     private int sysPersistentLoginsId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_PERSISTENT_LOGINS_ID")
-    public int getSysPersistentLoginsId() {
-        return sysPersistentLoginsId;
-    }
-
-    public void setSysPersistentLoginsId(int sysPersistentLoginsId) {
-        this.sysPersistentLoginsId = sysPersistentLoginsId;
-    }
-
     @Basic
-    @Column(name = "USERNAME", nullable = true, length = 100)
+    @Column(name = "USERNAME")
     public String getUsername() {
         return username;
     }
@@ -39,8 +27,7 @@ public class SysPersistentLoginsEntity {
     }
 
     @Id
-    @Basic
-    @Column(name = "SERIES", nullable = false, length = 64)
+    @Column(name = "SERIES")
     public String getSeries() {
         return series;
     }
@@ -50,7 +37,7 @@ public class SysPersistentLoginsEntity {
     }
 
     @Basic
-    @Column(name = "TOKEN", nullable = true, length = 64)
+    @Column(name = "TOKEN")
     public String getToken() {
         return token;
     }
@@ -60,13 +47,23 @@ public class SysPersistentLoginsEntity {
     }
 
     @Basic
-    @Column(name = "LAST_USED", nullable = false)
+    @Column(name = "LAST_USED")
     public Timestamp getLastUsed() {
         return lastUsed;
     }
 
     public void setLastUsed(Timestamp lastUsed) {
         this.lastUsed = lastUsed;
+    }
+
+    @Id
+    @Column(name = "SYS_PERSISTENT_LOGINS_ID")
+    public int getSysPersistentLoginsId() {
+        return sysPersistentLoginsId;
+    }
+
+    public void setSysPersistentLoginsId(int sysPersistentLoginsId) {
+        this.sysPersistentLoginsId = sysPersistentLoginsId;
     }
 
     @Override
@@ -76,7 +73,7 @@ public class SysPersistentLoginsEntity {
 
         SysPersistentLoginsEntity that = (SysPersistentLoginsEntity) o;
 
-        if (id != that.id) return false;
+        if (sysPersistentLoginsId != that.sysPersistentLoginsId) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (series != null ? !series.equals(that.series) : that.series != null) return false;
         if (token != null ? !token.equals(that.token) : that.token != null) return false;
@@ -87,11 +84,11 @@ public class SysPersistentLoginsEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
+        int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (series != null ? series.hashCode() : 0);
         result = 31 * result + (token != null ? token.hashCode() : 0);
         result = 31 * result + (lastUsed != null ? lastUsed.hashCode() : 0);
+        result = 31 * result + sysPersistentLoginsId;
         return result;
     }
 }

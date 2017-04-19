@@ -1,19 +1,17 @@
 package com.agile.mvc.model.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * Created by mydeathtrial on 2017/3/29.
+ * Created by mydeathtrial on 2017/4/17.
  */
 public class SysPersistentLoginsEntityPK implements Serializable {
     private String series;
     private int sysPersistentLoginsId;
 
-    @Column(name = "SERIES", nullable = false, length = 64)
-    @Basic
+    @Column(name = "SERIES")
     @Id
     public String getSeries() {
         return series;

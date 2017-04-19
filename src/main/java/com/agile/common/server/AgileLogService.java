@@ -1,7 +1,6 @@
 package com.agile.common.server;
 
 import com.agile.common.util.ObjectUtil;
-import com.agile.mvc.model.entity.SysAuthoritiesEntity;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -56,25 +55,25 @@ public class AgileLogService {
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
 
-        SysAuthoritiesEntity s = new SysAuthoritiesEntity();
-        s.setAuthorityDesc("1111111111");
-        s.setAuthorityMark("2222222222");
-        s.setAuthorityName("3333333333");
-        s.setEnable(true);
-        s.setIssys(true);
-        s.setMessage("4444444444");
-        s.setModuleId("12");
-        SysAuthoritiesEntity s1 = new SysAuthoritiesEntity();
-        s1.setAuthorityDesc("1111111112");
-        s1.setAuthorityMark("2222222223");
-        s1.setAuthorityName("3333333333");
-        s1.setEnable(true);
-        s1.setIssys(true);
-        s1.setMessage("4444444444");
-        s1.setModuleId("12");
-        createLog("ZYHM14",s,s1,"2000","123456");
-        createLog("ZYHM14",s,s1,"2000","123456");
-        createLog("ZYHM14",s,s1,"2000","123456");
-        createLog("ZYHM14",s,s1,"2000","123456");
+//        SysAuthoritiesEntity s = new SysAuthoritiesEntity();
+//        s.setAuthorityDesc("1111111111");
+//        s.setAuthorityMark("2222222222");
+//        s.setAuthorityName("3333333333");
+//        s.setEnable(true);
+//        s.setIssys(true);
+//        s.setMessage("4444444444");
+//        s.setModuleId("12");
+//        SysAuthoritiesEntity s1 = new SysAuthoritiesEntity();
+//        s1.setAuthorityDesc("1111111112");
+//        s1.setAuthorityMark("2222222223");
+//        s1.setAuthorityName("3333333333");
+//        s1.setEnable(true);
+//        s1.setIssys(true);
+//        s1.setMessage("4444444444");
+//        s1.setModuleId("12");
+//        createLog("ZYHM14",s,s1,"2000","123456");
+//        createLog("ZYHM14",s,s1,"2000","123456");
+//        createLog("ZYHM14",s,s1,"2000","123456");
+//        createLog("ZYHM14",s,s1,"2000","123456");
     }
 }

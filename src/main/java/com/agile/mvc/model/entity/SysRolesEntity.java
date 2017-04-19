@@ -3,12 +3,11 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_roles", schema = "agile_db", catalog = "")
 public class SysRolesEntity {
-    private int roleId;
     private String roleName;
     private String roleDesc;
     private Boolean enable;
@@ -16,19 +15,8 @@ public class SysRolesEntity {
     private String moduleId;
     private int sysRolesId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_ROLES_ID")
-    public int getSysRolesId() {
-        return sysRolesId;
-    }
-
-    public void setSysRolesId(int sysRolesId) {
-        this.sysRolesId = sysRolesId;
-    }
-
     @Basic
-    @Column(name = "ROLE_NAME", nullable = true, length = 100)
+    @Column(name = "ROLE_NAME")
     public String getRoleName() {
         return roleName;
     }
@@ -38,7 +26,7 @@ public class SysRolesEntity {
     }
 
     @Basic
-    @Column(name = "ROLE_DESC", nullable = true, length = 200)
+    @Column(name = "ROLE_DESC")
     public String getRoleDesc() {
         return roleDesc;
     }
@@ -48,7 +36,7 @@ public class SysRolesEntity {
     }
 
     @Basic
-    @Column(name = "ENABLE", nullable = true)
+    @Column(name = "ENABLE")
     public Boolean getEnable() {
         return enable;
     }
@@ -58,7 +46,7 @@ public class SysRolesEntity {
     }
 
     @Basic
-    @Column(name = "ISSYS", nullable = true)
+    @Column(name = "ISSYS")
     public Boolean getIssys() {
         return issys;
     }
@@ -68,13 +56,23 @@ public class SysRolesEntity {
     }
 
     @Basic
-    @Column(name = "MODULE_ID", nullable = true, length = 100)
+    @Column(name = "MODULE_ID")
     public String getModuleId() {
         return moduleId;
     }
 
     public void setModuleId(String moduleId) {
         this.moduleId = moduleId;
+    }
+
+    @Id
+    @Column(name = "SYS_ROLES_ID")
+    public int getSysRolesId() {
+        return sysRolesId;
+    }
+
+    public void setSysRolesId(int sysRolesId) {
+        this.sysRolesId = sysRolesId;
     }
 
     @Override
@@ -84,7 +82,7 @@ public class SysRolesEntity {
 
         SysRolesEntity that = (SysRolesEntity) o;
 
-        if (roleId != that.roleId) return false;
+        if (sysRolesId != that.sysRolesId) return false;
         if (roleName != null ? !roleName.equals(that.roleName) : that.roleName != null) return false;
         if (roleDesc != null ? !roleDesc.equals(that.roleDesc) : that.roleDesc != null) return false;
         if (enable != null ? !enable.equals(that.enable) : that.enable != null) return false;
@@ -96,12 +94,12 @@ public class SysRolesEntity {
 
     @Override
     public int hashCode() {
-        int result = roleId;
-        result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
+        int result = roleName != null ? roleName.hashCode() : 0;
         result = 31 * result + (roleDesc != null ? roleDesc.hashCode() : 0);
         result = 31 * result + (enable != null ? enable.hashCode() : 0);
         result = 31 * result + (issys != null ? issys.hashCode() : 0);
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
+        result = 31 * result + sysRolesId;
         return result;
     }
 }

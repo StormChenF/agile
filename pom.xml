@@ -71,8 +71,28 @@
         <enabled>true</enabled>
       </releases>
     </repository>
+    <repository>
+      <id>Alfresco Public</id>
+      <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
   </repositories>
-
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-releasetrain</artifactId>
+        <version>Kay-M2</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <!--servlet api支持-->
     <dependency>
@@ -276,33 +296,44 @@
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>
-      <version>2.0.0.M1</version>
       <exclusions>
-      <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      </exclusion>
-      <exclusion>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      </exclusion>
-      <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      </exclusion>
-      <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      </exclusion>
-      <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      </exclusion>
-      <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      </exclusion>
+        <exclusion>
+          <artifactId>spring-aop</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-tx</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-core</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-context</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-beans</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-jpa</artifactId>
+      <version>4.1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-apt</artifactId>
+      <version>4.1.1</version>
+      <scope>provided</scope>
     </dependency>
     <!--JPA与hibernate桥接-->
     <dependency>
@@ -502,6 +533,23 @@
             <docencoding>UTF-8</docencoding>
             <show>private</show>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.mysema.maven</groupId>
+          <artifactId>maven-apt-plugin</artifactId>
+          <version>1.0.4</version>
+          <executions>
+            <execution>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>process</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>target/generated-sources</outputDirectory>
+                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

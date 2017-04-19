@@ -1,9 +1,6 @@
 package com.agile.common.util;
 
-import com.agile.mvc.model.entity.LogMainEntity;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;
@@ -11,13 +8,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.String.*;
 
 /**
  * Created by 佟盟 on 2017/1/9

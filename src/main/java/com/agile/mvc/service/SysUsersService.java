@@ -4,7 +4,6 @@ import com.agile.common.base.AgileMainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
-import com.agile.common.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysUsersRepository;
 import com.agile.mvc.model.entity.SysUsersEntity;

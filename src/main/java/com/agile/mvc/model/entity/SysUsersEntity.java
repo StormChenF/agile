@@ -4,12 +4,11 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_users", schema = "agile_db", catalog = "")
 public class SysUsersEntity {
-    private int userId;
     private String username;
     private String name;
     private String password;
@@ -27,19 +26,8 @@ public class SysUsersEntity {
     private Boolean credentialsNonExpired;
     private int sysUsersId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_USERS_ID")
-    public int getSysUsersId() {
-        return sysUsersId;
-    }
-
-    public void setSysUsersId(int sysUsersId) {
-        this.sysUsersId = sysUsersId;
-    }
-
     @Basic
-    @Column(name = "USERNAME", nullable = false, length = 100)
+    @Column(name = "USERNAME")
     public String getUsername() {
         return username;
     }
@@ -49,7 +37,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "NAME", nullable = true, length = 100)
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }
@@ -59,7 +47,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "PASSWORD", nullable = false, length = 100)
+    @Column(name = "PASSWORD")
     public String getPassword() {
         return password;
     }
@@ -69,7 +57,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "DT_CREATE", nullable = true)
+    @Column(name = "DT_CREATE")
     public Timestamp getDtCreate() {
         return dtCreate;
     }
@@ -79,7 +67,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "LAST_LOGIN", nullable = true)
+    @Column(name = "LAST_LOGIN")
     public Timestamp getLastLogin() {
         return lastLogin;
     }
@@ -89,7 +77,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "DEADLINE", nullable = true)
+    @Column(name = "DEADLINE")
     public Timestamp getDeadline() {
         return deadline;
     }
@@ -99,7 +87,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "LOGIN_IP", nullable = true, length = 100)
+    @Column(name = "LOGIN_IP")
     public String getLoginIp() {
         return loginIp;
     }
@@ -109,7 +97,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "V_QZJGID", nullable = true, length = 100)
+    @Column(name = "V_QZJGID")
     public String getvQzjgid() {
         return vQzjgid;
     }
@@ -119,7 +107,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "V_QZJGMC", nullable = true, length = 100)
+    @Column(name = "V_QZJGMC")
     public String getvQzjgmc() {
         return vQzjgmc;
     }
@@ -129,7 +117,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "DEP_ID", nullable = true, length = 100)
+    @Column(name = "DEP_ID")
     public String getDepId() {
         return depId;
     }
@@ -139,7 +127,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "DEP_NAME", nullable = true, length = 100)
+    @Column(name = "DEP_NAME")
     public String getDepName() {
         return depName;
     }
@@ -149,7 +137,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "ENABLED", nullable = true)
+    @Column(name = "ENABLED")
     public Boolean getEnabled() {
         return enabled;
     }
@@ -159,7 +147,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_EXPIRED", nullable = true)
+    @Column(name = "ACCOUNT_NON_EXPIRED")
     public Boolean getAccountNonExpired() {
         return accountNonExpired;
     }
@@ -169,7 +157,7 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_LOCKED", nullable = true)
+    @Column(name = "ACCOUNT_NON_LOCKED")
     public Boolean getAccountNonLocked() {
         return accountNonLocked;
     }
@@ -179,13 +167,23 @@ public class SysUsersEntity {
     }
 
     @Basic
-    @Column(name = "CREDENTIALS_NON_EXPIRED", nullable = true)
+    @Column(name = "CREDENTIALS_NON_EXPIRED")
     public Boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
     public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Id
+    @Column(name = "SYS_USERS_ID")
+    public int getSysUsersId() {
+        return sysUsersId;
+    }
+
+    public void setSysUsersId(int sysUsersId) {
+        this.sysUsersId = sysUsersId;
     }
 
     @Override
@@ -195,7 +193,7 @@ public class SysUsersEntity {
 
         SysUsersEntity that = (SysUsersEntity) o;
 
-        if (userId != that.userId) return false;
+        if (sysUsersId != that.sysUsersId) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
@@ -220,8 +218,7 @@ public class SysUsersEntity {
 
     @Override
     public int hashCode() {
-        int result = userId;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
+        int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (dtCreate != null ? dtCreate.hashCode() : 0);
@@ -236,6 +233,7 @@ public class SysUsersEntity {
         result = 31 * result + (accountNonExpired != null ? accountNonExpired.hashCode() : 0);
         result = 31 * result + (accountNonLocked != null ? accountNonLocked.hashCode() : 0);
         result = 31 * result + (credentialsNonExpired != null ? credentialsNonExpired.hashCode() : 0);
+        result = 31 * result + sysUsersId;
         return result;
     }
 }

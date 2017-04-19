@@ -3,29 +3,17 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/20.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "sys_bt_roles_authorities", schema = "agile_db", catalog = "")
 public class SysBtRolesAuthoritiesEntity {
-    private int id;
     private int authorityId;
     private int roleId;
     private int sysBtRolesAuthoritiesId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_BT_ROLES_AUTHORITIES_ID")
-    public int getSysBtRolesAuthoritiesId() {
-        return sysBtRolesAuthoritiesId;
-    }
-
-    public void setSysBtRolesAuthoritiesId(int sysBtRolesAuthoritiesId) {
-        this.sysBtRolesAuthoritiesId = sysBtRolesAuthoritiesId;
-    }
-
     @Basic
-    @Column(name = "AUTHORITY_ID", nullable = false)
+    @Column(name = "AUTHORITY_ID")
     public int getAuthorityId() {
         return authorityId;
     }
@@ -35,13 +23,23 @@ public class SysBtRolesAuthoritiesEntity {
     }
 
     @Basic
-    @Column(name = "ROLE_ID", nullable = false)
+    @Column(name = "ROLE_ID")
     public int getRoleId() {
         return roleId;
     }
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    @Id
+    @Column(name = "SYS_BT_ROLES_AUTHORITIES_ID")
+    public int getSysBtRolesAuthoritiesId() {
+        return sysBtRolesAuthoritiesId;
+    }
+
+    public void setSysBtRolesAuthoritiesId(int sysBtRolesAuthoritiesId) {
+        this.sysBtRolesAuthoritiesId = sysBtRolesAuthoritiesId;
     }
 
     @Override
@@ -51,18 +49,18 @@ public class SysBtRolesAuthoritiesEntity {
 
         SysBtRolesAuthoritiesEntity that = (SysBtRolesAuthoritiesEntity) o;
 
-        if (id != that.id) return false;
         if (authorityId != that.authorityId) return false;
         if (roleId != that.roleId) return false;
+        if (sysBtRolesAuthoritiesId != that.sysBtRolesAuthoritiesId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + authorityId;
+        int result = authorityId;
         result = 31 * result + roleId;
+        result = 31 * result + sysBtRolesAuthoritiesId;
         return result;
     }
 }

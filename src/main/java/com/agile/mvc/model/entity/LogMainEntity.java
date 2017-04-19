@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mydeathtrial on 2017/3/29.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "log_main", schema = "agile_db", catalog = "")
@@ -17,7 +17,6 @@ public class LogMainEntity {
     private Timestamp createTime;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_main_id")
     public int getLogMainId() {
         return logMainId;

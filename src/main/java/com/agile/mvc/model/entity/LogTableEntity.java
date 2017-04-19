@@ -3,7 +3,7 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/29.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
 @Table(name = "log_table", schema = "agile_db", catalog = "")
@@ -13,9 +13,9 @@ public class LogTableEntity {
     private String tableName;
     private String operationType;
     private int operationOrder;
+    private String tableSchema;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_table_id")
     public int getLogTableId() {
         return logTableId;
@@ -65,6 +65,16 @@ public class LogTableEntity {
         this.operationOrder = operationOrder;
     }
 
+    @Basic
+    @Column(name = "table_schema")
+    public String getTableSchema() {
+        return tableSchema;
+    }
+
+    public void setTableSchema(String tableSchema) {
+        this.tableSchema = tableSchema;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +88,7 @@ public class LogTableEntity {
         if (tableName != null ? !tableName.equals(that.tableName) : that.tableName != null) return false;
         if (operationType != null ? !operationType.equals(that.operationType) : that.operationType != null)
             return false;
+        if (tableSchema != null ? !tableSchema.equals(that.tableSchema) : that.tableSchema != null) return false;
 
         return true;
     }
@@ -89,6 +100,7 @@ public class LogTableEntity {
         result = 31 * result + (tableName != null ? tableName.hashCode() : 0);
         result = 31 * result + (operationType != null ? operationType.hashCode() : 0);
         result = 31 * result + operationOrder;
+        result = 31 * result + (tableSchema != null ? tableSchema.hashCode() : 0);
         return result;
     }
 }

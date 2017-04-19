@@ -69,4 +69,14 @@ public final class StringUtil extends StringUtils{
         }
         return String.valueOf(mapOfString);
     }
+
+    /**
+     * 字符串比较
+     * @param resource 比较方
+     * @param target 参照方
+     * @return 是否相同
+     */
+    public static boolean compare(String resource, String target){
+        return ObjectUtil.isEmpty(resource)?ObjectUtil.isEmpty(target):resource.equals(target);
+    }
 }

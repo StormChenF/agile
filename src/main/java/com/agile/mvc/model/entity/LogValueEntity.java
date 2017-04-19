@@ -3,12 +3,12 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/3/29.
+ * Created by mydeathtrial on 2017/4/17.
  */
 @Entity
-@Table(name = "log_column", schema = "agile_db", catalog = "")
-public class LogColumnEntity {
-    private int logColumnId;
+@Table(name = "log_value", schema = "agile_db", catalog = "")
+public class LogValueEntity {
+    private int logValueId;
     private int logTableId;
     private String columnName;
     private String columnType;
@@ -16,14 +16,13 @@ public class LogColumnEntity {
     private String oldValue;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_column_id")
-    public int getLogColumnId() {
-        return logColumnId;
+    @Column(name = "log_value_id")
+    public int getLogValueId() {
+        return logValueId;
     }
 
-    public void setLogColumnId(int logColumnId) {
-        this.logColumnId = logColumnId;
+    public void setLogValueId(int logValueId) {
+        this.logValueId = logValueId;
     }
 
     @Basic
@@ -81,9 +80,9 @@ public class LogColumnEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LogColumnEntity that = (LogColumnEntity) o;
+        LogValueEntity that = (LogValueEntity) o;
 
-        if (logColumnId != that.logColumnId) return false;
+        if (logValueId != that.logValueId) return false;
         if (logTableId != that.logTableId) return false;
         if (columnName != null ? !columnName.equals(that.columnName) : that.columnName != null) return false;
         if (columnType != null ? !columnType.equals(that.columnType) : that.columnType != null) return false;
@@ -95,7 +94,7 @@ public class LogColumnEntity {
 
     @Override
     public int hashCode() {
-        int result = logColumnId;
+        int result = logValueId;
         result = 31 * result + logTableId;
         result = 31 * result + (columnName != null ? columnName.hashCode() : 0);
         result = 31 * result + (columnType != null ? columnType.hashCode() : 0);
