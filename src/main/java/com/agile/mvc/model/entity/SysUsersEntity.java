@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.sql.Date;
 import java.sql.Date;
 import java.sql.Date;
@@ -215,23 +216,7 @@ public class SysUsersEntity implements Serializable {
 
         SysUsersEntity that = (SysUsersEntity) o;
 
-        if (sysUsersId != that.sysUsersId) return false;
-        if (uSERNAME != null ? !uSERNAME.equals(that.uSERNAME) : that.uSERNAME != null) return false;
-        if (nAME != null ? !nAME.equals(that.nAME) : that.nAME != null) return false;
-        if (pASSWORD != null ? !pASSWORD.equals(that.pASSWORD) : that.pASSWORD != null) return false;
-        if (dtCreate != that.dtCreate) return false;
-        if (lastLogin != that.lastLogin) return false;
-        if (dEADLINE != that.dEADLINE) return false;
-        if (loginIp != null ? !loginIp.equals(that.loginIp) : that.loginIp != null) return false;
-        if (vQzjgid != null ? !vQzjgid.equals(that.vQzjgid) : that.vQzjgid != null) return false;
-        if (vQzjgmc != null ? !vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc != null) return false;
-        if (depId != null ? !depId.equals(that.depId) : that.depId != null) return false;
-        if (depName != null ? !depName.equals(that.depName) : that.depName != null) return false;
-        if (eNABLED != that.eNABLED) return false;
-        if (accountNonExpired != that.accountNonExpired) return false;
-        if (accountNonLocked != that.accountNonLocked) return false;
-        if (credentialsNonExpired != that.credentialsNonExpired) return false;
-        return true;
+        return Objects.equals(sysUsersId, that.sysUsersId) &&(uSERNAME != null ? uSERNAME.equals(that.uSERNAME) : that.uSERNAME == null) &&(nAME != null ? nAME.equals(that.nAME) : that.nAME == null) &&(pASSWORD != null ? pASSWORD.equals(that.pASSWORD) : that.pASSWORD == null) &&dtCreate == that.dtCreate &&lastLogin == that.lastLogin &&dEADLINE == that.dEADLINE &&(loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null) &&(vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null) &&(vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null) &&(depId != null ? depId.equals(that.depId) : that.depId == null) &&(depName != null ? depName.equals(that.depName) : that.depName == null) &&eNABLED == that.eNABLED &&accountNonExpired == that.accountNonExpired &&accountNonLocked == that.accountNonLocked &&credentialsNonExpired == that.credentialsNonExpired ;
     }
 
     @Override

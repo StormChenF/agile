@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -116,15 +117,7 @@ public class SysAuthoritiesEntity implements Serializable {
 
         SysAuthoritiesEntity that = (SysAuthoritiesEntity) o;
 
-        if (sysAuthorityId != that.sysAuthorityId) return false;
-        if (authorityMark != null ? !authorityMark.equals(that.authorityMark) : that.authorityMark != null) return false;
-        if (authorityName != null ? !authorityName.equals(that.authorityName) : that.authorityName != null) return false;
-        if (authorityDesc != null ? !authorityDesc.equals(that.authorityDesc) : that.authorityDesc != null) return false;
-        if (mESSAGE != null ? !mESSAGE.equals(that.mESSAGE) : that.mESSAGE != null) return false;
-        if (eNABLE != that.eNABLE) return false;
-        if (iSSYS != that.iSSYS) return false;
-        if (moduleId != null ? !moduleId.equals(that.moduleId) : that.moduleId != null) return false;
-        return true;
+        return Objects.equals(sysAuthorityId, that.sysAuthorityId) &&(authorityMark != null ? authorityMark.equals(that.authorityMark) : that.authorityMark == null) &&(authorityName != null ? authorityName.equals(that.authorityName) : that.authorityName == null) &&(authorityDesc != null ? authorityDesc.equals(that.authorityDesc) : that.authorityDesc == null) &&(mESSAGE != null ? mESSAGE.equals(that.mESSAGE) : that.mESSAGE == null) &&eNABLE == that.eNABLE &&iSSYS == that.iSSYS &&(moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -128,16 +129,7 @@ public class SysResourcesEntity implements Serializable {
 
         SysResourcesEntity that = (SysResourcesEntity) o;
 
-        if (sysResourcesId != that.sysResourcesId) return false;
-        if (resourceType != null ? !resourceType.equals(that.resourceType) : that.resourceType != null) return false;
-        if (resourceName != null ? !resourceName.equals(that.resourceName) : that.resourceName != null) return false;
-        if (resourceDesc != null ? !resourceDesc.equals(that.resourceDesc) : that.resourceDesc != null) return false;
-        if (resourcePath != null ? !resourcePath.equals(that.resourcePath) : that.resourcePath != null) return false;
-        if (pRIORITY != null ? !pRIORITY.equals(that.pRIORITY) : that.pRIORITY != null) return false;
-        if (eNABLE != that.eNABLE) return false;
-        if (iSSYS != that.iSSYS) return false;
-        if (moduleId != that.moduleId) return false;
-        return true;
+        return Objects.equals(sysResourcesId, that.sysResourcesId) &&(resourceType != null ? resourceType.equals(that.resourceType) : that.resourceType == null) &&(resourceName != null ? resourceName.equals(that.resourceName) : that.resourceName == null) &&(resourceDesc != null ? resourceDesc.equals(that.resourceDesc) : that.resourceDesc == null) &&(resourcePath != null ? resourcePath.equals(that.resourcePath) : that.resourcePath == null) &&(pRIORITY != null ? pRIORITY.equals(that.pRIORITY) : that.pRIORITY == null) &&eNABLE == that.eNABLE &&iSSYS == that.iSSYS &&Objects.equals(moduleId, that.moduleId) ;
     }
 
     @Override

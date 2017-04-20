@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.sql.Date;
 
 /**
@@ -93,13 +94,7 @@ public class LogMainEntity implements Serializable {
 
         LogMainEntity that = (LogMainEntity) o;
 
-        if (logMainId != that.logMainId) return false;
-        if (businessCode != null ? !businessCode.equals(that.businessCode) : that.businessCode != null) return false;
-        if (targetType != null ? !targetType.equals(that.targetType) : that.targetType != null) return false;
-        if (targetCode != null ? !targetCode.equals(that.targetCode) : that.targetCode != null) return false;
-        if (userId != that.userId) return false;
-        if (createTime != that.createTime) return false;
-        return true;
+        return Objects.equals(logMainId, that.logMainId) &&(businessCode != null ? businessCode.equals(that.businessCode) : that.businessCode == null) &&(targetType != null ? targetType.equals(that.targetType) : that.targetType == null) &&(targetCode != null ? targetCode.equals(that.targetCode) : that.targetCode == null) &&Objects.equals(userId, that.userId) &&createTime == that.createTime ;
     }
 
     @Override

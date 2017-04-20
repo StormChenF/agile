@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -56,10 +57,7 @@ public class SysBtRolesAuthoritiesEntity implements Serializable {
 
         SysBtRolesAuthoritiesEntity that = (SysBtRolesAuthoritiesEntity) o;
 
-        if (sysBtRolesAuthoritiesId != that.sysBtRolesAuthoritiesId) return false;
-        if (authorityId != that.authorityId) return false;
-        if (roleId != that.roleId) return false;
-        return true;
+        return Objects.equals(sysBtRolesAuthoritiesId, that.sysBtRolesAuthoritiesId) &&Objects.equals(authorityId, that.authorityId) &&Objects.equals(roleId, that.roleId) ;
     }
 
     @Override

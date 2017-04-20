@@ -2,6 +2,7 @@ package ${entityPackage};
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 <#list importList as import>
 import ${import}
 </#list>
@@ -45,14 +46,7 @@ public class ${className}Entity implements Serializable {
 
         ${className}Entity that = (${className}Entity) o;
 
-    <#list columnList as property>
-        <#if property.propertyType == "String">
-        if (${property.propertyName} != null ? !${property.propertyName}.equals(that.${property.propertyName}) : that.${property.propertyName} != null) return false;
-        <#else>
-        if (${property.propertyName} != that.${property.propertyName}) return false;
-        </#if>
-    </#list>
-        return true;
+        return <#list columnList as property><#if property.propertyType == "Integer">Objects.equals(${property.propertyName}, that.${property.propertyName}) <#if property_has_next>&&</#if><#elseif  property.propertyType == "Date" ||   property.propertyType == "Boolean" >${property.propertyName} == that.${property.propertyName} <#if property_has_next>&&</#if><#else>(${property.propertyName} != null ? ${property.propertyName}.equals(that.${property.propertyName}) : that.${property.propertyName} == null) <#if property_has_next>&&</#if></#if></#list>;
     }
 
     @Override

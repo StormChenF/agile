@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.sql.Timestamp;
 
 /**
@@ -81,12 +82,7 @@ public class SysPersistentLoginsEntity implements Serializable {
 
         SysPersistentLoginsEntity that = (SysPersistentLoginsEntity) o;
 
-        if (sysPersistentLoginsId != that.sysPersistentLoginsId) return false;
-        if (uSERNAME != null ? !uSERNAME.equals(that.uSERNAME) : that.uSERNAME != null) return false;
-        if (sERIES != null ? !sERIES.equals(that.sERIES) : that.sERIES != null) return false;
-        if (tOKEN != null ? !tOKEN.equals(that.tOKEN) : that.tOKEN != null) return false;
-        if (lastUsed != that.lastUsed) return false;
-        return true;
+        return Objects.equals(sysPersistentLoginsId, that.sysPersistentLoginsId) &&(uSERNAME != null ? uSERNAME.equals(that.uSERNAME) : that.uSERNAME == null) &&(sERIES != null ? sERIES.equals(that.sERIES) : that.sERIES == null) &&(tOKEN != null ? tOKEN.equals(that.tOKEN) : that.tOKEN == null) &&(lastUsed != null ? lastUsed.equals(that.lastUsed) : that.lastUsed == null) ;
     }
 
     @Override

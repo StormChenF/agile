@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -92,13 +93,7 @@ public class SysRolesEntity implements Serializable {
 
         SysRolesEntity that = (SysRolesEntity) o;
 
-        if (sysRolesId != that.sysRolesId) return false;
-        if (roleName != null ? !roleName.equals(that.roleName) : that.roleName != null) return false;
-        if (roleDesc != null ? !roleDesc.equals(that.roleDesc) : that.roleDesc != null) return false;
-        if (eNABLE != that.eNABLE) return false;
-        if (iSSYS != that.iSSYS) return false;
-        if (moduleId != null ? !moduleId.equals(that.moduleId) : that.moduleId != null) return false;
-        return true;
+        return Objects.equals(sysRolesId, that.sysRolesId) &&(roleName != null ? roleName.equals(that.roleName) : that.roleName == null) &&(roleDesc != null ? roleDesc.equals(that.roleDesc) : that.roleDesc == null) &&eNABLE == that.eNABLE &&iSSYS == that.iSSYS &&(moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -80,12 +81,7 @@ public class DictionaryDataEntity implements Serializable {
 
         DictionaryDataEntity that = (DictionaryDataEntity) o;
 
-        if (code != that.code) return false;
-        if (dicCode != null ? !dicCode.equals(that.dicCode) : that.dicCode != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (value != null ? !value.equals(that.value) : that.value != null) return false;
-        if (isFixed != that.isFixed) return false;
-        return true;
+        return Objects.equals(code, that.code) &&(dicCode != null ? dicCode.equals(that.dicCode) : that.dicCode == null) &&(name != null ? name.equals(that.name) : that.name == null) &&(value != null ? value.equals(that.value) : that.value == null) &&isFixed == that.isFixed ;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -164,19 +165,7 @@ public class SysModulesEntity implements Serializable {
 
         SysModulesEntity that = (SysModulesEntity) o;
 
-        if (sysModulesId != that.sysModulesId) return false;
-        if (moduleName != null ? !moduleName.equals(that.moduleName) : that.moduleName != null) return false;
-        if (moduleDesc != null ? !moduleDesc.equals(that.moduleDesc) : that.moduleDesc != null) return false;
-        if (moduleType != null ? !moduleType.equals(that.moduleType) : that.moduleType != null) return false;
-        if (pARENT != null ? !pARENT.equals(that.pARENT) : that.pARENT != null) return false;
-        if (moduleUrl != null ? !moduleUrl.equals(that.moduleUrl) : that.moduleUrl != null) return false;
-        if (iLevel != null ? !iLevel.equals(that.iLevel) : that.iLevel != null) return false;
-        if (lEAF != null ? !lEAF.equals(that.lEAF) : that.lEAF != null) return false;
-        if (aPPLICATION != null ? !aPPLICATION.equals(that.aPPLICATION) : that.aPPLICATION != null) return false;
-        if (cONTROLLER != null ? !cONTROLLER.equals(that.cONTROLLER) : that.cONTROLLER != null) return false;
-        if (eNABLE != that.eNABLE) return false;
-        if (pRIORITY != null ? !pRIORITY.equals(that.pRIORITY) : that.pRIORITY != null) return false;
-        return true;
+        return Objects.equals(sysModulesId, that.sysModulesId) &&(moduleName != null ? moduleName.equals(that.moduleName) : that.moduleName == null) &&(moduleDesc != null ? moduleDesc.equals(that.moduleDesc) : that.moduleDesc == null) &&(moduleType != null ? moduleType.equals(that.moduleType) : that.moduleType == null) &&(pARENT != null ? pARENT.equals(that.pARENT) : that.pARENT == null) &&(moduleUrl != null ? moduleUrl.equals(that.moduleUrl) : that.moduleUrl == null) &&(iLevel != null ? iLevel.equals(that.iLevel) : that.iLevel == null) &&(lEAF != null ? lEAF.equals(that.lEAF) : that.lEAF == null) &&(aPPLICATION != null ? aPPLICATION.equals(that.aPPLICATION) : that.aPPLICATION == null) &&(cONTROLLER != null ? cONTROLLER.equals(that.cONTROLLER) : that.cONTROLLER == null) &&eNABLE == that.eNABLE &&(pRIORITY != null ? pRIORITY.equals(that.pRIORITY) : that.pRIORITY == null) ;
     }
 
     @Override

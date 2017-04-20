@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -92,13 +93,7 @@ public class LogTableEntity implements Serializable {
 
         LogTableEntity that = (LogTableEntity) o;
 
-        if (logTableId != that.logTableId) return false;
-        if (logMainId != that.logMainId) return false;
-        if (tableSchema != null ? !tableSchema.equals(that.tableSchema) : that.tableSchema != null) return false;
-        if (tableName != null ? !tableName.equals(that.tableName) : that.tableName != null) return false;
-        if (operationType != null ? !operationType.equals(that.operationType) : that.operationType != null) return false;
-        if (operationOrder != that.operationOrder) return false;
-        return true;
+        return Objects.equals(logTableId, that.logTableId) &&Objects.equals(logMainId, that.logMainId) &&(tableSchema != null ? tableSchema.equals(that.tableSchema) : that.tableSchema == null) &&(tableName != null ? tableName.equals(that.tableName) : that.tableName == null) &&(operationType != null ? operationType.equals(that.operationType) : that.operationType == null) &&Objects.equals(operationOrder, that.operationOrder) ;
     }
 
     @Override

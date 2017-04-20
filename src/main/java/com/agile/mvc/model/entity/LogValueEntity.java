@@ -2,6 +2,7 @@ package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
 * Created by 佟盟
@@ -104,14 +105,7 @@ public class LogValueEntity implements Serializable {
 
         LogValueEntity that = (LogValueEntity) o;
 
-        if (logValueId != that.logValueId) return false;
-        if (logTableId != that.logTableId) return false;
-        if (columnName != null ? !columnName.equals(that.columnName) : that.columnName != null) return false;
-        if (columnType != null ? !columnType.equals(that.columnType) : that.columnType != null) return false;
-        if (newValue != null ? !newValue.equals(that.newValue) : that.newValue != null) return false;
-        if (oldValue != null ? !oldValue.equals(that.oldValue) : that.oldValue != null) return false;
-        if (columnInfo != null ? !columnInfo.equals(that.columnInfo) : that.columnInfo != null) return false;
-        return true;
+        return Objects.equals(logValueId, that.logValueId) &&Objects.equals(logTableId, that.logTableId) &&(columnName != null ? columnName.equals(that.columnName) : that.columnName == null) &&(columnType != null ? columnType.equals(that.columnType) : that.columnType == null) &&(newValue != null ? newValue.equals(that.newValue) : that.newValue == null) &&(oldValue != null ? oldValue.equals(that.oldValue) : that.oldValue == null) &&(columnInfo != null ? columnInfo.equals(that.columnInfo) : that.columnInfo == null) ;
     }
 
     @Override
