@@ -1,20 +1,29 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "log_value",  catalog = "agile_db")
-public class LogValueEntity {
+public class LogValueEntity implements Serializable {
 
+    //唯一标识
     private Integer logValueId;
+    //日志相关表标识
     private Integer logTableId;
+    //字段
     private String columnName;
+    //字段类型
     private String columnType;
+    //新值
     private String newValue;
+    //旧值
     private String oldValue;
+    //字段含义
+    private String columnInfo;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -77,6 +86,16 @@ public class LogValueEntity {
         this.oldValue = oldValue;
     }
 
+    @Basic
+    @Column(name = "column_info")
+    public String getColumnInfo() {
+        return columnInfo;
+    }
+
+    public void setcolumnInfo(String columnInfo) {
+        this.columnInfo = columnInfo;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -91,6 +110,7 @@ public class LogValueEntity {
         if (columnType != null ? !columnType.equals(that.columnType) : that.columnType != null) return false;
         if (newValue != null ? !newValue.equals(that.newValue) : that.newValue != null) return false;
         if (oldValue != null ? !oldValue.equals(that.oldValue) : that.oldValue != null) return false;
+        if (columnInfo != null ? !columnInfo.equals(that.columnInfo) : that.columnInfo != null) return false;
         return true;
     }
 
@@ -103,6 +123,7 @@ public class LogValueEntity {
         result = 31 * result + (columnType != null ? columnType.hashCode() : 0);
         result = 31 * result + (newValue != null ? newValue.hashCode() : 0);
         result = 31 * result + (oldValue != null ? oldValue.hashCode() : 0);
+        result = 31 * result + (columnInfo != null ? columnInfo.hashCode() : 0);
         return result;
     }
 }

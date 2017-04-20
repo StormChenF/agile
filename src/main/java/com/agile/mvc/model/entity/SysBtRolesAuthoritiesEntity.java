@@ -1,16 +1,20 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "sys_bt_roles_authorities",  catalog = "agile_db")
-public class SysBtRolesAuthoritiesEntity {
+public class SysBtRolesAuthoritiesEntity implements Serializable {
 
+    //唯一标识
     private Integer sysBtRolesAuthoritiesId;
+    //权限唯一标识
     private Integer authorityId;
+    //角色唯一标识
     private Integer roleId;
 
     @Id

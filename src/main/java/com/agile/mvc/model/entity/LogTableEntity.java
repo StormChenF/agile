@@ -1,19 +1,26 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "log_table",  catalog = "agile_db")
-public class LogTableEntity {
+public class LogTableEntity implements Serializable {
 
+    //唯一标识
     private Integer logTableId;
+    //日志标识
     private Integer logMainId;
+    //数据库
     private String tableSchema;
+    //表名
     private String tableName;
+    //操作类型
     private String operationType;
+    //操作顺序
     private Integer operationOrder;
 
     @Id

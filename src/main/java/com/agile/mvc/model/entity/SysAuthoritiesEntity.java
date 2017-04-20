@@ -1,21 +1,30 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "sys_authorities",  catalog = "agile_db")
-public class SysAuthoritiesEntity {
+public class SysAuthoritiesEntity implements Serializable {
 
+    //唯一标识
     private Integer sysAuthorityId;
+    //权限标识
     private String authorityMark;
+    //权限名称
     private String authorityName;
+    //权限说明
     private String authorityDesc;
+    //提示信息
     private String mESSAGE;
+    //是否可用
     private Boolean eNABLE;
+    //是否系统权限
     private Boolean iSSYS;
+    //模块
     private String moduleId;
 
     @Id

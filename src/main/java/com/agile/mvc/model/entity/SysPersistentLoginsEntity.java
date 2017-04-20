@@ -1,6 +1,7 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -8,12 +9,17 @@ import java.sql.Timestamp;
 */
 @Entity
 @Table(name = "sys_persistent_logins",  catalog = "agile_db")
-public class SysPersistentLoginsEntity {
+public class SysPersistentLoginsEntity implements Serializable {
 
+    //唯一标识
     private Integer sysPersistentLoginsId;
+    //用户名
     private String uSERNAME;
+    //序列
     private String sERIES;
+    //认证信息
     private String tOKEN;
+    //最后时间
     private Timestamp lastUsed;
 
     @Id

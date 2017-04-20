@@ -1,22 +1,32 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "sys_resources",  catalog = "agile_db")
-public class SysResourcesEntity {
+public class SysResourcesEntity implements Serializable {
 
+    //唯一标识
     private Integer sysResourcesId;
+    //资源类型
     private String resourceType;
+    //资源名称
     private String resourceName;
+    //资源描述
     private String resourceDesc;
+    //资源路径
     private String resourcePath;
+    //优先级
     private String pRIORITY;
+    //是否可用
     private Boolean eNABLE;
+    //是否系统权限
     private Boolean iSSYS;
+    //模块
     private Integer moduleId;
 
     @Id

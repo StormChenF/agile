@@ -1,25 +1,38 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "sys_modules",  catalog = "agile_db")
-public class SysModulesEntity {
+public class SysModulesEntity implements Serializable {
 
+    //唯一标识
     private Integer sysModulesId;
+    //模块名称
     private String moduleName;
+    //模块说明
     private String moduleDesc;
+    //模块类型
     private String moduleType;
+    //模块上级
     private String pARENT;
+    //模块地址
     private String moduleUrl;
+    //菜单级别
     private String iLevel;
+    //最下级
     private String lEAF;
+    //应用名称
     private String aPPLICATION;
+    //控制器名称
     private String cONTROLLER;
+    //是否可用
     private Boolean eNABLE;
+    //优先级
     private String pRIORITY;
 
     @Id

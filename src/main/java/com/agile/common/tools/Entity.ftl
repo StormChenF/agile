@@ -1,6 +1,7 @@
 package ${entityPackage};
 
 import javax.persistence.*;
+import java.io.Serializable;
 <#list importList as import>
 import ${import}
 </#list>
@@ -10,9 +11,10 @@ import ${import}
 */
 @Entity
 @Table(name = "${tableName}", <#if schemaName??>schema = "${schemaName}",</#if> catalog = "${catalogName}")
-public class ${className}Entity {
+public class ${className}Entity implements Serializable {
 
 <#list columnList as property>
+    //${property.remarks}
     private ${property.propertyType} ${property.propertyName};
 </#list>
 

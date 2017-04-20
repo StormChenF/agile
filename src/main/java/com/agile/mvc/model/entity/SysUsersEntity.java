@@ -1,6 +1,7 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Date;
 import java.sql.Date;
@@ -10,23 +11,39 @@ import java.sql.Date;
 */
 @Entity
 @Table(name = "sys_users",  catalog = "agile_db")
-public class SysUsersEntity {
+public class SysUsersEntity implements Serializable {
 
+    //唯一标识
     private Integer sysUsersId;
+    //用户名
     private String uSERNAME;
+    //用户姓名
     private String nAME;
+    //密码
     private String pASSWORD;
+    //创建日期
     private Date dtCreate;
+    //最后登录日期
     private Date lastLogin;
+    //截止日期
     private Date dEADLINE;
+    //最后登录IP地址
     private String loginIp;
+    //所属机构ID
     private String vQzjgid;
+    //所属机构名称
     private String vQzjgmc;
+    //地区编号
     private String depId;
+    //地区名称
     private String depName;
+    //是否可用
     private Boolean eNABLED;
+    //用户是否过期
     private Boolean accountNonExpired;
+    //用户是否锁定
     private Boolean accountNonLocked;
+    //用户证书是否有效
     private Boolean credentialsNonExpired;
 
     @Id

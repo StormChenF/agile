@@ -1,6 +1,7 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -8,13 +9,19 @@ import java.sql.Date;
 */
 @Entity
 @Table(name = "log_main",  catalog = "agile_db")
-public class LogMainEntity {
+public class LogMainEntity implements Serializable {
 
+    //唯一标识
     private Integer logMainId;
+    //业务编码
     private String businessCode;
+    //业务对象类型
     private String targetType;
+    //业务对象标识
     private String targetCode;
+    //操作人
     private Integer userId;
+    //操作时间
     private Date createTime;
 
     @Id

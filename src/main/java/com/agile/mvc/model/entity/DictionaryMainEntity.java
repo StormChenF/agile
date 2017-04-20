@@ -1,16 +1,20 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
 * Created by 佟盟
 */
 @Entity
 @Table(name = "dictionary_main",  catalog = "agile_db")
-public class DictionaryMainEntity {
+public class DictionaryMainEntity implements Serializable {
 
+    //字典编码
     private Integer code;
+    //字典名称
     private String name;
+    //是否是常量
     private Boolean isConstant;
 
     @Id
