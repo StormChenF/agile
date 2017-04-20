@@ -3,36 +3,48 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/4/17.
- */
+* Created by 佟盟
+*/
 @Entity
-@Table(name = "log_table", schema = "agile_db", catalog = "")
+@Table(name = "log_table",  catalog = "agile_db")
 public class LogTableEntity {
-    private int logTableId;
-    private int logMainId;
+
+    private Integer logTableId;
+    private Integer logMainId;
+    private String tableSchema;
     private String tableName;
     private String operationType;
-    private int operationOrder;
-    private String tableSchema;
+    private Integer operationOrder;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_table_id")
-    public int getLogTableId() {
+    public Integer getLogTableId() {
         return logTableId;
     }
 
-    public void setLogTableId(int logTableId) {
+    public void setlogTableId(int logTableId) {
         this.logTableId = logTableId;
     }
 
     @Basic
     @Column(name = "log_main_id")
-    public int getLogMainId() {
+    public Integer getLogMainId() {
         return logMainId;
     }
 
-    public void setLogMainId(int logMainId) {
+    public void setlogMainId(int logMainId) {
         this.logMainId = logMainId;
+    }
+
+    @Basic
+    @Column(name = "table_schema")
+    public String getTableSchema() {
+        return tableSchema;
+    }
+
+    public void settableSchema(String tableSchema) {
+        this.tableSchema = tableSchema;
     }
 
     @Basic
@@ -41,7 +53,7 @@ public class LogTableEntity {
         return tableName;
     }
 
-    public void setTableName(String tableName) {
+    public void settableName(String tableName) {
         this.tableName = tableName;
     }
 
@@ -51,29 +63,20 @@ public class LogTableEntity {
         return operationType;
     }
 
-    public void setOperationType(String operationType) {
+    public void setoperationType(String operationType) {
         this.operationType = operationType;
     }
 
     @Basic
     @Column(name = "operation_order")
-    public int getOperationOrder() {
+    public Integer getOperationOrder() {
         return operationOrder;
     }
 
-    public void setOperationOrder(int operationOrder) {
+    public void setoperationOrder(int operationOrder) {
         this.operationOrder = operationOrder;
     }
 
-    @Basic
-    @Column(name = "table_schema")
-    public String getTableSchema() {
-        return tableSchema;
-    }
-
-    public void setTableSchema(String tableSchema) {
-        this.tableSchema = tableSchema;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -84,23 +87,22 @@ public class LogTableEntity {
 
         if (logTableId != that.logTableId) return false;
         if (logMainId != that.logMainId) return false;
-        if (operationOrder != that.operationOrder) return false;
-        if (tableName != null ? !tableName.equals(that.tableName) : that.tableName != null) return false;
-        if (operationType != null ? !operationType.equals(that.operationType) : that.operationType != null)
-            return false;
         if (tableSchema != null ? !tableSchema.equals(that.tableSchema) : that.tableSchema != null) return false;
-
+        if (tableName != null ? !tableName.equals(that.tableName) : that.tableName != null) return false;
+        if (operationType != null ? !operationType.equals(that.operationType) : that.operationType != null) return false;
+        if (operationOrder != that.operationOrder) return false;
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = logTableId;
+        int result = 0;
+        result = 31 * result + logTableId;
         result = 31 * result + logMainId;
+        result = 31 * result + (tableSchema != null ? tableSchema.hashCode() : 0);
         result = 31 * result + (tableName != null ? tableName.hashCode() : 0);
         result = 31 * result + (operationType != null ? operationType.hashCode() : 0);
         result = 31 * result + operationOrder;
-        result = 31 * result + (tableSchema != null ? tableSchema.hashCode() : 0);
         return result;
     }
 }

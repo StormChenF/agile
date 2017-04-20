@@ -3,35 +3,37 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 
 /**
- * Created by mydeathtrial on 2017/4/17.
- */
+* Created by 佟盟
+*/
 @Entity
-@Table(name = "log_value", schema = "agile_db", catalog = "")
+@Table(name = "log_value",  catalog = "agile_db")
 public class LogValueEntity {
-    private int logValueId;
-    private int logTableId;
+
+    private Integer logValueId;
+    private Integer logTableId;
     private String columnName;
     private String columnType;
     private String newValue;
     private String oldValue;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_value_id")
-    public int getLogValueId() {
+    public Integer getLogValueId() {
         return logValueId;
     }
 
-    public void setLogValueId(int logValueId) {
+    public void setlogValueId(int logValueId) {
         this.logValueId = logValueId;
     }
 
     @Basic
     @Column(name = "log_table_id")
-    public int getLogTableId() {
+    public Integer getLogTableId() {
         return logTableId;
     }
 
-    public void setLogTableId(int logTableId) {
+    public void setlogTableId(int logTableId) {
         this.logTableId = logTableId;
     }
 
@@ -41,7 +43,7 @@ public class LogValueEntity {
         return columnName;
     }
 
-    public void setColumnName(String columnName) {
+    public void setcolumnName(String columnName) {
         this.columnName = columnName;
     }
 
@@ -51,7 +53,7 @@ public class LogValueEntity {
         return columnType;
     }
 
-    public void setColumnType(String columnType) {
+    public void setcolumnType(String columnType) {
         this.columnType = columnType;
     }
 
@@ -61,7 +63,7 @@ public class LogValueEntity {
         return newValue;
     }
 
-    public void setNewValue(String newValue) {
+    public void setnewValue(String newValue) {
         this.newValue = newValue;
     }
 
@@ -71,9 +73,10 @@ public class LogValueEntity {
         return oldValue;
     }
 
-    public void setOldValue(String oldValue) {
+    public void setoldValue(String oldValue) {
         this.oldValue = oldValue;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -88,13 +91,13 @@ public class LogValueEntity {
         if (columnType != null ? !columnType.equals(that.columnType) : that.columnType != null) return false;
         if (newValue != null ? !newValue.equals(that.newValue) : that.newValue != null) return false;
         if (oldValue != null ? !oldValue.equals(that.oldValue) : that.oldValue != null) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = logValueId;
+        int result = 0;
+        result = 31 * result + logValueId;
         result = 31 * result + logTableId;
         result = 31 * result + (columnName != null ? columnName.hashCode() : 0);
         result = 31 * result + (columnType != null ? columnType.hashCode() : 0);

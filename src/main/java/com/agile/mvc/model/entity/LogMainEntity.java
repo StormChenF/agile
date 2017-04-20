@@ -4,25 +4,27 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mydeathtrial on 2017/4/17.
- */
+* Created by 佟盟
+*/
 @Entity
-@Table(name = "log_main", schema = "agile_db", catalog = "")
+@Table(name = "log_main",  catalog = "agile_db")
 public class LogMainEntity {
-    private int logMainId;
+
+    private Integer logMainId;
     private String businessCode;
     private String targetType;
     private String targetCode;
-    private int userId;
+    private Integer userId;
     private Timestamp createTime;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_main_id")
-    public int getLogMainId() {
+    public Integer getLogMainId() {
         return logMainId;
     }
 
-    public void setLogMainId(int logMainId) {
+    public void setlogMainId(int logMainId) {
         this.logMainId = logMainId;
     }
 
@@ -32,7 +34,7 @@ public class LogMainEntity {
         return businessCode;
     }
 
-    public void setBusinessCode(String businessCode) {
+    public void setbusinessCode(String businessCode) {
         this.businessCode = businessCode;
     }
 
@@ -42,7 +44,7 @@ public class LogMainEntity {
         return targetType;
     }
 
-    public void setTargetType(String targetType) {
+    public void settargetType(String targetType) {
         this.targetType = targetType;
     }
 
@@ -52,17 +54,17 @@ public class LogMainEntity {
         return targetCode;
     }
 
-    public void setTargetCode(String targetCode) {
+    public void settargetCode(String targetCode) {
         this.targetCode = targetCode;
     }
 
     @Basic
     @Column(name = "user_id")
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setuserId(int userId) {
         this.userId = userId;
     }
 
@@ -72,9 +74,10 @@ public class LogMainEntity {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setcreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -84,18 +87,18 @@ public class LogMainEntity {
         LogMainEntity that = (LogMainEntity) o;
 
         if (logMainId != that.logMainId) return false;
-        if (userId != that.userId) return false;
         if (businessCode != null ? !businessCode.equals(that.businessCode) : that.businessCode != null) return false;
         if (targetType != null ? !targetType.equals(that.targetType) : that.targetType != null) return false;
         if (targetCode != null ? !targetCode.equals(that.targetCode) : that.targetCode != null) return false;
-        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
-
+        if (userId != that.userId) return false;
+        if (createTime != that.createTime) return false;
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = logMainId;
+        int result = 0;
+        result = 31 * result + logMainId;
         result = 31 * result + (businessCode != null ? businessCode.hashCode() : 0);
         result = 31 * result + (targetType != null ? targetType.hashCode() : 0);
         result = 31 * result + (targetCode != null ? targetCode.hashCode() : 0);
