@@ -1,7 +1,7 @@
 package com.agile.mvc.model.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
 * Created by 佟盟
@@ -15,7 +15,7 @@ public class LogMainEntity {
     private String targetType;
     private String targetCode;
     private Integer userId;
-    private Timestamp createTime;
+    private Date createTime;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -70,11 +70,11 @@ public class LogMainEntity {
 
     @Basic
     @Column(name = "create_time")
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setcreateTime(Timestamp createTime) {
+    public void setcreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
