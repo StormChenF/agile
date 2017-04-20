@@ -26,7 +26,6 @@ public class AgileTools {
 
         try {
 
-
             //获取表类别名称
             String catalog = CodeGenerator.connection.getCatalog();
             String schema = CodeGenerator.connection.getSchema();
