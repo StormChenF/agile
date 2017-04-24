@@ -21,7 +21,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_BT_ROLES_MOUDLES_ID" , nullable  = true)
+    @Column(name = "SYS_BT_ROLES_MOUDLES_ID" )
     public Integer getSysBtRolesMoudlesId() {
         return sysBtRolesMoudlesId;
     }
@@ -31,7 +31,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID" , nullable  = true)
+    @Column(name = "MODULE_ID" )
     public Integer getModuleId() {
         return moduleId;
     }
@@ -41,7 +41,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_ID" , nullable  = true)
+    @Column(name = "ROLE_ID" )
     public Integer getRoleId() {
         return roleId;
     }

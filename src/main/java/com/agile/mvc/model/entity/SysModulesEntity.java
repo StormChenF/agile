@@ -39,7 +39,7 @@ public class SysModulesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_MODULES_ID" , nullable  = true)
+    @Column(name = "SYS_MODULES_ID" )
     public Integer getSysModulesId() {
         return sysModulesId;
     }
@@ -49,7 +49,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_NAME" , nullable  = true)
+    @Column(name = "MODULE_NAME" )
     public String getModuleName() {
         return moduleName;
     }
@@ -59,7 +59,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_DESC" , nullable  = false)
+    @Column(name = "MODULE_DESC"  ,nullable = false )
     public String getModuleDesc() {
         return moduleDesc;
     }
@@ -69,7 +69,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_TYPE" , nullable  = false)
+    @Column(name = "MODULE_TYPE"  ,nullable = false )
     public String getModuleType() {
         return moduleType;
     }
@@ -79,7 +79,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PARENT" , nullable  = false)
+    @Column(name = "PARENT"  ,nullable = false )
     public String getPARENT() {
         return pARENT;
     }
@@ -89,7 +89,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_URL" , nullable  = false)
+    @Column(name = "MODULE_URL"  ,nullable = false )
     public String getModuleUrl() {
         return moduleUrl;
     }
@@ -99,7 +99,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "I_LEVEL" , nullable  = false)
+    @Column(name = "I_LEVEL"  ,nullable = false )
     public String getILevel() {
         return iLevel;
     }
@@ -109,7 +109,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LEAF" , nullable  = false)
+    @Column(name = "LEAF"  ,nullable = false )
     public String getLEAF() {
         return lEAF;
     }
@@ -119,7 +119,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "APPLICATION" , nullable  = false)
+    @Column(name = "APPLICATION"  ,nullable = false )
     public String getAPPLICATION() {
         return aPPLICATION;
     }
@@ -129,7 +129,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "CONTROLLER" , nullable  = false)
+    @Column(name = "CONTROLLER"  ,nullable = false )
     public String getCONTROLLER() {
         return cONTROLLER;
     }
@@ -139,7 +139,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable  = false)
+    @Column(name = "ENABLE"  ,nullable = false )
     public Boolean getENABLE() {
         return eNABLE;
     }
@@ -149,7 +149,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PRIORITY" , nullable  = false)
+    @Column(name = "PRIORITY"  ,nullable = false )
     public String getPRIORITY() {
         return pRIORITY;
     }

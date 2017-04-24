@@ -31,7 +31,7 @@ public class ${className}Entity implements Serializable {
     <#if property.isAutoincrement == "YES">
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     </#if>
-    @Column(name = "${property.columnName}" , nullable  = ${property.nullable})
+    @Column(name = "${property.columnName}" <#if property.nullable == "false"> ,nullable = ${property.nullable} </#if>)
     public ${property.propertyType} ${property.getMethod}() {
         return ${property.propertyName};
     }

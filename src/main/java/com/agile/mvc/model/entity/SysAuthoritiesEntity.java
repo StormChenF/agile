@@ -31,7 +31,7 @@ public class SysAuthoritiesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_AUTHORITY_ID" , nullable  = true)
+    @Column(name = "SYS_AUTHORITY_ID" )
     public Integer getSysAuthorityId() {
         return sysAuthorityId;
     }
@@ -41,7 +41,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_MARK" , nullable  = false)
+    @Column(name = "AUTHORITY_MARK"  ,nullable = false )
     public String getAuthorityMark() {
         return authorityMark;
     }
@@ -51,7 +51,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_NAME" , nullable  = true)
+    @Column(name = "AUTHORITY_NAME" )
     public String getAuthorityName() {
         return authorityName;
     }
@@ -61,7 +61,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_DESC" , nullable  = false)
+    @Column(name = "AUTHORITY_DESC"  ,nullable = false )
     public String getAuthorityDesc() {
         return authorityDesc;
     }
@@ -71,7 +71,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MESSAGE" , nullable  = false)
+    @Column(name = "MESSAGE"  ,nullable = false )
     public String getMESSAGE() {
         return mESSAGE;
     }
@@ -81,7 +81,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable  = false)
+    @Column(name = "ENABLE"  ,nullable = false )
     public Boolean getENABLE() {
         return eNABLE;
     }
@@ -91,7 +91,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ISSYS" , nullable  = false)
+    @Column(name = "ISSYS"  ,nullable = false )
     public Boolean getISSYS() {
         return iSSYS;
     }
@@ -101,7 +101,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID" , nullable  = false)
+    @Column(name = "MODULE_ID"  ,nullable = false )
     public String getModuleId() {
         return moduleId;
     }

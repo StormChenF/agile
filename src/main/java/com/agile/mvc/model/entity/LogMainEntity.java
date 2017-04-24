@@ -28,7 +28,7 @@ public class LogMainEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_main_id" , nullable  = true)
+    @Column(name = "log_main_id" )
     public Integer getLogMainId() {
         return logMainId;
     }
@@ -38,7 +38,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "business_code" , nullable  = true)
+    @Column(name = "business_code" )
     public String getBusinessCode() {
         return businessCode;
     }
@@ -48,7 +48,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "target_type" , nullable  = true)
+    @Column(name = "target_type" )
     public String getTargetType() {
         return targetType;
     }
@@ -58,7 +58,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "target_code" , nullable  = true)
+    @Column(name = "target_code" )
     public String getTargetCode() {
         return targetCode;
     }
@@ -68,7 +68,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "user_id" , nullable  = true)
+    @Column(name = "user_id" )
     public Integer getUserId() {
         return userId;
     }
@@ -78,7 +78,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_time" , nullable  = true)
+    @Column(name = "create_time" )
     public Date getCreateTime() {
         return createTime;
     }

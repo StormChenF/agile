@@ -50,7 +50,7 @@ public class SysUsersEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_USERS_ID" , nullable  = true)
+    @Column(name = "SYS_USERS_ID" )
     public Integer getSysUsersId() {
         return sysUsersId;
     }
@@ -60,7 +60,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "USERNAME" , nullable  = true)
+    @Column(name = "USERNAME" )
     public String getUSERNAME() {
         return uSERNAME;
     }
@@ -70,7 +70,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "NAME" , nullable  = false)
+    @Column(name = "NAME"  ,nullable = false )
     public String getNAME() {
         return nAME;
     }
@@ -80,7 +80,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PASSWORD" , nullable  = true)
+    @Column(name = "PASSWORD" )
     public String getPASSWORD() {
         return pASSWORD;
     }
@@ -90,7 +90,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DT_CREATE" , nullable  = false)
+    @Column(name = "DT_CREATE"  ,nullable = false )
     public Date getDtCreate() {
         return dtCreate;
     }
@@ -100,7 +100,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LAST_LOGIN" , nullable  = false)
+    @Column(name = "LAST_LOGIN"  ,nullable = false )
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -110,7 +110,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEADLINE" , nullable  = false)
+    @Column(name = "DEADLINE"  ,nullable = false )
     public Date getDEADLINE() {
         return dEADLINE;
     }
@@ -120,7 +120,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LOGIN_IP" , nullable  = false)
+    @Column(name = "LOGIN_IP"  ,nullable = false )
     public String getLoginIp() {
         return loginIp;
     }
@@ -130,7 +130,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "V_QZJGID" , nullable  = false)
+    @Column(name = "V_QZJGID"  ,nullable = false )
     public String getVQzjgid() {
         return vQzjgid;
     }
@@ -140,7 +140,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "V_QZJGMC" , nullable  = false)
+    @Column(name = "V_QZJGMC"  ,nullable = false )
     public String getVQzjgmc() {
         return vQzjgmc;
     }
@@ -150,7 +150,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEP_ID" , nullable  = false)
+    @Column(name = "DEP_ID"  ,nullable = false )
     public String getDepId() {
         return depId;
     }
@@ -160,7 +160,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEP_NAME" , nullable  = false)
+    @Column(name = "DEP_NAME"  ,nullable = false )
     public String getDepName() {
         return depName;
     }
@@ -170,7 +170,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLED" , nullable  = false)
+    @Column(name = "ENABLED"  ,nullable = false )
     public Boolean getENABLED() {
         return eNABLED;
     }
@@ -180,7 +180,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_EXPIRED" , nullable  = false)
+    @Column(name = "ACCOUNT_NON_EXPIRED"  ,nullable = false )
     public Boolean getAccountNonExpired() {
         return accountNonExpired;
     }
@@ -190,7 +190,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_LOCKED" , nullable  = false)
+    @Column(name = "ACCOUNT_NON_LOCKED"  ,nullable = false )
     public Boolean getAccountNonLocked() {
         return accountNonLocked;
     }
@@ -200,7 +200,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "CREDENTIALS_NON_EXPIRED" , nullable  = false)
+    @Column(name = "CREDENTIALS_NON_EXPIRED"  ,nullable = false )
     public Boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }

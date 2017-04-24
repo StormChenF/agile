@@ -27,7 +27,7 @@ public class SysRolesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_ROLES_ID" , nullable  = true)
+    @Column(name = "SYS_ROLES_ID" )
     public Integer getSysRolesId() {
         return sysRolesId;
     }
@@ -37,7 +37,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_NAME" , nullable  = false)
+    @Column(name = "ROLE_NAME"  ,nullable = false )
     public String getRoleName() {
         return roleName;
     }
@@ -47,7 +47,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_DESC" , nullable  = false)
+    @Column(name = "ROLE_DESC"  ,nullable = false )
     public String getRoleDesc() {
         return roleDesc;
     }
@@ -57,7 +57,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable  = false)
+    @Column(name = "ENABLE"  ,nullable = false )
     public Boolean getENABLE() {
         return eNABLE;
     }
@@ -67,7 +67,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ISSYS" , nullable  = false)
+    @Column(name = "ISSYS"  ,nullable = false )
     public Boolean getISSYS() {
         return iSSYS;
     }
@@ -77,7 +77,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID" , nullable  = false)
+    @Column(name = "MODULE_ID"  ,nullable = false )
     public String getModuleId() {
         return moduleId;
     }
