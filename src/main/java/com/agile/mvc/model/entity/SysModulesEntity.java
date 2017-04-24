@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_modules",  catalog = "agile_db")
 public class SysModulesEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer sysModulesId;
     //模块名称
@@ -38,7 +39,7 @@ public class SysModulesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_MODULES_ID")
+    @Column(name = "SYS_MODULES_ID" , nullable  = true)
     public Integer getSysModulesId() {
         return sysModulesId;
     }
@@ -48,7 +49,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_NAME")
+    @Column(name = "MODULE_NAME" , nullable  = true)
     public String getModuleName() {
         return moduleName;
     }
@@ -58,7 +59,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_DESC")
+    @Column(name = "MODULE_DESC" , nullable  = false)
     public String getModuleDesc() {
         return moduleDesc;
     }
@@ -68,7 +69,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_TYPE")
+    @Column(name = "MODULE_TYPE" , nullable  = false)
     public String getModuleType() {
         return moduleType;
     }
@@ -78,7 +79,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PARENT")
+    @Column(name = "PARENT" , nullable  = false)
     public String getPARENT() {
         return pARENT;
     }
@@ -88,7 +89,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_URL")
+    @Column(name = "MODULE_URL" , nullable  = false)
     public String getModuleUrl() {
         return moduleUrl;
     }
@@ -98,7 +99,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "I_LEVEL")
+    @Column(name = "I_LEVEL" , nullable  = false)
     public String getILevel() {
         return iLevel;
     }
@@ -108,7 +109,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LEAF")
+    @Column(name = "LEAF" , nullable  = false)
     public String getLEAF() {
         return lEAF;
     }
@@ -118,7 +119,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "APPLICATION")
+    @Column(name = "APPLICATION" , nullable  = false)
     public String getAPPLICATION() {
         return aPPLICATION;
     }
@@ -128,7 +129,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "CONTROLLER")
+    @Column(name = "CONTROLLER" , nullable  = false)
     public String getCONTROLLER() {
         return cONTROLLER;
     }
@@ -138,7 +139,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE")
+    @Column(name = "ENABLE" , nullable  = false)
     public Boolean getENABLE() {
         return eNABLE;
     }
@@ -148,7 +149,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PRIORITY")
+    @Column(name = "PRIORITY" , nullable  = false)
     public String getPRIORITY() {
         return pRIORITY;
     }

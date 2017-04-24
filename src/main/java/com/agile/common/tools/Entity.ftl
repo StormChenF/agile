@@ -13,7 +13,8 @@ import ${import}
 @Entity
 @Table(name = "${tableName}", <#if schemaName??>schema = "${schemaName}",</#if> catalog = "${catalogName}")
 public class ${className}Entity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
 <#list columnList as property>
     //${property.remarks}
     private ${property.propertyType} ${property.propertyName};
@@ -22,13 +23,15 @@ public class ${className}Entity implements Serializable {
 <#list columnList as property>
     <#if property.isPrimaryKey == "true">
     @Id
+    <#elseif property.columnType == "blob" ||  property.columnType == "text" >
+    @Basic(fetch=FetchType.LAZY)
     <#else>
     @Basic
     </#if>
     <#if property.isAutoincrement == "YES">
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     </#if>
-    @Column(name = "${property.columnName}")
+    @Column(name = "${property.columnName}" , nullable  = ${property.nullable})
     public ${property.propertyType} ${property.getMethod}() {
         return ${property.propertyName};
     }

@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_authorities",  catalog = "agile_db")
 public class SysAuthoritiesEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer sysAuthorityId;
     //权限标识
@@ -30,7 +31,7 @@ public class SysAuthoritiesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_AUTHORITY_ID")
+    @Column(name = "SYS_AUTHORITY_ID" , nullable  = true)
     public Integer getSysAuthorityId() {
         return sysAuthorityId;
     }
@@ -40,7 +41,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_MARK")
+    @Column(name = "AUTHORITY_MARK" , nullable  = false)
     public String getAuthorityMark() {
         return authorityMark;
     }
@@ -50,7 +51,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_NAME")
+    @Column(name = "AUTHORITY_NAME" , nullable  = true)
     public String getAuthorityName() {
         return authorityName;
     }
@@ -60,7 +61,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_DESC")
+    @Column(name = "AUTHORITY_DESC" , nullable  = false)
     public String getAuthorityDesc() {
         return authorityDesc;
     }
@@ -70,7 +71,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MESSAGE")
+    @Column(name = "MESSAGE" , nullable  = false)
     public String getMESSAGE() {
         return mESSAGE;
     }
@@ -80,7 +81,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE")
+    @Column(name = "ENABLE" , nullable  = false)
     public Boolean getENABLE() {
         return eNABLE;
     }
@@ -90,7 +91,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ISSYS")
+    @Column(name = "ISSYS" , nullable  = false)
     public Boolean getISSYS() {
         return iSSYS;
     }
@@ -100,7 +101,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID")
+    @Column(name = "MODULE_ID" , nullable  = false)
     public String getModuleId() {
         return moduleId;
     }

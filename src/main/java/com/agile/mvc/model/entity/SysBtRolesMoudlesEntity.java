@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_bt_roles_moudles",  catalog = "agile_db")
 public class SysBtRolesMoudlesEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer sysBtRolesMoudlesId;
     //模块唯一标识
@@ -20,7 +21,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_BT_ROLES_MOUDLES_ID")
+    @Column(name = "SYS_BT_ROLES_MOUDLES_ID" , nullable  = true)
     public Integer getSysBtRolesMoudlesId() {
         return sysBtRolesMoudlesId;
     }
@@ -30,7 +31,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID")
+    @Column(name = "MODULE_ID" , nullable  = true)
     public Integer getModuleId() {
         return moduleId;
     }
@@ -40,7 +41,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_ID")
+    @Column(name = "ROLE_ID" , nullable  = true)
     public Integer getRoleId() {
         return roleId;
     }

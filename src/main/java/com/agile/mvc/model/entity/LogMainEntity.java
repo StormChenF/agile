@@ -11,7 +11,8 @@ import java.sql.Date;
 @Entity
 @Table(name = "log_main",  catalog = "agile_db")
 public class LogMainEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer logMainId;
     //业务编码
@@ -27,7 +28,7 @@ public class LogMainEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_main_id")
+    @Column(name = "log_main_id" , nullable  = true)
     public Integer getLogMainId() {
         return logMainId;
     }
@@ -37,7 +38,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "business_code")
+    @Column(name = "business_code" , nullable  = true)
     public String getBusinessCode() {
         return businessCode;
     }
@@ -47,7 +48,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "target_type")
+    @Column(name = "target_type" , nullable  = true)
     public String getTargetType() {
         return targetType;
     }
@@ -57,7 +58,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "target_code")
+    @Column(name = "target_code" , nullable  = true)
     public String getTargetCode() {
         return targetCode;
     }
@@ -67,7 +68,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "user_id")
+    @Column(name = "user_id" , nullable  = true)
     public Integer getUserId() {
         return userId;
     }
@@ -77,7 +78,7 @@ public class LogMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_time")
+    @Column(name = "create_time" , nullable  = true)
     public Date getCreateTime() {
         return createTime;
     }

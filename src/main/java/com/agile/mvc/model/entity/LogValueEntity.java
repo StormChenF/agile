@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "log_value",  catalog = "agile_db")
 public class LogValueEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer logValueId;
     //日志相关表标识
@@ -28,7 +29,7 @@ public class LogValueEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_value_id")
+    @Column(name = "log_value_id" , nullable  = true)
     public Integer getLogValueId() {
         return logValueId;
     }
@@ -38,7 +39,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "log_table_id")
+    @Column(name = "log_table_id" , nullable  = true)
     public Integer getLogTableId() {
         return logTableId;
     }
@@ -48,7 +49,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_name")
+    @Column(name = "column_name" , nullable  = true)
     public String getColumnName() {
         return columnName;
     }
@@ -58,7 +59,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_type")
+    @Column(name = "column_type" , nullable  = true)
     public String getColumnType() {
         return columnType;
     }
@@ -68,7 +69,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "new_value")
+    @Column(name = "new_value" , nullable  = false)
     public String getNewValue() {
         return newValue;
     }
@@ -78,7 +79,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "old_value")
+    @Column(name = "old_value" , nullable  = false)
     public String getOldValue() {
         return oldValue;
     }
@@ -88,7 +89,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_info")
+    @Column(name = "column_info" , nullable  = false)
     public String getColumnInfo() {
         return columnInfo;
     }

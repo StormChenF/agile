@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "log_table",  catalog = "agile_db")
 public class LogTableEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer logTableId;
     //日志标识
@@ -26,7 +27,7 @@ public class LogTableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_table_id")
+    @Column(name = "log_table_id" , nullable  = true)
     public Integer getLogTableId() {
         return logTableId;
     }
@@ -36,7 +37,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "log_main_id")
+    @Column(name = "log_main_id" , nullable  = true)
     public Integer getLogMainId() {
         return logMainId;
     }
@@ -46,7 +47,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "table_schema")
+    @Column(name = "table_schema" , nullable  = true)
     public String getTableSchema() {
         return tableSchema;
     }
@@ -56,7 +57,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "table_name")
+    @Column(name = "table_name" , nullable  = true)
     public String getTableName() {
         return tableName;
     }
@@ -66,7 +67,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "operation_type")
+    @Column(name = "operation_type" , nullable  = true)
     public String getOperationType() {
         return operationType;
     }
@@ -76,7 +77,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "operation_order")
+    @Column(name = "operation_order" , nullable  = true)
     public Integer getOperationOrder() {
         return operationOrder;
     }

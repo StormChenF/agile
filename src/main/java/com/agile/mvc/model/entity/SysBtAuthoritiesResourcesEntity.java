@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_bt_authorities_resources",  catalog = "agile_db")
 public class SysBtAuthoritiesResourcesEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer sysBtAuthoritiesResourcesId;
     //资源唯一标识
@@ -20,7 +21,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_BT_AUTHORITIES_RESOURCES_ID")
+    @Column(name = "SYS_BT_AUTHORITIES_RESOURCES_ID" , nullable  = true)
     public Integer getSysBtAuthoritiesResourcesId() {
         return sysBtAuthoritiesResourcesId;
     }
@@ -30,7 +31,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "RESOURCE_ID")
+    @Column(name = "RESOURCE_ID" , nullable  = true)
     public Integer getResourceId() {
         return resourceId;
     }
@@ -40,7 +41,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_ID")
+    @Column(name = "AUTHORITY_ID" , nullable  = true)
     public Integer getAuthorityId() {
         return authorityId;
     }

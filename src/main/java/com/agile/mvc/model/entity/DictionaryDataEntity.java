@@ -10,7 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "dictionary_data",  catalog = "agile_db")
 public class DictionaryDataEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //字典编码
     private Integer code;
     //字典表_字典编码
@@ -24,7 +25,7 @@ public class DictionaryDataEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "code")
+    @Column(name = "code" , nullable  = true)
     public Integer getCode() {
         return code;
     }
@@ -34,7 +35,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "dic_code")
+    @Column(name = "dic_code" , nullable  = false)
     public String getDicCode() {
         return dicCode;
     }
@@ -44,7 +45,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name" , nullable  = true)
     public String getName() {
         return name;
     }
@@ -54,7 +55,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "value")
+    @Column(name = "value" , nullable  = true)
     public String getValue() {
         return value;
     }
@@ -64,7 +65,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_fixed")
+    @Column(name = "is_fixed" , nullable  = true)
     public Boolean getIsFixed() {
         return isFixed;
     }

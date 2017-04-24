@@ -11,7 +11,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "sys_persistent_logins",  catalog = "agile_db")
 public class SysPersistentLoginsEntity implements Serializable {
-
+    //序列
+    private static final long serialVersionUID = 1L;
     //唯一标识
     private Integer sysPersistentLoginsId;
     //用户名
@@ -25,7 +26,7 @@ public class SysPersistentLoginsEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_PERSISTENT_LOGINS_ID")
+    @Column(name = "SYS_PERSISTENT_LOGINS_ID" , nullable  = true)
     public Integer getSysPersistentLoginsId() {
         return sysPersistentLoginsId;
     }
@@ -35,7 +36,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME" , nullable  = false)
     public String getUSERNAME() {
         return uSERNAME;
     }
@@ -45,7 +46,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "SERIES")
+    @Column(name = "SERIES" , nullable  = true)
     public String getSERIES() {
         return sERIES;
     }
@@ -55,7 +56,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "TOKEN")
+    @Column(name = "TOKEN" , nullable  = false)
     public String getTOKEN() {
         return tOKEN;
     }
@@ -65,7 +66,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LAST_USED")
+    @Column(name = "LAST_USED" , nullable  = true)
     public Timestamp getLastUsed() {
         return lastUsed;
     }

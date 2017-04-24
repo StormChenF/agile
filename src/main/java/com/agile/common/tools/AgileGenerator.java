@@ -34,20 +34,22 @@ public class AgileGenerator {
             //获取表信息
             ResultSet tablesData = DataBaseUtil.databaseMetaData.getTables(catalog, schema, propertiesUtil.getProperty("agile.generator.table_name"), new String[]{"TABLE"});
             while (tablesData.next()) {
+
                 Map<String, Object> data = new HashMap<>();
                 String className, tableName, primaryKeyColumnName = null, primaryKeyPropertyType = null, propertyType;
 
                 List<HashMap<String, String>> columnList = new ArrayList<>();
                 List<String> importList = new ArrayList<>();
+                List<String> indexList = new ArrayList<>();
                 //获取表名字
                 tableName = tablesData.getString("TABLE_NAME");
                 className = StringUtil.toUpperName(tableName);
 
+                //获取主键信息
+                ResultSet primaryKeyResultSet = DataBaseUtil.databaseMetaData.getPrimaryKeys(catalog, schema, tableName);
 
                 //根据表名获取字段信息
                 ResultSet columnsData = DataBaseUtil.databaseMetaData.getColumns(catalog, schema, tableName, "%");
-                ResultSet primaryKeyResultSet = DataBaseUtil.databaseMetaData.getPrimaryKeys(catalog, schema, tableName);
-
 
                 while (primaryKeyResultSet.next()) {
                     //主键字段名称
@@ -55,6 +57,7 @@ public class AgileGenerator {
                 }
 
                 while (columnsData.next()) {
+                    //参数容器
                     HashMap<String, String> param = new HashMap<>();
 
                     //是否为主键
@@ -93,7 +96,7 @@ public class AgileGenerator {
                     param.put("digits", columnsData.getString("DECIMAL_DIGITS"));
 
                     //是否可为空
-                    param.put("nullable", columnsData.getString("NULLABLE"));
+                    param.put("nullable", "0".equals(columnsData.getString("NULLABLE"))?"true":"false");
 
                     //字段默认值
                     param.put("columnDef", columnsData.getString("COLUMN_DEF"));
@@ -124,6 +127,9 @@ public class AgileGenerator {
 
                 //文件导入
                 data.put("importList", importList);
+
+                //唯一索引信息
+                data.put("indexList",indexList);
 
                 //参数
                 data.put("className", className);
