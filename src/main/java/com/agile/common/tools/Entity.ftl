@@ -13,12 +13,23 @@ import ${import}
 @Entity
 @Table(name = "${tableName}", <#if schemaName??>schema = "${schemaName}",</#if> catalog = "${catalogName}")
 public class ${className}Entity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
 <#list columnList as property>
     //${property.remarks}
     private ${property.propertyType} ${property.propertyName};
 </#list>
+
+    //无参构造器
+    public ${className}Entity(){}
+
+    //有参构造器
+    public ${className}Entity(<#list columnList as property>${property.propertyType} ${property.propertyName}<#if property_has_next>,</#if> </#list>){
+        <#list columnList as property>
+        this.${property.propertyName} = ${property.propertyName};
+        </#list>
+    }
 
 <#list columnList as property>
     <#if property.isPrimaryKey == "true">
@@ -49,16 +60,16 @@ public class ${className}Entity implements Serializable {
 
         ${className}Entity that = (${className}Entity) o;
 
-        return <#list columnList as property><#if property.propertyType == "Integer">Objects.equals(${property.propertyName}, that.${property.propertyName}) <#if property_has_next>&&</#if><#elseif  property.propertyType == "Date" ||   property.propertyType == "Boolean" >${property.propertyName} == that.${property.propertyName} <#if property_has_next>&&</#if><#else>(${property.propertyName} != null ? ${property.propertyName}.equals(that.${property.propertyName}) : that.${property.propertyName} == null) <#if property_has_next>&&</#if></#if></#list>;
+        return <#list columnList as property><#if property.propertyType == "Integer" ||  property.propertyType == "Double"  ||  property.propertyType == "Float" || property.propertyType == "Long" || property.propertyType == "Short" || property.propertyType == "int" || property.propertyType == "double" || property.propertyType == "float" || property.propertyType == "long" || property.propertyType == "short" >Objects.equals(${property.propertyName}, that.${property.propertyName}) <#if property_has_next>&&</#if><#elseif  property.propertyType == "Date" || property.propertyType == "Boolean" || property.propertyType == "boolean" >${property.propertyName} == that.${property.propertyName} <#if property_has_next>&&</#if><#else>(${property.propertyName} != null ? ${property.propertyName}.equals(that.${property.propertyName}) : that.${property.propertyName} == null) <#if property_has_next>&&</#if></#if></#list>;
     }
 
     @Override
     public int hashCode() {
         int result = 0;
     <#list columnList as property>
-        <#if property.propertyType == "Integer" ||  property.propertyType == "Double"  ||  property.propertyType == "Float">
+        <#if property.propertyType == "Integer" ||  property.propertyType == "Double"  ||  property.propertyType == "Float" || property.propertyType == "Long" || property.propertyType == "Short" || property.propertyType == "int" || property.propertyType == "double" || property.propertyType == "float" || property.propertyType == "long" || property.propertyType == "short" >
         result = 31 * result + ${property.propertyName};
-        <#elseif property.propertyType == "Boolean">
+        <#elseif property.propertyType == "Boolean" || property.propertyType == "boolean">
         result = 31 * result + (${property.propertyName} ? 1 : 0);
         <#else>
         result = 31 * result + (${property.propertyName} != null ? ${property.propertyName}.hashCode() : 0);

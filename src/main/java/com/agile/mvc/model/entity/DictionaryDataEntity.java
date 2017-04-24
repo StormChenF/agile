@@ -10,10 +10,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "dictionary_data",  catalog = "agile_db")
 public class DictionaryDataEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //字典编码
-    private Integer code;
+    private int code;
     //字典表_字典编码
     private String dicCode;
     //字典值显示名称
@@ -21,12 +22,24 @@ public class DictionaryDataEntity implements Serializable {
     //字典值代表值
     private String value;
     //字典值是否固定
-    private Boolean isFixed;
+    private boolean isFixed;
+
+    //无参构造器
+    public DictionaryDataEntity(){}
+
+    //有参构造器
+    public DictionaryDataEntity(int code, String dicCode, String name, String value, boolean isFixed ){
+        this.code = code;
+        this.dicCode = dicCode;
+        this.name = name;
+        this.value = value;
+        this.isFixed = isFixed;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "code" )
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -66,11 +79,11 @@ public class DictionaryDataEntity implements Serializable {
 
     @Basic
     @Column(name = "is_fixed" )
-    public Boolean getIsFixed() {
+    public boolean getIsFixed() {
         return isFixed;
     }
 
-    public void setisFixed(Boolean isFixed) {
+    public void setisFixed(boolean isFixed) {
         this.isFixed = isFixed;
     }
 

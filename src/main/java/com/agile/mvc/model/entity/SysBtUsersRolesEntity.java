@@ -10,19 +10,30 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_bt_users_roles",  catalog = "agile_db")
 public class SysBtUsersRolesEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private Integer sysBtUsersRolesId;
+    private int sysBtUsersRolesId;
     //角色唯一标识
-    private Integer roleId;
+    private int roleId;
     //用户唯一标识
-    private Integer userId;
+    private int userId;
+
+    //无参构造器
+    public SysBtUsersRolesEntity(){}
+
+    //有参构造器
+    public SysBtUsersRolesEntity(int sysBtUsersRolesId, int roleId, int userId ){
+        this.sysBtUsersRolesId = sysBtUsersRolesId;
+        this.roleId = roleId;
+        this.userId = userId;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_BT_USERS_ROLES_ID" )
-    public Integer getSysBtUsersRolesId() {
+    public int getSysBtUsersRolesId() {
         return sysBtUsersRolesId;
     }
 
@@ -32,7 +43,7 @@ public class SysBtUsersRolesEntity implements Serializable {
 
     @Basic
     @Column(name = "ROLE_ID" )
-    public Integer getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
@@ -42,7 +53,7 @@ public class SysBtUsersRolesEntity implements Serializable {
 
     @Basic
     @Column(name = "USER_ID" )
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 

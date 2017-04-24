@@ -13,22 +13,23 @@ import java.sql.Date;
 @Entity
 @Table(name = "sys_users",  catalog = "agile_db")
 public class SysUsersEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private Integer sysUsersId;
+    private int sysUsersId;
     //用户名
-    private String uSERNAME;
+    private String username;
     //用户姓名
-    private String nAME;
+    private String name;
     //密码
-    private String pASSWORD;
+    private String password;
     //创建日期
     private Date dtCreate;
     //最后登录日期
     private Date lastLogin;
     //截止日期
-    private Date dEADLINE;
+    private Date deadline;
     //最后登录IP地址
     private String loginIp;
     //所属机构ID
@@ -40,18 +41,41 @@ public class SysUsersEntity implements Serializable {
     //地区名称
     private String depName;
     //是否可用
-    private Boolean eNABLED;
+    private boolean enabled;
     //用户是否过期
-    private Boolean accountNonExpired;
+    private boolean accountNonExpired;
     //用户是否锁定
-    private Boolean accountNonLocked;
+    private boolean accountNonLocked;
     //用户证书是否有效
-    private Boolean credentialsNonExpired;
+    private boolean credentialsNonExpired;
+
+    //无参构造器
+    public SysUsersEntity(){}
+
+    //有参构造器
+    public SysUsersEntity(int sysUsersId, String username, String name, String password, Date dtCreate, Date lastLogin, Date deadline, String loginIp, String vQzjgid, String vQzjgmc, String depId, String depName, boolean enabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired ){
+        this.sysUsersId = sysUsersId;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.dtCreate = dtCreate;
+        this.lastLogin = lastLogin;
+        this.deadline = deadline;
+        this.loginIp = loginIp;
+        this.vQzjgid = vQzjgid;
+        this.vQzjgmc = vQzjgmc;
+        this.depId = depId;
+        this.depName = depName;
+        this.enabled = enabled;
+        this.accountNonExpired = accountNonExpired;
+        this.accountNonLocked = accountNonLocked;
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_USERS_ID" )
-    public Integer getSysUsersId() {
+    public int getSysUsersId() {
         return sysUsersId;
     }
 
@@ -62,31 +86,31 @@ public class SysUsersEntity implements Serializable {
     @Basic
     @Column(name = "USERNAME" )
     public String getUSERNAME() {
-        return uSERNAME;
+        return username;
     }
 
-    public void setuSERNAME(String uSERNAME) {
-        this.uSERNAME = uSERNAME;
+    public void setuSERNAME(String username) {
+        this.username = username;
     }
 
     @Basic
     @Column(name = "NAME"  ,nullable = false )
     public String getNAME() {
-        return nAME;
+        return name;
     }
 
-    public void setnAME(String nAME) {
-        this.nAME = nAME;
+    public void setnAME(String name) {
+        this.name = name;
     }
 
     @Basic
     @Column(name = "PASSWORD" )
     public String getPASSWORD() {
-        return pASSWORD;
+        return password;
     }
 
-    public void setpASSWORD(String pASSWORD) {
-        this.pASSWORD = pASSWORD;
+    public void setpASSWORD(String password) {
+        this.password = password;
     }
 
     @Basic
@@ -112,11 +136,11 @@ public class SysUsersEntity implements Serializable {
     @Basic
     @Column(name = "DEADLINE"  ,nullable = false )
     public Date getDEADLINE() {
-        return dEADLINE;
+        return deadline;
     }
 
-    public void setdEADLINE(Date dEADLINE) {
-        this.dEADLINE = dEADLINE;
+    public void setdEADLINE(Date deadline) {
+        this.deadline = deadline;
     }
 
     @Basic
@@ -171,41 +195,41 @@ public class SysUsersEntity implements Serializable {
 
     @Basic
     @Column(name = "ENABLED"  ,nullable = false )
-    public Boolean getENABLED() {
-        return eNABLED;
+    public boolean getENABLED() {
+        return enabled;
     }
 
-    public void seteNABLED(Boolean eNABLED) {
-        this.eNABLED = eNABLED;
+    public void seteNABLED(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Basic
     @Column(name = "ACCOUNT_NON_EXPIRED"  ,nullable = false )
-    public Boolean getAccountNonExpired() {
+    public boolean getAccountNonExpired() {
         return accountNonExpired;
     }
 
-    public void setaccountNonExpired(Boolean accountNonExpired) {
+    public void setaccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
 
     @Basic
     @Column(name = "ACCOUNT_NON_LOCKED"  ,nullable = false )
-    public Boolean getAccountNonLocked() {
+    public boolean getAccountNonLocked() {
         return accountNonLocked;
     }
 
-    public void setaccountNonLocked(Boolean accountNonLocked) {
+    public void setaccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
 
     @Basic
     @Column(name = "CREDENTIALS_NON_EXPIRED"  ,nullable = false )
-    public Boolean getCredentialsNonExpired() {
+    public boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
-    public void setcredentialsNonExpired(Boolean credentialsNonExpired) {
+    public void setcredentialsNonExpired(boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
@@ -217,25 +241,25 @@ public class SysUsersEntity implements Serializable {
 
         SysUsersEntity that = (SysUsersEntity) o;
 
-        return Objects.equals(sysUsersId, that.sysUsersId) &&(uSERNAME != null ? uSERNAME.equals(that.uSERNAME) : that.uSERNAME == null) &&(nAME != null ? nAME.equals(that.nAME) : that.nAME == null) &&(pASSWORD != null ? pASSWORD.equals(that.pASSWORD) : that.pASSWORD == null) &&dtCreate == that.dtCreate &&lastLogin == that.lastLogin &&dEADLINE == that.dEADLINE &&(loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null) &&(vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null) &&(vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null) &&(depId != null ? depId.equals(that.depId) : that.depId == null) &&(depName != null ? depName.equals(that.depName) : that.depName == null) &&eNABLED == that.eNABLED &&accountNonExpired == that.accountNonExpired &&accountNonLocked == that.accountNonLocked &&credentialsNonExpired == that.credentialsNonExpired ;
+        return Objects.equals(sysUsersId, that.sysUsersId) &&(username != null ? username.equals(that.username) : that.username == null) &&(name != null ? name.equals(that.name) : that.name == null) &&(password != null ? password.equals(that.password) : that.password == null) &&dtCreate == that.dtCreate &&lastLogin == that.lastLogin &&deadline == that.deadline &&(loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null) &&(vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null) &&(vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null) &&(depId != null ? depId.equals(that.depId) : that.depId == null) &&(depName != null ? depName.equals(that.depName) : that.depName == null) &&enabled == that.enabled &&accountNonExpired == that.accountNonExpired &&accountNonLocked == that.accountNonLocked &&credentialsNonExpired == that.credentialsNonExpired ;
     }
 
     @Override
     public int hashCode() {
         int result = 0;
         result = 31 * result + sysUsersId;
-        result = 31 * result + (uSERNAME != null ? uSERNAME.hashCode() : 0);
-        result = 31 * result + (nAME != null ? nAME.hashCode() : 0);
-        result = 31 * result + (pASSWORD != null ? pASSWORD.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (dtCreate != null ? dtCreate.hashCode() : 0);
         result = 31 * result + (lastLogin != null ? lastLogin.hashCode() : 0);
-        result = 31 * result + (dEADLINE != null ? dEADLINE.hashCode() : 0);
+        result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
         result = 31 * result + (loginIp != null ? loginIp.hashCode() : 0);
         result = 31 * result + (vQzjgid != null ? vQzjgid.hashCode() : 0);
         result = 31 * result + (vQzjgmc != null ? vQzjgmc.hashCode() : 0);
         result = 31 * result + (depId != null ? depId.hashCode() : 0);
         result = 31 * result + (depName != null ? depName.hashCode() : 0);
-        result = 31 * result + (eNABLED ? 1 : 0);
+        result = 31 * result + (enabled ? 1 : 0);
         result = 31 * result + (accountNonExpired ? 1 : 0);
         result = 31 * result + (accountNonLocked ? 1 : 0);
         result = 31 * result + (credentialsNonExpired ? 1 : 0);

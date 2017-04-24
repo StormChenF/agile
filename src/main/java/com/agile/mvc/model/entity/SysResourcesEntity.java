@@ -10,10 +10,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_resources",  catalog = "agile_db")
 public class SysResourcesEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private Integer sysResourcesId;
+    private int sysResourcesId;
     //资源类型
     private String resourceType;
     //资源名称
@@ -23,18 +24,34 @@ public class SysResourcesEntity implements Serializable {
     //资源路径
     private String resourcePath;
     //优先级
-    private String pRIORITY;
+    private String priority;
     //是否可用
-    private Boolean eNABLE;
+    private boolean enable;
     //是否系统权限
-    private Boolean iSSYS;
+    private boolean issys;
     //模块
-    private Integer moduleId;
+    private int moduleId;
+
+    //无参构造器
+    public SysResourcesEntity(){}
+
+    //有参构造器
+    public SysResourcesEntity(int sysResourcesId, String resourceType, String resourceName, String resourceDesc, String resourcePath, String priority, boolean enable, boolean issys, int moduleId ){
+        this.sysResourcesId = sysResourcesId;
+        this.resourceType = resourceType;
+        this.resourceName = resourceName;
+        this.resourceDesc = resourceDesc;
+        this.resourcePath = resourcePath;
+        this.priority = priority;
+        this.enable = enable;
+        this.issys = issys;
+        this.moduleId = moduleId;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_RESOURCES_ID" )
-    public Integer getSysResourcesId() {
+    public int getSysResourcesId() {
         return sysResourcesId;
     }
 
@@ -85,36 +102,36 @@ public class SysResourcesEntity implements Serializable {
     @Basic
     @Column(name = "PRIORITY"  ,nullable = false )
     public String getPRIORITY() {
-        return pRIORITY;
+        return priority;
     }
 
-    public void setpRIORITY(String pRIORITY) {
-        this.pRIORITY = pRIORITY;
+    public void setpRIORITY(String priority) {
+        this.priority = priority;
     }
 
     @Basic
     @Column(name = "ENABLE"  ,nullable = false )
-    public Boolean getENABLE() {
-        return eNABLE;
+    public boolean getENABLE() {
+        return enable;
     }
 
-    public void seteNABLE(Boolean eNABLE) {
-        this.eNABLE = eNABLE;
+    public void seteNABLE(boolean enable) {
+        this.enable = enable;
     }
 
     @Basic
     @Column(name = "ISSYS"  ,nullable = false )
-    public Boolean getISSYS() {
-        return iSSYS;
+    public boolean getISSYS() {
+        return issys;
     }
 
-    public void setiSSYS(Boolean iSSYS) {
-        this.iSSYS = iSSYS;
+    public void setiSSYS(boolean issys) {
+        this.issys = issys;
     }
 
     @Basic
     @Column(name = "MODULE_ID"  ,nullable = false )
-    public Integer getModuleId() {
+    public int getModuleId() {
         return moduleId;
     }
 
@@ -130,7 +147,7 @@ public class SysResourcesEntity implements Serializable {
 
         SysResourcesEntity that = (SysResourcesEntity) o;
 
-        return Objects.equals(sysResourcesId, that.sysResourcesId) &&(resourceType != null ? resourceType.equals(that.resourceType) : that.resourceType == null) &&(resourceName != null ? resourceName.equals(that.resourceName) : that.resourceName == null) &&(resourceDesc != null ? resourceDesc.equals(that.resourceDesc) : that.resourceDesc == null) &&(resourcePath != null ? resourcePath.equals(that.resourcePath) : that.resourcePath == null) &&(pRIORITY != null ? pRIORITY.equals(that.pRIORITY) : that.pRIORITY == null) &&eNABLE == that.eNABLE &&iSSYS == that.iSSYS &&Objects.equals(moduleId, that.moduleId) ;
+        return Objects.equals(sysResourcesId, that.sysResourcesId) &&(resourceType != null ? resourceType.equals(that.resourceType) : that.resourceType == null) &&(resourceName != null ? resourceName.equals(that.resourceName) : that.resourceName == null) &&(resourceDesc != null ? resourceDesc.equals(that.resourceDesc) : that.resourceDesc == null) &&(resourcePath != null ? resourcePath.equals(that.resourcePath) : that.resourcePath == null) &&(priority != null ? priority.equals(that.priority) : that.priority == null) &&enable == that.enable &&issys == that.issys &&Objects.equals(moduleId, that.moduleId) ;
     }
 
     @Override
@@ -141,9 +158,9 @@ public class SysResourcesEntity implements Serializable {
         result = 31 * result + (resourceName != null ? resourceName.hashCode() : 0);
         result = 31 * result + (resourceDesc != null ? resourceDesc.hashCode() : 0);
         result = 31 * result + (resourcePath != null ? resourcePath.hashCode() : 0);
-        result = 31 * result + (pRIORITY != null ? pRIORITY.hashCode() : 0);
-        result = 31 * result + (eNABLE ? 1 : 0);
-        result = 31 * result + (iSSYS ? 1 : 0);
+        result = 31 * result + (priority != null ? priority.hashCode() : 0);
+        result = 31 * result + (enable ? 1 : 0);
+        result = 31 * result + (issys ? 1 : 0);
         result = 31 * result + moduleId;
         return result;
     }

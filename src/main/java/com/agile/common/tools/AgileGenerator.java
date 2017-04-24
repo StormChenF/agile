@@ -1,5 +1,6 @@
 package com.agile.common.tools;
 
+import com.agile.common.util.ClassUtil;
 import com.agile.common.util.DataBaseUtil;
 import com.agile.common.util.PropertiesUtil;
 import com.agile.common.util.StringUtil;
@@ -33,6 +34,7 @@ public class AgileGenerator {
 
             //获取表信息
             ResultSet tablesData = DataBaseUtil.databaseMetaData.getTables(catalog, schema, propertiesUtil.getProperty("agile.generator.table_name"), new String[]{"TABLE"});
+
             while (tablesData.next()) {
 
                 Map<String, Object> data = new HashMap<>();
@@ -67,7 +69,7 @@ public class AgileGenerator {
                     param.put("columnName", columnsData.getString("COLUMN_NAME"));
 
                     //属性名
-                    param.put("propertyName", StringUtil.toLowerName(columnsData.getString("COLUMN_NAME")));
+                    param.put("propertyName", StringUtil.toLowerName(columnsData.getString("COLUMN_NAME").toLowerCase()));
 
                     //get方法
                     param.put("getMethod", "get" + StringUtil.toUpperName(columnsData.getString("COLUMN_NAME")));
@@ -111,7 +113,7 @@ public class AgileGenerator {
                     if (StringUtil.compare(primaryKeyColumnName, columnsData.getString("COLUMN_NAME"))) {
 
                         //主键字段类型
-                        primaryKeyPropertyType = propertyType;
+                        primaryKeyPropertyType = ClassUtil.toWrapperNameFromName(propertyType);
 
                         //是否为主键
                         param.put("isPrimaryKey", "true");

@@ -10,19 +10,30 @@ import java.util.Objects;
 @Entity
 @Table(name = "dictionary_main",  catalog = "agile_db")
 public class DictionaryMainEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //字典编码
-    private Integer code;
+    private int code;
     //字典名称
     private String name;
     //是否是常量
-    private Boolean isConstant;
+    private boolean isConstant;
+
+    //无参构造器
+    public DictionaryMainEntity(){}
+
+    //有参构造器
+    public DictionaryMainEntity(int code, String name, boolean isConstant ){
+        this.code = code;
+        this.name = name;
+        this.isConstant = isConstant;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "code" )
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -42,11 +53,11 @@ public class DictionaryMainEntity implements Serializable {
 
     @Basic
     @Column(name = "is_constant" )
-    public Boolean getIsConstant() {
+    public boolean getIsConstant() {
         return isConstant;
     }
 
-    public void setisConstant(Boolean isConstant) {
+    public void setisConstant(boolean isConstant) {
         this.isConstant = isConstant;
     }
 

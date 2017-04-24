@@ -11,10 +11,11 @@ import java.sql.Date;
 @Entity
 @Table(name = "log_main",  catalog = "agile_db")
 public class LogMainEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private Integer logMainId;
+    private int logMainId;
     //业务编码
     private String businessCode;
     //业务对象类型
@@ -22,14 +23,27 @@ public class LogMainEntity implements Serializable {
     //业务对象标识
     private String targetCode;
     //操作人
-    private Integer userId;
+    private int userId;
     //操作时间
     private Date createTime;
+
+    //无参构造器
+    public LogMainEntity(){}
+
+    //有参构造器
+    public LogMainEntity(int logMainId, String businessCode, String targetType, String targetCode, int userId, Date createTime ){
+        this.logMainId = logMainId;
+        this.businessCode = businessCode;
+        this.targetType = targetType;
+        this.targetCode = targetCode;
+        this.userId = userId;
+        this.createTime = createTime;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_main_id" )
-    public Integer getLogMainId() {
+    public int getLogMainId() {
         return logMainId;
     }
 
@@ -69,7 +83,7 @@ public class LogMainEntity implements Serializable {
 
     @Basic
     @Column(name = "user_id" )
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 

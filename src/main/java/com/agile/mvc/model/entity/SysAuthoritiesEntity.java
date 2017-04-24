@@ -10,10 +10,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_authorities",  catalog = "agile_db")
 public class SysAuthoritiesEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private Integer sysAuthorityId;
+    private int sysAuthorityId;
     //权限标识
     private String authorityMark;
     //权限名称
@@ -21,18 +22,33 @@ public class SysAuthoritiesEntity implements Serializable {
     //权限说明
     private String authorityDesc;
     //提示信息
-    private String mESSAGE;
+    private String message;
     //是否可用
-    private Boolean eNABLE;
+    private boolean enable;
     //是否系统权限
-    private Boolean iSSYS;
+    private boolean issys;
     //模块
     private String moduleId;
+
+    //无参构造器
+    public SysAuthoritiesEntity(){}
+
+    //有参构造器
+    public SysAuthoritiesEntity(int sysAuthorityId, String authorityMark, String authorityName, String authorityDesc, String message, boolean enable, boolean issys, String moduleId ){
+        this.sysAuthorityId = sysAuthorityId;
+        this.authorityMark = authorityMark;
+        this.authorityName = authorityName;
+        this.authorityDesc = authorityDesc;
+        this.message = message;
+        this.enable = enable;
+        this.issys = issys;
+        this.moduleId = moduleId;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_AUTHORITY_ID" )
-    public Integer getSysAuthorityId() {
+    public int getSysAuthorityId() {
         return sysAuthorityId;
     }
 
@@ -73,31 +89,31 @@ public class SysAuthoritiesEntity implements Serializable {
     @Basic
     @Column(name = "MESSAGE"  ,nullable = false )
     public String getMESSAGE() {
-        return mESSAGE;
+        return message;
     }
 
-    public void setmESSAGE(String mESSAGE) {
-        this.mESSAGE = mESSAGE;
+    public void setmESSAGE(String message) {
+        this.message = message;
     }
 
     @Basic
     @Column(name = "ENABLE"  ,nullable = false )
-    public Boolean getENABLE() {
-        return eNABLE;
+    public boolean getENABLE() {
+        return enable;
     }
 
-    public void seteNABLE(Boolean eNABLE) {
-        this.eNABLE = eNABLE;
+    public void seteNABLE(boolean enable) {
+        this.enable = enable;
     }
 
     @Basic
     @Column(name = "ISSYS"  ,nullable = false )
-    public Boolean getISSYS() {
-        return iSSYS;
+    public boolean getISSYS() {
+        return issys;
     }
 
-    public void setiSSYS(Boolean iSSYS) {
-        this.iSSYS = iSSYS;
+    public void setiSSYS(boolean issys) {
+        this.issys = issys;
     }
 
     @Basic
@@ -118,7 +134,7 @@ public class SysAuthoritiesEntity implements Serializable {
 
         SysAuthoritiesEntity that = (SysAuthoritiesEntity) o;
 
-        return Objects.equals(sysAuthorityId, that.sysAuthorityId) &&(authorityMark != null ? authorityMark.equals(that.authorityMark) : that.authorityMark == null) &&(authorityName != null ? authorityName.equals(that.authorityName) : that.authorityName == null) &&(authorityDesc != null ? authorityDesc.equals(that.authorityDesc) : that.authorityDesc == null) &&(mESSAGE != null ? mESSAGE.equals(that.mESSAGE) : that.mESSAGE == null) &&eNABLE == that.eNABLE &&iSSYS == that.iSSYS &&(moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
+        return Objects.equals(sysAuthorityId, that.sysAuthorityId) &&(authorityMark != null ? authorityMark.equals(that.authorityMark) : that.authorityMark == null) &&(authorityName != null ? authorityName.equals(that.authorityName) : that.authorityName == null) &&(authorityDesc != null ? authorityDesc.equals(that.authorityDesc) : that.authorityDesc == null) &&(message != null ? message.equals(that.message) : that.message == null) &&enable == that.enable &&issys == that.issys &&(moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
     }
 
     @Override
@@ -128,9 +144,9 @@ public class SysAuthoritiesEntity implements Serializable {
         result = 31 * result + (authorityMark != null ? authorityMark.hashCode() : 0);
         result = 31 * result + (authorityName != null ? authorityName.hashCode() : 0);
         result = 31 * result + (authorityDesc != null ? authorityDesc.hashCode() : 0);
-        result = 31 * result + (mESSAGE != null ? mESSAGE.hashCode() : 0);
-        result = 31 * result + (eNABLE ? 1 : 0);
-        result = 31 * result + (iSSYS ? 1 : 0);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (enable ? 1 : 0);
+        result = 31 * result + (issys ? 1 : 0);
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
         return result;
     }

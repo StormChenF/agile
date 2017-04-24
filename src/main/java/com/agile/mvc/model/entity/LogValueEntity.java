@@ -10,12 +10,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "log_value",  catalog = "agile_db")
 public class LogValueEntity implements Serializable {
+
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private Integer logValueId;
+    private int logValueId;
     //日志相关表标识
-    private Integer logTableId;
+    private int logTableId;
     //字段
     private String columnName;
     //字段类型
@@ -27,10 +28,24 @@ public class LogValueEntity implements Serializable {
     //字段含义
     private String columnInfo;
 
+    //无参构造器
+    public LogValueEntity(){}
+
+    //有参构造器
+    public LogValueEntity(int logValueId, int logTableId, String columnName, String columnType, String newValue, String oldValue, String columnInfo ){
+        this.logValueId = logValueId;
+        this.logTableId = logTableId;
+        this.columnName = columnName;
+        this.columnType = columnType;
+        this.newValue = newValue;
+        this.oldValue = oldValue;
+        this.columnInfo = columnInfo;
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_value_id" )
-    public Integer getLogValueId() {
+    public int getLogValueId() {
         return logValueId;
     }
 
@@ -40,7 +55,7 @@ public class LogValueEntity implements Serializable {
 
     @Basic
     @Column(name = "log_table_id" )
-    public Integer getLogTableId() {
+    public int getLogTableId() {
         return logTableId;
     }
 
