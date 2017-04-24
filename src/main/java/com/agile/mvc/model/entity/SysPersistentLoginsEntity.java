@@ -109,4 +109,15 @@ public class SysPersistentLoginsEntity implements Serializable {
         result = 31 * result + (lastUsed != null ? lastUsed.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysPersistentLoginsEntity{" +
+        "sysPersistentLoginsId=" + sysPersistentLoginsId +
+        ",username=" + username + '\'' +
+        ",series=" + series + '\'' +
+        ",token=" + token + '\'' +
+        ",lastUsed=" + lastUsed +
+        '}';
+    }
 }

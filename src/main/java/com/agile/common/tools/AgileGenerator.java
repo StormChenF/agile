@@ -87,6 +87,8 @@ public class AgileGenerator {
                     //API导入
                     if ("Timestamp".equals(propertyType)) importList.add("java.sql.Timestamp;");
                     if ("Date".equals(propertyType)) importList.add("java.sql.Date;");
+                    if ("Clob".equals(propertyType)) importList.add("import java.sql.Clob;");
+                    if ("Blob".equals(propertyType)) importList.add("import java.sql.Blob;");
 
                     //是否自增长
                     param.put("isAutoincrement", columnsData.getString("IS_AUTOINCREMENT"));

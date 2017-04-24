@@ -80,4 +80,13 @@ public class DictionaryMainEntity implements Serializable {
         result = 31 * result + (isConstant ? 1 : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DictionaryMainEntity{" +
+        "code=" + code +
+        ",name=" + name + '\'' +
+        ",isConstant=" + isConstant +
+        '}';
+    }
 }

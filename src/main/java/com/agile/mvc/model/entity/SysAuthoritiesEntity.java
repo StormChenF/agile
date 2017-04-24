@@ -150,4 +150,18 @@ public class SysAuthoritiesEntity implements Serializable {
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysAuthoritiesEntity{" +
+        "sysAuthorityId=" + sysAuthorityId +
+        ",authorityMark=" + authorityMark + '\'' +
+        ",authorityName=" + authorityName + '\'' +
+        ",authorityDesc=" + authorityDesc + '\'' +
+        ",message=" + message + '\'' +
+        ",enable=" + enable +
+        ",issys=" + issys +
+        ",moduleId=" + moduleId + '\'' +
+        '}';
+    }
 }

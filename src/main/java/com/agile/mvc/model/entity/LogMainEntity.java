@@ -123,4 +123,16 @@ public class LogMainEntity implements Serializable {
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "LogMainEntity{" +
+        "logMainId=" + logMainId +
+        ",businessCode=" + businessCode + '\'' +
+        ",targetType=" + targetType + '\'' +
+        ",targetCode=" + targetCode + '\'' +
+        ",userId=" + userId +
+        ",createTime=" + createTime +
+        '}';
+    }
 }

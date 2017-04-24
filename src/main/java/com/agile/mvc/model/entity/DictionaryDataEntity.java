@@ -108,4 +108,15 @@ public class DictionaryDataEntity implements Serializable {
         result = 31 * result + (isFixed ? 1 : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "DictionaryDataEntity{" +
+        "code=" + code +
+        ",dicCode=" + dicCode + '\'' +
+        ",name=" + name + '\'' +
+        ",value=" + value + '\'' +
+        ",isFixed=" + isFixed +
+        '}';
+    }
 }

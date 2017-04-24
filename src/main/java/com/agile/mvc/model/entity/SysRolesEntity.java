@@ -122,4 +122,16 @@ public class SysRolesEntity implements Serializable {
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysRolesEntity{" +
+        "sysRolesId=" + sysRolesId +
+        ",roleName=" + roleName + '\'' +
+        ",roleDesc=" + roleDesc + '\'' +
+        ",enable=" + enable +
+        ",issys=" + issys +
+        ",moduleId=" + moduleId + '\'' +
+        '}';
+    }
 }

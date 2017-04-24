@@ -206,4 +206,22 @@ public class SysModulesEntity implements Serializable {
         result = 31 * result + (priority != null ? priority.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysModulesEntity{" +
+        "sysModulesId=" + sysModulesId +
+        ",moduleName=" + moduleName + '\'' +
+        ",moduleDesc=" + moduleDesc + '\'' +
+        ",moduleType=" + moduleType + '\'' +
+        ",parent=" + parent + '\'' +
+        ",moduleUrl=" + moduleUrl + '\'' +
+        ",iLevel=" + iLevel + '\'' +
+        ",leaf=" + leaf + '\'' +
+        ",application=" + application + '\'' +
+        ",controller=" + controller + '\'' +
+        ",enable=" + enable +
+        ",priority=" + priority + '\'' +
+        '}';
+    }
 }

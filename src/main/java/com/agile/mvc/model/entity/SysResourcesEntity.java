@@ -164,4 +164,19 @@ public class SysResourcesEntity implements Serializable {
         result = 31 * result + moduleId;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysResourcesEntity{" +
+        "sysResourcesId=" + sysResourcesId +
+        ",resourceType=" + resourceType + '\'' +
+        ",resourceName=" + resourceName + '\'' +
+        ",resourceDesc=" + resourceDesc + '\'' +
+        ",resourcePath=" + resourcePath + '\'' +
+        ",priority=" + priority + '\'' +
+        ",enable=" + enable +
+        ",issys=" + issys +
+        ",moduleId=" + moduleId +
+        '}';
+    }
 }

@@ -122,4 +122,16 @@ public class LogTableEntity implements Serializable {
         result = 31 * result + operationOrder;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "LogTableEntity{" +
+        "logTableId=" + logTableId +
+        ",logMainId=" + logMainId +
+        ",tableSchema=" + tableSchema + '\'' +
+        ",tableName=" + tableName + '\'' +
+        ",operationType=" + operationType + '\'' +
+        ",operationOrder=" + operationOrder +
+        '}';
+    }
 }

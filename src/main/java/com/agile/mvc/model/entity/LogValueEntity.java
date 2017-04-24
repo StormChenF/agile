@@ -136,4 +136,17 @@ public class LogValueEntity implements Serializable {
         result = 31 * result + (columnInfo != null ? columnInfo.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "LogValueEntity{" +
+        "logValueId=" + logValueId +
+        ",logTableId=" + logTableId +
+        ",columnName=" + columnName + '\'' +
+        ",columnType=" + columnType + '\'' +
+        ",newValue=" + newValue + '\'' +
+        ",oldValue=" + oldValue + '\'' +
+        ",columnInfo=" + columnInfo + '\'' +
+        '}';
+    }
 }

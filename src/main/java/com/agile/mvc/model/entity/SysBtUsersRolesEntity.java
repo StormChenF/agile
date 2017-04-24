@@ -80,4 +80,13 @@ public class SysBtUsersRolesEntity implements Serializable {
         result = 31 * result + userId;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysBtUsersRolesEntity{" +
+        "sysBtUsersRolesId=" + sysBtUsersRolesId +
+        ",roleId=" + roleId +
+        ",userId=" + userId +
+        '}';
+    }
 }

@@ -265,4 +265,26 @@ public class SysUsersEntity implements Serializable {
         result = 31 * result + (credentialsNonExpired ? 1 : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SysUsersEntity{" +
+        "sysUsersId=" + sysUsersId +
+        ",username=" + username + '\'' +
+        ",name=" + name + '\'' +
+        ",password=" + password + '\'' +
+        ",dtCreate=" + dtCreate +
+        ",lastLogin=" + lastLogin +
+        ",deadline=" + deadline +
+        ",loginIp=" + loginIp + '\'' +
+        ",vQzjgid=" + vQzjgid + '\'' +
+        ",vQzjgmc=" + vQzjgmc + '\'' +
+        ",depId=" + depId + '\'' +
+        ",depName=" + depName + '\'' +
+        ",enabled=" + enabled +
+        ",accountNonExpired=" + accountNonExpired +
+        ",accountNonLocked=" + accountNonLocked +
+        ",credentialsNonExpired=" + credentialsNonExpired +
+        '}';
+    }
 }
