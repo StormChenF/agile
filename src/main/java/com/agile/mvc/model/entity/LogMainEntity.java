@@ -31,7 +31,7 @@ public class LogMainEntity implements Serializable {
     public LogMainEntity(){}
 
     //有参构造器
-    public LogMainEntity(int logMainId, String businessCode, String targetType, String targetCode, int userId, Date createTime ){
+    public LogMainEntity(int logMainId,String businessCode,String targetType,String targetCode,int userId,Date createTime){
         this.logMainId = logMainId;
         this.businessCode = businessCode;
         this.targetType = targetType;
@@ -109,7 +109,13 @@ public class LogMainEntity implements Serializable {
 
         LogMainEntity that = (LogMainEntity) o;
 
-        return Objects.equals(logMainId, that.logMainId) &&(businessCode != null ? businessCode.equals(that.businessCode) : that.businessCode == null) &&(targetType != null ? targetType.equals(that.targetType) : that.targetType == null) &&(targetCode != null ? targetCode.equals(that.targetCode) : that.targetCode == null) &&Objects.equals(userId, that.userId) &&createTime == that.createTime ;
+        return 
+            Objects.equals(logMainId, that.logMainId)  && 
+            (businessCode != null ? businessCode.equals(that.businessCode) : that.businessCode == null)  && 
+            (targetType != null ? targetType.equals(that.targetType) : that.targetType == null)  && 
+            (targetCode != null ? targetCode.equals(that.targetCode) : that.targetCode == null)  && 
+            Objects.equals(userId, that.userId)  && 
+            (getCreateTime() != null ? getCreateTime().equals(that.getCreateTime()) : that.getCreateTime() == null) ;
     }
 
     @Override
@@ -120,7 +126,7 @@ public class LogMainEntity implements Serializable {
         result = 31 * result + (targetType != null ? targetType.hashCode() : 0);
         result = 31 * result + (targetCode != null ? targetCode.hashCode() : 0);
         result = 31 * result + userId;
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + (getCreateTime() != null ? getCreateTime().hashCode() : 0);
         return result;
     }
 
@@ -128,9 +134,9 @@ public class LogMainEntity implements Serializable {
     public String toString() {
         return "LogMainEntity{" +
         "logMainId=" + logMainId +
-        ",businessCode=" + businessCode + '\'' +
-        ",targetType=" + targetType + '\'' +
-        ",targetCode=" + targetCode + '\'' +
+        ",businessCode='" + businessCode + '\'' +
+        ",targetType='" + targetType + '\'' +
+        ",targetCode='" + targetCode + '\'' +
         ",userId=" + userId +
         ",createTime=" + createTime +
         '}';

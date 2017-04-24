@@ -42,7 +42,7 @@ public class SysModulesEntity implements Serializable {
     public SysModulesEntity(){}
 
     //有参构造器
-    public SysModulesEntity(int sysModulesId, String moduleName, String moduleDesc, String moduleType, String parent, String moduleUrl, String iLevel, String leaf, String application, String controller, boolean enable, String priority ){
+    public SysModulesEntity(int sysModulesId,String moduleName,String moduleDesc,String moduleType,String parent,String moduleUrl,String iLevel,String leaf,String application,String controller,boolean enable,String priority){
         this.sysModulesId = sysModulesId;
         this.moduleName = moduleName;
         this.moduleDesc = moduleDesc;
@@ -79,7 +79,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_DESC"  ,nullable = false )
+    @Column(name = "MODULE_DESC" , nullable = false )
     public String getModuleDesc() {
         return moduleDesc;
     }
@@ -89,7 +89,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_TYPE"  ,nullable = false )
+    @Column(name = "MODULE_TYPE" , nullable = false )
     public String getModuleType() {
         return moduleType;
     }
@@ -99,7 +99,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PARENT"  ,nullable = false )
+    @Column(name = "PARENT" , nullable = false )
     public String getPARENT() {
         return parent;
     }
@@ -109,7 +109,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_URL"  ,nullable = false )
+    @Column(name = "MODULE_URL" , nullable = false )
     public String getModuleUrl() {
         return moduleUrl;
     }
@@ -119,7 +119,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "I_LEVEL"  ,nullable = false )
+    @Column(name = "I_LEVEL" , nullable = false )
     public String getILevel() {
         return iLevel;
     }
@@ -129,7 +129,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LEAF"  ,nullable = false )
+    @Column(name = "LEAF" , nullable = false )
     public String getLEAF() {
         return leaf;
     }
@@ -139,7 +139,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "APPLICATION"  ,nullable = false )
+    @Column(name = "APPLICATION" , nullable = false )
     public String getAPPLICATION() {
         return application;
     }
@@ -149,7 +149,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "CONTROLLER"  ,nullable = false )
+    @Column(name = "CONTROLLER" , nullable = false )
     public String getCONTROLLER() {
         return controller;
     }
@@ -159,7 +159,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE"  ,nullable = false )
+    @Column(name = "ENABLE" , nullable = false )
     public boolean getENABLE() {
         return enable;
     }
@@ -169,7 +169,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PRIORITY"  ,nullable = false )
+    @Column(name = "PRIORITY" , nullable = false )
     public String getPRIORITY() {
         return priority;
     }
@@ -186,7 +186,19 @@ public class SysModulesEntity implements Serializable {
 
         SysModulesEntity that = (SysModulesEntity) o;
 
-        return Objects.equals(sysModulesId, that.sysModulesId) &&(moduleName != null ? moduleName.equals(that.moduleName) : that.moduleName == null) &&(moduleDesc != null ? moduleDesc.equals(that.moduleDesc) : that.moduleDesc == null) &&(moduleType != null ? moduleType.equals(that.moduleType) : that.moduleType == null) &&(parent != null ? parent.equals(that.parent) : that.parent == null) &&(moduleUrl != null ? moduleUrl.equals(that.moduleUrl) : that.moduleUrl == null) &&(iLevel != null ? iLevel.equals(that.iLevel) : that.iLevel == null) &&(leaf != null ? leaf.equals(that.leaf) : that.leaf == null) &&(application != null ? application.equals(that.application) : that.application == null) &&(controller != null ? controller.equals(that.controller) : that.controller == null) &&enable == that.enable &&(priority != null ? priority.equals(that.priority) : that.priority == null) ;
+        return 
+            Objects.equals(sysModulesId, that.sysModulesId)  && 
+            (moduleName != null ? moduleName.equals(that.moduleName) : that.moduleName == null)  && 
+            (moduleDesc != null ? moduleDesc.equals(that.moduleDesc) : that.moduleDesc == null)  && 
+            (moduleType != null ? moduleType.equals(that.moduleType) : that.moduleType == null)  && 
+            (parent != null ? parent.equals(that.parent) : that.parent == null)  && 
+            (moduleUrl != null ? moduleUrl.equals(that.moduleUrl) : that.moduleUrl == null)  && 
+            (iLevel != null ? iLevel.equals(that.iLevel) : that.iLevel == null)  && 
+            (leaf != null ? leaf.equals(that.leaf) : that.leaf == null)  && 
+            (application != null ? application.equals(that.application) : that.application == null)  && 
+            (controller != null ? controller.equals(that.controller) : that.controller == null)  && 
+            enable == that.enable  && 
+            (priority != null ? priority.equals(that.priority) : that.priority == null) ;
     }
 
     @Override
@@ -211,17 +223,17 @@ public class SysModulesEntity implements Serializable {
     public String toString() {
         return "SysModulesEntity{" +
         "sysModulesId=" + sysModulesId +
-        ",moduleName=" + moduleName + '\'' +
-        ",moduleDesc=" + moduleDesc + '\'' +
-        ",moduleType=" + moduleType + '\'' +
-        ",parent=" + parent + '\'' +
-        ",moduleUrl=" + moduleUrl + '\'' +
-        ",iLevel=" + iLevel + '\'' +
-        ",leaf=" + leaf + '\'' +
-        ",application=" + application + '\'' +
-        ",controller=" + controller + '\'' +
+        ",moduleName='" + moduleName + '\'' +
+        ",moduleDesc='" + moduleDesc + '\'' +
+        ",moduleType='" + moduleType + '\'' +
+        ",parent='" + parent + '\'' +
+        ",moduleUrl='" + moduleUrl + '\'' +
+        ",iLevel='" + iLevel + '\'' +
+        ",leaf='" + leaf + '\'' +
+        ",application='" + application + '\'' +
+        ",controller='" + controller + '\'' +
         ",enable=" + enable +
-        ",priority=" + priority + '\'' +
+        ",priority='" + priority + '\'' +
         '}';
     }
 }

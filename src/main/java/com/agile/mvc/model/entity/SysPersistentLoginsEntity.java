@@ -29,7 +29,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     public SysPersistentLoginsEntity(){}
 
     //有参构造器
-    public SysPersistentLoginsEntity(int sysPersistentLoginsId, String username, String series, String token, Timestamp lastUsed ){
+    public SysPersistentLoginsEntity(int sysPersistentLoginsId,String username,String series,String token,Timestamp lastUsed){
         this.sysPersistentLoginsId = sysPersistentLoginsId;
         this.username = username;
         this.series = series;
@@ -49,7 +49,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "USERNAME"  ,nullable = false )
+    @Column(name = "USERNAME" , nullable = false )
     public String getUSERNAME() {
         return username;
     }
@@ -69,7 +69,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "TOKEN"  ,nullable = false )
+    @Column(name = "TOKEN" , nullable = false )
     public String getTOKEN() {
         return token;
     }
@@ -96,7 +96,12 @@ public class SysPersistentLoginsEntity implements Serializable {
 
         SysPersistentLoginsEntity that = (SysPersistentLoginsEntity) o;
 
-        return Objects.equals(sysPersistentLoginsId, that.sysPersistentLoginsId) &&(username != null ? username.equals(that.username) : that.username == null) &&(series != null ? series.equals(that.series) : that.series == null) &&(token != null ? token.equals(that.token) : that.token == null) &&(lastUsed != null ? lastUsed.equals(that.lastUsed) : that.lastUsed == null) ;
+        return 
+            Objects.equals(sysPersistentLoginsId, that.sysPersistentLoginsId)  && 
+            (username != null ? username.equals(that.username) : that.username == null)  && 
+            (series != null ? series.equals(that.series) : that.series == null)  && 
+            (token != null ? token.equals(that.token) : that.token == null)  && 
+            (getLastUsed() != null ? getLastUsed().equals(that.getLastUsed()) : that.getLastUsed() == null) ;
     }
 
     @Override
@@ -106,7 +111,7 @@ public class SysPersistentLoginsEntity implements Serializable {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (series != null ? series.hashCode() : 0);
         result = 31 * result + (token != null ? token.hashCode() : 0);
-        result = 31 * result + (lastUsed != null ? lastUsed.hashCode() : 0);
+        result = 31 * result + (getLastUsed() != null ? getLastUsed().hashCode() : 0);
         return result;
     }
 
@@ -114,9 +119,9 @@ public class SysPersistentLoginsEntity implements Serializable {
     public String toString() {
         return "SysPersistentLoginsEntity{" +
         "sysPersistentLoginsId=" + sysPersistentLoginsId +
-        ",username=" + username + '\'' +
-        ",series=" + series + '\'' +
-        ",token=" + token + '\'' +
+        ",username='" + username + '\'' +
+        ",series='" + series + '\'' +
+        ",token='" + token + '\'' +
         ",lastUsed=" + lastUsed +
         '}';
     }

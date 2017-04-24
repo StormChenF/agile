@@ -24,7 +24,7 @@ public class SysBtUsersRolesEntity implements Serializable {
     public SysBtUsersRolesEntity(){}
 
     //有参构造器
-    public SysBtUsersRolesEntity(int sysBtUsersRolesId, int roleId, int userId ){
+    public SysBtUsersRolesEntity(int sysBtUsersRolesId,int roleId,int userId){
         this.sysBtUsersRolesId = sysBtUsersRolesId;
         this.roleId = roleId;
         this.userId = userId;
@@ -69,7 +69,10 @@ public class SysBtUsersRolesEntity implements Serializable {
 
         SysBtUsersRolesEntity that = (SysBtUsersRolesEntity) o;
 
-        return Objects.equals(sysBtUsersRolesId, that.sysBtUsersRolesId) &&Objects.equals(roleId, that.roleId) &&Objects.equals(userId, that.userId) ;
+        return 
+            Objects.equals(sysBtUsersRolesId, that.sysBtUsersRolesId)  && 
+            Objects.equals(roleId, that.roleId)  && 
+            Objects.equals(userId, that.userId) ;
     }
 
     @Override

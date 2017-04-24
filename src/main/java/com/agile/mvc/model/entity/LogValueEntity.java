@@ -32,7 +32,7 @@ public class LogValueEntity implements Serializable {
     public LogValueEntity(){}
 
     //有参构造器
-    public LogValueEntity(int logValueId, int logTableId, String columnName, String columnType, String newValue, String oldValue, String columnInfo ){
+    public LogValueEntity(int logValueId,int logTableId,String columnName,String columnType,String newValue,String oldValue,String columnInfo){
         this.logValueId = logValueId;
         this.logTableId = logTableId;
         this.columnName = columnName;
@@ -84,7 +84,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "new_value"  ,nullable = false )
+    @Column(name = "new_value" , nullable = false )
     public String getNewValue() {
         return newValue;
     }
@@ -94,7 +94,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "old_value"  ,nullable = false )
+    @Column(name = "old_value" , nullable = false )
     public String getOldValue() {
         return oldValue;
     }
@@ -104,7 +104,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_info"  ,nullable = false )
+    @Column(name = "column_info" , nullable = false )
     public String getColumnInfo() {
         return columnInfo;
     }
@@ -121,7 +121,14 @@ public class LogValueEntity implements Serializable {
 
         LogValueEntity that = (LogValueEntity) o;
 
-        return Objects.equals(logValueId, that.logValueId) &&Objects.equals(logTableId, that.logTableId) &&(columnName != null ? columnName.equals(that.columnName) : that.columnName == null) &&(columnType != null ? columnType.equals(that.columnType) : that.columnType == null) &&(newValue != null ? newValue.equals(that.newValue) : that.newValue == null) &&(oldValue != null ? oldValue.equals(that.oldValue) : that.oldValue == null) &&(columnInfo != null ? columnInfo.equals(that.columnInfo) : that.columnInfo == null) ;
+        return 
+            Objects.equals(logValueId, that.logValueId)  && 
+            Objects.equals(logTableId, that.logTableId)  && 
+            (columnName != null ? columnName.equals(that.columnName) : that.columnName == null)  && 
+            (columnType != null ? columnType.equals(that.columnType) : that.columnType == null)  && 
+            (newValue != null ? newValue.equals(that.newValue) : that.newValue == null)  && 
+            (oldValue != null ? oldValue.equals(that.oldValue) : that.oldValue == null)  && 
+            (columnInfo != null ? columnInfo.equals(that.columnInfo) : that.columnInfo == null) ;
     }
 
     @Override
@@ -142,11 +149,11 @@ public class LogValueEntity implements Serializable {
         return "LogValueEntity{" +
         "logValueId=" + logValueId +
         ",logTableId=" + logTableId +
-        ",columnName=" + columnName + '\'' +
-        ",columnType=" + columnType + '\'' +
-        ",newValue=" + newValue + '\'' +
-        ",oldValue=" + oldValue + '\'' +
-        ",columnInfo=" + columnInfo + '\'' +
+        ",columnName='" + columnName + '\'' +
+        ",columnType='" + columnType + '\'' +
+        ",newValue='" + newValue + '\'' +
+        ",oldValue='" + oldValue + '\'' +
+        ",columnInfo='" + columnInfo + '\'' +
         '}';
     }
 }

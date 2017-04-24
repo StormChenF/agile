@@ -30,7 +30,7 @@ public class LogTableEntity implements Serializable {
     public LogTableEntity(){}
 
     //有参构造器
-    public LogTableEntity(int logTableId, int logMainId, String tableSchema, String tableName, String operationType, int operationOrder ){
+    public LogTableEntity(int logTableId,int logMainId,String tableSchema,String tableName,String operationType,int operationOrder){
         this.logTableId = logTableId;
         this.logMainId = logMainId;
         this.tableSchema = tableSchema;
@@ -108,7 +108,13 @@ public class LogTableEntity implements Serializable {
 
         LogTableEntity that = (LogTableEntity) o;
 
-        return Objects.equals(logTableId, that.logTableId) &&Objects.equals(logMainId, that.logMainId) &&(tableSchema != null ? tableSchema.equals(that.tableSchema) : that.tableSchema == null) &&(tableName != null ? tableName.equals(that.tableName) : that.tableName == null) &&(operationType != null ? operationType.equals(that.operationType) : that.operationType == null) &&Objects.equals(operationOrder, that.operationOrder) ;
+        return 
+            Objects.equals(logTableId, that.logTableId)  && 
+            Objects.equals(logMainId, that.logMainId)  && 
+            (tableSchema != null ? tableSchema.equals(that.tableSchema) : that.tableSchema == null)  && 
+            (tableName != null ? tableName.equals(that.tableName) : that.tableName == null)  && 
+            (operationType != null ? operationType.equals(that.operationType) : that.operationType == null)  && 
+            Objects.equals(operationOrder, that.operationOrder) ;
     }
 
     @Override
@@ -128,9 +134,9 @@ public class LogTableEntity implements Serializable {
         return "LogTableEntity{" +
         "logTableId=" + logTableId +
         ",logMainId=" + logMainId +
-        ",tableSchema=" + tableSchema + '\'' +
-        ",tableName=" + tableName + '\'' +
-        ",operationType=" + operationType + '\'' +
+        ",tableSchema='" + tableSchema + '\'' +
+        ",tableName='" + tableName + '\'' +
+        ",operationType='" + operationType + '\'' +
         ",operationOrder=" + operationOrder +
         '}';
     }

@@ -24,7 +24,7 @@ public class DictionaryMainEntity implements Serializable {
     public DictionaryMainEntity(){}
 
     //有参构造器
-    public DictionaryMainEntity(int code, String name, boolean isConstant ){
+    public DictionaryMainEntity(int code,String name,boolean isConstant){
         this.code = code;
         this.name = name;
         this.isConstant = isConstant;
@@ -69,7 +69,10 @@ public class DictionaryMainEntity implements Serializable {
 
         DictionaryMainEntity that = (DictionaryMainEntity) o;
 
-        return Objects.equals(code, that.code) &&(name != null ? name.equals(that.name) : that.name == null) &&isConstant == that.isConstant ;
+        return 
+            Objects.equals(code, that.code)  && 
+            (name != null ? name.equals(that.name) : that.name == null)  && 
+            isConstant == that.isConstant ;
     }
 
     @Override
@@ -85,7 +88,7 @@ public class DictionaryMainEntity implements Serializable {
     public String toString() {
         return "DictionaryMainEntity{" +
         "code=" + code +
-        ",name=" + name + '\'' +
+        ",name='" + name + '\'' +
         ",isConstant=" + isConstant +
         '}';
     }

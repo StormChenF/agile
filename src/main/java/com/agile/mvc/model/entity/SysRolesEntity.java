@@ -30,7 +30,7 @@ public class SysRolesEntity implements Serializable {
     public SysRolesEntity(){}
 
     //有参构造器
-    public SysRolesEntity(int sysRolesId, String roleName, String roleDesc, boolean enable, boolean issys, String moduleId ){
+    public SysRolesEntity(int sysRolesId,String roleName,String roleDesc,boolean enable,boolean issys,String moduleId){
         this.sysRolesId = sysRolesId;
         this.roleName = roleName;
         this.roleDesc = roleDesc;
@@ -51,7 +51,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_NAME"  ,nullable = false )
+    @Column(name = "ROLE_NAME" , nullable = false )
     public String getRoleName() {
         return roleName;
     }
@@ -61,7 +61,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_DESC"  ,nullable = false )
+    @Column(name = "ROLE_DESC" , nullable = false )
     public String getRoleDesc() {
         return roleDesc;
     }
@@ -71,7 +71,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE"  ,nullable = false )
+    @Column(name = "ENABLE" , nullable = false )
     public boolean getENABLE() {
         return enable;
     }
@@ -81,7 +81,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ISSYS"  ,nullable = false )
+    @Column(name = "ISSYS" , nullable = false )
     public boolean getISSYS() {
         return issys;
     }
@@ -91,7 +91,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID"  ,nullable = false )
+    @Column(name = "MODULE_ID" , nullable = false )
     public String getModuleId() {
         return moduleId;
     }
@@ -108,7 +108,13 @@ public class SysRolesEntity implements Serializable {
 
         SysRolesEntity that = (SysRolesEntity) o;
 
-        return Objects.equals(sysRolesId, that.sysRolesId) &&(roleName != null ? roleName.equals(that.roleName) : that.roleName == null) &&(roleDesc != null ? roleDesc.equals(that.roleDesc) : that.roleDesc == null) &&enable == that.enable &&issys == that.issys &&(moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
+        return 
+            Objects.equals(sysRolesId, that.sysRolesId)  && 
+            (roleName != null ? roleName.equals(that.roleName) : that.roleName == null)  && 
+            (roleDesc != null ? roleDesc.equals(that.roleDesc) : that.roleDesc == null)  && 
+            enable == that.enable  && 
+            issys == that.issys  && 
+            (moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
     }
 
     @Override
@@ -127,11 +133,11 @@ public class SysRolesEntity implements Serializable {
     public String toString() {
         return "SysRolesEntity{" +
         "sysRolesId=" + sysRolesId +
-        ",roleName=" + roleName + '\'' +
-        ",roleDesc=" + roleDesc + '\'' +
+        ",roleName='" + roleName + '\'' +
+        ",roleDesc='" + roleDesc + '\'' +
         ",enable=" + enable +
         ",issys=" + issys +
-        ",moduleId=" + moduleId + '\'' +
+        ",moduleId='" + moduleId + '\'' +
         '}';
     }
 }

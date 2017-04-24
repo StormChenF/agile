@@ -53,7 +53,7 @@ public class SysUsersEntity implements Serializable {
     public SysUsersEntity(){}
 
     //有参构造器
-    public SysUsersEntity(int sysUsersId, String username, String name, String password, Date dtCreate, Date lastLogin, Date deadline, String loginIp, String vQzjgid, String vQzjgmc, String depId, String depName, boolean enabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired ){
+    public SysUsersEntity(int sysUsersId,String username,String name,String password,Date dtCreate,Date lastLogin,Date deadline,String loginIp,String vQzjgid,String vQzjgmc,String depId,String depName,boolean enabled,boolean accountNonExpired,boolean accountNonLocked,boolean credentialsNonExpired){
         this.sysUsersId = sysUsersId;
         this.username = username;
         this.name = name;
@@ -94,7 +94,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "NAME"  ,nullable = false )
+    @Column(name = "NAME" , nullable = false )
     public String getNAME() {
         return name;
     }
@@ -114,7 +114,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DT_CREATE"  ,nullable = false )
+    @Column(name = "DT_CREATE" , nullable = false )
     public Date getDtCreate() {
         return dtCreate;
     }
@@ -124,7 +124,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LAST_LOGIN"  ,nullable = false )
+    @Column(name = "LAST_LOGIN" , nullable = false )
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -134,7 +134,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEADLINE"  ,nullable = false )
+    @Column(name = "DEADLINE" , nullable = false )
     public Date getDEADLINE() {
         return deadline;
     }
@@ -144,7 +144,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LOGIN_IP"  ,nullable = false )
+    @Column(name = "LOGIN_IP" , nullable = false )
     public String getLoginIp() {
         return loginIp;
     }
@@ -154,7 +154,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "V_QZJGID"  ,nullable = false )
+    @Column(name = "V_QZJGID" , nullable = false )
     public String getVQzjgid() {
         return vQzjgid;
     }
@@ -164,7 +164,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "V_QZJGMC"  ,nullable = false )
+    @Column(name = "V_QZJGMC" , nullable = false )
     public String getVQzjgmc() {
         return vQzjgmc;
     }
@@ -174,7 +174,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEP_ID"  ,nullable = false )
+    @Column(name = "DEP_ID" , nullable = false )
     public String getDepId() {
         return depId;
     }
@@ -184,7 +184,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEP_NAME"  ,nullable = false )
+    @Column(name = "DEP_NAME" , nullable = false )
     public String getDepName() {
         return depName;
     }
@@ -194,7 +194,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLED"  ,nullable = false )
+    @Column(name = "ENABLED" , nullable = false )
     public boolean getENABLED() {
         return enabled;
     }
@@ -204,7 +204,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_EXPIRED"  ,nullable = false )
+    @Column(name = "ACCOUNT_NON_EXPIRED" , nullable = false )
     public boolean getAccountNonExpired() {
         return accountNonExpired;
     }
@@ -214,7 +214,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_LOCKED"  ,nullable = false )
+    @Column(name = "ACCOUNT_NON_LOCKED" , nullable = false )
     public boolean getAccountNonLocked() {
         return accountNonLocked;
     }
@@ -224,7 +224,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "CREDENTIALS_NON_EXPIRED"  ,nullable = false )
+    @Column(name = "CREDENTIALS_NON_EXPIRED" , nullable = false )
     public boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -241,7 +241,23 @@ public class SysUsersEntity implements Serializable {
 
         SysUsersEntity that = (SysUsersEntity) o;
 
-        return Objects.equals(sysUsersId, that.sysUsersId) &&(username != null ? username.equals(that.username) : that.username == null) &&(name != null ? name.equals(that.name) : that.name == null) &&(password != null ? password.equals(that.password) : that.password == null) &&dtCreate == that.dtCreate &&lastLogin == that.lastLogin &&deadline == that.deadline &&(loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null) &&(vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null) &&(vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null) &&(depId != null ? depId.equals(that.depId) : that.depId == null) &&(depName != null ? depName.equals(that.depName) : that.depName == null) &&enabled == that.enabled &&accountNonExpired == that.accountNonExpired &&accountNonLocked == that.accountNonLocked &&credentialsNonExpired == that.credentialsNonExpired ;
+        return 
+            Objects.equals(sysUsersId, that.sysUsersId)  && 
+            (username != null ? username.equals(that.username) : that.username == null)  && 
+            (name != null ? name.equals(that.name) : that.name == null)  && 
+            (password != null ? password.equals(that.password) : that.password == null)  && 
+            (getDtCreate() != null ? getDtCreate().equals(that.getDtCreate()) : that.getDtCreate() == null)  && 
+            (getLastLogin() != null ? getLastLogin().equals(that.getLastLogin()) : that.getLastLogin() == null)  && 
+            (getDEADLINE() != null ? getDEADLINE().equals(that.getDEADLINE()) : that.getDEADLINE() == null)  && 
+            (loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null)  && 
+            (vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null)  && 
+            (vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null)  && 
+            (depId != null ? depId.equals(that.depId) : that.depId == null)  && 
+            (depName != null ? depName.equals(that.depName) : that.depName == null)  && 
+            enabled == that.enabled  && 
+            accountNonExpired == that.accountNonExpired  && 
+            accountNonLocked == that.accountNonLocked  && 
+            credentialsNonExpired == that.credentialsNonExpired ;
     }
 
     @Override
@@ -251,9 +267,9 @@ public class SysUsersEntity implements Serializable {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (dtCreate != null ? dtCreate.hashCode() : 0);
-        result = 31 * result + (lastLogin != null ? lastLogin.hashCode() : 0);
-        result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
+        result = 31 * result + (getDtCreate() != null ? getDtCreate().hashCode() : 0);
+        result = 31 * result + (getLastLogin() != null ? getLastLogin().hashCode() : 0);
+        result = 31 * result + (getDEADLINE() != null ? getDEADLINE().hashCode() : 0);
         result = 31 * result + (loginIp != null ? loginIp.hashCode() : 0);
         result = 31 * result + (vQzjgid != null ? vQzjgid.hashCode() : 0);
         result = 31 * result + (vQzjgmc != null ? vQzjgmc.hashCode() : 0);
@@ -270,17 +286,17 @@ public class SysUsersEntity implements Serializable {
     public String toString() {
         return "SysUsersEntity{" +
         "sysUsersId=" + sysUsersId +
-        ",username=" + username + '\'' +
-        ",name=" + name + '\'' +
-        ",password=" + password + '\'' +
+        ",username='" + username + '\'' +
+        ",name='" + name + '\'' +
+        ",password='" + password + '\'' +
         ",dtCreate=" + dtCreate +
         ",lastLogin=" + lastLogin +
         ",deadline=" + deadline +
-        ",loginIp=" + loginIp + '\'' +
-        ",vQzjgid=" + vQzjgid + '\'' +
-        ",vQzjgmc=" + vQzjgmc + '\'' +
-        ",depId=" + depId + '\'' +
-        ",depName=" + depName + '\'' +
+        ",loginIp='" + loginIp + '\'' +
+        ",vQzjgid='" + vQzjgid + '\'' +
+        ",vQzjgmc='" + vQzjgmc + '\'' +
+        ",depId='" + depId + '\'' +
+        ",depName='" + depName + '\'' +
         ",enabled=" + enabled +
         ",accountNonExpired=" + accountNonExpired +
         ",accountNonLocked=" + accountNonLocked +

@@ -28,7 +28,7 @@ public class DictionaryDataEntity implements Serializable {
     public DictionaryDataEntity(){}
 
     //有参构造器
-    public DictionaryDataEntity(int code, String dicCode, String name, String value, boolean isFixed ){
+    public DictionaryDataEntity(int code,String dicCode,String name,String value,boolean isFixed){
         this.code = code;
         this.dicCode = dicCode;
         this.name = name;
@@ -48,7 +48,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "dic_code"  ,nullable = false )
+    @Column(name = "dic_code" , nullable = false )
     public String getDicCode() {
         return dicCode;
     }
@@ -95,7 +95,12 @@ public class DictionaryDataEntity implements Serializable {
 
         DictionaryDataEntity that = (DictionaryDataEntity) o;
 
-        return Objects.equals(code, that.code) &&(dicCode != null ? dicCode.equals(that.dicCode) : that.dicCode == null) &&(name != null ? name.equals(that.name) : that.name == null) &&(value != null ? value.equals(that.value) : that.value == null) &&isFixed == that.isFixed ;
+        return 
+            Objects.equals(code, that.code)  && 
+            (dicCode != null ? dicCode.equals(that.dicCode) : that.dicCode == null)  && 
+            (name != null ? name.equals(that.name) : that.name == null)  && 
+            (value != null ? value.equals(that.value) : that.value == null)  && 
+            isFixed == that.isFixed ;
     }
 
     @Override
@@ -113,9 +118,9 @@ public class DictionaryDataEntity implements Serializable {
     public String toString() {
         return "DictionaryDataEntity{" +
         "code=" + code +
-        ",dicCode=" + dicCode + '\'' +
-        ",name=" + name + '\'' +
-        ",value=" + value + '\'' +
+        ",dicCode='" + dicCode + '\'' +
+        ",name='" + name + '\'' +
+        ",value='" + value + '\'' +
         ",isFixed=" + isFixed +
         '}';
     }

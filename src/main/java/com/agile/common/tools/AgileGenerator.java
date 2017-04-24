@@ -4,6 +4,7 @@ import com.agile.common.util.ClassUtil;
 import com.agile.common.util.DataBaseUtil;
 import com.agile.common.util.PropertiesUtil;
 import com.agile.common.util.StringUtil;
+import com.agile.mvc.model.entity.SysUsersEntity;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -11,6 +12,7 @@ import freemarker.template.Template;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +27,14 @@ public class AgileGenerator {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         PropertiesUtil propertiesUtil = new PropertiesUtil("./src/main/resources/com/agile/configure/agile.properties");
         DataBaseUtil.initDB();
+        SysUsersEntity a = new SysUsersEntity(1,"佟盟","tongmeng","123456",new Date(123456789),new Date(123456789), new Date(123456789), "127.0.0.1", null,"", "", "", true, true, true, true );
+        SysUsersEntity b = new SysUsersEntity(1,"佟盟","tongmeng","123456",new Date(123456789),new Date(123456789), new Date(123456789), "127.0.0.1", null,"", "", "", true, true, true, true );
+        SysUsersEntity c = new SysUsersEntity(1,"佟1盟","tongmeng","123456",new Date(123456789),new Date(123456789), new Date(123456789), "127.0.0.1", null,"", "", "", true, true, true, true );
 
+        System.out.println(a.toString());
+        System.out.println(a.hashCode());
+        System.out.println(a.equals(b));
+        System.out.println(a.equals(c));
         try {
 
             //获取表类别名称

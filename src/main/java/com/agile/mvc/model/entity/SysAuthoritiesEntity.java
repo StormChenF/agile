@@ -34,7 +34,7 @@ public class SysAuthoritiesEntity implements Serializable {
     public SysAuthoritiesEntity(){}
 
     //有参构造器
-    public SysAuthoritiesEntity(int sysAuthorityId, String authorityMark, String authorityName, String authorityDesc, String message, boolean enable, boolean issys, String moduleId ){
+    public SysAuthoritiesEntity(int sysAuthorityId,String authorityMark,String authorityName,String authorityDesc,String message,boolean enable,boolean issys,String moduleId){
         this.sysAuthorityId = sysAuthorityId;
         this.authorityMark = authorityMark;
         this.authorityName = authorityName;
@@ -57,7 +57,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_MARK"  ,nullable = false )
+    @Column(name = "AUTHORITY_MARK" , nullable = false )
     public String getAuthorityMark() {
         return authorityMark;
     }
@@ -77,7 +77,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_DESC"  ,nullable = false )
+    @Column(name = "AUTHORITY_DESC" , nullable = false )
     public String getAuthorityDesc() {
         return authorityDesc;
     }
@@ -87,7 +87,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MESSAGE"  ,nullable = false )
+    @Column(name = "MESSAGE" , nullable = false )
     public String getMESSAGE() {
         return message;
     }
@@ -97,7 +97,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE"  ,nullable = false )
+    @Column(name = "ENABLE" , nullable = false )
     public boolean getENABLE() {
         return enable;
     }
@@ -107,7 +107,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ISSYS"  ,nullable = false )
+    @Column(name = "ISSYS" , nullable = false )
     public boolean getISSYS() {
         return issys;
     }
@@ -117,7 +117,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_ID"  ,nullable = false )
+    @Column(name = "MODULE_ID" , nullable = false )
     public String getModuleId() {
         return moduleId;
     }
@@ -134,7 +134,15 @@ public class SysAuthoritiesEntity implements Serializable {
 
         SysAuthoritiesEntity that = (SysAuthoritiesEntity) o;
 
-        return Objects.equals(sysAuthorityId, that.sysAuthorityId) &&(authorityMark != null ? authorityMark.equals(that.authorityMark) : that.authorityMark == null) &&(authorityName != null ? authorityName.equals(that.authorityName) : that.authorityName == null) &&(authorityDesc != null ? authorityDesc.equals(that.authorityDesc) : that.authorityDesc == null) &&(message != null ? message.equals(that.message) : that.message == null) &&enable == that.enable &&issys == that.issys &&(moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
+        return 
+            Objects.equals(sysAuthorityId, that.sysAuthorityId)  && 
+            (authorityMark != null ? authorityMark.equals(that.authorityMark) : that.authorityMark == null)  && 
+            (authorityName != null ? authorityName.equals(that.authorityName) : that.authorityName == null)  && 
+            (authorityDesc != null ? authorityDesc.equals(that.authorityDesc) : that.authorityDesc == null)  && 
+            (message != null ? message.equals(that.message) : that.message == null)  && 
+            enable == that.enable  && 
+            issys == that.issys  && 
+            (moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
     }
 
     @Override
@@ -155,13 +163,13 @@ public class SysAuthoritiesEntity implements Serializable {
     public String toString() {
         return "SysAuthoritiesEntity{" +
         "sysAuthorityId=" + sysAuthorityId +
-        ",authorityMark=" + authorityMark + '\'' +
-        ",authorityName=" + authorityName + '\'' +
-        ",authorityDesc=" + authorityDesc + '\'' +
-        ",message=" + message + '\'' +
+        ",authorityMark='" + authorityMark + '\'' +
+        ",authorityName='" + authorityName + '\'' +
+        ",authorityDesc='" + authorityDesc + '\'' +
+        ",message='" + message + '\'' +
         ",enable=" + enable +
         ",issys=" + issys +
-        ",moduleId=" + moduleId + '\'' +
+        ",moduleId='" + moduleId + '\'' +
         '}';
     }
 }

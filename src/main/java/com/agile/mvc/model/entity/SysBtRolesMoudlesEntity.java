@@ -24,7 +24,7 @@ public class SysBtRolesMoudlesEntity implements Serializable {
     public SysBtRolesMoudlesEntity(){}
 
     //有参构造器
-    public SysBtRolesMoudlesEntity(int sysBtRolesMoudlesId, int moduleId, int roleId ){
+    public SysBtRolesMoudlesEntity(int sysBtRolesMoudlesId,int moduleId,int roleId){
         this.sysBtRolesMoudlesId = sysBtRolesMoudlesId;
         this.moduleId = moduleId;
         this.roleId = roleId;
@@ -69,7 +69,10 @@ public class SysBtRolesMoudlesEntity implements Serializable {
 
         SysBtRolesMoudlesEntity that = (SysBtRolesMoudlesEntity) o;
 
-        return Objects.equals(sysBtRolesMoudlesId, that.sysBtRolesMoudlesId) &&Objects.equals(moduleId, that.moduleId) &&Objects.equals(roleId, that.roleId) ;
+        return 
+            Objects.equals(sysBtRolesMoudlesId, that.sysBtRolesMoudlesId)  && 
+            Objects.equals(moduleId, that.moduleId)  && 
+            Objects.equals(roleId, that.roleId) ;
     }
 
     @Override
