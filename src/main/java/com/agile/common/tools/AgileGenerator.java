@@ -27,14 +27,6 @@ public class AgileGenerator {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         PropertiesUtil propertiesUtil = new PropertiesUtil("./src/main/resources/com/agile/configure/agile.properties");
         DataBaseUtil.initDB();
-        SysUsersEntity a = new SysUsersEntity(1,"佟盟","tongmeng","123456",new Date(123456789),new Date(123456789), new Date(123456789), "127.0.0.1", null,"", "", "", true, true, true, true );
-        SysUsersEntity b = new SysUsersEntity(1,"佟盟","tongmeng","123456",new Date(123456789),new Date(123456789), new Date(123456789), "127.0.0.1", null,"", "", "", true, true, true, true );
-        SysUsersEntity c = new SysUsersEntity(1,"佟1盟","tongmeng","123456",new Date(123456789),new Date(123456789), new Date(123456789), "127.0.0.1", null,"", "", "", true, true, true, true );
-
-        System.out.println(a.toString());
-        System.out.println(a.hashCode());
-        System.out.println(a.equals(b));
-        System.out.println(a.equals(c));
         try {
 
             //获取表类别名称

@@ -34,7 +34,7 @@ public class ${className}Entity implements Serializable {
 <#list columnList as property>
     <#if property.isPrimaryKey == "true">
     @Id
-    <#elseif property.columnType == "blob" || property.columnType == "text" >
+    <#elseif property.columnType == "blob" || property.columnType == "text" || property.columnType == "clob" >
     @Basic(fetch=FetchType.LAZY)
     <#else>
     @Basic
