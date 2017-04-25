@@ -4,7 +4,6 @@ import com.agile.common.util.ClassUtil;
 import com.agile.common.util.DataBaseUtil;
 import com.agile.common.util.PropertiesUtil;
 import com.agile.common.util.StringUtil;
-import com.agile.mvc.model.entity.SysUsersEntity;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -12,7 +11,6 @@ import freemarker.template.Template;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,7 +74,7 @@ public class AgileGenerator {
                     param.put("getMethod", "get" + StringUtil.toUpperName(columnsData.getString("COLUMN_NAME")));
 
                     //set方法
-                    param.put("setMethod", "set" + StringUtil.toLowerName(columnsData.getString("COLUMN_NAME")));
+                    param.put("setMethod", "set" + StringUtil.toUpperName(columnsData.getString("COLUMN_NAME")));
 
                     //字段类型
                     param.put("columnType", columnsData.getString("TYPE_NAME"));
@@ -101,7 +99,7 @@ public class AgileGenerator {
                     param.put("digits", columnsData.getString("DECIMAL_DIGITS"));
 
                     //是否可为空
-                    param.put("nullable", "0".equals(columnsData.getString("NULLABLE"))?"true":"false");
+                    param.put("nullable", "0".equals(columnsData.getString("NULLABLE")) ? "true" : "false");
 
                     //字段默认值
                     param.put("columnDef", columnsData.getString("COLUMN_DEF"));
@@ -134,7 +132,7 @@ public class AgileGenerator {
                 data.put("importList", importList);
 
                 //唯一索引信息
-                data.put("indexList",indexList);
+                data.put("indexList", indexList);
 
                 //参数
                 data.put("className", className);

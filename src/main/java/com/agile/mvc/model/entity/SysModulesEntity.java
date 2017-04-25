@@ -64,7 +64,7 @@ public class SysModulesEntity implements Serializable {
         return sysModulesId;
     }
 
-    public void setsysModulesId(int sysModulesId) {
+    public void setSysModulesId(int sysModulesId) {
         this.sysModulesId = sysModulesId;
     }
 
@@ -74,7 +74,7 @@ public class SysModulesEntity implements Serializable {
         return moduleName;
     }
 
-    public void setmoduleName(String moduleName) {
+    public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
 
@@ -84,7 +84,7 @@ public class SysModulesEntity implements Serializable {
         return moduleDesc;
     }
 
-    public void setmoduleDesc(String moduleDesc) {
+    public void setModuleDesc(String moduleDesc) {
         this.moduleDesc = moduleDesc;
     }
 
@@ -94,7 +94,7 @@ public class SysModulesEntity implements Serializable {
         return moduleType;
     }
 
-    public void setmoduleType(String moduleType) {
+    public void setModuleType(String moduleType) {
         this.moduleType = moduleType;
     }
 
@@ -104,7 +104,7 @@ public class SysModulesEntity implements Serializable {
         return parent;
     }
 
-    public void setpARENT(String parent) {
+    public void setPARENT(String parent) {
         this.parent = parent;
     }
 
@@ -114,7 +114,7 @@ public class SysModulesEntity implements Serializable {
         return moduleUrl;
     }
 
-    public void setmoduleUrl(String moduleUrl) {
+    public void setModuleUrl(String moduleUrl) {
         this.moduleUrl = moduleUrl;
     }
 
@@ -124,7 +124,7 @@ public class SysModulesEntity implements Serializable {
         return iLevel;
     }
 
-    public void setiLevel(String iLevel) {
+    public void setILevel(String iLevel) {
         this.iLevel = iLevel;
     }
 
@@ -134,7 +134,7 @@ public class SysModulesEntity implements Serializable {
         return leaf;
     }
 
-    public void setlEAF(String leaf) {
+    public void setLEAF(String leaf) {
         this.leaf = leaf;
     }
 
@@ -144,7 +144,7 @@ public class SysModulesEntity implements Serializable {
         return application;
     }
 
-    public void setaPPLICATION(String application) {
+    public void setAPPLICATION(String application) {
         this.application = application;
     }
 
@@ -154,7 +154,7 @@ public class SysModulesEntity implements Serializable {
         return controller;
     }
 
-    public void setcONTROLLER(String controller) {
+    public void setCONTROLLER(String controller) {
         this.controller = controller;
     }
 
@@ -164,7 +164,7 @@ public class SysModulesEntity implements Serializable {
         return enable;
     }
 
-    public void seteNABLE(boolean enable) {
+    public void setENABLE(boolean enable) {
         this.enable = enable;
     }
 
@@ -174,7 +174,7 @@ public class SysModulesEntity implements Serializable {
         return priority;
     }
 
-    public void setpRIORITY(String priority) {
+    public void setPRIORITY(String priority) {
         this.priority = priority;
     }
 

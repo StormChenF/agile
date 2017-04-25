@@ -7,6 +7,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 /**
 * Created by 佟盟
 */
-public interface LogValueRepository extends JpaRepository<LogValueEntity,Integer>,QuerydslPredicateExecutor<LogValueEntity> {
+public interface LogValueRepository extends JpaRepository<LogValueEntity,Integer> {
 
 }

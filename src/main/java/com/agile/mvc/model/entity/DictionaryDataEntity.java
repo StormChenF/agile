@@ -43,7 +43,7 @@ public class DictionaryDataEntity implements Serializable {
         return code;
     }
 
-    public void setcode(int code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -53,7 +53,7 @@ public class DictionaryDataEntity implements Serializable {
         return dicCode;
     }
 
-    public void setdicCode(String dicCode) {
+    public void setDicCode(String dicCode) {
         this.dicCode = dicCode;
     }
 
@@ -63,7 +63,7 @@ public class DictionaryDataEntity implements Serializable {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -73,7 +73,7 @@ public class DictionaryDataEntity implements Serializable {
         return value;
     }
 
-    public void setvalue(String value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -83,7 +83,7 @@ public class DictionaryDataEntity implements Serializable {
         return isFixed;
     }
 
-    public void setisFixed(boolean isFixed) {
+    public void setIsFixed(boolean isFixed) {
         this.isFixed = isFixed;
     }
 

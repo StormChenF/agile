@@ -46,7 +46,7 @@ public class LogTableEntity implements Serializable {
         return logTableId;
     }
 
-    public void setlogTableId(int logTableId) {
+    public void setLogTableId(int logTableId) {
         this.logTableId = logTableId;
     }
 
@@ -56,7 +56,7 @@ public class LogTableEntity implements Serializable {
         return logMainId;
     }
 
-    public void setlogMainId(int logMainId) {
+    public void setLogMainId(int logMainId) {
         this.logMainId = logMainId;
     }
 
@@ -66,7 +66,7 @@ public class LogTableEntity implements Serializable {
         return tableSchema;
     }
 
-    public void settableSchema(String tableSchema) {
+    public void setTableSchema(String tableSchema) {
         this.tableSchema = tableSchema;
     }
 
@@ -76,7 +76,7 @@ public class LogTableEntity implements Serializable {
         return tableName;
     }
 
-    public void settableName(String tableName) {
+    public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
@@ -86,7 +86,7 @@ public class LogTableEntity implements Serializable {
         return operationType;
     }
 
-    public void setoperationType(String operationType) {
+    public void setOperationType(String operationType) {
         this.operationType = operationType;
     }
 
@@ -96,7 +96,7 @@ public class LogTableEntity implements Serializable {
         return operationOrder;
     }
 
-    public void setoperationOrder(int operationOrder) {
+    public void setOperationOrder(int operationOrder) {
         this.operationOrder = operationOrder;
     }
 

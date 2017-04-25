@@ -79,7 +79,7 @@ public class SysUsersEntity implements Serializable {
         return sysUsersId;
     }
 
-    public void setsysUsersId(int sysUsersId) {
+    public void setSysUsersId(int sysUsersId) {
         this.sysUsersId = sysUsersId;
     }
 
@@ -89,7 +89,7 @@ public class SysUsersEntity implements Serializable {
         return username;
     }
 
-    public void setuSERNAME(String username) {
+    public void setUSERNAME(String username) {
         this.username = username;
     }
 
@@ -99,7 +99,7 @@ public class SysUsersEntity implements Serializable {
         return name;
     }
 
-    public void setnAME(String name) {
+    public void setNAME(String name) {
         this.name = name;
     }
 
@@ -109,7 +109,7 @@ public class SysUsersEntity implements Serializable {
         return password;
     }
 
-    public void setpASSWORD(String password) {
+    public void setPASSWORD(String password) {
         this.password = password;
     }
 
@@ -119,7 +119,7 @@ public class SysUsersEntity implements Serializable {
         return dtCreate;
     }
 
-    public void setdtCreate(Date dtCreate) {
+    public void setDtCreate(Date dtCreate) {
         this.dtCreate = dtCreate;
     }
 
@@ -129,7 +129,7 @@ public class SysUsersEntity implements Serializable {
         return lastLogin;
     }
 
-    public void setlastLogin(Date lastLogin) {
+    public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }
 
@@ -139,7 +139,7 @@ public class SysUsersEntity implements Serializable {
         return deadline;
     }
 
-    public void setdEADLINE(Date deadline) {
+    public void setDEADLINE(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -149,7 +149,7 @@ public class SysUsersEntity implements Serializable {
         return loginIp;
     }
 
-    public void setloginIp(String loginIp) {
+    public void setLoginIp(String loginIp) {
         this.loginIp = loginIp;
     }
 
@@ -159,7 +159,7 @@ public class SysUsersEntity implements Serializable {
         return vQzjgid;
     }
 
-    public void setvQzjgid(String vQzjgid) {
+    public void setVQzjgid(String vQzjgid) {
         this.vQzjgid = vQzjgid;
     }
 
@@ -169,7 +169,7 @@ public class SysUsersEntity implements Serializable {
         return vQzjgmc;
     }
 
-    public void setvQzjgmc(String vQzjgmc) {
+    public void setVQzjgmc(String vQzjgmc) {
         this.vQzjgmc = vQzjgmc;
     }
 
@@ -179,7 +179,7 @@ public class SysUsersEntity implements Serializable {
         return depId;
     }
 
-    public void setdepId(String depId) {
+    public void setDepId(String depId) {
         this.depId = depId;
     }
 
@@ -189,7 +189,7 @@ public class SysUsersEntity implements Serializable {
         return depName;
     }
 
-    public void setdepName(String depName) {
+    public void setDepName(String depName) {
         this.depName = depName;
     }
 
@@ -199,7 +199,7 @@ public class SysUsersEntity implements Serializable {
         return enabled;
     }
 
-    public void seteNABLED(boolean enabled) {
+    public void setENABLED(boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -209,7 +209,7 @@ public class SysUsersEntity implements Serializable {
         return accountNonExpired;
     }
 
-    public void setaccountNonExpired(boolean accountNonExpired) {
+    public void setAccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
 
@@ -219,7 +219,7 @@ public class SysUsersEntity implements Serializable {
         return accountNonLocked;
     }
 
-    public void setaccountNonLocked(boolean accountNonLocked) {
+    public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
 
@@ -229,7 +229,7 @@ public class SysUsersEntity implements Serializable {
         return credentialsNonExpired;
     }
 
-    public void setcredentialsNonExpired(boolean credentialsNonExpired) {
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 

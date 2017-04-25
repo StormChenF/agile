@@ -44,7 +44,7 @@ public class SysPersistentLoginsEntity implements Serializable {
         return sysPersistentLoginsId;
     }
 
-    public void setsysPersistentLoginsId(int sysPersistentLoginsId) {
+    public void setSysPersistentLoginsId(int sysPersistentLoginsId) {
         this.sysPersistentLoginsId = sysPersistentLoginsId;
     }
 
@@ -54,7 +54,7 @@ public class SysPersistentLoginsEntity implements Serializable {
         return username;
     }
 
-    public void setuSERNAME(String username) {
+    public void setUSERNAME(String username) {
         this.username = username;
     }
 
@@ -64,7 +64,7 @@ public class SysPersistentLoginsEntity implements Serializable {
         return series;
     }
 
-    public void setsERIES(String series) {
+    public void setSERIES(String series) {
         this.series = series;
     }
 
@@ -74,7 +74,7 @@ public class SysPersistentLoginsEntity implements Serializable {
         return token;
     }
 
-    public void settOKEN(String token) {
+    public void setTOKEN(String token) {
         this.token = token;
     }
 
@@ -84,7 +84,7 @@ public class SysPersistentLoginsEntity implements Serializable {
         return lastUsed;
     }
 
-    public void setlastUsed(Timestamp lastUsed) {
+    public void setLastUsed(Timestamp lastUsed) {
         this.lastUsed = lastUsed;
     }
 

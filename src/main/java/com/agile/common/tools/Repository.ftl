@@ -7,6 +7,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 /**
 * Created by 佟盟
 */
-public interface ${className}Repository extends JpaRepository<${className}Entity,${primaryKeyPropertyType}>,QuerydslPredicateExecutor<${className}Entity> {
+public interface ${className}Repository extends JpaRepository<${className}Entity,${primaryKeyPropertyType}> {
 
 }

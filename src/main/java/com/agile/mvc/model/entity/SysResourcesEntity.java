@@ -55,7 +55,7 @@ public class SysResourcesEntity implements Serializable {
         return sysResourcesId;
     }
 
-    public void setsysResourcesId(int sysResourcesId) {
+    public void setSysResourcesId(int sysResourcesId) {
         this.sysResourcesId = sysResourcesId;
     }
 
@@ -65,7 +65,7 @@ public class SysResourcesEntity implements Serializable {
         return resourceType;
     }
 
-    public void setresourceType(String resourceType) {
+    public void setResourceType(String resourceType) {
         this.resourceType = resourceType;
     }
 
@@ -75,7 +75,7 @@ public class SysResourcesEntity implements Serializable {
         return resourceName;
     }
 
-    public void setresourceName(String resourceName) {
+    public void setResourceName(String resourceName) {
         this.resourceName = resourceName;
     }
 
@@ -85,7 +85,7 @@ public class SysResourcesEntity implements Serializable {
         return resourceDesc;
     }
 
-    public void setresourceDesc(String resourceDesc) {
+    public void setResourceDesc(String resourceDesc) {
         this.resourceDesc = resourceDesc;
     }
 
@@ -95,7 +95,7 @@ public class SysResourcesEntity implements Serializable {
         return resourcePath;
     }
 
-    public void setresourcePath(String resourcePath) {
+    public void setResourcePath(String resourcePath) {
         this.resourcePath = resourcePath;
     }
 
@@ -105,7 +105,7 @@ public class SysResourcesEntity implements Serializable {
         return priority;
     }
 
-    public void setpRIORITY(String priority) {
+    public void setPRIORITY(String priority) {
         this.priority = priority;
     }
 
@@ -115,7 +115,7 @@ public class SysResourcesEntity implements Serializable {
         return enable;
     }
 
-    public void seteNABLE(boolean enable) {
+    public void setENABLE(boolean enable) {
         this.enable = enable;
     }
 
@@ -125,7 +125,7 @@ public class SysResourcesEntity implements Serializable {
         return issys;
     }
 
-    public void setiSSYS(boolean issys) {
+    public void setISSYS(boolean issys) {
         this.issys = issys;
     }
 
@@ -135,7 +135,7 @@ public class SysResourcesEntity implements Serializable {
         return moduleId;
     }
 
-    public void setmoduleId(int moduleId) {
+    public void setModuleId(int moduleId) {
         this.moduleId = moduleId;
     }
 

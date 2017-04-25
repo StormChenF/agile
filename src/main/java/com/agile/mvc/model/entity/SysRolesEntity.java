@@ -46,7 +46,7 @@ public class SysRolesEntity implements Serializable {
         return sysRolesId;
     }
 
-    public void setsysRolesId(int sysRolesId) {
+    public void setSysRolesId(int sysRolesId) {
         this.sysRolesId = sysRolesId;
     }
 
@@ -56,7 +56,7 @@ public class SysRolesEntity implements Serializable {
         return roleName;
     }
 
-    public void setroleName(String roleName) {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
@@ -66,7 +66,7 @@ public class SysRolesEntity implements Serializable {
         return roleDesc;
     }
 
-    public void setroleDesc(String roleDesc) {
+    public void setRoleDesc(String roleDesc) {
         this.roleDesc = roleDesc;
     }
 
@@ -76,7 +76,7 @@ public class SysRolesEntity implements Serializable {
         return enable;
     }
 
-    public void seteNABLE(boolean enable) {
+    public void setENABLE(boolean enable) {
         this.enable = enable;
     }
 
@@ -86,7 +86,7 @@ public class SysRolesEntity implements Serializable {
         return issys;
     }
 
-    public void setiSSYS(boolean issys) {
+    public void setISSYS(boolean issys) {
         this.issys = issys;
     }
 
@@ -96,7 +96,7 @@ public class SysRolesEntity implements Serializable {
         return moduleId;
     }
 
-    public void setmoduleId(String moduleId) {
+    public void setModuleId(String moduleId) {
         this.moduleId = moduleId;
     }
 

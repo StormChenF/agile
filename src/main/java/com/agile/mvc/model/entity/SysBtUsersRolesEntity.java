@@ -37,7 +37,7 @@ public class SysBtUsersRolesEntity implements Serializable {
         return sysBtUsersRolesId;
     }
 
-    public void setsysBtUsersRolesId(int sysBtUsersRolesId) {
+    public void setSysBtUsersRolesId(int sysBtUsersRolesId) {
         this.sysBtUsersRolesId = sysBtUsersRolesId;
     }
 
@@ -47,7 +47,7 @@ public class SysBtUsersRolesEntity implements Serializable {
         return roleId;
     }
 
-    public void setroleId(int roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
@@ -57,7 +57,7 @@ public class SysBtUsersRolesEntity implements Serializable {
         return userId;
     }
 
-    public void setuserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

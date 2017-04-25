@@ -7,6 +7,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 /**
 * Created by 佟盟
 */
-public interface SysPersistentLoginsRepository extends JpaRepository<SysPersistentLoginsEntity,Integer>,QuerydslPredicateExecutor<SysPersistentLoginsEntity> {
+public interface SysPersistentLoginsRepository extends JpaRepository<SysPersistentLoginsEntity,Integer> {
 
 }

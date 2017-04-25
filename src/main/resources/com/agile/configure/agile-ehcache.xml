@@ -17,7 +17,18 @@
            timeToIdleSeconds="300"
            timeToLiveSeconds="600"
            diskExpiryThreadIntervalSeconds="600"/>
-
+        
+    <cache name="org.hibernate.cache.StandardQueryCache"
+           maxElementsInMemory="5"
+           eternal="false"
+           timeToLiveSeconds="120"
+           overflowToDisk="true"/>
+     
+        
+    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+           maxElementsInMemory="5000"
+           eternal="true"
+           overflowToDisk="true"/>
     <!--
         eternal="false"   // 元素是否永恒,如果是就永不过期(必须设置)
         maxElementsInMemory="1000" // 缓存容量的内存最大值(必须设置)

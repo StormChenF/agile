@@ -7,6 +7,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 /**
 * Created by 佟盟
 */
-public interface DictionaryMainRepository extends JpaRepository<DictionaryMainEntity,Integer>,QuerydslPredicateExecutor<DictionaryMainEntity> {
+public interface DictionaryMainRepository extends JpaRepository<DictionaryMainEntity,Integer> {
 
 }

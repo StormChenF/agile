@@ -52,7 +52,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return sysAuthorityId;
     }
 
-    public void setsysAuthorityId(int sysAuthorityId) {
+    public void setSysAuthorityId(int sysAuthorityId) {
         this.sysAuthorityId = sysAuthorityId;
     }
 
@@ -62,7 +62,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return authorityMark;
     }
 
-    public void setauthorityMark(String authorityMark) {
+    public void setAuthorityMark(String authorityMark) {
         this.authorityMark = authorityMark;
     }
 
@@ -72,7 +72,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return authorityName;
     }
 
-    public void setauthorityName(String authorityName) {
+    public void setAuthorityName(String authorityName) {
         this.authorityName = authorityName;
     }
 
@@ -82,7 +82,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return authorityDesc;
     }
 
-    public void setauthorityDesc(String authorityDesc) {
+    public void setAuthorityDesc(String authorityDesc) {
         this.authorityDesc = authorityDesc;
     }
 
@@ -92,7 +92,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return message;
     }
 
-    public void setmESSAGE(String message) {
+    public void setMESSAGE(String message) {
         this.message = message;
     }
 
@@ -102,7 +102,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return enable;
     }
 
-    public void seteNABLE(boolean enable) {
+    public void setENABLE(boolean enable) {
         this.enable = enable;
     }
 
@@ -112,7 +112,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return issys;
     }
 
-    public void setiSSYS(boolean issys) {
+    public void setISSYS(boolean issys) {
         this.issys = issys;
     }
 
@@ -122,7 +122,7 @@ public class SysAuthoritiesEntity implements Serializable {
         return moduleId;
     }
 
-    public void setmoduleId(String moduleId) {
+    public void setModuleId(String moduleId) {
         this.moduleId = moduleId;
     }
 

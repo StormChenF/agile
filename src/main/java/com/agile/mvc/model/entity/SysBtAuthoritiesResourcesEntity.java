@@ -37,7 +37,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
         return sysBtAuthoritiesResourcesId;
     }
 
-    public void setsysBtAuthoritiesResourcesId(int sysBtAuthoritiesResourcesId) {
+    public void setSysBtAuthoritiesResourcesId(int sysBtAuthoritiesResourcesId) {
         this.sysBtAuthoritiesResourcesId = sysBtAuthoritiesResourcesId;
     }
 
@@ -47,7 +47,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
         return resourceId;
     }
 
-    public void setresourceId(int resourceId) {
+    public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -57,7 +57,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
         return authorityId;
     }
 
-    public void setauthorityId(int authorityId) {
+    public void setAuthorityId(int authorityId) {
         this.authorityId = authorityId;
     }
 

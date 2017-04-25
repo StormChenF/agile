@@ -47,7 +47,7 @@ public class LogMainEntity implements Serializable {
         return logMainId;
     }
 
-    public void setlogMainId(int logMainId) {
+    public void setLogMainId(int logMainId) {
         this.logMainId = logMainId;
     }
 
@@ -57,7 +57,7 @@ public class LogMainEntity implements Serializable {
         return businessCode;
     }
 
-    public void setbusinessCode(String businessCode) {
+    public void setBusinessCode(String businessCode) {
         this.businessCode = businessCode;
     }
 
@@ -67,7 +67,7 @@ public class LogMainEntity implements Serializable {
         return targetType;
     }
 
-    public void settargetType(String targetType) {
+    public void setTargetType(String targetType) {
         this.targetType = targetType;
     }
 
@@ -77,7 +77,7 @@ public class LogMainEntity implements Serializable {
         return targetCode;
     }
 
-    public void settargetCode(String targetCode) {
+    public void setTargetCode(String targetCode) {
         this.targetCode = targetCode;
     }
 
@@ -87,7 +87,7 @@ public class LogMainEntity implements Serializable {
         return userId;
     }
 
-    public void setuserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -97,7 +97,7 @@ public class LogMainEntity implements Serializable {
         return createTime;
     }
 
-    public void setcreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

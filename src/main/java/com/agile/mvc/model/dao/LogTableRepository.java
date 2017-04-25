@@ -7,6 +7,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 /**
 * Created by 佟盟
 */
-public interface LogTableRepository extends JpaRepository<LogTableEntity,Integer>,QuerydslPredicateExecutor<LogTableEntity> {
+public interface LogTableRepository extends JpaRepository<LogTableEntity,Integer> {
 
 }

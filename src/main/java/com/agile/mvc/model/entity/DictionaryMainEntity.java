@@ -37,7 +37,7 @@ public class DictionaryMainEntity implements Serializable {
         return code;
     }
 
-    public void setcode(int code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -47,7 +47,7 @@ public class DictionaryMainEntity implements Serializable {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -57,7 +57,7 @@ public class DictionaryMainEntity implements Serializable {
         return isConstant;
     }
 
-    public void setisConstant(boolean isConstant) {
+    public void setIsConstant(boolean isConstant) {
         this.isConstant = isConstant;
     }
 

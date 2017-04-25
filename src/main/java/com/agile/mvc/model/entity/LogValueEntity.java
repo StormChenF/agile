@@ -49,7 +49,7 @@ public class LogValueEntity implements Serializable {
         return logValueId;
     }
 
-    public void setlogValueId(int logValueId) {
+    public void setLogValueId(int logValueId) {
         this.logValueId = logValueId;
     }
 
@@ -59,7 +59,7 @@ public class LogValueEntity implements Serializable {
         return logTableId;
     }
 
-    public void setlogTableId(int logTableId) {
+    public void setLogTableId(int logTableId) {
         this.logTableId = logTableId;
     }
 
@@ -69,7 +69,7 @@ public class LogValueEntity implements Serializable {
         return columnName;
     }
 
-    public void setcolumnName(String columnName) {
+    public void setColumnName(String columnName) {
         this.columnName = columnName;
     }
 
@@ -79,7 +79,7 @@ public class LogValueEntity implements Serializable {
         return columnType;
     }
 
-    public void setcolumnType(String columnType) {
+    public void setColumnType(String columnType) {
         this.columnType = columnType;
     }
 
@@ -89,7 +89,7 @@ public class LogValueEntity implements Serializable {
         return newValue;
     }
 
-    public void setnewValue(String newValue) {
+    public void setNewValue(String newValue) {
         this.newValue = newValue;
     }
 
@@ -99,7 +99,7 @@ public class LogValueEntity implements Serializable {
         return oldValue;
     }
 
-    public void setoldValue(String oldValue) {
+    public void setOldValue(String oldValue) {
         this.oldValue = oldValue;
     }
 
@@ -109,7 +109,7 @@ public class LogValueEntity implements Serializable {
         return columnInfo;
     }
 
-    public void setcolumnInfo(String columnInfo) {
+    public void setColumnInfo(String columnInfo) {
         this.columnInfo = columnInfo;
     }
 

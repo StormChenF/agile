@@ -7,6 +7,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 /**
 * Created by 佟盟
 */
-public interface SysAuthoritiesRepository extends JpaRepository<SysAuthoritiesEntity,Integer>,QuerydslPredicateExecutor<SysAuthoritiesEntity> {
+public interface SysAuthoritiesRepository extends JpaRepository<SysAuthoritiesEntity,Integer> {
 
 }
