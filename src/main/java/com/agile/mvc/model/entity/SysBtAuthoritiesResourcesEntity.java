@@ -14,7 +14,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysBtAuthoritiesResourcesId;
+    private Integer sysBtAuthoritiesResourcesId;
     //资源唯一标识
     private int resourceId;
     //权限唯一标识
@@ -24,7 +24,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     public SysBtAuthoritiesResourcesEntity(){}
 
     //有参构造器
-    public SysBtAuthoritiesResourcesEntity(int sysBtAuthoritiesResourcesId,int resourceId,int authorityId){
+    public SysBtAuthoritiesResourcesEntity(Integer sysBtAuthoritiesResourcesId,int resourceId,int authorityId){
         this.sysBtAuthoritiesResourcesId = sysBtAuthoritiesResourcesId;
         this.resourceId = resourceId;
         this.authorityId = authorityId;
@@ -33,7 +33,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_BT_AUTHORITIES_RESOURCES_ID" )
-    public int getSysBtAuthoritiesResourcesId() {
+    public Integer getSysBtAuthoritiesResourcesId() {
         return sysBtAuthoritiesResourcesId;
     }
 

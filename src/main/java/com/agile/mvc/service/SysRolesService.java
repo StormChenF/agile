@@ -31,9 +31,9 @@ public class SysRolesService extends AgileMainService {
      */
     public RETURN delete(){
         SysRolesRepository dao = (SysRolesRepository) FactoryUtil.getBean("SysRolesRepository");
-        String[] ids = this.getInParam("id").toString().split(",");
+        String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,id));
+            dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
         }
         return RETURN.SUCCESS;
     }

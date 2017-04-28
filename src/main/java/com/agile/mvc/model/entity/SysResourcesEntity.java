@@ -14,7 +14,7 @@ public class SysResourcesEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysResourcesId;
+    private Integer sysResourcesId;
     //资源类型
     private String resourceType;
     //资源名称
@@ -36,7 +36,7 @@ public class SysResourcesEntity implements Serializable {
     public SysResourcesEntity(){}
 
     //有参构造器
-    public SysResourcesEntity(int sysResourcesId,String resourceType,String resourceName,String resourceDesc,String resourcePath,String priority,boolean enable,boolean issys,int moduleId){
+    public SysResourcesEntity(Integer sysResourcesId,String resourceType,String resourceName,String resourceDesc,String resourcePath,String priority,boolean enable,boolean issys,int moduleId){
         this.sysResourcesId = sysResourcesId;
         this.resourceType = resourceType;
         this.resourceName = resourceName;
@@ -51,7 +51,7 @@ public class SysResourcesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_RESOURCES_ID" )
-    public int getSysResourcesId() {
+    public Integer getSysResourcesId() {
         return sysResourcesId;
     }
 

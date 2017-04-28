@@ -14,7 +14,7 @@ public class SysBtRolesAuthoritiesEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysBtRolesAuthoritiesId;
+    private Integer sysBtRolesAuthoritiesId;
     //权限唯一标识
     private int authorityId;
     //角色唯一标识
@@ -24,7 +24,7 @@ public class SysBtRolesAuthoritiesEntity implements Serializable {
     public SysBtRolesAuthoritiesEntity(){}
 
     //有参构造器
-    public SysBtRolesAuthoritiesEntity(int sysBtRolesAuthoritiesId,int authorityId,int roleId){
+    public SysBtRolesAuthoritiesEntity(Integer sysBtRolesAuthoritiesId,int authorityId,int roleId){
         this.sysBtRolesAuthoritiesId = sysBtRolesAuthoritiesId;
         this.authorityId = authorityId;
         this.roleId = roleId;
@@ -33,7 +33,7 @@ public class SysBtRolesAuthoritiesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_BT_ROLES_AUTHORITIES_ID" )
-    public int getSysBtRolesAuthoritiesId() {
+    public Integer getSysBtRolesAuthoritiesId() {
         return sysBtRolesAuthoritiesId;
     }
 

@@ -14,7 +14,7 @@ public class SysRolesEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //角色唯一标识
-    private int sysRolesId;
+    private Integer sysRolesId;
     //角色名称
     private String roleName;
     //角色说明
@@ -30,7 +30,7 @@ public class SysRolesEntity implements Serializable {
     public SysRolesEntity(){}
 
     //有参构造器
-    public SysRolesEntity(int sysRolesId,String roleName,String roleDesc,boolean enable,boolean issys,String moduleId){
+    public SysRolesEntity(Integer sysRolesId,String roleName,String roleDesc,boolean enable,boolean issys,String moduleId){
         this.sysRolesId = sysRolesId;
         this.roleName = roleName;
         this.roleDesc = roleDesc;
@@ -42,7 +42,7 @@ public class SysRolesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_ROLES_ID" )
-    public int getSysRolesId() {
+    public Integer getSysRolesId() {
         return sysRolesId;
     }
 

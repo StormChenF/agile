@@ -14,7 +14,7 @@ public class LogValueEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int logValueId;
+    private Integer logValueId;
     //日志相关表标识
     private int logTableId;
     //字段
@@ -32,7 +32,7 @@ public class LogValueEntity implements Serializable {
     public LogValueEntity(){}
 
     //有参构造器
-    public LogValueEntity(int logValueId,int logTableId,String columnName,String columnType,String newValue,String oldValue,String columnInfo){
+    public LogValueEntity(Integer logValueId,int logTableId,String columnName,String columnType,String newValue,String oldValue,String columnInfo){
         this.logValueId = logValueId;
         this.logTableId = logTableId;
         this.columnName = columnName;
@@ -45,7 +45,7 @@ public class LogValueEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_value_id" )
-    public int getLogValueId() {
+    public Integer getLogValueId() {
         return logValueId;
     }
 

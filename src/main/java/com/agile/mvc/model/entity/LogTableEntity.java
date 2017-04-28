@@ -14,7 +14,7 @@ public class LogTableEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int logTableId;
+    private Integer logTableId;
     //日志标识
     private int logMainId;
     //数据库
@@ -30,7 +30,7 @@ public class LogTableEntity implements Serializable {
     public LogTableEntity(){}
 
     //有参构造器
-    public LogTableEntity(int logTableId,int logMainId,String tableSchema,String tableName,String operationType,int operationOrder){
+    public LogTableEntity(Integer logTableId,int logMainId,String tableSchema,String tableName,String operationType,int operationOrder){
         this.logTableId = logTableId;
         this.logMainId = logMainId;
         this.tableSchema = tableSchema;
@@ -42,7 +42,7 @@ public class LogTableEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_table_id" )
-    public int getLogTableId() {
+    public Integer getLogTableId() {
         return logTableId;
     }
 

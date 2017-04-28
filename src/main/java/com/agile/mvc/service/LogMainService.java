@@ -31,9 +31,9 @@ public class LogMainService extends AgileMainService {
      */
     public RETURN delete(){
         LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
-        String[] ids = this.getInParam("id").toString().split(",");
+        String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,id));
+            dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
         }
         return RETURN.SUCCESS;
     }

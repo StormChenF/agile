@@ -81,7 +81,6 @@ public class AgileGenerator {
 
                     //属性类型
                     propertyType = propertiesUtil.getProperty("agile.generator.column_type." + columnsData.getString("TYPE_NAME").toLowerCase());
-                    param.put("propertyType", propertyType);
 
                     //API导入
                     if ("Timestamp".equals(propertyType)) importList.add("java.sql.Timestamp;");
@@ -119,7 +118,12 @@ public class AgileGenerator {
                         //是否为主键
                         param.put("isPrimaryKey", "true");
 
+                        //属性类型
+                        propertyType = primaryKeyPropertyType;
                     }
+
+                    //属性类型
+                    param.put("propertyType", propertyType);
                     columnList.add(param);
                 }
 

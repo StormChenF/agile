@@ -31,9 +31,9 @@ public class SysAuthoritiesService extends AgileMainService {
      */
     public RETURN delete(){
         SysAuthoritiesRepository dao = (SysAuthoritiesRepository) FactoryUtil.getBean("SysAuthoritiesRepository");
-        String[] ids = this.getInParam("id").toString().split(",");
+        String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,id));
+            dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
         }
         return RETURN.SUCCESS;
     }

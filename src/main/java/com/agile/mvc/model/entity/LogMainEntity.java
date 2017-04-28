@@ -15,7 +15,7 @@ public class LogMainEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int logMainId;
+    private Integer logMainId;
     //业务编码
     private String businessCode;
     //业务对象类型
@@ -31,7 +31,7 @@ public class LogMainEntity implements Serializable {
     public LogMainEntity(){}
 
     //有参构造器
-    public LogMainEntity(int logMainId,String businessCode,String targetType,String targetCode,int userId,Date createTime){
+    public LogMainEntity(Integer logMainId,String businessCode,String targetType,String targetCode,int userId,Date createTime){
         this.logMainId = logMainId;
         this.businessCode = businessCode;
         this.targetType = targetType;
@@ -43,7 +43,7 @@ public class LogMainEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "log_main_id" )
-    public int getLogMainId() {
+    public Integer getLogMainId() {
         return logMainId;
     }
 

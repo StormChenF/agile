@@ -14,7 +14,7 @@ public class SysAuthoritiesEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysAuthorityId;
+    private Integer sysAuthorityId;
     //权限标识
     private String authorityMark;
     //权限名称
@@ -34,7 +34,7 @@ public class SysAuthoritiesEntity implements Serializable {
     public SysAuthoritiesEntity(){}
 
     //有参构造器
-    public SysAuthoritiesEntity(int sysAuthorityId,String authorityMark,String authorityName,String authorityDesc,String message,boolean enable,boolean issys,String moduleId){
+    public SysAuthoritiesEntity(Integer sysAuthorityId,String authorityMark,String authorityName,String authorityDesc,String message,boolean enable,boolean issys,String moduleId){
         this.sysAuthorityId = sysAuthorityId;
         this.authorityMark = authorityMark;
         this.authorityName = authorityName;
@@ -48,7 +48,7 @@ public class SysAuthoritiesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_AUTHORITY_ID" )
-    public int getSysAuthorityId() {
+    public Integer getSysAuthorityId() {
         return sysAuthorityId;
     }
 

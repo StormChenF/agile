@@ -15,7 +15,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysPersistentLoginsId;
+    private Integer sysPersistentLoginsId;
     //用户名
     private String username;
     //序列
@@ -29,7 +29,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     public SysPersistentLoginsEntity(){}
 
     //有参构造器
-    public SysPersistentLoginsEntity(int sysPersistentLoginsId,String username,String series,String token,Timestamp lastUsed){
+    public SysPersistentLoginsEntity(Integer sysPersistentLoginsId,String username,String series,String token,Timestamp lastUsed){
         this.sysPersistentLoginsId = sysPersistentLoginsId;
         this.username = username;
         this.series = series;
@@ -40,7 +40,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_PERSISTENT_LOGINS_ID" )
-    public int getSysPersistentLoginsId() {
+    public Integer getSysPersistentLoginsId() {
         return sysPersistentLoginsId;
     }
 

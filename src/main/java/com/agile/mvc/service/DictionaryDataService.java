@@ -31,9 +31,9 @@ public class DictionaryDataService extends AgileMainService {
      */
     public RETURN delete(){
         DictionaryDataRepository dao = (DictionaryDataRepository) FactoryUtil.getBean("DictionaryDataRepository");
-        String[] ids = this.getInParam("id").toString().split(",");
+        String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,id));
+            dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
         }
         return RETURN.SUCCESS;
     }

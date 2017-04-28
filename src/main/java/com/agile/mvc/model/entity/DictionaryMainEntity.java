@@ -14,7 +14,7 @@ public class DictionaryMainEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //字典编码
-    private int code;
+    private Integer code;
     //字典名称
     private String name;
     //是否是常量
@@ -24,7 +24,7 @@ public class DictionaryMainEntity implements Serializable {
     public DictionaryMainEntity(){}
 
     //有参构造器
-    public DictionaryMainEntity(int code,String name,boolean isConstant){
+    public DictionaryMainEntity(Integer code,String name,boolean isConstant){
         this.code = code;
         this.name = name;
         this.isConstant = isConstant;
@@ -33,7 +33,7 @@ public class DictionaryMainEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "code" )
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 

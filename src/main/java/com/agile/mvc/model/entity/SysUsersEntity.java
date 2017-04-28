@@ -17,7 +17,7 @@ public class SysUsersEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysUsersId;
+    private Integer sysUsersId;
     //用户名
     private String username;
     //用户姓名
@@ -53,7 +53,7 @@ public class SysUsersEntity implements Serializable {
     public SysUsersEntity(){}
 
     //有参构造器
-    public SysUsersEntity(int sysUsersId,String username,String name,String password,Date dtCreate,Date lastLogin,Date deadline,String loginIp,String vQzjgid,String vQzjgmc,String depId,String depName,boolean enabled,boolean accountNonExpired,boolean accountNonLocked,boolean credentialsNonExpired){
+    public SysUsersEntity(Integer sysUsersId,String username,String name,String password,Date dtCreate,Date lastLogin,Date deadline,String loginIp,String vQzjgid,String vQzjgmc,String depId,String depName,boolean enabled,boolean accountNonExpired,boolean accountNonLocked,boolean credentialsNonExpired){
         this.sysUsersId = sysUsersId;
         this.username = username;
         this.name = name;
@@ -75,7 +75,7 @@ public class SysUsersEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_USERS_ID" )
-    public int getSysUsersId() {
+    public Integer getSysUsersId() {
         return sysUsersId;
     }
 

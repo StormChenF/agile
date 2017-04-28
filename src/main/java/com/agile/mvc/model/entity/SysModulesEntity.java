@@ -14,7 +14,7 @@ public class SysModulesEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //唯一标识
-    private int sysModulesId;
+    private Integer sysModulesId;
     //模块名称
     private String moduleName;
     //模块说明
@@ -42,7 +42,7 @@ public class SysModulesEntity implements Serializable {
     public SysModulesEntity(){}
 
     //有参构造器
-    public SysModulesEntity(int sysModulesId,String moduleName,String moduleDesc,String moduleType,String parent,String moduleUrl,String iLevel,String leaf,String application,String controller,boolean enable,String priority){
+    public SysModulesEntity(Integer sysModulesId,String moduleName,String moduleDesc,String moduleType,String parent,String moduleUrl,String iLevel,String leaf,String application,String controller,boolean enable,String priority){
         this.sysModulesId = sysModulesId;
         this.moduleName = moduleName;
         this.moduleDesc = moduleDesc;
@@ -60,7 +60,7 @@ public class SysModulesEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "SYS_MODULES_ID" )
-    public int getSysModulesId() {
+    public Integer getSysModulesId() {
         return sysModulesId;
     }
 

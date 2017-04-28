@@ -14,7 +14,7 @@ public class DictionaryDataEntity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
     //字典编码
-    private int code;
+    private Integer code;
     //字典表_字典编码
     private String dicCode;
     //字典值显示名称
@@ -28,7 +28,7 @@ public class DictionaryDataEntity implements Serializable {
     public DictionaryDataEntity(){}
 
     //有参构造器
-    public DictionaryDataEntity(int code,String dicCode,String name,String value,boolean isFixed){
+    public DictionaryDataEntity(Integer code,String dicCode,String name,String value,boolean isFixed){
         this.code = code;
         this.dicCode = dicCode;
         this.name = name;
@@ -39,7 +39,7 @@ public class DictionaryDataEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "code" )
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
