@@ -5,6 +5,7 @@ import com.agile.common.base.RETURN;
 import org.springframework.stereotype.Service;
 
 /**
+ * 登陆服务
  * Created by mydeathtrial on 2017/3/2
  */
 @Service

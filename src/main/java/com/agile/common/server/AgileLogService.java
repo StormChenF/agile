@@ -11,6 +11,7 @@ import java.util.Map;
 
 
 /**
+ * 日志服务
  * Created by mydeathtrial on 2017/3/21
  */
 public class AgileLogService {

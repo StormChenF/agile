@@ -330,18 +330,21 @@
       <artifactId>hibernate-entitymanager</artifactId>
       <version>5.2.6.Final</version>
     </dependency>
+
     <!--数据连接池-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
       <version>1.0.27</version>
     </dependency>
+
     <!--mysql桥接-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>6.0.5</version>
     </dependency>
+
     <!--消息队列-->
     <dependency>
       <groupId>org.springframework.kafka</groupId>
@@ -362,12 +365,14 @@
         </exclusion>
       </exclusions>
     </dependency>
+
     <!--模板引擎-->
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
       <version>2.3.25-incubating</version>
     </dependency>
+
     <!--JSON工具集-->
     <dependency>
       <groupId>net.sf.json-lib</groupId>
@@ -393,6 +398,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+
     <!--spring 与 ehcache注解化-->
     <dependency>
       <groupId>com.googlecode.ehcache-spring-annotations</groupId>
@@ -423,46 +429,53 @@
           <artifactId>spring-beans</artifactId>
           <groupId>org.springframework</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>guava</artifactId>
+          <groupId>com.google.guava</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
+
     <!--对象属性拷贝-->
     <dependency>
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
       <version>3.2.5</version>
     </dependency>
-    <!--&lt;!&ndash;spring websocket支持&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework</groupId>-->
-      <!--<artifactId>spring-websocket</artifactId>-->
-      <!--<version>5.0.0.M4</version>-->
-    <!--</dependency>-->
-    <!--&lt;!&ndash;spring redis支持&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.data</groupId>-->
-      <!--<artifactId>spring-data-redis</artifactId>-->
-      <!--<version>2.0.0.M1</version>-->
-    <!--</dependency>-->
-    <!--&lt;!&ndash;spring webservice支持&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.ws</groupId>-->
-      <!--<artifactId>spring-ws-core</artifactId>-->
-      <!--<version>2.4.0.RELEASE</version>-->
-    <!--</dependency>-->
-    <!--spring webservice的xml支持-->
-    <!--<dependency>-->
-      <!--<groupId>org.springframework.ws</groupId>-->
-      <!--<artifactId>spring-xml</artifactId>-->
-      <!--<version>2.4.0.RELEASE</version>-->
-    <!--</dependency>-->
-    <!--&lt;!&ndash;spring webservice相关支持&ndash;&gt;-->
-    <!--<dependency>-->
-      <!--<groupId>org.jvnet.jax-ws-commons.spring</groupId>-->
-      <!--<artifactId>jaxws-spring</artifactId>-->
-      <!--<version>1.9</version>-->
-    <!--</dependency>-->
 
-
+    <!--swagger-->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.6.1</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jackson-annotations</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-aop</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-context</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-beans</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.6.1</version>
+    </dependency>
 
     <!--单元测试-->
     <dependency>

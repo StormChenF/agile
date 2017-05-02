@@ -1,7 +1,7 @@
 package com.agile.common.base;
 
 /**
- * Created by 佟盟 on 2017/1/9.
+ * Created by 佟盟 on 2017/1/9
  */
 public final class RETURN {
     //响应状态码
