@@ -13,5 +13,4 @@
     <import resource="classpath:com/agile/configure/spring-cache.xml"/>
     <import resource="classpath:com/agile/configure/spring-druid.xml"/>
     <import resource="classpath:com/agile/configure/spring-jpa.xml"/>
-    <import resource="classpath:com/agile/configure/spring-swagger.xml"/>
 </beans>

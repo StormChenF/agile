@@ -6,17 +6,19 @@ import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryDataRepository;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.transform.Result;
 
 /**
 * Created by 佟盟
 */
-@Api(value = "DictionaryDataService", description = "关于Restful接口文档注释")
 @Service
 public class DictionaryDataService extends AgileMainService {
 
@@ -24,8 +26,6 @@ public class DictionaryDataService extends AgileMainService {
      * 新增
      * 地址：http://localhost:8080/agile/DictionaryDataService/save
      */
-    @ApiOperation(value = "GET获取数据",produces="application/json")
-    @ApiResponse(code = 200, message = "success", response = Result.class)
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         DictionaryDataRepository dao = (DictionaryDataRepository) FactoryUtil.getBean("DictionaryDataRepository");
         DictionaryDataEntity entity = (DictionaryDataEntity)ObjectUtil.getObjectFromMap(DictionaryDataEntity.class, this.getInParam());
