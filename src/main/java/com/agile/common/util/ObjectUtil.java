@@ -63,8 +63,7 @@ public class ObjectUtil extends ObjectUtils {
             Object object = isEmpty(source)?target:source;
             Class sourceClass = object.getClass();
             Method[] methods = sourceClass.getMethods();
-            int frequency = methods.length;
-            for (int i = 0 ; i < frequency ; i++) {
+            for (int i = 0 ; i < methods.length ; i++) {
                 Method method = methods[i];
                 String methodName = method.getName();
                 if (!methodName.startsWith("get")) {
@@ -126,8 +125,7 @@ public class ObjectUtil extends ObjectUtils {
             e.printStackTrace();
         }
         Field[] fields = clazz.getDeclaredFields();
-        int frequency = fields.length;
-        for (int i = 0 ; i < frequency ; i++) {
+        for (int i = 0 ; i < fields.length ; i++) {
             Field field = fields[i];
             String propertyKey = prefix + field.getName() + suffix;
             if(map.containsKey(propertyKey)){

@@ -30,8 +30,7 @@ public class AgileCsrfSecurityRequestMatcher implements RequestMatcher {
         if (!StringUtil.isEmpty(excludeUrl)) {
             String servletPath = httpServletRequest.getServletPath();
             String[] excludeUrls = excludeUrl.split(",");
-            int frequency = excludeUrls.length;
-            for (int i = 0 ; i < frequency ; i++) {
+            for (int i = 0 ; i < excludeUrls.length ; i++) {
                 if (servletPath.contains(excludeUrls[i])) {
                     return false;
                 }

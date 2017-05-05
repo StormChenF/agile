@@ -32,8 +32,7 @@ public class SysModulesService extends AgileMainService {
     public RETURN delete(){
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
-        int frequency = ids.length;
-        for (int i = 0 ; i < frequency ; i++) {
+        for (int i = 0 ; i < ids.length ; i++) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
         }
         return RETURN.SUCCESS;

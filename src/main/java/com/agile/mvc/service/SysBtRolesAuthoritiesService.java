@@ -32,8 +32,7 @@ public class SysBtRolesAuthoritiesService extends AgileMainService {
     public RETURN delete(){
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
-        int frequency = ids.length;
-        for (int i = 0 ; i < frequency ; i++) {
+        for (int i = 0 ; i < ids.length ; i++) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
         }
         return RETURN.SUCCESS;
