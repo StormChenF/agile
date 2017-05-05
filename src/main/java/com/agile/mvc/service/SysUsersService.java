@@ -32,8 +32,9 @@ public class SysUsersService extends AgileMainService {
     public RETURN delete(){
         SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
-        for (String id:ids) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
+        int frequency = ids.length;
+        for (int i = 0 ; i < frequency ; i++) {
+            dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
         }
         return RETURN.SUCCESS;
     }

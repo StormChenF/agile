@@ -180,8 +180,9 @@ public class AgileMainController {
         String queryString = request.getQueryString();
         if (!StringUtil.isEmpty(queryString)){
             String[] params = queryString.split("&"),paramContainer;
-            for (String param:params) {
-                paramContainer = param.split("=");
+            int frequency = params.length;
+            for (int i = 0 ; i < frequency ; i++) {
+                paramContainer = params[i].split("=");
                 if (paramContainer.length == 2){
                     inParam.put(paramContainer[0],paramContainer[1]);
                 }

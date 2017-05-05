@@ -17,7 +17,7 @@ public class AgileCsrfSecurityRequestMatcher implements RequestMatcher {
      */
     private final HashSet<String> allowedMethods;
     private AgileCsrfSecurityRequestMatcher() {
-        this.allowedMethods = new HashSet<>(Arrays.asList(new String[]{"GET", "HEAD", "TRACE", "OPTIONS"}));
+        this.allowedMethods = new HashSet<>(Arrays.asList("GET", "HEAD", "TRACE", "OPTIONS"));
     }
 
     /**
@@ -30,8 +30,9 @@ public class AgileCsrfSecurityRequestMatcher implements RequestMatcher {
         if (!StringUtil.isEmpty(excludeUrl)) {
             String servletPath = httpServletRequest.getServletPath();
             String[] excludeUrls = excludeUrl.split(",");
-            for (String url:excludeUrls) {
-                if (servletPath.contains(url)) {
+            int frequency = excludeUrls.length;
+            for (int i = 0 ; i < frequency ; i++) {
+                if (servletPath.contains(excludeUrls[i])) {
                     return false;
                 }
             }
