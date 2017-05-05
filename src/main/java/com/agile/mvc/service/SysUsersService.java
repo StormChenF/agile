@@ -19,8 +19,8 @@ public class SysUsersService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysUsersRepository dao = (SysUsersRepository) FactoryUtil.getBean("SysUsersRepository");
-        SysUsersEntity entity = (SysUsersEntity)ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
+        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
+        SysUsersEntity entity = ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysUsersService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/delete
      */
     public RETURN delete(){
-        SysUsersRepository dao = (SysUsersRepository) FactoryUtil.getBean("SysUsersRepository");
+        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysUsersService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysUsersRepository dao = (SysUsersRepository) FactoryUtil.getBean("SysUsersRepository");
-        SysUsersEntity entity = (SysUsersEntity)ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
+        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
+        SysUsersEntity entity = ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysUsersService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/query
      */
     public RETURN query(){
-        SysUsersRepository dao = (SysUsersRepository) FactoryUtil.getBean("SysUsersRepository");
+        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

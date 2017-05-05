@@ -1,5 +1,3 @@
-package com.agile.common.tools;
-
 import com.agile.common.util.ClassUtil;
 import com.agile.common.util.DataBaseUtil;
 import com.agile.common.util.PropertiesUtil;
@@ -54,7 +52,7 @@ public class AgileGenerator {
 
                 while (primaryKeyResultSet.next()) {
                     //主键字段名称
-                    primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME");
+                    primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME").toLowerCase();
                 }
 
                 while (columnsData.next()) {
@@ -65,16 +63,17 @@ public class AgileGenerator {
                     param.put("isPrimaryKey", "false");
 
                     //字段名称
-                    param.put("columnName", columnsData.getString("COLUMN_NAME"));
+                    String columnName = columnsData.getString("COLUMN_NAME").toLowerCase();
+                    param.put("columnName", columnName);
 
                     //属性名
-                    param.put("propertyName", StringUtil.toLowerName(columnsData.getString("COLUMN_NAME").toLowerCase()));
+                    param.put("propertyName", StringUtil.toLowerName(columnName));
 
                     //get方法
-                    param.put("getMethod", "get" + StringUtil.toUpperName(columnsData.getString("COLUMN_NAME")));
+                    param.put("getMethod", "get" + StringUtil.toUpperName(columnName));
 
                     //set方法
-                    param.put("setMethod", "set" + StringUtil.toUpperName(columnsData.getString("COLUMN_NAME")));
+                    param.put("setMethod", "set" + StringUtil.toUpperName(columnName));
 
                     //字段类型
                     param.put("columnType", columnsData.getString("TYPE_NAME"));
@@ -110,7 +109,7 @@ public class AgileGenerator {
                     param.put("remarks", columnsData.getString("REMARKS"));
 
                     //处理主键
-                    if (StringUtil.compare(primaryKeyColumnName, columnsData.getString("COLUMN_NAME"))) {
+                    if (StringUtil.compare(primaryKeyColumnName, columnName)) {
 
                         //主键字段类型
                         primaryKeyPropertyType = ClassUtil.toWrapperNameFromName(propertyType);
@@ -150,11 +149,11 @@ public class AgileGenerator {
                 //字段参数
                 data.put("columnList", columnList);
                 Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-                cfg.setDirectoryForTemplateLoading(new File("./src/main/java/com/agile/common/tools"));
+                cfg.setDirectoryForTemplateLoading(new File("./tools"));
                 cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
 
                 //Entity生成器
-                Template entityTemp = cfg.getTemplate("Entity.ftl");
+                Template entityTemp = cfg.getTemplate("AgileFTL/Entity.ftl");
                 String entityFileName = className + "Entity.java";
                 File entityFile = new File("./src/main/java/com/agile/mvc/model/entity/" + entityFileName);
                 FileWriter entityFileFw = new FileWriter(entityFile);
@@ -164,7 +163,7 @@ public class AgileGenerator {
                 entityFileFw.close();
 
                 //DAO生成器
-                Template repositoryTemp = cfg.getTemplate("Repository.ftl");
+                Template repositoryTemp = cfg.getTemplate("AgileFTL/Repository.ftl");
                 String repositoryFileName = className + "Repository.java";
                 File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
                 FileWriter repositoryFileFw = new FileWriter(repositoryFile);
@@ -174,7 +173,7 @@ public class AgileGenerator {
                 repositoryFileFw.close();
 
                 //service生成器
-                Template serviceTemp = cfg.getTemplate("Service.ftl");
+                Template serviceTemp = cfg.getTemplate("AgileFTL/Service.ftl");
                 String ServiceFileName = className + "Service.java";
                 File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
                 FileWriter serviceFileFw = new FileWriter(serviceFile);

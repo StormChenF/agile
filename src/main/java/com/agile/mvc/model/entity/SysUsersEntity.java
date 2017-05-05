@@ -74,7 +74,7 @@ public class SysUsersEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_USERS_ID" )
+    @Column(name = "sys_users_id" )
     public Integer getSysUsersId() {
         return sysUsersId;
     }
@@ -84,37 +84,37 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "USERNAME" )
-    public String getUSERNAME() {
+    @Column(name = "username" )
+    public String getUsername() {
         return username;
     }
 
-    public void setUSERNAME(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
     @Basic
-    @Column(name = "NAME" , nullable = false )
-    public String getNAME() {
+    @Column(name = "name" , nullable = false )
+    public String getName() {
         return name;
     }
 
-    public void setNAME(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     @Basic
-    @Column(name = "PASSWORD" )
-    public String getPASSWORD() {
+    @Column(name = "password" )
+    public String getPassword() {
         return password;
     }
 
-    public void setPASSWORD(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     @Basic
-    @Column(name = "DT_CREATE" , nullable = false )
+    @Column(name = "dt_create" , nullable = false )
     public Date getDtCreate() {
         return dtCreate;
     }
@@ -124,7 +124,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LAST_LOGIN" , nullable = false )
+    @Column(name = "last_login" , nullable = false )
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -134,17 +134,17 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEADLINE" , nullable = false )
-    public Date getDEADLINE() {
+    @Column(name = "deadline" , nullable = false )
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDEADLINE(Date deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
     @Basic
-    @Column(name = "LOGIN_IP" , nullable = false )
+    @Column(name = "login_ip" , nullable = false )
     public String getLoginIp() {
         return loginIp;
     }
@@ -154,7 +154,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "V_QZJGID" , nullable = false )
+    @Column(name = "v_qzjgid" , nullable = false )
     public String getVQzjgid() {
         return vQzjgid;
     }
@@ -164,7 +164,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "V_QZJGMC" , nullable = false )
+    @Column(name = "v_qzjgmc" , nullable = false )
     public String getVQzjgmc() {
         return vQzjgmc;
     }
@@ -174,7 +174,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEP_ID" , nullable = false )
+    @Column(name = "dep_id" , nullable = false )
     public String getDepId() {
         return depId;
     }
@@ -184,7 +184,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "DEP_NAME" , nullable = false )
+    @Column(name = "dep_name" , nullable = false )
     public String getDepName() {
         return depName;
     }
@@ -194,17 +194,17 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLED" , nullable = false )
-    public boolean getENABLED() {
+    @Column(name = "enabled" , nullable = false )
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setENABLED(boolean enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_EXPIRED" , nullable = false )
+    @Column(name = "account_non_expired" , nullable = false )
     public boolean getAccountNonExpired() {
         return accountNonExpired;
     }
@@ -214,7 +214,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_NON_LOCKED" , nullable = false )
+    @Column(name = "account_non_locked" , nullable = false )
     public boolean getAccountNonLocked() {
         return accountNonLocked;
     }
@@ -224,7 +224,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "CREDENTIALS_NON_EXPIRED" , nullable = false )
+    @Column(name = "credentials_non_expired" , nullable = false )
     public boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }
@@ -248,7 +248,7 @@ public class SysUsersEntity implements Serializable {
             (password != null ? password.equals(that.password) : that.password == null)  && 
             (getDtCreate() != null ? getDtCreate().equals(that.getDtCreate()) : that.getDtCreate() == null)  && 
             (getLastLogin() != null ? getLastLogin().equals(that.getLastLogin()) : that.getLastLogin() == null)  && 
-            (getDEADLINE() != null ? getDEADLINE().equals(that.getDEADLINE()) : that.getDEADLINE() == null)  && 
+            (getDeadline() != null ? getDeadline().equals(that.getDeadline()) : that.getDeadline() == null)  && 
             (loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null)  && 
             (vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null)  && 
             (vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null)  && 
@@ -269,7 +269,7 @@ public class SysUsersEntity implements Serializable {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (getDtCreate() != null ? getDtCreate().hashCode() : 0);
         result = 31 * result + (getLastLogin() != null ? getLastLogin().hashCode() : 0);
-        result = 31 * result + (getDEADLINE() != null ? getDEADLINE().hashCode() : 0);
+        result = 31 * result + (getDeadline() != null ? getDeadline().hashCode() : 0);
         result = 31 * result + (loginIp != null ? loginIp.hashCode() : 0);
         result = 31 * result + (vQzjgid != null ? vQzjgid.hashCode() : 0);
         result = 31 * result + (vQzjgmc != null ? vQzjgmc.hashCode() : 0);

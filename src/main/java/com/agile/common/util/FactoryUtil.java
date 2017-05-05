@@ -1,5 +1,6 @@
 package com.agile.common.util;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,15 @@ public final class FactoryUtil {
      */
     public static Object getBean(String beanName){
         return factoryUtil.applicationContext.getBean(beanName.substring(0,1).toLowerCase()+beanName.substring(1));
+    }
+
+    /**
+     * 根据bean名获取bean对象
+     * @param clazz bean类型
+     * @return bean对象
+     */
+    public static <T> T getBean(Class<T> clazz){
+        return factoryUtil.applicationContext.getBean(clazz);
     }
 
 }

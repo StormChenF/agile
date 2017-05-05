@@ -19,8 +19,8 @@ public class ${className}Service extends AgileMainService {
      * 地址：http://localhost:8080/agile/${className}Service/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        ${className}Repository dao = (${className}Repository) FactoryUtil.getBean("${className}Repository");
-        ${className}Entity entity = (${className}Entity)ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
+        ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
+        ${className}Entity entity = ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class ${className}Service extends AgileMainService {
      * 地址：http://localhost:8080/agile/${className}Service/delete
      */
     public RETURN delete(){
-        ${className}Repository dao = (${className}Repository) FactoryUtil.getBean("${className}Repository");
+        ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class ${className}Service extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        ${className}Repository dao = (${className}Repository) FactoryUtil.getBean("${className}Repository");
-        ${className}Entity entity = (${className}Entity)ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
+        ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
+        ${className}Entity entity = ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class ${className}Service extends AgileMainService {
      * 地址：http://localhost:8080/agile/${className}Service/query
      */
     public RETURN query(){
-        ${className}Repository dao = (${className}Repository) FactoryUtil.getBean("${className}Repository");
+        ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

@@ -59,7 +59,7 @@ public class SysModulesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_MODULES_ID" )
+    @Column(name = "sys_modules_id" )
     public Integer getSysModulesId() {
         return sysModulesId;
     }
@@ -69,7 +69,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_NAME" )
+    @Column(name = "module_name" )
     public String getModuleName() {
         return moduleName;
     }
@@ -79,7 +79,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_DESC" , nullable = false )
+    @Column(name = "module_desc" , nullable = false )
     public String getModuleDesc() {
         return moduleDesc;
     }
@@ -89,7 +89,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MODULE_TYPE" , nullable = false )
+    @Column(name = "module_type" , nullable = false )
     public String getModuleType() {
         return moduleType;
     }
@@ -99,17 +99,17 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PARENT" , nullable = false )
-    public String getPARENT() {
+    @Column(name = "parent" , nullable = false )
+    public String getParent() {
         return parent;
     }
 
-    public void setPARENT(String parent) {
+    public void setParent(String parent) {
         this.parent = parent;
     }
 
     @Basic
-    @Column(name = "MODULE_URL" , nullable = false )
+    @Column(name = "module_url" , nullable = false )
     public String getModuleUrl() {
         return moduleUrl;
     }
@@ -119,7 +119,7 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "I_LEVEL" , nullable = false )
+    @Column(name = "i_level" , nullable = false )
     public String getILevel() {
         return iLevel;
     }
@@ -129,52 +129,52 @@ public class SysModulesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "LEAF" , nullable = false )
-    public String getLEAF() {
+    @Column(name = "leaf" , nullable = false )
+    public String getLeaf() {
         return leaf;
     }
 
-    public void setLEAF(String leaf) {
+    public void setLeaf(String leaf) {
         this.leaf = leaf;
     }
 
     @Basic
-    @Column(name = "APPLICATION" , nullable = false )
-    public String getAPPLICATION() {
+    @Column(name = "application" , nullable = false )
+    public String getApplication() {
         return application;
     }
 
-    public void setAPPLICATION(String application) {
+    public void setApplication(String application) {
         this.application = application;
     }
 
     @Basic
-    @Column(name = "CONTROLLER" , nullable = false )
-    public String getCONTROLLER() {
+    @Column(name = "controller" , nullable = false )
+    public String getController() {
         return controller;
     }
 
-    public void setCONTROLLER(String controller) {
+    public void setController(String controller) {
         this.controller = controller;
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable = false )
-    public boolean getENABLE() {
+    @Column(name = "enable" , nullable = false )
+    public boolean getEnable() {
         return enable;
     }
 
-    public void setENABLE(boolean enable) {
+    public void setEnable(boolean enable) {
         this.enable = enable;
     }
 
     @Basic
-    @Column(name = "PRIORITY" , nullable = false )
-    public String getPRIORITY() {
+    @Column(name = "priority" , nullable = false )
+    public String getPriority() {
         return priority;
     }
 
-    public void setPRIORITY(String priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 

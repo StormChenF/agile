@@ -1,6 +1,7 @@
 package com.agile.common.util;
 
 import org.springframework.cglib.beans.BeanCopier;
+import org.springframework.jndi.JndiTemplate;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;
@@ -74,12 +75,14 @@ public class ObjectUtil extends ObjectUtils {
                 if (compareValue(sourceValue,targetValue)) {
                     continue;
                 }
-                rList.add(new HashMap<String,Object>() {{
+                rList.add(new HashMap<String,Object>() {
+                    private static final long serialVersionUID = -3959176970036247143L;
+                    {
                     put("propertyName", methodName.replace("get", ""));
-                    put("propertyType",objectValue.getClass().getName());
+                    put("propertyType", objectValue != null ? objectValue.getClass().getName() : null);
                     put("oldValue", sourceValue);
-                    put("newValue", targetValue);
-                }});
+                    put("newValue", targetValue);}
+                });
             }
             return rList;
         }
@@ -91,12 +94,19 @@ public class ObjectUtil extends ObjectUtils {
      * @param clazz 想要获取的对象类型
      * @param map 属性集合
      * @return 返回指定对象类型对象
-     * @throws IllegalAccessException 非法访问
-     * @throws InstantiationException 实例化异常
-     * @throws NoSuchFieldException 没有指定方法
      */
-    public static Object getObjectFromMap(Class<?> clazz,HashMap<String, Object> map) throws IllegalAccessException, InstantiationException, NoSuchFieldException{
-        return getObjectFromMap(clazz,map,null);
+    public static  <T> T  getObjectFromMap(Class<T> clazz,HashMap<String, Object> map){
+        return getObjectFromMap(clazz,map,"","");
+    }
+
+    /**
+     * 从Map对象中获取指定类型对象
+     * @param clazz 想要获取的对象类型
+     * @param map 属性集合
+     * @return 返回指定对象类型对象
+     */
+    public static  <T> T  getObjectFromMap(Class<T> clazz,HashMap<String, Object> map, String prefix){
+        return getObjectFromMap(clazz,map,prefix,"");
     }
 
     /**
@@ -105,31 +115,33 @@ public class ObjectUtil extends ObjectUtils {
      * @param map 属性集合
      * @param prefix 属性前缀
      * @return 返回指定对象类型对象
-     * @throws IllegalAccessException 非法访问
-     * @throws InstantiationException 实例化异常
      */
-    public static Object getObjectFromMap(Class<?> clazz,HashMap<String, Object> map, String prefix) throws IllegalAccessException, InstantiationException {
-        Object object = clazz.newInstance();
-        for (Map.Entry<String, Object> entry : map.entrySet()){
-            if (!isEmpty(entry.getValue())) {
-                String fieldName = entry.getKey();
-                if(!isEmpty(prefix) && fieldName.startsWith(prefix)){
-                    fieldName = fieldName.replaceFirst(prefix, "");
-                }
-
-                try {
-                    Field field = clazz.getDeclaredField(fieldName);
-                    field.setAccessible(true);
-                    Class<?> fieldType = field.getType();
-                    Object propertyValue = entry.getValue();
-                    field.set(object,cast(fieldType,propertyValue));
-                }catch (NoSuchFieldException e){
-                    continue;
-                }
-
-            }
+    public static <T> T getObjectFromMap(Class<T> clazz,HashMap<String, Object> map, String prefix, String suffix) {
+        Object object = null;
+        try {
+            object = clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
         }
-        return object;
+        Field[] fields = clazz.getDeclaredFields();
+        int frequency = fields.length;
+        int i=0;
+        while (i<frequency) {
+            Field field = fields[i];
+            String propertyKey = prefix + field.getName() + suffix;
+            if(map.containsKey(propertyKey)){
+                Class<?> propertyType = field.getType();
+                String propertyValue = map.get(propertyKey).toString();
+                try {
+                    Method setMethod = clazz.getDeclaredMethod("set" + StringUtil.toUpperName(propertyKey),propertyType);
+                    setMethod.invoke(object,propertyValue);
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+            }
+            i++;
+        }
+        return (T) object;
     }
 
     /**

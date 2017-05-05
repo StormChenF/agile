@@ -50,7 +50,7 @@ public class SysResourcesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_RESOURCES_ID" )
+    @Column(name = "sys_resources_id" )
     public Integer getSysResourcesId() {
         return sysResourcesId;
     }
@@ -60,7 +60,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "RESOURCE_TYPE" , nullable = false )
+    @Column(name = "resource_type" , nullable = false )
     public String getResourceType() {
         return resourceType;
     }
@@ -70,7 +70,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "RESOURCE_NAME" , nullable = false )
+    @Column(name = "resource_name" , nullable = false )
     public String getResourceName() {
         return resourceName;
     }
@@ -80,7 +80,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "RESOURCE_DESC" , nullable = false )
+    @Column(name = "resource_desc" , nullable = false )
     public String getResourceDesc() {
         return resourceDesc;
     }
@@ -90,7 +90,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "RESOURCE_PATH" , nullable = false )
+    @Column(name = "resource_path" , nullable = false )
     public String getResourcePath() {
         return resourcePath;
     }
@@ -100,37 +100,37 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "PRIORITY" , nullable = false )
-    public String getPRIORITY() {
+    @Column(name = "priority" , nullable = false )
+    public String getPriority() {
         return priority;
     }
 
-    public void setPRIORITY(String priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable = false )
-    public boolean getENABLE() {
+    @Column(name = "enable" , nullable = false )
+    public boolean getEnable() {
         return enable;
     }
 
-    public void setENABLE(boolean enable) {
+    public void setEnable(boolean enable) {
         this.enable = enable;
     }
 
     @Basic
-    @Column(name = "ISSYS" , nullable = false )
-    public boolean getISSYS() {
+    @Column(name = "issys" , nullable = false )
+    public boolean getIssys() {
         return issys;
     }
 
-    public void setISSYS(boolean issys) {
+    public void setIssys(boolean issys) {
         this.issys = issys;
     }
 
     @Basic
-    @Column(name = "MODULE_ID" , nullable = false )
+    @Column(name = "module_id" , nullable = false )
     public int getModuleId() {
         return moduleId;
     }

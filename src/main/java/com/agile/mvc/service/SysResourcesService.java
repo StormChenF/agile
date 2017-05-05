@@ -19,8 +19,8 @@ public class SysResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysResourcesService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysResourcesRepository dao = (SysResourcesRepository) FactoryUtil.getBean("SysResourcesRepository");
-        SysResourcesEntity entity = (SysResourcesEntity)ObjectUtil.getObjectFromMap(SysResourcesEntity.class, this.getInParam());
+        SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
+        SysResourcesEntity entity = ObjectUtil.getObjectFromMap(SysResourcesEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysResourcesService/delete
      */
     public RETURN delete(){
-        SysResourcesRepository dao = (SysResourcesRepository) FactoryUtil.getBean("SysResourcesRepository");
+        SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysResourcesRepository dao = (SysResourcesRepository) FactoryUtil.getBean("SysResourcesRepository");
-        SysResourcesEntity entity = (SysResourcesEntity)ObjectUtil.getObjectFromMap(SysResourcesEntity.class, this.getInParam());
+        SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
+        SysResourcesEntity entity = ObjectUtil.getObjectFromMap(SysResourcesEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysResourcesService/query
      */
     public RETURN query(){
-        SysResourcesRepository dao = (SysResourcesRepository) FactoryUtil.getBean("SysResourcesRepository");
+        SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

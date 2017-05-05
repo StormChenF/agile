@@ -19,8 +19,8 @@ public class DictionaryMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/DictionaryMainService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        DictionaryMainRepository dao = (DictionaryMainRepository) FactoryUtil.getBean("DictionaryMainRepository");
-        DictionaryMainEntity entity = (DictionaryMainEntity)ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
+        DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
+        DictionaryMainEntity entity = ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class DictionaryMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/DictionaryMainService/delete
      */
     public RETURN delete(){
-        DictionaryMainRepository dao = (DictionaryMainRepository) FactoryUtil.getBean("DictionaryMainRepository");
+        DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class DictionaryMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        DictionaryMainRepository dao = (DictionaryMainRepository) FactoryUtil.getBean("DictionaryMainRepository");
-        DictionaryMainEntity entity = (DictionaryMainEntity)ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
+        DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
+        DictionaryMainEntity entity = ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class DictionaryMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/DictionaryMainService/query
      */
     public RETURN query(){
-        DictionaryMainRepository dao = (DictionaryMainRepository) FactoryUtil.getBean("DictionaryMainRepository");
+        DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

@@ -19,8 +19,8 @@ public class LogMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/LogMainService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
-        LogMainEntity entity = (LogMainEntity)ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
+        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
+        LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class LogMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/LogMainService/delete
      */
     public RETURN delete(){
-        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
+        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class LogMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
-        LogMainEntity entity = (LogMainEntity)ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
+        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
+        LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class LogMainService extends AgileMainService {
      * 地址：http://localhost:8080/agile/LogMainService/query
      */
     public RETURN query(){
-        LogMainRepository dao = (LogMainRepository) FactoryUtil.getBean("LogMainRepository");
+        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

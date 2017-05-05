@@ -80,4 +80,6 @@
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
 
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean  class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 </beans>

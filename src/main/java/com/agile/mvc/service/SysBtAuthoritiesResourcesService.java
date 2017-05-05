@@ -19,8 +19,8 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysBtAuthoritiesResourcesRepository dao = (SysBtAuthoritiesResourcesRepository) FactoryUtil.getBean("SysBtAuthoritiesResourcesRepository");
-        SysBtAuthoritiesResourcesEntity entity = (SysBtAuthoritiesResourcesEntity)ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
+        SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
+        SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/delete
      */
     public RETURN delete(){
-        SysBtAuthoritiesResourcesRepository dao = (SysBtAuthoritiesResourcesRepository) FactoryUtil.getBean("SysBtAuthoritiesResourcesRepository");
+        SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysBtAuthoritiesResourcesRepository dao = (SysBtAuthoritiesResourcesRepository) FactoryUtil.getBean("SysBtAuthoritiesResourcesRepository");
-        SysBtAuthoritiesResourcesEntity entity = (SysBtAuthoritiesResourcesEntity)ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
+        SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
+        SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/query
      */
     public RETURN query(){
-        SysBtAuthoritiesResourcesRepository dao = (SysBtAuthoritiesResourcesRepository) FactoryUtil.getBean("SysBtAuthoritiesResourcesRepository");
+        SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

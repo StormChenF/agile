@@ -19,8 +19,8 @@ public class SysRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysRolesService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysRolesRepository dao = (SysRolesRepository) FactoryUtil.getBean("SysRolesRepository");
-        SysRolesEntity entity = (SysRolesEntity)ObjectUtil.getObjectFromMap(SysRolesEntity.class, this.getInParam());
+        SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
+        SysRolesEntity entity = ObjectUtil.getObjectFromMap(SysRolesEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysRolesService/delete
      */
     public RETURN delete(){
-        SysRolesRepository dao = (SysRolesRepository) FactoryUtil.getBean("SysRolesRepository");
+        SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysRolesRepository dao = (SysRolesRepository) FactoryUtil.getBean("SysRolesRepository");
-        SysRolesEntity entity = (SysRolesEntity)ObjectUtil.getObjectFromMap(SysRolesEntity.class, this.getInParam());
+        SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
+        SysRolesEntity entity = ObjectUtil.getObjectFromMap(SysRolesEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysRolesService/query
      */
     public RETURN query(){
-        SysRolesRepository dao = (SysRolesRepository) FactoryUtil.getBean("SysRolesRepository");
+        SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

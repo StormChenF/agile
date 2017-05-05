@@ -19,8 +19,8 @@ public class SysAuthoritiesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysAuthoritiesService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysAuthoritiesRepository dao = (SysAuthoritiesRepository) FactoryUtil.getBean("SysAuthoritiesRepository");
-        SysAuthoritiesEntity entity = (SysAuthoritiesEntity)ObjectUtil.getObjectFromMap(SysAuthoritiesEntity.class, this.getInParam());
+        SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
+        SysAuthoritiesEntity entity = ObjectUtil.getObjectFromMap(SysAuthoritiesEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysAuthoritiesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysAuthoritiesService/delete
      */
     public RETURN delete(){
-        SysAuthoritiesRepository dao = (SysAuthoritiesRepository) FactoryUtil.getBean("SysAuthoritiesRepository");
+        SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysAuthoritiesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysAuthoritiesRepository dao = (SysAuthoritiesRepository) FactoryUtil.getBean("SysAuthoritiesRepository");
-        SysAuthoritiesEntity entity = (SysAuthoritiesEntity)ObjectUtil.getObjectFromMap(SysAuthoritiesEntity.class, this.getInParam());
+        SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
+        SysAuthoritiesEntity entity = ObjectUtil.getObjectFromMap(SysAuthoritiesEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysAuthoritiesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysAuthoritiesService/query
      */
     public RETURN query(){
-        SysAuthoritiesRepository dao = (SysAuthoritiesRepository) FactoryUtil.getBean("SysAuthoritiesRepository");
+        SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

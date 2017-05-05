@@ -19,8 +19,8 @@ public class SysBtUsersRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysBtUsersRolesService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysBtUsersRolesRepository dao = (SysBtUsersRolesRepository) FactoryUtil.getBean("SysBtUsersRolesRepository");
-        SysBtUsersRolesEntity entity = (SysBtUsersRolesEntity)ObjectUtil.getObjectFromMap(SysBtUsersRolesEntity.class, this.getInParam());
+        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
+        SysBtUsersRolesEntity entity = ObjectUtil.getObjectFromMap(SysBtUsersRolesEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysBtUsersRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysBtUsersRolesService/delete
      */
     public RETURN delete(){
-        SysBtUsersRolesRepository dao = (SysBtUsersRolesRepository) FactoryUtil.getBean("SysBtUsersRolesRepository");
+        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysBtUsersRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysBtUsersRolesRepository dao = (SysBtUsersRolesRepository) FactoryUtil.getBean("SysBtUsersRolesRepository");
-        SysBtUsersRolesEntity entity = (SysBtUsersRolesEntity)ObjectUtil.getObjectFromMap(SysBtUsersRolesEntity.class, this.getInParam());
+        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
+        SysBtUsersRolesEntity entity = ObjectUtil.getObjectFromMap(SysBtUsersRolesEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysBtUsersRolesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysBtUsersRolesService/query
      */
     public RETURN query(){
-        SysBtUsersRolesRepository dao = (SysBtUsersRolesRepository) FactoryUtil.getBean("SysBtUsersRolesRepository");
+        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

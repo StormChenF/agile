@@ -41,7 +41,7 @@ public class SysRolesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_ROLES_ID" )
+    @Column(name = "sys_roles_id" )
     public Integer getSysRolesId() {
         return sysRolesId;
     }
@@ -51,7 +51,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_NAME" , nullable = false )
+    @Column(name = "role_name" , nullable = false )
     public String getRoleName() {
         return roleName;
     }
@@ -61,7 +61,7 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ROLE_DESC" , nullable = false )
+    @Column(name = "role_desc" , nullable = false )
     public String getRoleDesc() {
         return roleDesc;
     }
@@ -71,27 +71,27 @@ public class SysRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable = false )
-    public boolean getENABLE() {
+    @Column(name = "enable" , nullable = false )
+    public boolean getEnable() {
         return enable;
     }
 
-    public void setENABLE(boolean enable) {
+    public void setEnable(boolean enable) {
         this.enable = enable;
     }
 
     @Basic
-    @Column(name = "ISSYS" , nullable = false )
-    public boolean getISSYS() {
+    @Column(name = "issys" , nullable = false )
+    public boolean getIssys() {
         return issys;
     }
 
-    public void setISSYS(boolean issys) {
+    public void setIssys(boolean issys) {
         this.issys = issys;
     }
 
     @Basic
-    @Column(name = "MODULE_ID" , nullable = false )
+    @Column(name = "module_id" , nullable = false )
     public String getModuleId() {
         return moduleId;
     }

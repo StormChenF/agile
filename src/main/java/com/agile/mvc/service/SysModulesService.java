@@ -19,8 +19,8 @@ public class SysModulesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysModulesService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysModulesRepository dao = (SysModulesRepository) FactoryUtil.getBean("SysModulesRepository");
-        SysModulesEntity entity = (SysModulesEntity)ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
+        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
+        SysModulesEntity entity = ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysModulesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysModulesService/delete
      */
     public RETURN delete(){
-        SysModulesRepository dao = (SysModulesRepository) FactoryUtil.getBean("SysModulesRepository");
+        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysModulesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysModulesRepository dao = (SysModulesRepository) FactoryUtil.getBean("SysModulesRepository");
-        SysModulesEntity entity = (SysModulesEntity)ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
+        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
+        SysModulesEntity entity = ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysModulesService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysModulesService/query
      */
     public RETURN query(){
-        SysModulesRepository dao = (SysModulesRepository) FactoryUtil.getBean("SysModulesRepository");
+        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

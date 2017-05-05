@@ -47,7 +47,7 @@ public class SysAuthoritiesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "SYS_AUTHORITY_ID" )
+    @Column(name = "sys_authority_id" )
     public Integer getSysAuthorityId() {
         return sysAuthorityId;
     }
@@ -57,7 +57,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_MARK" , nullable = false )
+    @Column(name = "authority_mark" , nullable = false )
     public String getAuthorityMark() {
         return authorityMark;
     }
@@ -67,7 +67,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_NAME" )
+    @Column(name = "authority_name" )
     public String getAuthorityName() {
         return authorityName;
     }
@@ -77,7 +77,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "AUTHORITY_DESC" , nullable = false )
+    @Column(name = "authority_desc" , nullable = false )
     public String getAuthorityDesc() {
         return authorityDesc;
     }
@@ -87,37 +87,37 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "MESSAGE" , nullable = false )
-    public String getMESSAGE() {
+    @Column(name = "message" , nullable = false )
+    public String getMessage() {
         return message;
     }
 
-    public void setMESSAGE(String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 
     @Basic
-    @Column(name = "ENABLE" , nullable = false )
-    public boolean getENABLE() {
+    @Column(name = "enable" , nullable = false )
+    public boolean getEnable() {
         return enable;
     }
 
-    public void setENABLE(boolean enable) {
+    public void setEnable(boolean enable) {
         this.enable = enable;
     }
 
     @Basic
-    @Column(name = "ISSYS" , nullable = false )
-    public boolean getISSYS() {
+    @Column(name = "issys" , nullable = false )
+    public boolean getIssys() {
         return issys;
     }
 
-    public void setISSYS(boolean issys) {
+    public void setIssys(boolean issys) {
         this.issys = issys;
     }
 
     @Basic
-    @Column(name = "MODULE_ID" , nullable = false )
+    @Column(name = "module_id" , nullable = false )
     public String getModuleId() {
         return moduleId;
     }

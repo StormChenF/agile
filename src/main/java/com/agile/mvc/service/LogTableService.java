@@ -19,8 +19,8 @@ public class LogTableService extends AgileMainService {
      * 地址：http://localhost:8080/agile/LogTableService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        LogTableRepository dao = (LogTableRepository) FactoryUtil.getBean("LogTableRepository");
-        LogTableEntity entity = (LogTableEntity)ObjectUtil.getObjectFromMap(LogTableEntity.class, this.getInParam());
+        LogTableRepository dao = FactoryUtil.getBean(LogTableRepository.class);
+        LogTableEntity entity = ObjectUtil.getObjectFromMap(LogTableEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class LogTableService extends AgileMainService {
      * 地址：http://localhost:8080/agile/LogTableService/delete
      */
     public RETURN delete(){
-        LogTableRepository dao = (LogTableRepository) FactoryUtil.getBean("LogTableRepository");
+        LogTableRepository dao = FactoryUtil.getBean(LogTableRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class LogTableService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        LogTableRepository dao = (LogTableRepository) FactoryUtil.getBean("LogTableRepository");
-        LogTableEntity entity = (LogTableEntity)ObjectUtil.getObjectFromMap(LogTableEntity.class, this.getInParam());
+        LogTableRepository dao = FactoryUtil.getBean(LogTableRepository.class);
+        LogTableEntity entity = ObjectUtil.getObjectFromMap(LogTableEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class LogTableService extends AgileMainService {
      * 地址：http://localhost:8080/agile/LogTableService/query
      */
     public RETURN query(){
-        LogTableRepository dao = (LogTableRepository) FactoryUtil.getBean("LogTableRepository");
+        LogTableRepository dao = FactoryUtil.getBean(LogTableRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }

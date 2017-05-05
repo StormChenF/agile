@@ -19,8 +19,8 @@ public class SysPersistentLoginsService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysPersistentLoginsService/save
      */
     public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysPersistentLoginsRepository dao = (SysPersistentLoginsRepository) FactoryUtil.getBean("SysPersistentLoginsRepository");
-        SysPersistentLoginsEntity entity = (SysPersistentLoginsEntity)ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
+        SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
+        SysPersistentLoginsEntity entity = ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -30,7 +30,7 @@ public class SysPersistentLoginsService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysPersistentLoginsService/delete
      */
     public RETURN delete(){
-        SysPersistentLoginsRepository dao = (SysPersistentLoginsRepository) FactoryUtil.getBean("SysPersistentLoginsRepository");
+        SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
         String[] ids = this.getInParam("ids").toString().split(",");
         for (String id:ids) {
             dao.delete((Integer) ObjectUtil.cast(Integer.class,id.trim()));
@@ -43,8 +43,8 @@ public class SysPersistentLoginsService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        SysPersistentLoginsRepository dao = (SysPersistentLoginsRepository) FactoryUtil.getBean("SysPersistentLoginsRepository");
-        SysPersistentLoginsEntity entity = (SysPersistentLoginsEntity)ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
+        SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
+        SysPersistentLoginsEntity entity = ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }
@@ -54,7 +54,7 @@ public class SysPersistentLoginsService extends AgileMainService {
      * 地址：http://localhost:8080/agile/SysPersistentLoginsService/query
      */
     public RETURN query(){
-        SysPersistentLoginsRepository dao = (SysPersistentLoginsRepository) FactoryUtil.getBean("SysPersistentLoginsRepository");
+        SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
     }
