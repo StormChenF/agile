@@ -23,7 +23,7 @@ public class PropertiesUtil {
     private PropertiesUtil() {
         try {
             this.properties = new Properties();
-            InputStream in = new BufferedInputStream(new FileInputStream(Thread.currentThread().getContextClassLoader().getResource("/").getPath()+"/com/agile/configure/agile.properties"));
+            InputStream in = new BufferedInputStream(new FileInputStream(Thread.currentThread().getContextClassLoader().getResource("").getPath()+"com/agile/configure/agile.properties"));
             properties.load(in);
             in.close();
         } catch (IOException e) {

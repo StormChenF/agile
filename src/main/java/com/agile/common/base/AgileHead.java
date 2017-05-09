@@ -3,11 +3,12 @@ package com.agile.common.base;
 import com.agile.common.util.ServletUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public class AgileHead {
+public class AgileHead implements Serializable {
     private String url = "";
     private String ip = "";
     private String code = "";

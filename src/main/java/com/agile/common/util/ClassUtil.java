@@ -1,6 +1,6 @@
 package com.agile.common.util;
 
-import org.apache.commons.lang.ClassUtils;
+import org.springframework.util.ClassUtils;
 
 /**
  * Created by mydeathtrial on 2017/4/24
