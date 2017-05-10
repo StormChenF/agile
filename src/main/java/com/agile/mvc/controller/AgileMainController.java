@@ -57,6 +57,21 @@ public class AgileMainController {
     }
 
     /**
+     * 非法请求处理器
+     * @param request 请求对象
+     * @return 响应视图
+     */
+    @RequestMapping(value = {"/{module}/{service}","/{module}"})
+    public ModelAndView processor(HttpServletRequest request){
+        //初始化参数
+        ModelAndView modelAndView = new ModelAndView();//响应视图对象
+
+        //判断模块存在
+        modelAndView.addObject("head",new AgileHead(RETURN.NO_COMPLETE,request));
+        return modelAndView;
+    }
+
+    /**
      * agile框架处理器
      * @param request 请求对象
      * @param response 响应对象

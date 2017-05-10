@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
          updateCheck="false">
 
-    <diskStore path="com.agile.common.temp"/>
+    <diskStore path="temp"/>
 
     <defaultCache
             maxElementsInMemory="10000"
