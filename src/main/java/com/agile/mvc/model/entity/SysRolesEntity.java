@@ -120,7 +120,7 @@ public class SysRolesEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysRolesId;
+        result = 31 * result + (getSysRolesId() != null ? getSysRolesId().hashCode() : 0);
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         result = 31 * result + (roleDesc != null ? roleDesc.hashCode() : 0);
         result = 31 * result + (enable ? 1 : 0);

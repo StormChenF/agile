@@ -148,7 +148,7 @@ public class SysAuthoritiesEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysAuthorityId;
+        result = 31 * result + (getSysAuthorityId() != null ? getSysAuthorityId().hashCode() : 0);
         result = 31 * result + (authorityMark != null ? authorityMark.hashCode() : 0);
         result = 31 * result + (authorityName != null ? authorityName.hashCode() : 0);
         result = 31 * result + (authorityDesc != null ? authorityDesc.hashCode() : 0);

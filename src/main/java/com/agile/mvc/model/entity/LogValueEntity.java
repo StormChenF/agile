@@ -134,7 +134,7 @@ public class LogValueEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + logValueId;
+        result = 31 * result + (getLogValueId() != null ? getLogValueId().hashCode() : 0);
         result = 31 * result + logTableId;
         result = 31 * result + (columnName != null ? columnName.hashCode() : 0);
         result = 31 * result + (columnType != null ? columnType.hashCode() : 0);

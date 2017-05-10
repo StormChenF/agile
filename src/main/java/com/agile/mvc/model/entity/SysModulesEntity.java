@@ -204,7 +204,7 @@ public class SysModulesEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysModulesId;
+        result = 31 * result + (getSysModulesId() != null ? getSysModulesId().hashCode() : 0);
         result = 31 * result + (moduleName != null ? moduleName.hashCode() : 0);
         result = 31 * result + (moduleDesc != null ? moduleDesc.hashCode() : 0);
         result = 31 * result + (moduleType != null ? moduleType.hashCode() : 0);

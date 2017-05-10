@@ -106,7 +106,7 @@ public class DictionaryDataEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + code;
+        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
         result = 31 * result + (dicCode != null ? dicCode.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (value != null ? value.hashCode() : 0);

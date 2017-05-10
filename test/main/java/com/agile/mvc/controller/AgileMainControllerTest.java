@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by mydeathtrial on 2017/5/5
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(name = "context",locations = "classpath:com/agile/configure/spring-container.xml")
 @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
 public class AgileMainControllerTest {
@@ -49,28 +48,29 @@ public class AgileMainControllerTest {
     }
 
     protected MockHttpServletRequest getRequest(){
-        return this.request;
+        return request;
     }
 
     protected void setUrl(String url){
-        this.request.setServletPath(url);
+        request.setServletPath(url);
     }
 
     protected void setParameter(String key,String value){
-        this.request.setParameter(key,value);
+        request.setParameter(key,value);
     }
 
     protected void setMethod(String method){
-        this.request.setMethod(method);
+        request.setMethod(method);
     }
 
-    protected ModelAndView processor(HttpServletRequest request) throws Exception {
+    protected ModelAndView processor() throws Exception {
         request.setAttribute(HandlerMapping.INTROSPECT_TYPE_LEVEL_MAPPING, true);
         HandlerExecutionChain chain = handlerMapping.getHandler(request);
         ModelAndView model = null;
         try {
             model = handlerAdapter.handle(request, new MockHttpServletResponse(), chain.getHandler());
             System.out.println(JSONUtil.toJSONString(model.getModel().get("head")));
+            System.out.println(JSONUtil.toJSONString(model.getModel().get("result")));
         } catch (Exception e) {
             e.printStackTrace();
         }

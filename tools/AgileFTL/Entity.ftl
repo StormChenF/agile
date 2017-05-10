@@ -68,11 +68,11 @@ public class ${className}Entity implements Serializable {
     public int hashCode() {
         int result = 0;
     <#list columnList as property>
-        <#if property.propertyType == "Integer" || property.propertyType == "Double" || property.propertyType == "Float" || property.propertyType == "Long" || property.propertyType == "Short" || property.propertyType == "int" || property.propertyType == "double" || property.propertyType == "float" || property.propertyType == "long" || property.propertyType == "short" >
+        <#if property.propertyType == "int" || property.propertyType == "double" || property.propertyType == "float" || property.propertyType == "long" || property.propertyType == "short" >
         result = 31 * result + ${property.propertyName};
         <#elseif property.propertyType == "Boolean" || property.propertyType == "boolean">
         result = 31 * result + (${property.propertyName} ? 1 : 0);
-        <#elseif property.propertyType == "Date" || property.propertyType == "Timestamp">
+        <#elseif property.propertyType == "Date" || property.propertyType == "Timestamp" || property.propertyType == "Integer" || property.propertyType == "Double" || property.propertyType == "Float" || property.propertyType == "Long" || property.propertyType == "Short">
         result = 31 * result + (${property.getMethod}() != null ? ${property.getMethod}().hashCode() : 0);
         <#else>
         result = 31 * result + (${property.propertyName} != null ? ${property.propertyName}.hashCode() : 0);

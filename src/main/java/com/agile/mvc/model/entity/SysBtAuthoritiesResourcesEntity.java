@@ -78,7 +78,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysBtAuthoritiesResourcesId;
+        result = 31 * result + (getSysBtAuthoritiesResourcesId() != null ? getSysBtAuthoritiesResourcesId().hashCode() : 0);
         result = 31 * result + resourceId;
         result = 31 * result + authorityId;
         return result;

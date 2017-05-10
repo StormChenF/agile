@@ -18,9 +18,10 @@ public class SysPersistentLoginsService extends AgileMainService {
      * 新增
      * 地址：http://localhost:8080/agile/SysPersistentLoginsService/save
      */
-    public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public RETURN save() {
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
         SysPersistentLoginsEntity entity = ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
+        if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -31,20 +32,24 @@ public class SysPersistentLoginsService extends AgileMainService {
      */
     public RETURN delete(){
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
-        String[] ids = this.getInParam("ids").toString().split(",");
-        for (int i = 0 ; i < ids.length ; i++) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+        if (this.containsKey("ids")){
+            String[] ids = this.getInParamOfString("ids").split(",");
+            for (int i = 0 ; i < ids.length ; i++) {
+                dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+            }
+            return RETURN.SUCCESS;
         }
-        return RETURN.SUCCESS;
+        return RETURN.PARAMETER_ERROR;
     }
 
     /**
      * 修改
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
-    public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public RETURN update() {
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
         SysPersistentLoginsEntity entity = ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
+        if (ObjectUtil.isEmpty(entity.getSysPersistentLoginsId())) return RETURN.PARAMETER_ERROR;
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }

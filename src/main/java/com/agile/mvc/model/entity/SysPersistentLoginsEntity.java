@@ -107,7 +107,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysPersistentLoginsId;
+        result = 31 * result + (getSysPersistentLoginsId() != null ? getSysPersistentLoginsId().hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (series != null ? series.hashCode() : 0);
         result = 31 * result + (token != null ? token.hashCode() : 0);

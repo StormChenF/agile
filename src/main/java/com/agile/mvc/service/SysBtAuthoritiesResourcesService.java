@@ -18,9 +18,10 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      * 新增
      * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/save
      */
-    public RETURN save() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public RETURN save() {
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
         SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
+        if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
         return RETURN.SUCCESS;
     }
@@ -31,20 +32,24 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
      */
     public RETURN delete(){
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
-        String[] ids = this.getInParam("ids").toString().split(",");
-        for (int i = 0 ; i < ids.length ; i++) {
-            dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+        if (this.containsKey("ids")){
+            String[] ids = this.getInParamOfString("ids").split(",");
+            for (int i = 0 ; i < ids.length ; i++) {
+                dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+            }
+            return RETURN.SUCCESS;
         }
-        return RETURN.SUCCESS;
+        return RETURN.PARAMETER_ERROR;
     }
 
     /**
      * 修改
      * 地址：http://localhost:8080/agile/SysUsersService/update
      */
-    public RETURN update() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public RETURN update() {
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
         SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
+        if (ObjectUtil.isEmpty(entity.getSysBtAuthoritiesResourcesId())) return RETURN.PARAMETER_ERROR;
         dao.saveAndFlush(entity);
         return RETURN.SUCCESS;
     }

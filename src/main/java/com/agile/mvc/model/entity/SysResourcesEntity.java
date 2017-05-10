@@ -162,7 +162,7 @@ public class SysResourcesEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysResourcesId;
+        result = 31 * result + (getSysResourcesId() != null ? getSysResourcesId().hashCode() : 0);
         result = 31 * result + (resourceType != null ? resourceType.hashCode() : 0);
         result = 31 * result + (resourceName != null ? resourceName.hashCode() : 0);
         result = 31 * result + (resourceDesc != null ? resourceDesc.hashCode() : 0);

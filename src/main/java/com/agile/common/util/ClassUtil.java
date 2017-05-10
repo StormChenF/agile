@@ -6,6 +6,12 @@ import org.springframework.util.ClassUtils;
  * Created by mydeathtrial on 2017/4/24
  */
 public class ClassUtil extends ClassUtils {
+
+    /**
+     * 基本类型转换包装类
+     * @param name 类型名字
+     * @return 包装类名字
+     */
     public static String toWrapperNameFromName(String name){
         if ("byte".equals(name))return "Byte";
         if ("short".equals(name))return "Short";
@@ -17,4 +23,5 @@ public class ClassUtil extends ClassUtils {
         if ("char".equals(name))return "Character";
         return null;
     }
+
 }

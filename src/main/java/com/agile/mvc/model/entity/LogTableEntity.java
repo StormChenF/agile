@@ -120,7 +120,7 @@ public class LogTableEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + logTableId;
+        result = 31 * result + (getLogTableId() != null ? getLogTableId().hashCode() : 0);
         result = 31 * result + logMainId;
         result = 31 * result + (tableSchema != null ? tableSchema.hashCode() : 0);
         result = 31 * result + (tableName != null ? tableName.hashCode() : 0);

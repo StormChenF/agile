@@ -35,7 +35,7 @@ public class AgileGenerator {
             while (tablesData.next()) {
 
                 Map<String, Object> data = new HashMap<>();
-                String className, tableName, primaryKeyColumnName = null, primaryKeyPropertyType = null, propertyType;
+                String className, tableName, primaryKeyColumnName = null, primaryKeyPropertyName = null,primaryKeyPropertyType = null, propertyType;
 
                 List<HashMap<String, String>> columnList = new ArrayList<>();
                 List<String> importList = new ArrayList<>();
@@ -111,6 +111,7 @@ public class AgileGenerator {
                     //处理主键
                     if (StringUtil.compare(primaryKeyColumnName, columnName)) {
 
+                        primaryKeyPropertyName = StringUtil.toUpperName(columnName);
                         //主键字段类型
                         primaryKeyPropertyType = ClassUtil.toWrapperNameFromName(propertyType);
 
@@ -145,6 +146,7 @@ public class AgileGenerator {
 
                 //主键参数
                 data.put("primaryKeyPropertyType", primaryKeyPropertyType);
+                data.put("primaryKeyPropertyName",primaryKeyPropertyName);
 
                 //字段参数
                 data.put("columnList", columnList);

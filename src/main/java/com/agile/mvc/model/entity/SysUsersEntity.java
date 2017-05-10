@@ -263,7 +263,7 @@ public class SysUsersEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + sysUsersId;
+        result = 31 * result + (getSysUsersId() != null ? getSysUsersId().hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);

@@ -121,7 +121,7 @@ public class LogMainEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + logMainId;
+        result = 31 * result + (getLogMainId() != null ? getLogMainId().hashCode() : 0);
         result = 31 * result + (businessCode != null ? businessCode.hashCode() : 0);
         result = 31 * result + (targetType != null ? targetType.hashCode() : 0);
         result = 31 * result + (targetCode != null ? targetCode.hashCode() : 0);

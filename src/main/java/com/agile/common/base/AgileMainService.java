@@ -32,7 +32,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
         return execute(method);
     }
     @Transactional
-    private RETURN execute(Method method) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
+    RETURN execute(Method method) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
         //取消安全检测，提高性能
         method.setAccessible(true);
         return (RETURN) method.invoke(this);
