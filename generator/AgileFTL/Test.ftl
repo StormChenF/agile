@@ -16,8 +16,9 @@ public class ${className}Test extends AgileMainControllerTest {
         this.setUrl("${method.url}");
         this.setMethod("post");
 
-        this.setParameter("name", "张三");
-        this.setParameter("password", "123456");
+        <#list propertyList as property>
+        this.setParameter("${property}", "");
+        </#list>
 
         this.processor();
     }

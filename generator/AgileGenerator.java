@@ -151,12 +151,12 @@ public class AgileGenerator {
                 //字段参数
                 data.put("columnList", columnList);
                 Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-                cfg.setDirectoryForTemplateLoading(new File("./tools"));
+                cfg.setDirectoryForTemplateLoading(new File("./generator"));
                 cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
 
                 //Entity生成器
                 Template entityTemp = cfg.getTemplate("AgileFTL/Entity.ftl");
-                String entityFileName = className + "Entity.java";
+                String entityFileName = propertiesUtil.getProperty("agile.generator.entity_prefix") + className + propertiesUtil.getProperty("agile.generator.entity_suffix") + ".java";
                 File entityFile = new File("./src/main/java/com/agile/mvc/model/entity/" + entityFileName);
                 FileWriter entityFileFw = new FileWriter(entityFile);
                 BufferedWriter entityFileBw = new BufferedWriter(entityFileFw);
@@ -166,7 +166,7 @@ public class AgileGenerator {
 
                 //DAO生成器
                 Template repositoryTemp = cfg.getTemplate("AgileFTL/Repository.ftl");
-                String repositoryFileName = className + "Repository.java";
+                String repositoryFileName = propertiesUtil.getProperty("agile.generator.repository_prefix") + className + propertiesUtil.getProperty("agile.generator.repository_suffix") + ".java";
                 File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
                 FileWriter repositoryFileFw = new FileWriter(repositoryFile);
                 BufferedWriter repositoryFileBw = new BufferedWriter(repositoryFileFw);
@@ -176,7 +176,7 @@ public class AgileGenerator {
 
                 //service生成器
                 Template serviceTemp = cfg.getTemplate("AgileFTL/Service.ftl");
-                String ServiceFileName = className + "Service.java";
+                String ServiceFileName = propertiesUtil.getProperty("agile.generator.service_prefix") + className + propertiesUtil.getProperty("agile.generator.service_suffix") + ".java";
                 File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
                 FileWriter serviceFileFw = new FileWriter(serviceFile);
                 BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);

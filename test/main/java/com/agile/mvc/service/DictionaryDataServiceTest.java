@@ -15,8 +15,11 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setUrl("/agile/DictionaryDataService/update");
         this.setMethod("post");
 
-        this.setParameter("name", "张三");
-        this.setParameter("password", "123456");
+        this.setParameter("setName", "");
+        this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
+        this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
@@ -25,8 +28,11 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setUrl("/agile/DictionaryDataService/delete");
         this.setMethod("post");
 
-        this.setParameter("name", "张三");
-        this.setParameter("password", "123456");
+        this.setParameter("setName", "");
+        this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
+        this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
@@ -35,8 +41,11 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setUrl("/agile/DictionaryDataService/save");
         this.setMethod("post");
 
-        this.setParameter("name", "张三");
-        this.setParameter("password", "123456");
+        this.setParameter("setName", "");
+        this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
+        this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
@@ -45,8 +54,11 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setUrl("/agile/DictionaryDataService/query");
         this.setMethod("post");
 
-        this.setParameter("name", "张三");
-        this.setParameter("password", "123456");
+        this.setParameter("setName", "");
+        this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
+        this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
