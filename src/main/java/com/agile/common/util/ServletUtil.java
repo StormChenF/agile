@@ -15,7 +15,7 @@ public class ServletUtil {
      * @return 返回IP地址
      */
     @Contract("null -> null")
-    public static String getIPAddr(HttpServletRequest request){
+    public static String getCustomerIPAddr(HttpServletRequest request){
         if (request == null)
             return null;
         String ip = request.getHeader("X-Forwarded-For");
@@ -29,6 +29,10 @@ public class ServletUtil {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
             ip = request.getRemoteAddr();
+        return localhostFormat(ip);
+    }
+
+    public static String localhostFormat(String ip) {
         if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip))
             try {
                 ip = InetAddress.getLocalHost().getHostAddress();

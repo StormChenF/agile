@@ -7,6 +7,7 @@ import com.agile.common.base.AgileServiceInterface;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.ServletUtil;
 import com.agile.common.util.StringUtil;
+import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -37,6 +38,8 @@ import java.util.Iterator;
 @Controller
 @Scope("prototype")
 public class AgileMainController {
+    //日志工具
+    private org.apache.logging.log4j.Logger logger = LogManager.getLogger(this.getClass());
     //上下文
     private final ApplicationContext applicationContext;
     //服务对象
@@ -62,7 +65,7 @@ public class AgileMainController {
      * @return 响应视图
      */
     @RequestMapping(value = {"/{module}/{service}","/{module}"})
-    public ModelAndView processor(HttpServletRequest request){
+    public ModelAndView processor(HttpServletRequest request, @PathVariable("module") String module, @PathVariable("service") String service){
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
 
@@ -188,7 +191,7 @@ public class AgileMainController {
         inParam.put("app",moduleName);
         inParam.put("service",service);
         inParam.put("method",method);
-        inParam.put("ip", ServletUtil.getIPAddr(request));
+        inParam.put("ip", ServletUtil.getCustomerIPAddr(request));
         inParam.put("url", request.getRequestURL());
 
         //---------------------------------请求参数解析------------------------------------

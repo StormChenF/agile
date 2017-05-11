@@ -13,4 +13,8 @@
     <import resource="classpath:com/agile/configure/spring-cache.xml"/>
     <import resource="classpath:com/agile/configure/spring-druid.xml"/>
     <import resource="classpath:com/agile/configure/spring-jpa.xml"/>
+
+    <!--用于处理测试用例模拟服务器请求-->
+    <bean id="requestMappingHandlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean id="requestMappingHandlerAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 </beans>

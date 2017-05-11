@@ -1,6 +1,10 @@
 package com.agile.mvc.controller;
 
 import com.agile.common.util.JSONUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.ConfigurationSource;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,6 +23,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
 
 
 /**
@@ -27,6 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 @ContextConfiguration(locations = "classpath:com/agile/configure/spring-container.xml")
 @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
 public class AgileMainControllerTest {
+    //日志工具
+    private Logger logger = LogManager.getLogger(this.getClass());
     private static RequestMappingHandlerMapping handlerMapping;
     private static RequestMappingHandlerAdapter handlerAdapter;
     private static MockHttpServletRequest request;
@@ -84,8 +93,9 @@ public class AgileMainControllerTest {
         ModelAndView model = null;
         try {
             model = handlerAdapter.handle(request, new MockHttpServletResponse(), chain.getHandler());
-            System.out.println(JSONUtil.toJSONString(model.getModel().get("head")));
-//            System.out.println(JSONUtil.toJSONString(model.getModel().get("result")));
+            logger.info(JSONUtil.toJSONString(model.getModel().get("head")));
+            logger.trace(JSONUtil.toJSONString(model.getModel().get("result")));
+            logger.error(JSONUtil.toJSONString(model.getModel().get("head")));
         } catch (Exception e) {
             e.printStackTrace();
         }

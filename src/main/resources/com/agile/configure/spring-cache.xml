@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd ">
 
-    <cache:annotation-driven cache-manager="cacheManager"/>
+    <cache:annotation-driven/>
     <!-- 启用用户的缓存功能 -->
     <bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
         <property name="cache" ref="userEhCache" />
