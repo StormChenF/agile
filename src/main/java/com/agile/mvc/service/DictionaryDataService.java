@@ -2,6 +2,7 @@ package com.agile.mvc.service;
 
 import com.agile.common.base.AgileMainService;
 import com.agile.common.base.RETURN;
+import com.agile.common.util.CacheUtil;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import net.sf.ehcache.Cache;
@@ -11,7 +12,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryDataRepository;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
+import org.springframework.web.context.support.ServletContextResource;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -66,7 +71,8 @@ public class DictionaryDataService extends AgileMainService {
      */
     public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
-        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
+        CacheUtil.setCache("a",dao.findAll(this.getPageInfo()));
+        this.setOutParam("queryList",CacheUtil.getCache("a"));
         return RETURN.SUCCESS;
     }
 

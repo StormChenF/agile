@@ -214,6 +214,6 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
         if(this.containsKey("size")){
             size = this.getInParamOfInteger("size");
         }
-        return new PageRequest(page,size);
+        return PageRequest.of(page,size);
     }
 }

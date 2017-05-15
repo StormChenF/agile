@@ -40,17 +40,20 @@
         <property name="jpaProperties">
             <props>
                 <!--基本配置-->
+                <!--实体类对应数据库没有表 就生成一个表 -->
                 <prop key="hibernate.hbm2ddl.auto">${agile.jpa.hbm2ddl}</prop>
 
                 <!--二级缓存-->
                 <prop key="hibernate.current_session_context_class">${agile.jpa.current_session_context_class}</prop>
                 <prop key="hibernate.cache.use_second_level_cache">${agile.jpa.use_second_level_cache}</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
                 <prop key="hibernate.cache.use_structured_entries">${agile.jpa.use_structured_entries}</prop>
                 <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
-                <prop key="hibernate.net.sf.ehcache.configurationResourceName">agile-ehcache.xml</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">/com/agile/configure/agile-ehcache.xml</prop>
 
                 <!--查询缓存-->
                 <prop key="hibernate.cache.use_query_cache">${agile.jpa.use_query_cache}</prop>
+                <!--下划线转驼峰命名规则-->
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
                 <prop key="hibernate.show_sql">${agile.jpa.show_sql}</prop>
                 <prop key="hibernate.format_sql">${agile.jpa.format_sql}</prop>

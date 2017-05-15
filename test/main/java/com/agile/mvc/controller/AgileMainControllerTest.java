@@ -95,7 +95,6 @@ public class AgileMainControllerTest {
             model = handlerAdapter.handle(request, new MockHttpServletResponse(), chain.getHandler());
             logger.info(JSONUtil.toJSONString(model.getModel().get("head")));
             logger.trace(JSONUtil.toJSONString(model.getModel().get("result")));
-            logger.error(JSONUtil.toJSONString(model.getModel().get("head")));
         } catch (Exception e) {
             e.printStackTrace();
         }
