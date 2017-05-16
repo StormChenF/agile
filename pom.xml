@@ -480,6 +480,13 @@
             <version>3.2.5</version>
         </dependency>
 
+        <!--面向切面编程-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.0.BETA-5</version>
+        </dependency>
+
         <!--spring单元测试-->
         <dependency>
             <groupId>org.springframework</groupId>

@@ -1,4 +1,6 @@
-package com.agile.common.base;
+package com.agile.common.server;
+
+import com.agile.common.base.RETURN;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;

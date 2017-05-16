@@ -21,6 +21,17 @@ public class CacheUtil{
     }
 
     /**
+     * 设置/更新缓存
+     * @param key 索引值
+     * @param object 缓存值
+     */
+    public static void setCache(String key,Object object,int timeToIdleSeconds){
+        Element element = new Element(key, object);
+        element.setTimeToIdle(timeToIdleSeconds);
+        cache.put(element);
+    }
+
+    /**
      * 删除缓存
      * @param key 索引值
      */
