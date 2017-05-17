@@ -61,11 +61,10 @@ public class DictionaryDataService extends AgileMainService {
      * 地址：http://localhost:8080/agile/DictionaryDataService/query
      */
     @Scheduled(cron = "0/2 * * * * *")
-    public RETURN query(){
+    public void query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
         CacheUtil.setCache("a",dao.findAll(this.getPageInfo()));
         this.setOutParam("queryList",CacheUtil.getCache("a"));
-        return RETURN.SUCCESS;
     }
 
 
