@@ -5,6 +5,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -14,17 +16,31 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--用来帮助我们处理请求映射，决定是哪个controller的哪个方法来处理当前请求，异常处理-->
+    <description>spring mvc配置</description>
+    <!--开启mvc注解-->
     <mvc:annotation-driven/>
 
-    <!--开启切面代理 使得spring认识 @Aspect-->
+    <!--开启切面代理注解-->
     <aop:aspectj-autoproxy/>
-    <!--扫描主控制器注解-->
+
+    <!--开启缓存注解-->
+    <cache:annotation-driven cache-manager="${agile.cache.annotation}"/>
+
+    <!--开启任务调度注解-->
+    <task:annotation-driven/>
+
+    <!--事务注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <!--扫描注解-->
     <context:component-scan base-package="com.agile"/>
 
-    <task:annotation-driven/>
     <!--ContentNegotiatingViewResolver视图解析器路由配置-->
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <property name="ignoreAcceptHeader" value="true"/>

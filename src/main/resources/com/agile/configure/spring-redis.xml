@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    
-    <bean id = "redisPool" class = "redis.clients.jedis.JedisPoolConfig"
-          p:maxIdle ="${agile.redis.max_idle}"
-          p:minIdle ="${agile.redis.min_idle}"
-          p:maxWaitMillis = "${agile.redis.max_wait_millis}"
-          p:testOnReturn = "${agile.redis.test_on_return}"
-          p:testOnBorrow = "${agile.redis.test_on_borrow}"/>
+
+    <description>redis配置</description>
+    <bean id="redisPool" class="redis.clients.jedis.JedisPoolConfig"
+          p:maxIdle="${agile.redis.max_idle}"
+          p:minIdle="${agile.redis.min_idle}"
+          p:maxWaitMillis="${agile.redis.max_wait_millis}"
+          p:testOnReturn="${agile.redis.test_on_return}"
+          p:testOnBorrow="${agile.redis.test_on_borrow}"/>
 
     <!--<bean id = "sentinelConfig" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">-->
-        <!--<constructor-arg name = "master" value="agileMaster"/>-->
-        <!--<constructor-arg name = "sentinelHostAndPorts">-->
-            <!--<set>-->
-                <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
-                <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
-                <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
-                <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
-            <!--</set>-->
-        <!--</constructor-arg>-->
+    <!--<constructor-arg name = "master" value="agileMaster"/>-->
+    <!--<constructor-arg name = "sentinelHostAndPorts">-->
+    <!--<set>-->
+    <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
+    <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
+    <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
+    <!--&lt;!&ndash;<value>192.168.0.0:1800</value>&ndash;&gt;-->
+    <!--</set>-->
+    <!--</constructor-arg>-->
     <!--</bean>-->
 
-    <bean id = "jedisConnectionFactory" class = "org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
           p:host-name="${agile.redis.host}"
-          p:port ="${agile.redis.port}"
-          p:password ="${agile.redis.pass}"
-          p:pool-config-ref ="redisPool">
+          p:port="${agile.redis.port}"
+          p:password="${agile.redis.pass}"
+          p:pool-config-ref="redisPool">
         <!--<constructor-arg ref="sentinelConfig"/>-->
     </bean>
 
-    <bean id = "redisTemplate" class = "org.springframework.data.redis.core.StringRedisTemplate"
-          p:connectionFactory-ref ="jedisConnectionFactory"/>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+          p:connectionFactory-ref="jedisConnectionFactory"/>
 
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+          c:redisOperations-ref="redisTemplate"/>
 </beans>

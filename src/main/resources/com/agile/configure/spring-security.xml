@@ -3,12 +3,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security.xsd
-" default-autowire="byName" default-lazy-init="true">
+		http://www.springframework.org/schema/security/spring-security.xsd"
+       default-autowire="byName"
+       default-lazy-init="true">
 
+    <description>security配置</description>
     <!--免认证-->
     <security:http pattern="/**/*.png" security="none"/>
     <security:http pattern="/**/*.jpg" security="none"/>
@@ -16,31 +20,31 @@
     <security:http pattern="/**/*.gif" security="none"/>
     <security:http pattern="${agile.security.not_login_url}" security="none"/>
     <security:http entry-point-ref="authenticationProcessingFilterEntryPoint" use-expressions="true">
-        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
-        <security:custom-filter ref="loginFilter"  position="FORM_LOGIN_FILTER" />
-        <security:logout logout-url="${agile.security.login_out_url}" logout-success-url="${agile.security.login_success_url}" delete-cookies="JSESSIONID" invalidate-session="true"/>
+        <security:custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER"/>
+        <security:logout logout-url="${agile.security.login_out_url}"
+                         logout-success-url="${agile.security.login_success_url}" delete-cookies="JSESSIONID"
+                         invalidate-session="true"/>
         <security:session-management invalid-session-url="${agile.security.invalid_session_url}"/>
         <security:csrf request-matcher-ref="agileCsrfSecurityRequestMatcher"></security:csrf>
     </security:http>
 
     <!--CSRF过滤器-->
-    <bean id="agileCsrfSecurityRequestMatcher" class="com.agile.common.security.AgileCsrfSecurityRequestMatcher">
-        <property name="excludeUrl" value="${agile.security.csrf_exclude_url}"/>
-    </bean>
+    <bean id="agileCsrfSecurityRequestMatcher" class="com.agile.common.security.AgileCsrfSecurityRequestMatcher"
+          p:excludeUrl="${agile.security.csrf_exclude_url}"/>
 
-    <!-- 未登录的切入点 -->
-    <bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-        <constructor-arg value="${agile.security.not_login_url}"/>
-    </bean>
+    <!--未登录的切入点-->
+    <bean id="authenticationProcessingFilterEntryPoint"
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
+          c:loginFormUrl="${agile.security.not_login_url}"/>
 
     <!--登录认证体系-->
-    <bean id="loginFilter" class="com.agile.common.security.AgileUsernamePasswordAuthenticationFilter">
-        <property name="filterProcessesUrl" value="${agile.security.login_url}"/>
-        <property name="authenticationSuccessHandler" ref="AuthenticationSuccessHandler"/>
-        <property name="authenticationFailureHandler" ref="AuthenticationFailureHandler"/>
-        <property name="authenticationManager" ref="authenticationManager"/>
-    </bean>
+    <bean id="loginFilter" class="com.agile.common.security.AgileUsernamePasswordAuthenticationFilter"
+          p:filterProcessesUrl="${agile.security.login_url}"
+          p:authenticationSuccessHandler-ref="AuthenticationSuccessHandler"
+          p:authenticationFailureHandler-ref="AuthenticationFailureHandler"
+          p:authenticationManager-ref="authenticationManager"/>
 
     <!--权限认证体系-->
     <security:authentication-manager alias="authenticationManager" erase-credentials="false">
@@ -48,21 +52,18 @@
     </security:authentication-manager>
 
     <!--验证成功默认显示页面 -->
-    <bean id="AuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-        <property name="alwaysUseDefaultTargetUrl" value="true" />
-        <!--此处可以请求登录首页的action地址  -->
-        <property name="defaultTargetUrl" value="${agile.security.success_url}" />
-    </bean>
+    <bean id="AuthenticationSuccessHandler"
+          class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"
+          p:alwaysUseDefaultTargetUrl="true"
+          p:defaultTargetUrl="${agile.security.success_url}"/>
 
     <!--验证失败显示页面-->
-    <bean id="AuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-        <property name="defaultFailureUrl" value="${agile.security.failure_url}" />
-    </bean>
-
-
+    <bean id="AuthenticationFailureHandler"
+          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+          p:defaultFailureUrl="${agile.security.failure_url}"/>
 
     <!-- 定义上下文返回的消息的国际化 -->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="com.agile.configure.agile-message"/>
-    </bean>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:basename="com.agile.configure.agile-message"/>
+
 </beans>
