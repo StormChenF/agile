@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd ">
 
-    <cache:annotation-driven />
+    <cache:annotation-driven cache-manager="redisCacheManager"/>
     <!-- 启用用户的缓存功能 -->
     <!--<bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">-->
         <!--<property name="cache" ref="userEhCache" />-->
@@ -18,12 +18,15 @@
         <!--<property name="cacheManager" ref="cacheManager" />-->
     <!--</bean>-->
 
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="cacheManagerFactory"/>
+    <bean id = "redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+          c:redisOperations-ref="redisTemplate"/>
+
+    <bean id = "ehCacheCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehCacheManagerFactory"/>
         <property name="transactionAware" value="true"/>
     </bean>
 
-    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <bean id = "ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:com/agile/configure/agile-ehcache.xml"/>
         <property name="shared" value="true"/>
         <property name="cacheManagerName" value="agileCacheManager"/>

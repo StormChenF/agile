@@ -1,8 +1,6 @@
 package com.agile.mvc.service;
 
-import com.agile.common.util.CacheUtil;
 import com.agile.mvc.controller.AgileMainControllerTest;
-import org.apache.commons.logging.LogFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;

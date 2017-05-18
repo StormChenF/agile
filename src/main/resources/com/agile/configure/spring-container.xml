@@ -9,8 +9,10 @@
 ">
     <context:property-placeholder location="classpath:com/agile/configure/agile.properties" ignore-unresolvable="true" ignore-resource-not-found="true" file-encoding="UTF-8"/>
     <import resource="classpath:com/agile/configure/spring-web-mvc.xml"/>
-    <import resource="classpath:com/agile/configure/spring-security.xml"/>
-    <import resource="classpath:com/agile/configure/spring-cache.xml"/>
     <import resource="classpath:com/agile/configure/spring-druid.xml"/>
     <import resource="classpath:com/agile/configure/spring-jpa.xml"/>
+    <import resource="classpath:com/agile/configure/spring-security.xml"/>
+    <import resource="classpath:com/agile/configure/spring-cache.xml"/>
+    <import resource="classpath:com/agile/configure/spring-redis.xml"/>
+
 </beans>

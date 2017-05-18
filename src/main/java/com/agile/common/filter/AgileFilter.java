@@ -1,7 +1,8 @@
 package com.agile.common.filter;
 
+import com.agile.common.base.AbstractCacheUtil;
 import com.agile.common.util.BooleanUtil;
-import com.agile.common.util.CacheUtil;
+import com.agile.common.server.EhCacheService;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,11 +10,11 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 
 /**
  * Created by 佟盟
@@ -21,6 +22,8 @@ import java.lang.reflect.Method;
 @Component
 @Aspect
 public class AgileFilter {
+    @Autowired
+    AbstractCacheUtil redisService;
 
     @Pointcut(value = "execution(@org.springframework.scheduling.annotation.Scheduled * *(..))")
     public void taskPointCut(){}
@@ -53,9 +56,9 @@ public class AgileFilter {
                 timeToldleSeconds = 60 * 60 ;
             }
         }
-        if(ObjectUtil.isEmpty(CacheUtil.getCache(cacheKey))
-                || !BooleanUtil.toBoolean(CacheUtil.getCache(cacheKey))){
-            CacheUtil.setCache(cacheKey,true,timeToldleSeconds);
+        if(ObjectUtil.isEmpty(redisService.getCache(cacheKey))
+                || !BooleanUtil.toBoolean(redisService.getCache(cacheKey))){
+            redisService.setCache(cacheKey,true,timeToldleSeconds);
             try {
                 return proceedingJoinPoint.proceed();
             } catch (Throwable throwable) {

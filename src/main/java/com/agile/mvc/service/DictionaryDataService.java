@@ -2,7 +2,8 @@ package com.agile.mvc.service;
 
 import com.agile.common.server.AgileMainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.CacheUtil;
+import com.agile.common.server.EhCacheService;
+import com.agile.common.server.RedisService;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -63,10 +64,13 @@ public class DictionaryDataService extends AgileMainService {
     @Scheduled(cron = "0/2 * * * * *")
     public void query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
-        CacheUtil.setCache("a",dao.findAll(this.getPageInfo()));
-        this.setOutParam("queryList",CacheUtil.getCache("a"));
+        int a = 123;EhCacheService cache = FactoryUtil.getBean(EhCacheService.class);
+        cache.setCache("a",a);
+        if(ObjectUtil.isEmpty(cache.getCache("a"))){
+            System.out.println("kong");
+        }else {
+            System.out.println("you:"+ cache.getCache("a"));
+        }
     }
-
-
 
 }
