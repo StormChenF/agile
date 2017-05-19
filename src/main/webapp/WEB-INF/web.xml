@@ -39,6 +39,14 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/agile/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>agileCsrfHeaderFilter</filter-name>
+        <filter-class>com.agile.common.security.AgileCsrfHeaderFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>agileCsrfHeaderFilter</filter-name>
+        <url-pattern>/agile/*</url-pattern>
+    </filter-mapping>
 
     <!--防止内存泄漏-->
     <listener>

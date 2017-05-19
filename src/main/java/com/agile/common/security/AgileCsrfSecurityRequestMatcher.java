@@ -12,39 +12,46 @@ import java.util.HashSet;
  * Created by mydeathtrial on 2017/3/8
  */
 public class AgileCsrfSecurityRequestMatcher implements RequestMatcher {
+
     /**
      * 需要排除的请求类型
      */
-    private final HashSet<String> allowedMethods;
-    private AgileCsrfSecurityRequestMatcher() {
-        this.allowedMethods = new HashSet<>(Arrays.asList("GET", "HEAD", "TRACE", "OPTIONS"));
-    }
+    private String allowedMethod;
 
     /**
      * 需要排除的url列表
      */
-    private String excludeUrl;
+    private String allowedUrl;
 
     @Override
     public boolean matches(HttpServletRequest httpServletRequest) {
-        if (!StringUtil.isEmpty(excludeUrl)) {
+        if (!StringUtil.isEmpty(allowedUrl)) {
             String servletPath = httpServletRequest.getServletPath();
-            String[] excludeUrls = excludeUrl.split(",");
-            for (int i = 0 ; i < excludeUrls.length ; i++) {
-                if (servletPath.contains(excludeUrls[i])) {
+            String[] allowedUrls = allowedUrl.split(",");
+            for (int i = 0 ; i < allowedUrls.length ; i++) {
+                if (servletPath.contains(allowedUrls[i])) {
                     return false;
                 }
             }
         }
-        return !this.allowedMethods.contains(httpServletRequest.getMethod());
+        if (!StringUtil.isEmpty(allowedMethod)) {
+            String servletMethod = httpServletRequest.getMethod();
+            String[] allowedMethods = allowedMethod.split(",");
+            for (int i = 0 ; i < allowedMethods.length ; i++) {
+                if (servletMethod.contains(allowedMethods[i])) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
-    public String getExcludeUrl() {
-        return excludeUrl;
+    public void setAllowedUrl(String allowedUrl) {
+        this.allowedUrl = allowedUrl;
     }
 
-    public void setExcludeUrl(String excludeUrl) {
-        this.excludeUrl = excludeUrl;
+    public void setAllowedMethod(String allowedMethod) {
+        this.allowedMethod = allowedMethod;
     }
 
 }

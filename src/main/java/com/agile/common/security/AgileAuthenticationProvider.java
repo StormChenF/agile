@@ -32,14 +32,14 @@ public class AgileAuthenticationProvider implements AuthenticationProvider {
      */
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        // 1. Check username and password
+        // 1. 校验用户名密码
         try {
             doLogin(authentication);
         } catch (Exception e) {
             if (e instanceof AuthenticationException) {
                 throw (AuthenticationException) e;
             }
-            logger.error("failure to doLogin", e);
+            logger.error("登陆失败", e);
         }
 
         // 2. Get UserDetails

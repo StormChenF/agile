@@ -30,7 +30,8 @@
 
     <!--CSRF过滤器-->
     <agile-security:bean id="agileCsrfSecurityRequestMatcher" class="com.agile.common.security.AgileCsrfSecurityRequestMatcher"
-                         p:excludeUrl="${agile.security.csrf_exclude_url}"/>
+                         p:allowedUrl="${agile.security.csrf_allow_url}"
+                         p:allowedMethod="${agile.security.csrf_allow_methods}"/>
 
     <!--未登录的切入点-->
     <agile-security:bean id="authenticationProcessingFilterEntryPoint"
