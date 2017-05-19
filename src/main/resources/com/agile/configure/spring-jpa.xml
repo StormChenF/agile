@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress ALL -->
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:c="http://www.springframework.org/schema/c"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+<agile-jpa:beans xmlns:agile-jpa="http://www.springframework.org/schema/beans"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+                 xmlns:aop="http://www.springframework.org/schema/aop"
+                 xmlns:tx="http://www.springframework.org/schema/tx"
+                 xmlns:p="http://www.springframework.org/schema/p"
+                 xmlns:c="http://www.springframework.org/schema/c"
+                 xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
@@ -17,51 +17,51 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
 ">
 
-    <description>数据持久化框架JPA配置</description>
+    <agile-jpa:description>数据持久化框架JPA配置</agile-jpa:description>
 
     <!--JPA dao包扫描，自动完成DAO注入，添加事务-->
     <jpa:repositories base-package="com.agile.mvc.model.dao" transaction-manager-ref="transactionManager"
                       entity-manager-factory-ref="entityManagerFactory"/>
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:dataSource-ref="dataSource"
-          p:jpaVendorAdapter-ref="hibernateJpaVendorAdapter"
-          p:packagesToScan="com.agile.mvc.model.entity">
+    <agile-jpa:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+                    p:dataSource-ref="dataSource"
+                    p:jpaVendorAdapter-ref="hibernateJpaVendorAdapter"
+                    p:packagesToScan="com.agile.mvc.model.entity">
         <!--JPA属性-->
-        <property name="jpaProperties">
-            <props>
+        <agile-jpa:property name="jpaProperties">
+            <agile-jpa:props>
                 <!--基本配置-->
                 <!--实体类对应数据库没有表 就生成一个表 -->
-                <prop key="hibernate.hbm2ddl.auto">${agile.jpa.hbm2ddl}</prop>
+                <agile-jpa:prop key="hibernate.hbm2ddl.auto">${agile.jpa.hbm2ddl}</agile-jpa:prop>
 
                 <!--二级缓存-->
-                <prop key="hibernate.current_session_context_class">${agile.jpa.current_session_context_class}</prop>
-                <prop key="hibernate.cache.use_second_level_cache">${agile.jpa.use_second_level_cache}</prop>
-                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-                <prop key="hibernate.cache.use_structured_entries">${agile.jpa.use_structured_entries}</prop>
-                <prop key="hibernate.cache.region.factory_class">
+                <agile-jpa:prop key="hibernate.current_session_context_class">${agile.jpa.current_session_context_class}</agile-jpa:prop>
+                <agile-jpa:prop key="hibernate.cache.use_second_level_cache">${agile.jpa.use_second_level_cache}</agile-jpa:prop>
+                <agile-jpa:prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</agile-jpa:prop>
+                <agile-jpa:prop key="hibernate.cache.use_structured_entries">${agile.jpa.use_structured_entries}</agile-jpa:prop>
+                <agile-jpa:prop key="hibernate.cache.region.factory_class">
                     org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-                </prop>
-                <prop key="net.sf.ehcache.configurationResourceName">/com/agile/configure/agile-ehcache.xml</prop>
+                </agile-jpa:prop>
+                <agile-jpa:prop key="net.sf.ehcache.configurationResourceName">/com/agile/configure/agile-ehcache.xml</agile-jpa:prop>
 
                 <!--查询缓存-->
-                <prop key="hibernate.cache.use_query_cache">${agile.jpa.use_query_cache}</prop>
+                <agile-jpa:prop key="hibernate.cache.use_query_cache">${agile.jpa.use_query_cache}</agile-jpa:prop>
                 <!--下划线转驼峰命名规则-->
-                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-                <prop key="hibernate.show_sql">${agile.jpa.show_sql}</prop>
-                <prop key="hibernate.format_sql">${agile.jpa.format_sql}</prop>
-            </props>
-        </property>
-    </bean>
+                <agile-jpa:prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</agile-jpa:prop>
+                <agile-jpa:prop key="hibernate.show_sql">${agile.jpa.show_sql}</agile-jpa:prop>
+                <agile-jpa:prop key="hibernate.format_sql">${agile.jpa.format_sql}</agile-jpa:prop>
+            </agile-jpa:props>
+        </agile-jpa:property>
+    </agile-jpa:bean>
 
     <!--事务处理-->
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"/>
+    <agile-jpa:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+                    p:entityManagerFactory-ref="entityManagerFactory"/>
 
     <!--指定Jpa持久化实现厂商类,这里以Hibernate为例-->
-    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
-          p:generateDdl="${agile.jpa.generate_ddl}"
-          p:database="${agile.jpa.db}"
-          p:databasePlatform="${agile.jpa.database_platform}"/>
+    <agile-jpa:bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                    p:generateDdl="${agile.jpa.generate_ddl}"
+                    p:database="${agile.jpa.db}"
+                    p:databasePlatform="${agile.jpa.database_platform}"/>
 
-</beans>
+</agile-jpa:beans>
