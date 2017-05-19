@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agile-redis:beans xmlns:agile-redis="http://www.springframework.org/schema/beans"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xmlns:p="http://www.springframework.org/schema/p"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
                    xmlns:c="http://www.springframework.org/schema/c"
-                   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+                   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                   http://www.springframework.org/schema/beans/spring-beans.xsd"
+                   default-lazy-init="true">
 
     <agile-redis:description>redis配置</agile-redis:description>
+
     <agile-redis:bean id="redisPool" class="redis.clients.jedis.JedisPoolConfig"
                       p:maxIdle="${agile.redis.max_idle}"
                       p:minIdle="${agile.redis.min_idle}"

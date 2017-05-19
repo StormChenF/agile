@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agile-mvc:beans xmlns:agile-mvc="http://www.springframework.org/schema/beans"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+                 xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
                  xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                 http://www.springframework.org/schema/util
+                 http://www.springframework.org/schema/util/spring-util.xsd">
 
     <agile-mvc:description>spring mvc配置</agile-mvc:description>
 
-    <!--ContentNegotiatingViewResolver视图解析器路由配置-->
-    <agile-mvc:bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <agile-mvc:property name="ignoreAcceptHeader" value="true"/>
-        <agile-mvc:property name="favorPathExtension" value="true"/>
-        <agile-mvc:property name="favorParameter" value="true"/>
-        <agile-mvc:property name="parameterName" value="format"/>
-        <agile-mvc:property name="defaultContentType" value="application/json;charset=UTF-8"/>
-        <agile-mvc:property name="mediaTypes">
-            <agile-mvc:map>
-                <agile-mvc:entry key="atom" value="application/atom+xml"/>
-                <agile-mvc:entry key="form" value="application/x-www-form-urlencoded"/>
-                <agile-mvc:entry key="json" value="application/json"/>
-                <agile-mvc:entry key="octet-stream" value="application/octet-stream"/>
-                <agile-mvc:entry key="event-stream" value="text/event-stream"/>
-                <agile-mvc:entry key="pdf" value="application/pdf"/>
-                <agile-mvc:entry key="xhtml" value="application/xhtml+xml"/>
-                <agile-mvc:entry key="xml" value="application/xml"/>
-                <agile-mvc:entry key="gif" value="image/gif"/>
-                <agile-mvc:entry key="jpeg" value="image/jpeg"/>
-                <agile-mvc:entry key="png" value="image/png"/>
-                <agile-mvc:entry key="multipart" value="multipart/form-data"/>
-                <agile-mvc:entry key="html" value="text/html"/>
-                <agile-mvc:entry key="plain" value="text/plain"/>
-                <agile-mvc:entry key="markdown" value="text/markdown"/>
-            </agile-mvc:map>
-        </agile-mvc:property>
-    </agile-mvc:bean>
+    <!--响应视图解析器路由-->
+    <agile-mvc:bean id="viewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="1" p:contentNegotiationManager-ref="contentNegotiationManager" p:defaultViews-ref="defaultViews"/>
 
+    <!--路由配置-->
+    <agile-mvc:bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"
+                    p:ignoreAcceptHeader="true"
+                    p:favorPathExtension="true"
+                    p:favorParameter="true"
+                    p:parameterName="format"
+                    p:defaultContentType="application/json;charset=UTF-8"
+                    p:mediaTypes-ref="mediaTypes"/>
+
+    <!--多媒体类型-->
+    <util:properties id="mediaTypes">
+        <agile-mvc:prop key="atom">application/atom+xml</agile-mvc:prop>
+        <agile-mvc:prop key="form">application/x-www-form-urlencoded</agile-mvc:prop>
+        <agile-mvc:prop key="json">application/json</agile-mvc:prop>
+        <agile-mvc:prop key="octet-stream">application/octet-stream</agile-mvc:prop>
+        <agile-mvc:prop key="event-stream">text/event-stream</agile-mvc:prop>
+        <agile-mvc:prop key="pdf">application/pdf</agile-mvc:prop>
+        <agile-mvc:prop key="xhtml">application/xhtml+xml</agile-mvc:prop>
+        <agile-mvc:prop key="xml">application/xml</agile-mvc:prop>
+        <agile-mvc:prop key="gif">image/gif</agile-mvc:prop>
+        <agile-mvc:prop key="jpeg">image/jpeg</agile-mvc:prop>
+        <agile-mvc:prop key="png">image/png</agile-mvc:prop>
+        <agile-mvc:prop key="multipart">multipart/form-data</agile-mvc:prop>
+        <agile-mvc:prop key="html">text/html</agile-mvc:prop>
+        <agile-mvc:prop key="plain">text/plain</agile-mvc:prop>
+        <agile-mvc:prop key="markdown">text/markdown</agile-mvc:prop>
+    </util:properties>
+
+    <!--默认视图列表-->
+    <util:list id="defaultViews">
+        <agile-mvc:ref bean="mappingJackson2JsonView"/>
+        <agile-mvc:ref bean="marshallingView"/>
+    </util:list>
+
+    <!--json视图-->
+    <agile-mvc:bean id="mappingJackson2JsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" p:objectMapper-ref="objectMapper"/>
     <!--json视图解析时间格式化配置-->
-    <agile-mvc:bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
-        <agile-mvc:property name="indentOutput" value="true"/>
-        <agile-mvc:property name="simpleDateFormat" value="yyyy-MM-dd HH:mm:ss"/>
-    </agile-mvc:bean>
+    <agile-mvc:bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean" p:indentOutput="true" p:simpleDateFormat="yyyy-MM-dd HH:mm:ss"/>
 
-    <!--spring mvc响应视图解析器-->
-    <agile-mvc:bean id="viewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" 
-                    p:order="1" p:contentNegotiationManager-ref="contentNegotiationManager">
-        <agile-mvc:property name="defaultViews">
-            <agile-mvc:list>
-                <agile-mvc:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
-                    <agile-mvc:property name="objectMapper" ref="objectMapper"/>
-                </agile-mvc:bean>
-                <agile-mvc:bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-                    <agile-mvc:constructor-arg>
-                        <agile-mvc:bean class="org.springframework.oxm.xstream.XStreamMarshaller"/>
-                    </agile-mvc:constructor-arg>
-                </agile-mvc:bean>
-            </agile-mvc:list>
-        </agile-mvc:property>
-    </agile-mvc:bean>
+    <!--xml视图-->
+    <agile-mvc:bean id="marshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView" c:marshaller-ref="xStreamMarshaller"/>
 
+    <agile-mvc:bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
     <!--支持上传文件-->
     <agile-mvc:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
                     p:maxUploadSize="${agile.upload.max_upload_size}"

@@ -53,7 +53,7 @@ public class AgileFilter {
                 timeToldleSeconds = 60 * 60;
             }
         }
-        if (ObjectUtil.isEmpty(CacheUtil.getCache(cacheKey)) || !BooleanUtil.toBoolean(CacheUtil.getCache(cacheKey))) {
+        if (ObjectUtil.isEmpty(CacheUtil.getCache(cacheKey)) || !BooleanUtil.toBoolean(String.valueOf(CacheUtil.getCache(cacheKey)))) {
             CacheUtil.setCache(cacheKey, true, timeToldleSeconds);
             try {
                 return proceedingJoinPoint.proceed();

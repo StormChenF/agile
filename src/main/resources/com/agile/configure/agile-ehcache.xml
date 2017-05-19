@@ -13,7 +13,7 @@
             memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </defaultCache>
-    <cache name="agileCache" maxElementsInMemory="1000" overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="300" timeToLiveSeconds="600" diskExpiryThreadIntervalSeconds="600"/>
+    <cache name="agileCache" maxElementsInMemory="1000" overflowToDisk="true" diskPersistent="false" timeToIdleSeconds="300" timeToLiveSeconds="600" diskExpiryThreadIntervalSeconds="600"/>
     <cache name="securityCache" maxElementsInMemory="1000" overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="300" timeToLiveSeconds="600" diskExpiryThreadIntervalSeconds="600"/>
     <cache name="org.hibernate.cache.spi.UpdateTimestampsCache" maxElementsInMemory="5" timeToLiveSeconds="120" overflowToDisk="true"/>
     <cache name="org.hibernate.cache.internal.StandardQueryCache" maxElementsInMemory="5000" eternal="true" overflowToDisk="true"/>
