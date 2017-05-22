@@ -1,8 +1,6 @@
 package com.agile.mvc.service;
 
 import com.agile.mvc.controller.AgileMainControllerTest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -12,8 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DictionaryDataServiceTest extends AgileMainControllerTest {
-    //日志工具
-    private Logger logger = LogManager.getLogger(this.getClass());
     @Test
     public void update() throws Exception {
         this.setUrl("/agile/DictionaryDataService/update");
@@ -22,8 +18,8 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
+        this.setParameter("setDicCode", "");
 
         this.processor();
     }
@@ -35,8 +31,8 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
+        this.setParameter("setDicCode", "");
 
         this.processor();
     }
@@ -48,8 +44,8 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
+        this.setParameter("setDicCode", "");
 
         this.processor();
     }
@@ -61,8 +57,8 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
+        this.setParameter("setDicCode", "");
 
         this.processor();
     }

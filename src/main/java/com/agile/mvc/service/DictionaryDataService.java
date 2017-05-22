@@ -2,11 +2,8 @@ package com.agile.mvc.service;
 
 import com.agile.common.server.AgileMainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.server.EhCacheService;
-import com.agile.common.server.RedisService;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryDataRepository;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
@@ -61,16 +58,9 @@ public class DictionaryDataService extends AgileMainService {
      * 查询
      * 地址：http://localhost:8080/agile/DictionaryDataService/query
      */
-    @Scheduled(cron = "0/2 * * * * *")
-    public void query(){
+    public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
-        int a = 123;EhCacheService cache = FactoryUtil.getBean(EhCacheService.class);
-        cache.setCache("a",a);
-        if(ObjectUtil.isEmpty(cache.getCache("a"))){
-            System.out.println("kong");
-        }else {
-            System.out.println("you:"+ cache.getCache("a"));
-        }
+        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
+        return RETURN.SUCCESS;
     }
-
 }

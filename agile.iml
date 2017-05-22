@@ -4,10 +4,12 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-cache.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-annotation.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-container.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-druid.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-ehcache.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-jpa.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-redis.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-security.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-web-mvc.xml</file>
         </fileset>
@@ -22,9 +24,9 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/generator" />
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/generator" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -38,8 +40,11 @@
       <sourceFolder url="file://$MODULE_DIR$/generator" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/main.resource" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/test/main/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/test/main/resource" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/main/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/test-logs" />
+      <excludeFolder url="file://$MODULE_DIR$/test-temp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
