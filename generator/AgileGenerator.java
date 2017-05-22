@@ -155,7 +155,7 @@ public class AgileGenerator {
                 cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
 
                 //Entity生成器
-                Template entityTemp = cfg.getTemplate("AgileFTL/Entity.ftl");
+                Template entityTemp = cfg.getTemplate("agileTemplate/Entity.ftl");
                 String entityFileName = propertiesUtil.getProperty("agile.generator.entity_prefix") + className + propertiesUtil.getProperty("agile.generator.entity_suffix") + ".java";
                 File entityFile = new File("./src/main/java/com/agile/mvc/model/entity/" + entityFileName);
                 FileWriter entityFileFw = new FileWriter(entityFile);
@@ -165,7 +165,7 @@ public class AgileGenerator {
                 entityFileFw.close();
 
                 //DAO生成器
-                Template repositoryTemp = cfg.getTemplate("AgileFTL/Repository.ftl");
+                Template repositoryTemp = cfg.getTemplate("agileTemplate/Repository.ftl");
                 String repositoryFileName = propertiesUtil.getProperty("agile.generator.repository_prefix") + className + propertiesUtil.getProperty("agile.generator.repository_suffix") + ".java";
                 File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
                 FileWriter repositoryFileFw = new FileWriter(repositoryFile);
@@ -175,7 +175,7 @@ public class AgileGenerator {
                 repositoryFileFw.close();
 
                 //service生成器
-                Template serviceTemp = cfg.getTemplate("AgileFTL/Service.ftl");
+                Template serviceTemp = cfg.getTemplate("agileTemplate/Service.ftl");
                 String ServiceFileName = propertiesUtil.getProperty("agile.generator.service_prefix") + className + propertiesUtil.getProperty("agile.generator.service_suffix") + ".java";
                 File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
                 FileWriter serviceFileFw = new FileWriter(serviceFile);

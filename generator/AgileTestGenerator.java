@@ -10,7 +10,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,7 +83,7 @@ public class AgileTestGenerator {
                 Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
                 cfg.setDirectoryForTemplateLoading(new File("./generator"));
                 cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-                Template testTemp = cfg.getTemplate("AgileFTL/Test.ftl");
+                Template testTemp = cfg.getTemplate("agileTemplate/Test.ftl");
                 String testFileName = serviceName + "Test.java";
                 File testFile = new File("./test/main/java/com/agile/mvc/service/" + testFileName);
                 FileWriter testFileFw = new FileWriter(testFile);
