@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * Created by 佟盟 on 2017/3/7
  */
+@WebFilter(filterName = "agileCsrfHeaderFilter",urlPatterns = "/*")
 public class AgileCsrfHeaderFilter extends OncePerRequestFilter implements Filter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

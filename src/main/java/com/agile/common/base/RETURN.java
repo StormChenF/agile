@@ -15,7 +15,7 @@ public final class RETURN {
     public static RETURN NO_MODULE = new RETURN("000001","请求模块不存在！");
     public static RETURN NO_SERVICE = new RETURN("000002","请求服务不存在！");
     public static RETURN NO_METHOD = new RETURN("000003","请求方法不存在！");
-    public static RETURN NO_COMPLETE = new RETURN("000004","请求路径不完整！");
+    public static RETURN NO_COMPLETE = new RETURN("000004","非法请求！");
 
     //登陆类响应状态
     public static RETURN NO_LOGIN = new RETURN("100000","账号尚未登陆！");

@@ -12,6 +12,7 @@
     <agile-security:description>security配置</agile-security:description>
 
     <!--免认证-->
+    <security:http pattern="/druid/*" security="none"/>
     <security:http pattern="/**/*.png" security="none"/>
     <security:http pattern="/**/*.jpg" security="none"/>
     <security:http pattern="/**/*.jpeg" security="none"/>

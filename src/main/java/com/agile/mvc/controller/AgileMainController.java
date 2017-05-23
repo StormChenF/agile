@@ -62,8 +62,8 @@ public class AgileMainController {
      * @param request 请求对象
      * @return 响应视图
      */
-    @RequestMapping(value = {"/{module}/{service}","/{module}/","/{module}"})
-    public ModelAndView processor(HttpServletRequest request, @PathVariable("module") String module, @PathVariable("service") String service){
+    @RequestMapping(value = {"/","/*","/*/*","/*/*/*/*/**"})
+    public ModelAndView processor(HttpServletRequest request){
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
 
