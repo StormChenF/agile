@@ -69,17 +69,17 @@ public class AgileGenerator {
                     //属性名
                     param.put("propertyName", StringUtil.toLowerName(columnName));
 
-                    //get方法
-                    param.put("getMethod", "get" + StringUtil.toUpperName(columnName));
-
-                    //set方法
-                    param.put("setMethod", "set" + StringUtil.toUpperName(columnName));
-
                     //字段类型
                     param.put("columnType", columnsData.getString("TYPE_NAME"));
 
                     //属性类型
                     propertyType = propertiesUtil.getProperty("agile.generator.column_type." + columnsData.getString("TYPE_NAME").toLowerCase());
+
+                    //get方法
+                    param.put("getMethod", "get" + StringUtil.toUpperName(columnName));
+
+                    //set方法
+                    param.put("setMethod", "set" + StringUtil.toUpperName(columnName));
 
                     //API导入
                     if ("Timestamp".equals(propertyType)) importList.add("java.sql.Timestamp;");

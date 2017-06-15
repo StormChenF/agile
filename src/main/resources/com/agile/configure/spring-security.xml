@@ -34,7 +34,7 @@
                          p:allowedUrl="${agile.security.csrf_allow_url}"
                          p:allowedMethod="${agile.security.csrf_allow_methods}"/>
 
-    <!--未登录的切入点-->
+    <!--默认未登录的切入点-->
     <agile-security:bean id="authenticationProcessingFilterEntryPoint"
                          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
                          c:loginFormUrl="${agile.security.not_login_url}"/>
@@ -46,7 +46,7 @@
                          p:authenticationFailureHandler-ref="AuthenticationFailureHandler"
                          p:authenticationManager-ref="authenticationManager"/>
 
-    <!--权限认证体系-->
+    <!--认证管理器，使用自定义的UserDetailsService，并对密码采用md5加密-->
     <security:authentication-manager alias="authenticationManager" erase-credentials="false">
         <security:authentication-provider ref="agileAuthenticationProvider"/>
     </security:authentication-manager>
@@ -62,7 +62,7 @@
                          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
                          p:defaultFailureUrl="${agile.security.failure_url}"/>
 
-    <!-- 定义上下文返回的消息的国际化 -->
+    <!--定义上下文返回的消息的国际化-->
     <agile-security:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
                          p:basename="com.agile.configure.agile-message"/>
 

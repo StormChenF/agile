@@ -9,28 +9,65 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 佟盟 on 2017/1/9
  */
 public class ObjectUtil extends ObjectUtils {
-    /**
-     * 对象属性拷贝
-     * @param source 源对象
-     * @param target 目标对象
-     * @param useConverter 是否使用转换器
-     * @return 转换结果
-     */
-    public static BeanCopier copyProperties(Class source, Class target, boolean useConverter){
-        return BeanCopier.create(source, target, useConverter);
+    public enum ContainOrExclude{
+        INCLUDE,EXCLUDE,GENERAL;
     }
 
     /**
-     * 比较两个对象是否继承与同一个类
+     * 复制对象中哪些属性
+     * @param source 原对象
+     * @param target 新对象
+     * @param arguments 属性列表
+     * @param containOrExclude 包含或排除
+     */
+    public static void copyProperties(Object source, Object target, String[] arguments, ContainOrExclude containOrExclude){
+        if (ObjectUtil.isEmpty(source) || ObjectUtil.isEmpty(target)) return;
+
+        Field[] sourceFields = source.getClass().getDeclaredFields();
+        Field[] targetFields = target.getClass().getDeclaredFields();
+        for (int i = 0 ;i < sourceFields.length ; i++){
+            String property = sourceFields[i].getName();
+            if(!ObjectUtil.isEmpty(arguments)){
+                switch (containOrExclude){
+                    case EXCLUDE:if (Arrays.asList(arguments).contains(property)) continue;
+                        break;
+                    case INCLUDE:if (!Arrays.asList(arguments).contains(property)) continue;
+                        break;
+                    case GENERAL:break;
+                }
+            }
+            try {
+                Method getMethod = source.getClass().getMethod("get" + StringUtil.toUpperName(property));
+                Method setMethod = target.getClass().getMethod("set" + StringUtil.toUpperName(property));
+                //取消安全检测，提高性能
+                getMethod.setAccessible(true);
+                setMethod.setAccessible(true);
+                Object value = getMethod.invoke(source);
+                setMethod.invoke(value);
+            }catch (Exception e){
+                continue;
+            }
+        }
+    }
+
+    /**
+     * 复制对象属性
+     * @param source 原对象
+     * @param target 新对象
+     */
+    public static void copyProperties(Object source, Object target){
+        copyProperties(source,target,null,ContainOrExclude.GENERAL);
+    }
+
+
+    /**
+     * 比较两个对象是否继承于同一个类
      * @param source 源对象
      * @param target 目标对象
      * @return 是否相同

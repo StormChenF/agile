@@ -62,8 +62,10 @@ public class AgileAuthenticationProvider implements AuthenticationProvider {
 //        }
 //        throw new BadCredentialsException("没有分配权限");
     }
+
     private void doLogin(Authentication authentication) throws AuthenticationException {
     }
+
     public boolean supports(Class<?> authentication) {
         // TODO Auto-generated method stub
         return true;

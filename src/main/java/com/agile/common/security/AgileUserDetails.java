@@ -1,90 +1,47 @@
 package com.agile.common.security;
 
+import com.agile.mvc.model.dao.SysUsersRepository;
+import com.agile.mvc.model.entity.SysUsersEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.List;
 
 /**
- * Created by 佟盟 on 2017/1/17
+ * Created by 佟盟 on 2017/6/15
  */
-public class AgileUserDetails implements UserDetails {
+public class AgileUserDetails extends SysUsersEntity implements UserDetails {
 
-    private Collection<? extends GrantedAuthority> authorities;
-
-    private String password;
-
-    private String username;
-
-    private boolean accountNonExpired;
-
-    private boolean accountNonLocked;
-
-    private boolean credentialsNonExpired;
-
-    private boolean enabled;
-
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+    private static final long serialVersionUID = 1L;
+    private List<AgileGrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return authorities;
     }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
+    public void setAuthorities(List<AgileGrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.accountNonExpired;
+        return super.getAccountNonExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.accountNonLocked;
+        return super.getAccountNonLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.credentialsNonExpired;
+        return super.getCredentialsNonExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return this.enabled;
+        return super.getEnabled();
     }
-
 }
