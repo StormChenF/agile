@@ -37,7 +37,7 @@ public class AgileUserDetailsService implements UserDetailsService {
         Example<SysUsersEntity> sysUsersEntityExample = Example.of(sysUsersEntity, matcher);
 
         ///加载用户基本信息
-        SysUsersEntity s = sysUsersRepository.findOne(sysUsersEntityExample);
+//        SysUsersEntity s = sysUsersRepository.findOne(sysUsersEntityExample);
 
         //用户信息
         AgileUserDetails agileUserDetails = new AgileUserDetails();

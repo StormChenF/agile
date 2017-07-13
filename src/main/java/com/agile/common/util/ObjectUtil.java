@@ -1,7 +1,5 @@
 package com.agile.common.util;
 
-import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.jndi.JndiTemplate;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;

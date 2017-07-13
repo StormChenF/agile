@@ -1,7 +1,7 @@
 package com.agile.common.util;
 
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.util.StringUtils;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public final class StringUtil extends StringUtils{
+public final class StringUtil extends StringUtils {
     /**
      * 特殊符号转驼峰式
      * @text text 任意字符串

@@ -17,9 +17,9 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
         this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
-        this.setParameter("setCode", "");
 
         this.processor();
     }
@@ -30,9 +30,9 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
         this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
-        this.setParameter("setCode", "");
 
         this.processor();
     }
@@ -43,9 +43,9 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
         this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
-        this.setParameter("setCode", "");
 
         this.processor();
     }
@@ -56,9 +56,9 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
+        this.setParameter("setCode", "");
         this.setParameter("setDicCode", "");
         this.setParameter("setIsFixed", "");
-        this.setParameter("setCode", "");
 
         this.processor();
     }
