@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by 佟盟 on 2017/1/13
  */
-public class AgileUsernamePasswordAuthenticationFilter extends org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter {
+public class AgileAuthenticationFilter extends org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter {
 
     public static final String VALIDATE_CODE = "validateCode";
     public static final String USERNAME = "agile_username";

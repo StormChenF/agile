@@ -13,14 +13,10 @@
 
     <!--免认证-->
     <security:http pattern="/druid/*" security="none"/>
-    <security:http pattern="/**/*.png" security="none"/>
-    <security:http pattern="/**/*.jpg" security="none"/>
-    <security:http pattern="/**/*.jpeg" security="none"/>
-    <security:http pattern="/**/*.gif" security="none"/>
     <security:http pattern="${agile.security.not_login_url}" security="none"/>
-    <security:http entry-point-ref="authenticationProcessingFilterEntryPoint" use-expressions="true">
+    <security:http entry-point-ref="authenticationProcessingFilterEntryPoint">
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
-        <security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
+        <!--<security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>-->
         <security:custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER"/>
         <security:logout logout-url="${agile.security.login_out_url}"
                          logout-success-url="${agile.security.login_success_url}" delete-cookies="JSESSIONID"
@@ -39,8 +35,8 @@
                          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
                          c:loginFormUrl="${agile.security.not_login_url}"/>
 
-    <!--登录认证体系-->
-    <agile-security:bean id="loginFilter" class="com.agile.common.security.AgileUsernamePasswordAuthenticationFilter"
+    <!--登录认证过滤器-->
+    <agile-security:bean id="loginFilter" class="com.agile.common.security.AgileAuthenticationFilter"
                          p:filterProcessesUrl="${agile.security.login_url}"
                          p:authenticationSuccessHandler-ref="AuthenticationSuccessHandler"
                          p:authenticationFailureHandler-ref="AuthenticationFailureHandler"

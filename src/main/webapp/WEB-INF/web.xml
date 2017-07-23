@@ -30,7 +30,7 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
-    <!--用户权限认证拦截器-->
+    <!--SPRING-SECURITY授权代理过滤器-->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
