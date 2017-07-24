@@ -19,7 +19,7 @@ public class AgileHead implements Serializable {
 
     public AgileHead(RETURN returnState, HttpServletRequest request) {
         this.ip = ServletUtil.getCustomerIPAddr(request);
-        this.url = request.getScheme() + "://" + ServletUtil.localhostFormat(request.getLocalAddr())+ ":" + request.getLocalPort() + request.getServletPath();
+        this.url = request.getScheme() + "://" + ServletUtil.localhostFormat(request.getLocalAddr())+ ":" + request.getLocalPort() + request.getRequestURI();
         this.code = returnState.getCode();
         this.msg = returnState.getMsg();
 
