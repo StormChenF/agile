@@ -90,6 +90,7 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.0.0.M2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.0.0.M2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-acl:5.0.0.M2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.0.RC2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-taglibs:5.0.0.M2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security.oauth:spring-security-oauth2:2.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
@@ -107,7 +108,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:2.0.0.M4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.0.0.M4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:5.0.0.RC2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.0.RC2" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.10" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:5.2.10.Final" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
