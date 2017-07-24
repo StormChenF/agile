@@ -115,4 +115,8 @@
         <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
 
+    <!--会话时长控制-->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </web-app>

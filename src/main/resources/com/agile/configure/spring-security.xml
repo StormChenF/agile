@@ -15,15 +15,19 @@
     <security:http pattern="/druid/*" security="none"/>
     <security:http pattern="${agile.security.not_login_url}" security="none"/>
     <security:http pattern="${agile.security.invalid_session_url}" security="none"/>
+
+    <!--登陆认证入口-->
     <security:http entry-point-ref="authenticationProcessingFilterEntryPoint">
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
-        <!--<security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>-->
+        <security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
         <security:custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER"/>
         <security:logout logout-url="${agile.security.login_out_url}"
                          logout-success-url="${agile.security.login_out_success_url}" delete-cookies="JSESSIONID"
                          invalidate-session="true"/>
-        <security:session-management invalid-session-url="${agile.security.invalid_session_url}"/>
-        <security:csrf request-matcher-ref="agileCsrfSecurityRequestMatcher"></security:csrf>
+        <security:session-management invalid-session-url="${agile.security.invalid_session_url}">
+            <security:concurrency-control error-if-maximum-exceeded="false" />
+        </security:session-management>
+        <security:csrf request-matcher-ref="agileCsrfSecurityRequestMatcher"/>
     </security:http>
 
     <!--CSRF过滤器-->
@@ -31,7 +35,7 @@
                          p:allowedUrl="${agile.security.csrf_allow_url}"
                          p:allowedMethod="${agile.security.csrf_allow_methods}"/>
 
-    <!--默认未登录的切入点-->
+    <!--登陆认证入口-->
     <agile-security:bean id="authenticationProcessingFilterEntryPoint"
                          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
                          c:loginFormUrl="${agile.security.not_login_url}"/>

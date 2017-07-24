@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AgileSignService extends AgileMainService {
     public RETURN successSignOut(){
-        return RETURN.LOGIN_OUT;
+        return RETURN.SUCCESS_SIGN_OUT;
     }
-    public RETURN notLogged(){
-        return RETURN.NO_LOGIN;
+    public RETURN notSignIn(){
+        return RETURN.NO_SIGN_IN;
     }
     public RETURN invalidSession(){
         return RETURN.INVALID_SESSION;
@@ -21,7 +21,10 @@ public class AgileSignService extends AgileMainService {
     public RETURN homepage(){
         return RETURN.SUCCESS;
     }
-    public RETURN errorLogging(){
-        return RETURN.ERROR_LOGIN;
+    public RETURN errorSignIn(){
+        return RETURN.ERROR_SIGN_IN;
+    }
+    public RETURN accessDenied(){
+        return RETURN.ACCESS_DENIED;
     }
 }

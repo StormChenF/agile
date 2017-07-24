@@ -18,10 +18,11 @@ public final class RETURN {
     public static RETURN NO_COMPLETE = new RETURN("000004","非法请求！");
 
     //登陆类响应状态
-    public static RETURN NO_LOGIN = new RETURN("100000","账号尚未登陆！");
-    public static RETURN LOGIN_OUT = new RETURN("100001","账号成功登出！");
-    public static RETURN ERROR_LOGIN = new RETURN("100002","账号成功登出！");
+    public static RETURN NO_SIGN_IN = new RETURN("100000","账号尚未登陆！");
+    public static RETURN SUCCESS_SIGN_OUT = new RETURN("100001","账号成功登出！");
+    public static RETURN ERROR_SIGN_IN = new RETURN("100002","账号或密码验证失败！");
     public static RETURN INVALID_SESSION = new RETURN("100003","会话超时，请重新登陆！");
+    public static RETURN ACCESS_DENIED = new RETURN("100004","权限不足，无法访问！");
 
     //运行错误响应状态
     static RETURN EXPRESSION = new RETURN("200000","程序错误！");

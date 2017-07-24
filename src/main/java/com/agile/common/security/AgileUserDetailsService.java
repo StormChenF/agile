@@ -1,21 +1,18 @@
 package com.agile.common.security;
 
 import com.agile.common.util.ObjectUtil;
-import com.agile.mvc.model.dao.SysRolesRepository;
 import com.agile.mvc.model.dao.SysUsersRepository;
-import com.agile.mvc.model.entity.SysRolesEntity;
 import com.agile.mvc.model.entity.SysUsersEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 /**
  * Created by 佟盟 on 2017/1/13
