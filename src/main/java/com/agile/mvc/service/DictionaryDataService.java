@@ -58,7 +58,7 @@ public class DictionaryDataService extends AgileMainService {
      * 查询
      * 地址：http://localhost:8080/agile/DictionaryDataService/query
      */
-    public RETURN query() {
+    public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
         this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
         return RETURN.SUCCESS;
