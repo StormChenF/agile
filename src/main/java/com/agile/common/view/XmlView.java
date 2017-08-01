@@ -1,0 +1,16 @@
+package com.agile.common.view;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.oxm.xstream.XStreamMarshaller;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.view.xml.MarshallingView;
+
+/**
+ * Created by 佟盟 on 2017/8/1
+ */
+@Component
+public class XmlView extends MarshallingView {
+    public XmlView() {
+        this.setMarshaller(new XStreamMarshaller());
+    }
+}

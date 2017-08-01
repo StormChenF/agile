@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agile-mvc:beans xmlns:agile-mvc="http://www.springframework.org/schema/beans"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-                 xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
+                 xmlns:c="http://www.springframework.org/schema/c"
+                 xmlns:util="http://www.springframework.org/schema/util"
                  xsi:schemaLocation="http://www.springframework.org/schema/beans
                  http://www.springframework.org/schema/beans/spring-beans.xsd
                  http://www.springframework.org/schema/util
-                 http://www.springframework.org/schema/util/spring-util.xsd">
+                 http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <agile-mvc:description>spring mvc配置</agile-mvc:description>
 
     <!--响应视图解析器路由-->
-    <agile-mvc:bean id="viewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="1" p:contentNegotiationManager-ref="contentNegotiationManager" p:defaultViews-ref="defaultViews"/>
+    <agile-mvc:bean id="viewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="1" p:contentNegotiationManager-ref="contentNegotiationManager" p:viewResolvers-ref="viewResolvers" p:defaultViews-ref="defaultViews"/>
 
     <!--路由配置-->
     <agile-mvc:bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"
@@ -42,22 +43,27 @@
 
     <!--默认视图列表-->
     <util:list id="defaultViews">
-        <agile-mvc:ref bean="mappingJackson2JsonView"/>
-        <agile-mvc:ref bean="marshallingView"/>
+        <agile-mvc:ref bean="jsonView"/>
+        <agile-mvc:ref bean="xmlView"/>
     </util:list>
 
-    <!--json视图-->
-    <agile-mvc:bean id="mappingJackson2JsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" p:objectMapper-ref="objectMapper"/>
-    <!--json视图解析时间格式化配置-->
-    <agile-mvc:bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean" p:indentOutput="true" p:simpleDateFormat="yyyy-MM-dd HH:mm:ss"/>
+    <!--&lt;!&ndash;json视图&ndash;&gt;-->
+    <!--<agile-mvc:bean id="mappingJackson2JsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" p:objectMapper-ref="objectMapper"/>-->
+    <!--&lt;!&ndash;json视图解析时间格式化配置&ndash;&gt;-->
+    <!--<agile-mvc:bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean" p:indentOutput="true" p:simpleDateFormat="yyyy-MM-dd HH:mm:ss"/>-->
 
-    <!--xml视图-->
-    <agile-mvc:bean id="marshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView" c:marshaller-ref="xStreamMarshaller"/>
+    <!--&lt;!&ndash;xml视图&ndash;&gt;-->
+    <!--<agile-mvc:bean id="marshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView" c:marshaller-ref="xStreamMarshaller"/>-->
 
-    <agile-mvc:bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+    <!--<agile-mvc:bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>-->
     <!--支持上传文件-->
     <agile-mvc:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
                     p:maxUploadSize="${agile.upload.max_upload_size}"
                     p:defaultEncoding="${agile.upload.default_encoding}"/>
 
+    <!--视图解析器列表-->
+    <util:list id="viewResolvers">
+        <agile-mvc:ref bean="jsonViewResolver"/>
+        <agile-mvc:ref bean="xmlViewResolver"/>
+    </util:list>
 </agile-mvc:beans>

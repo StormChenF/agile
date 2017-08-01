@@ -11,6 +11,7 @@
 
     <agile-security:description>security配置</agile-security:description>
 
+    <security:global-method-security  pre-post-annotations = "enabled" />
     <!--免认证-->
     <security:http pattern="/druid/*" security="none"/>
     <security:http pattern="${agile.security.not_login_url}" security="none"/>
