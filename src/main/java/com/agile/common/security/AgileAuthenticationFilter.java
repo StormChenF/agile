@@ -1,14 +1,9 @@
 package com.agile.common.security;
 
 import com.agile.mvc.model.dao.SysUsersRepository;
-import com.agile.mvc.model.entity.SysUsersEntity;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.TextEscapeUtils;
 
 import javax.annotation.Resource;

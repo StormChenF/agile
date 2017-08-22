@@ -4,7 +4,6 @@ import com.agile.common.server.AgileMainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryDataRepository;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
@@ -36,7 +35,7 @@ public class DictionaryDataService extends AgileMainService {
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }

@@ -35,7 +35,7 @@ public class DictionaryMainService extends AgileMainService {
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }

@@ -106,7 +106,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-releasetrain</artifactId>
-                <version>Kay-M4</version>
+                <version>Ingalls-SR6</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

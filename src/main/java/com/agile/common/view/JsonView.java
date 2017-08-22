@@ -1,8 +1,5 @@
 package com.agile.common.view;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;

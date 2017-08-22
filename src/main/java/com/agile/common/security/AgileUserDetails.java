@@ -1,11 +1,9 @@
 package com.agile.common.security;
 
-import com.agile.mvc.model.dao.SysUsersRepository;
 import com.agile.mvc.model.entity.SysUsersEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 
