@@ -1,16 +1,16 @@
 package com.agile.common.base;
 
-import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.criteria.ParameterExpression;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by 佟盟 on 2017/2/23
  */
-public class AgileExceptionHandler implements HandlerExceptionResolver{
+public class AgileExceptionHandler implements HandlerExceptionResolver {
     /**
      * 日志工具
      */
@@ -28,17 +28,9 @@ public class AgileExceptionHandler implements HandlerExceptionResolver{
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
-        if(e instanceof ParameterExpression){
-            logger.error(RETURN.PARAMETER_EXPRESSION.getMsg());
-            modelAndView.addObject("head",new AgileHead(RETURN.PARAMETER_EXPRESSION,request));
-            return modelAndView;
-        }else if(e instanceof SQLException){
+        if(e instanceof SQLException){
             logger.error(RETURN.SQL_EXPRESSION.getMsg());
             modelAndView.addObject("head",new AgileHead(RETURN.SQL_EXPRESSION,request));
-            return modelAndView;
-        }else if(e instanceof HibernateException){
-            logger.error(RETURN.HIBERNATE_EXPRESSION.getMsg());
-            modelAndView.addObject("head",new AgileHead(RETURN.HIBERNATE_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof DateTimeException){
             logger.error(RETURN.DATETIME_EXPRESSION.getMsg());
@@ -51,10 +43,6 @@ public class AgileExceptionHandler implements HandlerExceptionResolver{
         }else if(e instanceof ParseException){
             logger.error(RETURN.PARSE_EXPRESSION.getMsg());
             modelAndView.addObject("head",new AgileHead(RETURN.PARSE_EXPRESSION,request));
-            return modelAndView;
-        }else if(e instanceof IOException){
-            logger.error(RETURN.IO_EXPRESSION.getMsg());
-            modelAndView.addObject("head",new AgileHead(RETURN.IO_EXPRESSION,request));
             return modelAndView;
         }else if(e instanceof TimeoutException){
             logger.error(RETURN.TIMEOUT_EXPRESSION.getMsg());
@@ -87,6 +75,18 @@ public class AgileExceptionHandler implements HandlerExceptionResolver{
         }else if(e instanceof BeansException){
             logger.error(RETURN.BEAN_EXPRESSION.getMsg());
             modelAndView.addObject("head",new AgileHead(RETURN.BEAN_EXPRESSION,request));
+            return modelAndView;
+        }else if (e instanceof NoSuchBeanDefinitionException){
+            logger.error(RETURN.NUSUCH_BEAN_EXPRESSION.getMsg());
+            modelAndView.addObject("head",new AgileHead(RETURN.NUSUCH_BEAN_EXPRESSION,request));
+            return modelAndView;
+        }else if (e instanceof MaxUploadSizeExceededException){
+            logger.error(RETURN.MAX_UPLOAD_SIZE_EXPRESSION.getMsg());
+            modelAndView.addObject("head",new AgileHead(RETURN.MAX_UPLOAD_SIZE_EXPRESSION,request));
+            return modelAndView;
+        }else if (e instanceof FileNotFoundException){
+            logger.error(RETURN.FILE_NOT_FOUND_EXPRESSION.getMsg());
+            modelAndView.addObject("head",new AgileHead(RETURN.FILE_NOT_FOUND_EXPRESSION,request));
             return modelAndView;
         }else {
             logger.error(RETURN.EXPRESSION.getMsg());
