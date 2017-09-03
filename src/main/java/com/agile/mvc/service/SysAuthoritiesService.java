@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysAuthoritiesRepository;
 import com.agile.mvc.model.entity.SysAuthoritiesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysAuthoritiesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysAuthoritiesService/save
+     * 地址：http://localhost:8080/SysAuthoritiesService/save
      */
     public RETURN save() {
         SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
@@ -28,7 +30,7 @@ public class SysAuthoritiesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysAuthoritiesService/delete
+     * 地址：http://localhost:8080/SysAuthoritiesService/delete
      */
     public RETURN delete(){
         SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
@@ -44,7 +46,7 @@ public class SysAuthoritiesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);
@@ -56,7 +58,7 @@ public class SysAuthoritiesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysAuthoritiesService/query
+     * 地址：http://localhost:8080/SysAuthoritiesService/query
      */
     public RETURN query(){
         SysAuthoritiesRepository dao = FactoryUtil.getBean(SysAuthoritiesRepository.class);

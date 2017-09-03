@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.${className}Repository;
 import com.agile.mvc.model.entity.${className}Entity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class ${className}Service extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/${className}Service/save
+     * 地址：http://localhost:8080/${className}Service/save
      */
     public RETURN save() {
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
@@ -28,7 +30,7 @@ public class ${className}Service extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/${className}Service/delete
+     * 地址：http://localhost:8080/${className}Service/delete
      */
     public RETURN delete(){
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
@@ -44,7 +46,7 @@ public class ${className}Service extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
@@ -56,7 +58,7 @@ public class ${className}Service extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/${className}Service/query
+     * 地址：http://localhost:8080/${className}Service/query
      */
     public RETURN query(){
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);

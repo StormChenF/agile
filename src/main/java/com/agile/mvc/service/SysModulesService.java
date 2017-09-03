@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysModulesRepository;
 import com.agile.mvc.model.entity.SysModulesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysModulesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysModulesService/save
+     * 地址：http://localhost:8080/SysModulesService/save
      */
     public RETURN save() {
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
@@ -28,7 +30,7 @@ public class SysModulesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysModulesService/delete
+     * 地址：http://localhost:8080/SysModulesService/delete
      */
     public RETURN delete(){
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
@@ -44,7 +46,7 @@ public class SysModulesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
@@ -56,7 +58,7 @@ public class SysModulesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysModulesService/query
+     * 地址：http://localhost:8080/SysModulesService/query
      */
     public RETURN query(){
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);

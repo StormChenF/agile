@@ -27,9 +27,10 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
     /**
      * 根据对象及方法名通过反射执行该对象的指定方法
      * @param methodName 服务内部的具体方法名
+     * @param serviceProxy
      * @return 返回执行结果
      */
-    public RETURN executeMethod(String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public RETURN executeMethod(String methodName, AgileServiceInterface serviceProxy) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = this.getClass().getDeclaredMethod(methodName);
         return execute(method);
     }
@@ -200,7 +201,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @param key 参数索引字符串
      * @param value 参数值
      */
-    protected void setOutParam(String key, Object value) {
+    public void setOutParam(String key, Object value) {
         if(ObjectUtil.isEmpty(this.outParam)){
             this.outParam = new HashMap<>();
         }

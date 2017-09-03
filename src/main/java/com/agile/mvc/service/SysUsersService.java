@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysUsersRepository;
 import com.agile.mvc.model.entity.SysUsersEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysUsersService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysUsersService/save
+     * 地址：http://localhost:8080/SysUsersService/save
      */
     public RETURN save() {
         SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
@@ -28,7 +30,7 @@ public class SysUsersService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysUsersService/delete
+     * 地址：http://localhost:8080/SysUsersService/delete
      */
     public RETURN delete(){
         SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
@@ -44,7 +46,7 @@ public class SysUsersService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
@@ -56,7 +58,7 @@ public class SysUsersService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysUsersService/query
+     * 地址：http://localhost:8080/SysUsersService/query
      */
     public RETURN query(){
         SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);

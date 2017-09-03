@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysBtRolesMoudlesRepository;
 import com.agile.mvc.model.entity.SysBtRolesMoudlesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysBtRolesMoudlesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysBtRolesMoudlesService/save
+     * 地址：http://localhost:8080/SysBtRolesMoudlesService/save
      */
     public RETURN save() {
         SysBtRolesMoudlesRepository dao = FactoryUtil.getBean(SysBtRolesMoudlesRepository.class);
@@ -28,7 +30,7 @@ public class SysBtRolesMoudlesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysBtRolesMoudlesService/delete
+     * 地址：http://localhost:8080/SysBtRolesMoudlesService/delete
      */
     public RETURN delete(){
         SysBtRolesMoudlesRepository dao = FactoryUtil.getBean(SysBtRolesMoudlesRepository.class);
@@ -44,7 +46,7 @@ public class SysBtRolesMoudlesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysBtRolesMoudlesRepository dao = FactoryUtil.getBean(SysBtRolesMoudlesRepository.class);
@@ -56,7 +58,7 @@ public class SysBtRolesMoudlesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysBtRolesMoudlesService/query
+     * 地址：http://localhost:8080/SysBtRolesMoudlesService/query
      */
     public RETURN query(){
         SysBtRolesMoudlesRepository dao = FactoryUtil.getBean(SysBtRolesMoudlesRepository.class);

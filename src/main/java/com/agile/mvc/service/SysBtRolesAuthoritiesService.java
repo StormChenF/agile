@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysBtRolesAuthoritiesRepository;
 import com.agile.mvc.model.entity.SysBtRolesAuthoritiesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysBtRolesAuthoritiesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysBtRolesAuthoritiesService/save
+     * 地址：http://localhost:8080/SysBtRolesAuthoritiesService/save
      */
     public RETURN save() {
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);
@@ -28,7 +30,7 @@ public class SysBtRolesAuthoritiesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysBtRolesAuthoritiesService/delete
+     * 地址：http://localhost:8080/SysBtRolesAuthoritiesService/delete
      */
     public RETURN delete(){
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);
@@ -44,7 +46,7 @@ public class SysBtRolesAuthoritiesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);
@@ -56,7 +58,7 @@ public class SysBtRolesAuthoritiesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysBtRolesAuthoritiesService/query
+     * 地址：http://localhost:8080/SysBtRolesAuthoritiesService/query
      */
     public RETURN query(){
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);

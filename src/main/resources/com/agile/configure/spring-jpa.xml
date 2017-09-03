@@ -37,7 +37,7 @@
         <agile-jpa:prop key="hibernate.cache.use_second_level_cache">${agile.jpa.use_second_level_cache}</agile-jpa:prop>
         <agile-jpa:prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</agile-jpa:prop>
         <agile-jpa:prop key="hibernate.cache.use_structured_entries">${agile.jpa.use_structured_entries}</agile-jpa:prop>
-        <agile-jpa:prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</agile-jpa:prop>
+        <agile-jpa:prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</agile-jpa:prop>
         <agile-jpa:prop key="net.sf.ehcache.configurationResourceName">/com/agile/configure/agile-ehcache.xml</agile-jpa:prop>
 
         <!--查询缓存-->

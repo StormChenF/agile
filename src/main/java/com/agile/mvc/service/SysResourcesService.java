@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysResourcesRepository;
 import com.agile.mvc.model.entity.SysResourcesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysResourcesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysResourcesService/save
+     * 地址：http://localhost:8080/SysResourcesService/save
      */
     public RETURN save() {
         SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
@@ -28,7 +30,7 @@ public class SysResourcesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysResourcesService/delete
+     * 地址：http://localhost:8080/SysResourcesService/delete
      */
     public RETURN delete(){
         SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
@@ -44,7 +46,7 @@ public class SysResourcesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
@@ -56,7 +58,7 @@ public class SysResourcesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysResourcesService/query
+     * 地址：http://localhost:8080/SysResourcesService/query
      */
     public RETURN query(){
         SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);

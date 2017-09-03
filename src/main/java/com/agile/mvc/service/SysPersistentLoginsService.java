@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysPersistentLoginsRepository;
 import com.agile.mvc.model.entity.SysPersistentLoginsEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysPersistentLoginsService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysPersistentLoginsService/save
+     * 地址：http://localhost:8080/SysPersistentLoginsService/save
      */
     public RETURN save() {
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
@@ -28,7 +30,7 @@ public class SysPersistentLoginsService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysPersistentLoginsService/delete
+     * 地址：http://localhost:8080/SysPersistentLoginsService/delete
      */
     public RETURN delete(){
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
@@ -44,7 +46,7 @@ public class SysPersistentLoginsService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);
@@ -56,7 +58,7 @@ public class SysPersistentLoginsService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysPersistentLoginsService/query
+     * 地址：http://localhost:8080/SysPersistentLoginsService/query
      */
     public RETURN query(){
         SysPersistentLoginsRepository dao = FactoryUtil.getBean(SysPersistentLoginsRepository.class);

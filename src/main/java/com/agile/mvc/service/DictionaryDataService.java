@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryDataRepository;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class DictionaryDataService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/DictionaryDataService/save
+     * 地址：http://localhost:8080/DictionaryDataService/save
      */
     public RETURN save() {
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
@@ -28,7 +30,7 @@ public class DictionaryDataService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/DictionaryDataService/delete
+     * 地址：http://localhost:8080/DictionaryDataService/delete
      */
     public RETURN delete(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
@@ -44,7 +46,7 @@ public class DictionaryDataService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
@@ -56,7 +58,7 @@ public class DictionaryDataService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/DictionaryDataService/query
+     * 地址：http://localhost:8080/DictionaryDataService/query
      */
     public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);

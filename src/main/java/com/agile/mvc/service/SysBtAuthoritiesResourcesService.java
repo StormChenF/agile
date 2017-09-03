@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysBtAuthoritiesResourcesRepository;
 import com.agile.mvc.model.entity.SysBtAuthoritiesResourcesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysBtAuthoritiesResourcesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/save
+     * 地址：http://localhost:8080/SysBtAuthoritiesResourcesService/save
      */
     public RETURN save() {
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
@@ -28,7 +30,7 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/delete
+     * 地址：http://localhost:8080/SysBtAuthoritiesResourcesService/delete
      */
     public RETURN delete(){
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
@@ -44,7 +46,7 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
@@ -56,7 +58,7 @@ public class SysBtAuthoritiesResourcesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysBtAuthoritiesResourcesService/query
+     * 地址：http://localhost:8080/SysBtAuthoritiesResourcesService/query
      */
     public RETURN query(){
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);

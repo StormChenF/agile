@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.LogMainRepository;
 import com.agile.mvc.model.entity.LogMainEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class LogMainService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/LogMainService/save
+     * 地址：http://localhost:8080/LogMainService/save
      */
     public RETURN save() {
         LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
@@ -28,7 +30,7 @@ public class LogMainService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/LogMainService/delete
+     * 地址：http://localhost:8080/LogMainService/delete
      */
     public RETURN delete(){
         LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
@@ -44,7 +46,7 @@ public class LogMainService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
@@ -56,7 +58,7 @@ public class LogMainService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/LogMainService/query
+     * 地址：http://localhost:8080/LogMainService/query
      */
     public RETURN query(){
         LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);

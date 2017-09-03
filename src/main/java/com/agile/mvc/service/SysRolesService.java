@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysRolesRepository;
 import com.agile.mvc.model.entity.SysRolesEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class SysRolesService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/SysRolesService/save
+     * 地址：http://localhost:8080/SysRolesService/save
      */
     public RETURN save() {
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
@@ -28,7 +30,7 @@ public class SysRolesService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/SysRolesService/delete
+     * 地址：http://localhost:8080/SysRolesService/delete
      */
     public RETURN delete(){
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
@@ -44,7 +46,7 @@ public class SysRolesService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
@@ -56,7 +58,7 @@ public class SysRolesService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/SysRolesService/query
+     * 地址：http://localhost:8080/SysRolesService/query
      */
     public RETURN query(){
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);

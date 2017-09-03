@@ -7,16 +7,18 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryMainRepository;
 import com.agile.mvc.model.entity.DictionaryMainEntity;
+import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
+@Scope("prototype")
 public class DictionaryMainService extends AgileMainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/agile/DictionaryMainService/save
+     * 地址：http://localhost:8080/DictionaryMainService/save
      */
     public RETURN save() {
         DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
@@ -28,7 +30,7 @@ public class DictionaryMainService extends AgileMainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/agile/DictionaryMainService/delete
+     * 地址：http://localhost:8080/DictionaryMainService/delete
      */
     public RETURN delete(){
         DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
@@ -44,7 +46,7 @@ public class DictionaryMainService extends AgileMainService {
 
     /**
      * 修改
-     * 地址：http://localhost:8080/agile/SysUsersService/update
+     * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
         DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
@@ -56,7 +58,7 @@ public class DictionaryMainService extends AgileMainService {
 
     /**
      * 查询
-     * 地址：http://localhost:8080/agile/DictionaryMainService/query
+     * 地址：http://localhost:8080/DictionaryMainService/query
      */
     public RETURN query(){
         DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
