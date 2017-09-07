@@ -5,6 +5,10 @@
         <param-name>webAppRootKey</param-name>
         <param-value>agile.root</param-value>
     </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:com/agile/configure/spring-container.xml;</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
@@ -124,4 +128,5 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/favicon.ico</url-pattern>
     </servlet-mapping>
+
 </web-app>

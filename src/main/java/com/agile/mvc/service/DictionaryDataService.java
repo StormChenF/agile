@@ -4,6 +4,7 @@ import com.agile.common.server.AgileMainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryDataRepository;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
@@ -62,7 +63,9 @@ public class DictionaryDataService extends AgileMainService {
      */
     public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
-        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
+        this.setOutParam("queryList1",dao.findByCode(1));
+        this.setOutParam("queryList2",dao.findByName("tong",this.getPageInfo()));
+        this.setOutParam("queryList3",dao.queryABC(1));
         return RETURN.SUCCESS;
     }
 }
