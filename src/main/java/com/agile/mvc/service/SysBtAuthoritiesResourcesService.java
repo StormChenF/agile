@@ -7,13 +7,11 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysBtAuthoritiesResourcesRepository;
 import com.agile.mvc.model.entity.SysBtAuthoritiesResourcesEntity;
-import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
-@Scope("prototype")
 public class SysBtAuthoritiesResourcesService extends AgileMainService {
 
     /**

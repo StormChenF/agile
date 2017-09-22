@@ -7,13 +7,11 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.DictionaryMainRepository;
 import com.agile.mvc.model.entity.DictionaryMainEntity;
-import org.springframework.context.annotation.Scope;
 
 /**
 * Created by 佟盟
 */
 @Service
-@Scope("prototype")
 public class DictionaryMainService extends AgileMainService {
 
     /**

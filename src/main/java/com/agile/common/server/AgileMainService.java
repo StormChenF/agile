@@ -17,35 +17,49 @@ import java.util.LinkedHashMap;
  * Created by 佟盟 on 2017/1/9
  */
 public abstract class AgileMainService extends AgileExceptionHandler implements AgileServiceInterface {
+
     //日志工具
-    private Logger logger = LogManager.getLogger(this.getClass());
+    private ThreadLocal<Logger> logger = new ThreadLocal<Logger>(){
+        @Override
+        protected Logger initialValue() {
+            return LogManager.getLogger(this.getClass());
+        }
+    };
+
     //输入
-    private HashMap<String, Object> inParam = new LinkedHashMap<>();
+    private ThreadLocal<HashMap<String, Object>> inParam = new ThreadLocal<>();
+
     //输出
-    private HashMap<String, Object> outParam = new LinkedHashMap<>();
+    private ThreadLocal<HashMap<String, Object>> outParam = new ThreadLocal<HashMap<String, Object>>(){
+        @Override
+        protected HashMap<String, Object> initialValue() {
+            return new HashMap<>();
+        }
+    };
 
     /**
      * 根据对象及方法名通过反射执行该对象的指定方法
      * @param methodName 服务内部的具体方法名
-     * @param serviceProxy
+     * @param object 服务子类对象，为解决Hystrix组件无法识别服务子类问题（识别成了父类）
      * @return 返回执行结果
      */
-    public RETURN executeMethod(String methodName, AgileServiceInterface serviceProxy) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method method = this.getClass().getDeclaredMethod(methodName);
-        return execute(method);
+    public RETURN executeMethod(String methodName,Object object) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        return this.execute(this.getClass().getDeclaredMethod(methodName),object);
     }
+
     @Transactional
-    RETURN execute(Method method) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
+    protected RETURN execute(Method method,Object object) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
         //取消安全检测，提高性能
         method.setAccessible(true);
-        return (RETURN) method.invoke(this);
+        return (RETURN) method.invoke(object);
     }
+
     /**
      * 控制层中调用该方法设置服务入参
      * @param inParam 参数集
      */
     public final void setInParam(HashMap<String, Object> inParam) {
-        this.inParam = inParam;
+        this.inParam.set(inParam);
     }
 
     /**
@@ -54,7 +68,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 入参值
      */
     protected Object getInParam(String key) {
-        return inParam.get(key);
+        return inParam.get().get(key);
     }
 
     /**
@@ -63,7 +77,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 入参值
      */
     protected String getInParamOfString(String key) {
-        return String.valueOf(inParam.get(key));
+        return String.valueOf(inParam.get().get(key));
     }
 
     /**
@@ -73,7 +87,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 入参值
      */
     protected String getInParamOfString(String key,String defaultValue) {
-        return containsKey(key)?String.valueOf(inParam.get(key)):defaultValue;
+        return containsKey(key)?String.valueOf(inParam.get().get(key)):defaultValue;
     }
 
     /**
@@ -177,7 +191,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 入参值
      */
     protected boolean containsKey(String key) {
-        return inParam.containsKey(key);
+        return inParam.get().containsKey(key);
     }
 
     /**
@@ -185,7 +199,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 入参集合
      */
     protected HashMap<String, Object> getInParam() {
-        return inParam;
+        return inParam.get();
     }
 
     /**
@@ -193,7 +207,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @return 响应参数集
      */
     public HashMap<String, Object> getOutParam() {
-        return this.outParam;
+        return this.outParam.get();
     }
 
     /**
@@ -202,14 +216,18 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * @param value 参数值
      */
     public void setOutParam(String key, Object value) {
-        if(ObjectUtil.isEmpty(this.outParam)){
-            this.outParam = new HashMap<>();
-        }
-        this.outParam.put(key,value);
+        this.outParam.get().put(key,value);
+    }
+
+    /**
+     * 日志工具
+     */
+    public void getLogger(){
+        this.logger.get();
     }
 
     public PageRequest getPageInfo(){
-        int page = 1,size =10;
+        int page = 0,size =10;
 
         if(this.containsKey("page")){
             page = this.getInParamOfInteger("page");

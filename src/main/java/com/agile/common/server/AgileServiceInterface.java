@@ -13,5 +13,5 @@ public interface AgileServiceInterface {
 	//提取响应参数
 	HashMap<String, Object> getOutParam();
 	//调用请求方法
-	RETURN executeMethod(String methodName, AgileServiceInterface serviceProxy) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,NoSuchMethodException, SecurityException;
+	RETURN executeMethod(String methodName,Object object) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,NoSuchMethodException, SecurityException;
 }
