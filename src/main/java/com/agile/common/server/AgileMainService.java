@@ -58,7 +58,7 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
      * 控制层中调用该方法设置服务入参
      * @param inParam 参数集
      */
-    public final void setInParam(HashMap<String, Object> inParam) {
+    public void setInParam(HashMap<String, Object> inParam) {
         this.inParam.set(inParam);
     }
 
@@ -226,15 +226,4 @@ public abstract class AgileMainService extends AgileExceptionHandler implements 
         this.logger.get();
     }
 
-    public PageRequest getPageInfo(){
-        int page = 0,size =10;
-
-        if(this.containsKey("page")){
-            page = this.getInParamOfInteger("page");
-        }
-        if(this.containsKey("size")){
-            size = this.getInParamOfInteger("size");
-        }
-        return new PageRequest(page,size);
-    }
 }

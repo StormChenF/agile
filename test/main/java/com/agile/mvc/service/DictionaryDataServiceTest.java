@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class DictionaryDataServiceTest extends AgileMainControllerTest {
     @Test
     public void update() throws Exception {
-        this.setUrl("/agile/DictionaryDataService/update");
+        this.setUrl("/DictionaryDataService/update");
         this.setMethod("post");
 
         this.setParameter("setName", "");
@@ -23,9 +23,10 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.processor();
     }
+
     @Test
     public void delete() throws Exception {
-        this.setUrl("/agile/DictionaryDataService/delete");
+        this.setUrl("/DictionaryDataService/delete");
         this.setMethod("post");
 
         this.setParameter("setName", "");
@@ -36,9 +37,10 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.processor();
     }
+
     @Test
     public void save() throws Exception {
-        this.setUrl("/agile/DictionaryDataService/save");
+        this.setUrl("/DictionaryDataService/save");
         this.setMethod("post");
 
         this.setParameter("setName", "");
@@ -49,9 +51,10 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.processor();
     }
+
     @Test
     public void query() throws Exception {
-        this.setUrl("/agile/DictionaryDataService/query");
+        this.setUrl("/DictionaryDataService/query");
         this.setMethod("post");
 
         this.setParameter("setName", "");
@@ -62,5 +65,6 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
 
         this.processor();
     }
+
 
 }

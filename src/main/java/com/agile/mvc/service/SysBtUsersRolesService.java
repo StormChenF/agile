@@ -7,6 +7,7 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysBtUsersRolesRepository;
 import com.agile.mvc.model.entity.SysBtUsersRolesEntity;
+import org.springframework.data.domain.PageRequest;
 
 /**
 * Created by 佟盟
@@ -60,7 +61,7 @@ public class SysBtUsersRolesService extends AgileMainService {
      */
     public RETURN query(){
         SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
-        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
+        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
         return RETURN.SUCCESS;
     }
 }

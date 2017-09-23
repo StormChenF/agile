@@ -7,6 +7,7 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.LogValueRepository;
 import com.agile.mvc.model.entity.LogValueEntity;
+import org.springframework.data.domain.PageRequest;
 
 /**
 * Created by 佟盟
@@ -60,7 +61,7 @@ public class LogValueService extends AgileMainService {
      */
     public RETURN query(){
         LogValueRepository dao = FactoryUtil.getBean(LogValueRepository.class);
-        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
+        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
         return RETURN.SUCCESS;
     }
 }

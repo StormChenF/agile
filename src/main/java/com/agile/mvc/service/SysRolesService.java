@@ -7,6 +7,7 @@ import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.dao.SysRolesRepository;
 import com.agile.mvc.model.entity.SysRolesEntity;
+import org.springframework.data.domain.PageRequest;
 
 /**
 * Created by 佟盟
@@ -60,7 +61,7 @@ public class SysRolesService extends AgileMainService {
      */
     public RETURN query(){
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
-        this.setOutParam("queryList",dao.findAll(this.getPageInfo()));
+        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
         return RETURN.SUCCESS;
     }
 }

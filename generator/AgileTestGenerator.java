@@ -41,7 +41,7 @@ public class AgileTestGenerator {
                             String methodName = methods[j].getName();
                             Map<String,String> map = new HashMap<>();
                             map.put("methodName",methodName);
-                            map.put("url","/"+propertiesUtil.getProperty("agile.project.name")+"/"+serviceName+"/"+methodName);
+                            map.put("url","/"+serviceName+"/"+methodName);
                             methodList.add(map);
                         }
                     }

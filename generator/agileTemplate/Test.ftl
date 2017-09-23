@@ -22,6 +22,7 @@ public class ${className}Test extends AgileMainControllerTest {
 
         this.processor();
     }
+
 </#list>
 
 }
