@@ -6,11 +6,9 @@ import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchServiceException;
 import com.agile.common.server.AgileServiceInterface;
 import com.agile.common.util.FactoryUtil;
-import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.ServletUtil;
 import com.agile.common.util.StringUtil;
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.BeansException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -57,7 +55,6 @@ public class AgileMainController {
     /**
      * agile框架处理器
      * @param request 请求对象
-     * @param response 响应对象
      * @param service 服务名
      * @param method 方法名
      * @param forward 转发信息
@@ -71,7 +68,6 @@ public class AgileMainController {
     @RequestMapping(value = "/{service}/{method}")
     public ModelAndView processor(
             HttpServletRequest request,
-            HttpServletResponse response,
             @PathVariable String service,
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
@@ -254,11 +250,11 @@ public class AgileMainController {
         return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
     }
 
-    public AgileServiceInterface getService() {
+    private AgileServiceInterface getService() {
         return service.get();
     }
 
-    public void setService(AgileServiceInterface service) {
+    private void setService(AgileServiceInterface service) {
         this.service.set(service);
     }
 }
