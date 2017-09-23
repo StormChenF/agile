@@ -3,16 +3,14 @@ package com.agile.mvc.controller;
 import com.agile.common.base.AgileHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
+import com.agile.common.exception.NoSuchServiceException;
 import com.agile.common.server.AgileServiceInterface;
+import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.ServletUtil;
 import com.agile.common.util.StringUtil;
-import org.apache.commons.codec.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -38,15 +37,7 @@ import java.util.*;
 @Controller
 public class AgileMainController {
 
-    private final ApplicationContext applicationContext;
-
-    @Value("${spring.application.name}")
-    private String moduleName;
-
-    @Autowired
-    public AgileMainController(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+    private ThreadLocal<AgileServiceInterface> service = new ThreadLocal<>();
 
     /**
      * 非法请求处理器
@@ -71,7 +62,6 @@ public class AgileMainController {
      * @param method 方法名
      * @param forward 转发信息
      * @return 响应试图数据
-     * @throws IOException 流异常
      * @throws IllegalAccessException 非法访问异常
      * @throws IllegalArgumentException 非法参数异常
      * @throws InvocationTargetException 调用目标异常
@@ -86,35 +76,23 @@ public class AgileMainController {
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
             @RequestParam(value = "file-path", required = false) String filePath
-    ) throws IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    ) throws NoSuchServiceException,IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
         service =  StringUtil.toLowerName(service);//设置服务名
-        AgileServiceInterface serviceProxy = this.getService(StringUtil.toLowerName(service));
         method = StringUtil.toLowerName(method);//设置方法名
-
-        //判断服务存在
-        if (StringUtil.isEmpty(service) || ObjectUtil.isEmpty(serviceProxy)) {
-            modelAndView.addObject(Constant.ResponseAbout.HEAD, new AgileHead(RETURN.NO_SERVICE, request));
-            return modelAndView;
-        }
-
-        //判断方法存在
-        if (StringUtil.isEmpty(method)) {
-            modelAndView.addObject(Constant.ResponseAbout.HEAD, new AgileHead(RETURN.NO_METHOD, request));
-            return modelAndView;
-        }
+        initService(service);
 
         //调用目标方法前处理入参
-        handleRequestUrl(request,service,serviceProxy, method);
+        handleRequestUrl(request);
 
         //调用目标方法
-        RETURN returnState = serviceProxy.executeMethod(method,serviceProxy);
+        RETURN returnState = this.getService().executeMethod(method,this.getService());
 
         //判断是否存在文件上传
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         if (!StringUtil.isEmpty(filePath) && multipartResolver.isMultipart(request)){
-            this.upLoadFile(request, filePath,serviceProxy);
+            this.upLoadFile(request, filePath);
         }
 
         //判断是否转发
@@ -128,7 +106,7 @@ public class AgileMainController {
             String beforeParam = request.getQueryString().replaceFirst(Constant.RegularAbout.AFTER_PARAM, Constant.RegularAbout.NULL);
 
             //服务间参数传递
-            String afterParam = StringUtil.fromMapToUrl(serviceProxy.getOutParam());
+            String afterParam = StringUtil.fromMapToUrl(this.getService().getOutParam());
 
 
             url = (StringUtil.isEmpty(beforeParam) && StringUtil.isEmpty(afterParam))?url
@@ -146,7 +124,7 @@ public class AgileMainController {
         modelAndView.addObject(Constant.ResponseAbout.HEAD, new AgileHead(returnState, request));
 
         //响应数据装填
-        modelAndView.addObject(Constant.ResponseAbout.RESULT, serviceProxy.getOutParam());
+        modelAndView.addObject(Constant.ResponseAbout.RESULT, this.getService().getOutParam());
 
         return modelAndView;
     }
@@ -154,38 +132,31 @@ public class AgileMainController {
     /**
      * 根据服务名在Spring上下文中获取服务bean
      * @param serviceName   服务名
-     * @return  服务bean
      */
-    private AgileServiceInterface getService(String serviceName) {
+    private void initService(String serviceName)throws NoSuchServiceException {
         try {
-            Object serviceTry = this.applicationContext.getBean(serviceName);
-            return (AgileServiceInterface) serviceTry;
-        } catch (BeansException e) {
-            return null;
+            Object service = FactoryUtil.getBean(serviceName);
+            this.setService((AgileServiceInterface) service);
+        }catch (Exception e){
+            throw new NoSuchServiceException();
         }
     }
 
     /**
      * 根据servlet请求、认证信息、目标服务名、目标方法名处理入参
      * @param request   servlet请求
-     * @param service   目标服务名
-     * @param method    目标方法名
-     * @throws IOException 流异常
      */
-    private void handleRequestUrl(HttpServletRequest request, String service, AgileServiceInterface serviceProxy, String method) throws IOException {
+    private void handleRequestUrl(HttpServletRequest request) {
         HashMap<String, Object> inParam = new HashMap<>();
-        inParam.put(Constant.ResponseAbout.APP,moduleName);
-        inParam.put(Constant.ResponseAbout.SERVICE,service);
-        inParam.put(Constant.ResponseAbout.METHOD,method);
         inParam.put(Constant.ResponseAbout.IP, ServletUtil.getCustomerIPAddr(request));
         inParam.put(Constant.ResponseAbout.URL, request.getRequestURL());
 
         //---------------------------------请求参数解析------------------------------------
         String queryString = request.getQueryString();
         if (!StringUtil.isEmpty(queryString)){
-            String[] params = queryString.split("&"),paramContainer;
+            String[] params = queryString.split(Constant.RegularAbout.AND),paramContainer;
             for (int i = 0 ; i < params.length ; i++) {
-                paramContainer = params[i].split("=");
+                paramContainer = params[i].split(Constant.RegularAbout.EQUAL);
                 if (paramContainer.length == 2){
                     inParam.put(paramContainer[0],paramContainer[1]);
                 }
@@ -193,16 +164,15 @@ public class AgileMainController {
         }
 
         //将处理过的所有请求参数传入调用服务对象
-        serviceProxy.setInParam(inParam);
+        this.getService().setInParam(inParam);
     }
 
     /**
      * 文件下载
      * @param request  请求对象
      * @param path  文件存储路径
-     * @param serviceProxy
      */
-    private void upLoadFile(HttpServletRequest request, String path, AgileServiceInterface serviceProxy){
+    private void upLoadFile(HttpServletRequest request, String path){
         List<HashMap<String,Object>> list = new ArrayList<>();
 
         //转换成多部分request
@@ -258,7 +228,7 @@ public class AgileMainController {
                 list.add(map);
             }
         }
-        serviceProxy.setOutParam(Constant.FileAbout.UP_LOUD_FILE_INFO,list);
+        this.getService().setOutParam(Constant.FileAbout.UP_LOUD_FILE_INFO,list);
     }
 
     /**
@@ -280,7 +250,15 @@ public class AgileMainController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setContentLength(file.length());
-        headers.setContentDispositionFormData(Constant.HeaderAbout.ATTACHMENT,new String(fileName.getBytes(Charsets.UTF_8), Charsets.ISO_8859_1));
+        headers.setContentDispositionFormData(Constant.HeaderAbout.ATTACHMENT,new String(fileName.getBytes(Charset.forName("UTF-8")),Charset.forName("ISO-8859-1")));
         return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
+    }
+
+    public AgileServiceInterface getService() {
+        return service.get();
+    }
+
+    public void setService(AgileServiceInterface service) {
+        this.service.set(service);
     }
 }

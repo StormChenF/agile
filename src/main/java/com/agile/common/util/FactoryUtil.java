@@ -1,5 +1,6 @@
 package com.agile.common.util;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public final class FactoryUtil {
      * @param beanName bean名
      * @return bean对象
      */
-    public static Object getBean(String beanName){
+    public static Object getBean(String beanName) throws BeansException{
         return factoryUtil.applicationContext.getBean(beanName.substring(0,1).toLowerCase()+beanName.substring(1));
     }
 

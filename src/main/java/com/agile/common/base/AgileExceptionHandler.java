@@ -1,5 +1,6 @@
 package com.agile.common.base;
 
+import com.agile.common.exception.NoSuchServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -87,6 +88,10 @@ public class AgileExceptionHandler implements HandlerExceptionResolver {
         }else if (e instanceof FileNotFoundException){
             logger.error(RETURN.FILE_NOT_FOUND_EXPRESSION.getMsg());
             modelAndView.addObject("head",new AgileHead(RETURN.FILE_NOT_FOUND_EXPRESSION,request));
+            return modelAndView;
+        }else if (e instanceof NoSuchServiceException){
+            logger.error(RETURN.NO_SERVICE.getMsg());
+            modelAndView.addObject("head",new AgileHead(RETURN.NO_SERVICE,request));
             return modelAndView;
         }else {
             logger.error(RETURN.EXPRESSION.getMsg());

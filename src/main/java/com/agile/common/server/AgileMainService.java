@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public abstract class AgileMainService extends AgileExceptionHandler implements AgileServiceInterface {
+public class AgileMainService extends AgileExceptionHandler implements AgileServiceInterface {
 
     //日志工具
     private ThreadLocal<Logger> logger = new ThreadLocal<Logger>(){
