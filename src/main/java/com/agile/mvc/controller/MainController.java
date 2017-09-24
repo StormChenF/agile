@@ -1,10 +1,10 @@
 package com.agile.mvc.controller;
 
-import com.agile.common.base.AgileHead;
+import com.agile.common.base.Head;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
-import com.agile.common.exception.NoSuchServiceException;
-import com.agile.common.server.AgileServiceInterface;
+import com.agile.common.exception.NoSuchRequestServiceException;
+import com.agile.common.server.ServiceInterface;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ServletUtil;
 import com.agile.common.util.StringUtil;
@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
@@ -33,9 +32,9 @@ import java.util.*;
  * Created by 佟盟 on 2017/8/22
  */
 @Controller
-public class AgileMainController {
+public class MainController {
 
-    private ThreadLocal<AgileServiceInterface> service = new ThreadLocal<>();
+    private ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
 
     /**
      * 非法请求处理器
@@ -48,7 +47,7 @@ public class AgileMainController {
         ModelAndView modelAndView = new ModelAndView();
 
         //判断模块存在
-        modelAndView.addObject(Constant.ResponseAbout.HEAD,new AgileHead(RETURN.NO_COMPLETE,request));
+        modelAndView.addObject(Constant.ResponseAbout.HEAD,new Head(RETURN.NO_COMPLETE,request));
         return modelAndView;
     }
 
@@ -72,7 +71,7 @@ public class AgileMainController {
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
             @RequestParam(value = "file-path", required = false) String filePath
-    ) throws NoSuchServiceException,IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    ) throws Throwable {
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
         service =  StringUtil.toLowerName(service);//设置服务名
@@ -117,7 +116,7 @@ public class AgileMainController {
         }
 
         //调用目标方法后处理视图
-        modelAndView.addObject(Constant.ResponseAbout.HEAD, new AgileHead(returnState, request));
+        modelAndView.addObject(Constant.ResponseAbout.HEAD, new Head(returnState, request));
 
         //响应数据装填
         modelAndView.addObject(Constant.ResponseAbout.RESULT, this.getService().getOutParam());
@@ -129,12 +128,12 @@ public class AgileMainController {
      * 根据服务名在Spring上下文中获取服务bean
      * @param serviceName   服务名
      */
-    private void initService(String serviceName)throws NoSuchServiceException {
+    private void initService(String serviceName)throws NoSuchRequestServiceException {
         try {
             Object service = FactoryUtil.getBean(serviceName);
-            this.setService((AgileServiceInterface) service);
+            this.setService((ServiceInterface) service);
         }catch (Exception e){
-            throw new NoSuchServiceException();
+            throw new NoSuchRequestServiceException("[服务类:" + serviceName + "]于系统中不存在！");
         }
     }
 
@@ -250,11 +249,11 @@ public class AgileMainController {
         return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
     }
 
-    private AgileServiceInterface getService() {
+    private ServiceInterface getService() {
         return service.get();
     }
 
-    private void setService(AgileServiceInterface service) {
+    private void setService(ServiceInterface service) {
         this.service.set(service);
     }
 }

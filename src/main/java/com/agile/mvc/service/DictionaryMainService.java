@@ -1,6 +1,6 @@
 package com.agile.mvc.service;
 
-import com.agile.common.server.AgileMainService;
+import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 * Created by 佟盟
 */
 @Service
-public class DictionaryMainService extends AgileMainService {
+public class DictionaryMainService extends MainService {
 
     /**
      * 新增

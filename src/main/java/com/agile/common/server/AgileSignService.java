@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * Created by mydeathtrial on 2017/3/2
  */
 @Service
-public class AgileSignService extends AgileMainService {
+public class AgileSignService extends MainService {
     public RETURN successSignOut(){
         return RETURN.SUCCESS_SIGN_OUT;
     }

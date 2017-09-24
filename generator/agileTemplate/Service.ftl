@@ -1,6 +1,6 @@
 package ${servicePackage};
 
-import com.agile.common.server.AgileMainService;
+import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;

@@ -1,22 +1,20 @@
 package com.agile.common.server;
 
-import com.agile.common.base.AgileExceptionHandler;
+import com.agile.common.exception.AgileExceptionHandler;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.ObjectUtil;
+import com.agile.common.exception.NoSuchRequestMethodException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public class AgileMainService extends AgileExceptionHandler implements AgileServiceInterface {
+public class MainService extends AgileExceptionHandler implements ServiceInterface {
 
     //日志工具
     private ThreadLocal<Logger> logger = new ThreadLocal<Logger>(){
@@ -30,12 +28,7 @@ public class AgileMainService extends AgileExceptionHandler implements AgileServ
     private ThreadLocal<HashMap<String, Object>> inParam = new ThreadLocal<>();
 
     //输出
-    private ThreadLocal<HashMap<String, Object>> outParam = new ThreadLocal<HashMap<String, Object>>(){
-        @Override
-        protected HashMap<String, Object> initialValue() {
-            return new HashMap<>();
-        }
-    };
+    private ThreadLocal<HashMap<String, Object>> outParam = ThreadLocal.withInitial(HashMap::new);
 
     /**
      * 根据对象及方法名通过反射执行该对象的指定方法
@@ -43,15 +36,18 @@ public class AgileMainService extends AgileExceptionHandler implements AgileServ
      * @param object 服务子类对象，为解决Hystrix组件无法识别服务子类问题（识别成了父类）
      * @return 返回执行结果
      */
-    public RETURN executeMethod(String methodName,Object object) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        return this.execute(this.getClass().getDeclaredMethod(methodName),object);
-    }
-
     @Transactional
-    protected RETURN execute(Method method,Object object) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,SecurityException{
-        //取消安全检测，提高性能
-        method.setAccessible(true);
-        return (RETURN) method.invoke(object);
+    public RETURN executeMethod(String methodName,Object object) throws Throwable {
+        try {
+            Method method = this.getClass().getDeclaredMethod(methodName);
+            //取消安全检测，提高性能
+            method.setAccessible(true);
+            return (RETURN) method.invoke(object);
+        }catch (NoSuchMethodException e){
+            throw new NoSuchRequestMethodException("[方法:" + methodName + "]于[服务类:" + this.getClass().getName() + "]中不存在！");
+        }catch (InvocationTargetException e){
+            throw e.getTargetException();
+        }
     }
 
     /**
