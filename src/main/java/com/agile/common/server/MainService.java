@@ -3,8 +3,8 @@ package com.agile.common.server;
 import com.agile.common.exception.ExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -17,12 +17,7 @@ import java.util.HashMap;
 public class MainService extends ExceptionHandler implements ServiceInterface {
 
     //日志工具
-    private ThreadLocal<Logger> logger = new ThreadLocal<Logger>(){
-        @Override
-        protected Logger initialValue() {
-            return LogManager.getLogger(this.getClass());
-        }
-    };
+    private ThreadLocal<Logger> logger = new ThreadLocal<>();
 
     //输入
     private ThreadLocal<HashMap<String, Object>> inParam = new ThreadLocal<>();
@@ -38,6 +33,9 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      */
     @Transactional
     public RETURN executeMethod(String methodName,Object object) throws Throwable {
+        //初始化日志控件
+        setLogger(LoggerFactory.getLogger(this.getClass()));
+
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);
             //取消安全检测，提高性能
@@ -194,7 +192,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      * 服务中调用该方法获取入参集合
      * @return 入参集合
      */
-    protected HashMap<String, Object> getInParam() {
+    public HashMap<String, Object> getInParam() {
         return inParam.get();
     }
 
@@ -218,8 +216,15 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
     /**
      * 日志工具
      */
-    public void getLogger(){
-        this.logger.get();
+    public void setLogger(Logger logger){
+        this.logger.set(logger);
+    }
+
+    /**
+     * 日志工具
+     */
+    public Logger getLogger(){
+        return this.logger.get();
     }
 
 }
