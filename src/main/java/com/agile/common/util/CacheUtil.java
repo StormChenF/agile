@@ -1,7 +1,5 @@
 package com.agile.common.util;
 
-import com.agile.common.base.AbstractCacheUtil;
-
 /**
  * Created by 佟盟 on 2017/5/19
  */

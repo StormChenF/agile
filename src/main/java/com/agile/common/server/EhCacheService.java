@@ -1,6 +1,6 @@
 package com.agile.common.server;
 
-import com.agile.common.base.AbstractCacheUtil;
+import com.agile.common.util.AbstractCacheUtil;
 import com.agile.common.util.ObjectUtil;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;

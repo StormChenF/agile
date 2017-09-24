@@ -1,7 +1,6 @@
 package com.agile.common.server;
 
-import com.agile.common.base.AbstractCacheUtil;
-import com.agile.common.util.FactoryUtil;
+import com.agile.common.util.AbstractCacheUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
