@@ -23,7 +23,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by 佟盟 on 2017/2/23
  */
-public class AgileExceptionHandler implements HandlerExceptionResolver {
+public class ExceptionHandler implements HandlerExceptionResolver {
     /**
      * 日志工具
      */

@@ -1,6 +1,6 @@
 package com.agile.common.server;
 
-import com.agile.common.exception.AgileExceptionHandler;
+import com.agile.common.exception.ExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by 佟盟 on 2017/1/9
  */
-public class MainService extends AgileExceptionHandler implements ServiceInterface {
+public class MainService extends ExceptionHandler implements ServiceInterface {
 
     //日志工具
     private ThreadLocal<Logger> logger = new ThreadLocal<Logger>(){

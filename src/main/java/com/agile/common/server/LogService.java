@@ -14,7 +14,7 @@ import java.util.Map;
  * 日志服务
  * Created by mydeathtrial on 2017/3/21
  */
-public class AgileLogService {
+public class LogService {
     public static void createLog(String type, Object oldObject, Object newObject, String targetType, String targetCode){
         try {
             if (((ObjectUtil.compareClass(oldObject, newObject) && !ObjectUtil.compareValue(oldObject, newObject)) || ObjectUtil.isEmpty(oldObject)) != ObjectUtil.isEmpty(newObject)){
