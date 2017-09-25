@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
@@ -67,6 +68,7 @@ public class MainController {
     @RequestMapping(value = "/{service}/{method}")
     public ModelAndView processor(
             HttpServletRequest request,
+            HttpSession session,
             @PathVariable String service,
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
