@@ -1,8 +1,6 @@
 package com.agile.common.filter;
 
 import com.agile.common.util.StringUtil;
-import org.springframework.util.CollectionUtils;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
@@ -15,10 +13,10 @@ import java.util.List;
 /**
  * Created by 佟盟 on 2017/9/25
  */
-@WebFilter(filterName = "CorsFilter",urlPatterns = "/*",initParams = {
+@WebFilter(filterName = "CORSFilter",urlPatterns = "/*",initParams = {
         @WebInitParam(name = "allowOrigin",value = "*"),@WebInitParam(name = "allowMethods",value = "GET,POST,PUT,DELETE,OPTIONS"),@WebInitParam(name = "allowCredentials",value = "true"),@WebInitParam(name = "allowHeaders",value = "Content-Type")
 })
-public class CorsFilter implements Filter {
+public class CORSFilter implements Filter {
     private String allowOrigin;
     private String allowMethods;
     private String allowCredentials;
@@ -38,14 +36,17 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        if (StringUtil.isNotEmpty(allowOrigin)) {
+        if (allowOrigin.equals("*") || StringUtil.isEmpty(allowOrigin)){
+            response.setHeader("Access-Control-Allow-Origin", allowOrigin);
+        }else{
             List<String> allowOriginList = Arrays.asList(allowOrigin.split(","));
-            if (CollectionUtils.isEmpty(allowOriginList)) {
-                String currentOrigin = request.getHeader("Origin");
-                if (allowOriginList.contains(currentOrigin)) {
-                    response.setHeader("Access-Control-Allow-Origin", currentOrigin);
-                }
+            String currentOrigin = request.getHeader("Origin");
+            if (allowOriginList.contains(currentOrigin)) {
+                response.setHeader("Access-Control-Allow-Origin", currentOrigin);
             }
+        }
+        if (StringUtil.isNotEmpty(allowOrigin)) {
+            response.setHeader("Access-Control-Allow-Origin", allowOrigin);
         }
         if (StringUtil.isNotEmpty(allowMethods)) {
             response.setHeader("Access-Control-Allow-Methods", allowMethods);
