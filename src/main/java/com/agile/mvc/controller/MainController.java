@@ -68,7 +68,6 @@ public class MainController {
     @RequestMapping(value = "/{service}/{method}")
     public ModelAndView processor(
             HttpServletRequest request,
-            HttpSession session,
             @PathVariable String service,
             @PathVariable String method,
             @RequestParam(value = "forward", required = false) String forward,
