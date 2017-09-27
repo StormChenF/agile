@@ -25,8 +25,9 @@ public final class RETURN {
     public final static RETURN NO_SIGN_IN = new RETURN("100000","账号尚未登陆！");
     public final static RETURN SUCCESS_SIGN_OUT = new RETURN("100001","账号成功登出！");
     public final static RETURN ERROR_SIGN_IN = new RETURN("100002","账号或密码验证失败！");
-    public final static RETURN INVALID_SESSION = new RETURN("100003","会话超时，请重新登陆！");
+    public final static RETURN INVALID_SESSION = new RETURN("100003","无效会话，请重新登陆！");
     public final static RETURN ACCESS_DENIED = new RETURN("100004","权限不足，无法访问！");
+    public final static RETURN EXPIRED_SESSION = new RETURN("100003","会话期满，请重新登陆！");
 
     //运行错误响应状态
     public final static RETURN EXPRESSION = new RETURN("200000","程序错误！");

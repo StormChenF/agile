@@ -1,12 +1,10 @@
 package com.agile.common.security;
 
-import com.agile.mvc.model.dao.SysUsersRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.TextEscapeUtils;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,15 +12,10 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by 佟盟 on 2017/1/13
  */
-public class AgileAuthenticationFilter extends org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter {
+public class SecurityAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    public static final String VALIDATE_CODE = "validateCode";
-    public static final String USERNAME = "agile_username";
-    public static final String PASSWORD = "agile_password";
-    public static final String EMPLOYEENO = "agile_employeeNo";
-
-    @Resource
-    private SysUsersRepository sysUsersRepository;
+    private static final String USERNAME = "agile_username";
+    private static final String PASSWORD = "agile_password";
 
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)throws AuthenticationException {
         //获取用户名密码

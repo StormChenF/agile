@@ -452,6 +452,13 @@
             <version>[1.9.0.BETA-6,)</version>
         </dependency>
 
+        <!--验证码-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
         <!--单元测试-->
         <dependency>
             <groupId>junit</groupId>

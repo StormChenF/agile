@@ -1,26 +1,27 @@
 package com.agile.common.security;
 
 import com.agile.common.util.StringUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashSet;
 
 /**
  * Created by mydeathtrial on 2017/3/8
  */
-public class AgileCsrfSecurityRequestMatcher implements RequestMatcher {
+@Component
+public class SecurityCsrfRequestMatcher implements RequestMatcher {
 
     /**
      * 需要排除的请求类型
      */
+    @Value("${agile.security.csrf_allow_methods}")
     private String allowedMethod;
 
     /**
      * 需要排除的url列表
      */
+    @Value("${agile.security.csrf_allow_url}")
     private String allowedUrl;
 
     @Override

@@ -1,19 +1,18 @@
 package com.agile.mvc.controller;
 
+import com.agile.common.config.SecurityConfig;
+import com.agile.common.config.SpringConfig;
+import com.agile.common.config.ViewResolverConfig;
 import com.agile.common.util.JSONUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.ConfigurationSource;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.HandlerExecutionChain;
@@ -22,16 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URL;
-
 
 /**
- * Created by mydeathtrial on 2017/5/5
+ * Created by 佟盟 on 2017/5/5
  */
-@ContextConfiguration(locations = "classpath:com/agile/configure/spring-container.xml")
+@WebAppConfiguration
+@ContextConfiguration(classes = {ViewResolverConfig.class,SpringConfig.class,SecurityConfig.class})
 @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
 public class AgileMainControllerTest {
     //日志工具
@@ -87,14 +82,20 @@ public class AgileMainControllerTest {
      * @return 视图，每个测试用例可通过该试图获取被测试服务响应信息
      * @throws Exception 异常
      */
+    @Transactional
     protected ModelAndView processor() throws Exception {
         request.setAttribute(HandlerMapping.INTROSPECT_TYPE_LEVEL_MAPPING, true);
         HandlerExecutionChain chain = handlerMapping.getHandler(request);
         ModelAndView model = null;
         try {
-            model = handlerAdapter.handle(request, new MockHttpServletResponse(), chain.getHandler());
-            logger.info(JSONUtil.toJSONString(model.getModel().get("head")));
-            logger.trace(JSONUtil.toJSONString(model.getModel().get("result")));
+            if (chain != null) {
+                model = handlerAdapter.handle(request, new MockHttpServletResponse(), chain.getHandler());
+            }
+            if (model != null) {
+                logger.info(JSONUtil.toJSONString(model.getModel().get("head")));
+                logger.trace(JSONUtil.toJSONString(model.getModel().get("result")));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

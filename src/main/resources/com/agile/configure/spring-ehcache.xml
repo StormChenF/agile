@@ -7,7 +7,7 @@
 
     <agile-ehcache:description>ehcache缓存配置</agile-ehcache:description>
 
-    <agile-ehcache:bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+    <agile-ehcache:bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheCacheManager" primary="true"
                         p:cacheManager-ref="ehCacheManagerFactory"
                         p:transactionAware="true"/>
 

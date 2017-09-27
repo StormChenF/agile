@@ -18,6 +18,9 @@ public class SignService extends MainService {
     public RETURN invalidSession(){
         return RETURN.INVALID_SESSION;
     }
+    public RETURN expiredSession(){
+        return RETURN.EXPIRED_SESSION;
+    }
     public RETURN homepage(){
         return RETURN.SUCCESS;
     }

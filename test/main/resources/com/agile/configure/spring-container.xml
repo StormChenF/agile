@@ -10,17 +10,11 @@
     <agile-test-container:description>spring 总配置容器</agile-test-container:description>
 
     <!--属性文件引入-->
-    <context:property-placeholder location="classpath:com/agile/configure/agile.properties" ignore-unresolvable="true"
-                                  ignore-resource-not-found="true" file-encoding="UTF-8"/>
-    <agile-test-container:import resource="classpath:com/agile/configure/spring-web-mvc.xml"/>
+    <context:property-placeholder location="classpath:com/agile/configure/agile.properties" ignore-unresolvable="true" ignore-resource-not-found="true" file-encoding="UTF-8"/>
     <agile-test-container:import resource="classpath:com/agile/configure/spring-druid.xml"/>
     <agile-test-container:import resource="classpath:com/agile/configure/spring-jpa.xml"/>
-    <agile-test-container:import resource="classpath:com/agile/configure/spring-security.xml"/>
     <agile-test-container:import resource="classpath:com/agile/configure/spring-ehcache.xml"/>
     <agile-test-container:import resource="classpath:com/agile/configure/spring-redis.xml"/>
     <agile-test-container:import resource="classpath:com/agile/configure/spring-annotation.xml"/>
 
-    <!--用于处理测试用例模拟服务器请求-->
-    <agile-test-container:bean id="requestMappingHandlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-    <agile-test-container:bean id="requestMappingHandlerAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
 </agile-test-container:beans>

@@ -1,4 +1,4 @@
-package com.agile.common.security;
+package com.agile.common.filter;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -17,7 +17,7 @@ import java.io.IOException;
  * Created by 佟盟 on 2017/3/7
  */
 @WebFilter(filterName = "agileCsrfHeaderFilter",urlPatterns = "/*")
-public class AgileCsrfHeaderFilter extends OncePerRequestFilter implements Filter {
+public class SecurityCsrfHeaderFilter extends OncePerRequestFilter implements Filter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         CsrfToken csrf = (CsrfToken) httpServletRequest.getAttribute(CsrfToken.class.getName());
