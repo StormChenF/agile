@@ -2,10 +2,9 @@ package com.agile.common.util;
 
 import com.agile.common.base.Constant;
 import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,9 +58,9 @@ public final class StringUtil extends StringUtils {
      * @param map 参数集合
      * @return url参数
      */
-    public static String fromMapToUrl(HashMap<String,Object> map){
+    public static String fromMapToUrl(Map<String,Object> map){
         StringBuilder mapOfString = new StringBuilder(Constant.RegularAbout.NULL);
-        for (HashMap.Entry<String, Object> entity : map.entrySet()) {
+        for (Map.Entry<String, Object> entity : map.entrySet()) {
             if(!(entity.getValue() instanceof Page)){
                 mapOfString.append(Constant.RegularAbout.AND).append(entity.getKey());
                 mapOfString.append(Constant.RegularAbout.EQUAL).append(entity.getValue());

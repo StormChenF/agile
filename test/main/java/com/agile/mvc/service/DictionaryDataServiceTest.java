@@ -15,8 +15,8 @@ public class DictionaryDataServiceTest extends AgileMainControllerTest {
         this.setUrl("/DictionaryDataService/update");
         this.setMethod("post");
 
-        this.setParameter("setName", "");
-        this.setParameter("setValue", "");
+        this.setParameter("setName", "qwe");this.setParameter("setName", "qwes");
+        this.setParameter("setValue", "123");
         this.setParameter("setCode", "");
         this.setParameter("setIsFixed", "");
         this.setParameter("setDicCode", "");

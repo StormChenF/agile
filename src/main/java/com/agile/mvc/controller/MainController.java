@@ -143,7 +143,12 @@ public class MainController {
      * @param request   servlet请求
      */
     private void handleRequestUrl(HttpServletRequest request) {
-        HashMap<String, Object> inParam = new HashMap<>();
+        Map<String, Object> inParam = new HashMap<>();
+        if (request.getParameterMap().size()>0){
+            for (Map.Entry<String,String[]> map:request.getParameterMap().entrySet() ) {
+                inParam.put(map.getKey(),map.getValue()[0]);
+            }
+        }
 
         //---------------------------------请求参数解析------------------------------------
         String queryString = request.getQueryString();
@@ -151,7 +156,7 @@ public class MainController {
             String[] params = queryString.split(Constant.RegularAbout.AND),paramContainer;
             for (int i = 0 ; i < params.length ; i++) {
                 paramContainer = params[i].split(Constant.RegularAbout.EQUAL);
-                if (paramContainer.length == 2){
+                if (paramContainer.length==2){
                     inParam.put(paramContainer[0],paramContainer[1]);
                 }
             }
