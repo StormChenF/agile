@@ -16,24 +16,29 @@ import java.io.IOException;
 /**
  * Created by 佟盟 on 2017/3/7
  */
-@WebFilter(filterName = "agileCsrfHeaderFilter",urlPatterns = "/*")
 public class SecurityCsrfHeaderFilter extends OncePerRequestFilter implements Filter {
+    private String tokenName;
+
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         CsrfToken csrf = (CsrfToken) httpServletRequest.getAttribute(CsrfToken.class.getName());
         if (csrf != null) {
-            Cookie cookie = WebUtils.getCookie(httpServletRequest, "X-CSRF-TOKEN");
+            Cookie cookie = WebUtils.getCookie(httpServletRequest, tokenName);
             String token = csrf.getToken();
             if (cookie==null || token!=null && !token.equals(cookie.getValue())) {
-                cookie = new Cookie("X-CSRF-TOKEN", token);
+                cookie = new Cookie(tokenName, token);
                 cookie.setPath("/");
                 httpServletResponse.addCookie(cookie);
             }
         }else{
-            Cookie cookie = new Cookie("X-CSRF-TOKEN", null);
+            Cookie cookie = new Cookie(tokenName, null);
             cookie.setMaxAge(0);
             httpServletResponse.addCookie(cookie);
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
+    }
+
+    public void setTokenName(String tokenName) {
+        this.tokenName = tokenName;
     }
 }
