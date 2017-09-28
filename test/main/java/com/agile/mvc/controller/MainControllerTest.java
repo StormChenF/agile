@@ -28,7 +28,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @WebAppConfiguration
 @ContextConfiguration(classes = {ViewResolverConfig.class,SpringConfig.class,SecurityConfig.class})
 @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
-public class AgileMainControllerTest {
+public class MainControllerTest {
     //日志工具
     private Logger logger = LogManager.getLogger(this.getClass());
     private static RequestMappingHandlerMapping handlerMapping;

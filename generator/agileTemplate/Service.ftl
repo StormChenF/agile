@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 * Created by 佟盟
 */
 @Service
-public class ${className}Service extends AgileMainService {
+public class ${className}Service extends MainService {
 
     /**
      * 新增
