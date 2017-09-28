@@ -228,4 +228,11 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
         return this.logger.get();
     }
 
+    /**
+     * 清理
+     */
+    public void clear(){
+        this.inParam.remove();
+        this.outParam.remove();
+    }
 }

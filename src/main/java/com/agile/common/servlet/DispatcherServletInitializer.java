@@ -5,7 +5,6 @@ import com.agile.common.filter.SecurityCsrfHeaderFilter;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
-import org.apache.commons.codec.Charsets;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -54,13 +53,13 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
         agileCsrfHeaderFilter.addMappingForUrlPatterns(null, false, "/*");
 
         /*
-          CSRF过滤器
+          CORS过滤器
          */
         FilterRegistration.Dynamic corsFilter = servletContext.addFilter("CORSFilter", CORSFilter.class);
         corsFilter.setInitParameter("allowOrigin","*");
         corsFilter.setInitParameter("allowMethods","GET,POST,PUT,DELETE,OPTIONS");
         corsFilter.setInitParameter("allowCredentials","true");
-        corsFilter.setInitParameter("allowHeaders","Content-Type");
+        corsFilter.setInitParameter("allowHeaders","Content-Type,X-CSRF-TOKEN,JSESSIONID");
         corsFilter.addMappingForUrlPatterns(null, false, "/*");
 
         /*

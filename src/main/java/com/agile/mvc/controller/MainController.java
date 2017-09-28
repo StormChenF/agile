@@ -116,6 +116,9 @@ public class MainController {
         //响应数据装填
         modelAndView.addObject(Constant.ResponseAbout.RESULT, this.getService().getOutParam());
 
+        this.getService().clear();
+        this.service.remove();
+
         return modelAndView;
     }
 

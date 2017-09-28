@@ -8,6 +8,8 @@ public interface ServiceInterface {
 	void setInParam(Map<String, Object> inParam);
 	//设置响应参数
 	void setOutParam(String key, Object value);
+	//清理
+	void clear();
 	//提取响应参数
 	Map<String, Object> getOutParam();
 	//调用请求方法
