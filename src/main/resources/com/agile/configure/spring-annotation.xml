@@ -27,7 +27,7 @@
     <!--开启mvc注解-->
     <!--<mvc:annotation-driven/>-->
 
-    <!--&lt;!&ndash;开启切面代理注解&ndash;&gt;-->
+    <!--开启切面代理注解-->
     <aop:aspectj-autoproxy/>
 
     <!--&lt;!&ndash;开启缓存注解&ndash;&gt;-->

@@ -64,4 +64,5 @@ public class DictionaryDataService extends MainService {
         this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
         return RETURN.SUCCESS;
     }
+
 }
