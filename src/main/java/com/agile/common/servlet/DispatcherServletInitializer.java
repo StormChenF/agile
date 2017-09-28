@@ -2,14 +2,19 @@ package com.agile.common.servlet;
 
 import com.agile.common.filter.CORSFilter;
 import com.agile.common.filter.SecurityCsrfHeaderFilter;
+import com.agile.common.listener.CacheListener;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
+import org.apache.logging.log4j.web.Log4jServletContextListener;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.util.IntrospectorCleanupListener;
+import org.springframework.web.util.WebAppRootListener;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
@@ -85,5 +90,37 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
         springDispatcherServlet.setInitParameter("dispatchOptionsRequest","true");
         springDispatcherServlet.setLoadOnStartup(1);
         springDispatcherServlet.addMapping("/*");
+
+        /*
+          初始化缓存监听
+         */
+        servletContext.addListener(CacheListener.class);
+
+        /*
+          内存溢出监听
+         */
+        servletContext.addListener(IntrospectorCleanupListener.class);
+
+        /*
+          日志监听
+         */
+        servletContext.addListener(Log4jServletContextListener.class);
+
+        /*
+          session监听
+         */
+        servletContext.addListener(HttpSessionEventPublisher.class);
+
+        /*
+          项目根目录监听
+         */
+        servletContext.addListener(WebAppRootListener.class);
+
+        servletContext.setInitParameter("webAppRootKey","agile.root");
+        servletContext.setInitParameter("contextConfigLocation","classpath:com/agile/configure/spring-container.xml;");
+        servletContext.setInitParameter("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
+        servletContext.setSessionTimeout(30);
+        servletContext.setRequestCharacterEncoding("UTF-8");
+        servletContext.setResponseCharacterEncoding("UTF-8");
     }
 }

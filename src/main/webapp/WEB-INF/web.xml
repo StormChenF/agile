@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
     <display-name>agile</display-name>
-    <context-param>
-        <param-name>webAppRootKey</param-name>
-        <param-value>agile.root</param-value>
-    </context-param>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:com/agile/configure/spring-container.xml;</param-value>
-    </context-param>
-
-    <!--log4j2 配置-->
-    <context-param>
-        <param-name>log4jConfiguration</param-name>
-        <param-value>classpath:com/agile/configure/agile-log4j2.properties</param-value>
-    </context-param>
-
-    <!--会话时长控制-->
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
