@@ -14,7 +14,7 @@ public final class RETURN {
     public final static RETURN SUCCESS = new RETURN("000001","服务执行成功！");
     public final static RETURN NO_SERVICE = new RETURN("000002","请求服务不存在！");
     public final static RETURN NO_METHOD = new RETURN("000003","请求方法不存在！");
-    public final static RETURN NO_COMPLETE = new RETURN("000004","非法请求！");
+    public final static RETURN NO_COMPLETE = new RETURN("000004","请求路径不合法！");
     public final static RETURN UPLOAD_SUCCESS = new RETURN("000005","文件上传成功！");
     public final static RETURN UPLOAD_ERROR = new RETURN("000006","文件上传过程中发生错误，上传失败！");
     public final static RETURN MADE_DIR_FAIL = new RETURN("000007","文件夹创建失败！");

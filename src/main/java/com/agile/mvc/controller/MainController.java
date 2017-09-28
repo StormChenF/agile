@@ -4,6 +4,7 @@ import com.agile.common.base.RequestHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
+import com.agile.common.exception.UnlawfulRequestException;
 import com.agile.common.server.ServiceInterface;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ServletUtil;
@@ -39,17 +40,10 @@ public class MainController {
 
     /**
      * 非法请求处理器
-     * @param request 请求对象
-     * @return 响应视图
      */
     @RequestMapping(value = {"/","/*","/*/*/*/**"})
-    public ModelAndView processor(HttpServletRequest request){
-        //初始化参数
-        ModelAndView modelAndView = new ModelAndView();
-
-        //判断模块存在
-        modelAndView.addObject(Constant.ResponseAbout.HEAD,new RequestHead(RETURN.NO_COMPLETE,request));
-        return modelAndView;
+    public void processor() throws UnlawfulRequestException {
+        throw new UnlawfulRequestException();
     }
 
     /**

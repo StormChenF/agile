@@ -5,6 +5,7 @@ import com.agile.common.filter.SecurityCsrfHeaderFilter;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
+import org.apache.commons.codec.Charsets;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
