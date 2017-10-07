@@ -17,8 +17,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableCaching
 @EnableScheduling
 @EnableWebMvc
-@ComponentScan(value = "com.agile")
+
 @ImportResource(value = "classpath:com/agile/configure/spring-container.xml")
+@PropertySources({
+//        @PropertySource("classpath:com/agile/configure/agile-core.properties",ignoreResourceNotFound = true,encoding = "UTF-8"),
+        @PropertySource(value = "classpath:com/agile/configure/agile.properties",ignoreResourceNotFound = true,encoding = "UTF-8")
+})
+
+@ComponentScans({@ComponentScan(basePackages = {"com.agile"})})
 public class SpringConfig {
 
 }

@@ -9,12 +9,12 @@
     <agile-container:description>spring 总配置容器</agile-container:description>
 
     <!--属性文件引入-->
-    <context:property-placeholder location="classpath:com/agile/configure/agile.properties" ignore-unresolvable="true" ignore-resource-not-found="true" file-encoding="UTF-8"/>
+    <!--<context:property-placeholder location="classpath:com/agile/configure/agile.properties" ignore-unresolvable="true" ignore-resource-not-found="true" file-encoding="UTF-8"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-web-mvc.xml"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-druid.xml"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-jpa.xml"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-security.xml"/>-->
-    <agile-container:import resource="classpath:com/agile/configure/spring-ehcache.xml"/>
-    <agile-container:import resource="classpath:com/agile/configure/spring-redis.xml"/>
+    <!--<agile-container:import resource="classpath:com/agile/configure/spring-ehcache.xml"/>-->
+    <!--<agile-container:import resource="classpath:com/agile/configure/spring-redis.xml"/>-->
     <agile-container:import resource="classpath:com/agile/configure/spring-annotation.xml"/>
 </agile-container:beans>

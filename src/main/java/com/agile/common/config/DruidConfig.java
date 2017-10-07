@@ -4,8 +4,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 
 import java.sql.SQLException;
@@ -14,10 +12,6 @@ import java.sql.SQLException;
  * Created by 佟盟 on 2017/10/7
  */
 @Configuration
-@PropertySources({
-//        @PropertySource("classpath:com/agile/configure/agile-core.properties"),
-        @PropertySource("classpath:com/agile/configure/agile.properties")
-})
 public class DruidConfig implements EnvironmentAware {
     private Environment env;
 

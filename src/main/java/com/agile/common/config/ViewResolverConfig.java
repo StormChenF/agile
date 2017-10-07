@@ -2,10 +2,12 @@ package com.agile.common.config;
 
 import com.agile.common.viewResolver.JsonViewResolver;
 import com.agile.common.viewResolver.XmlViewResolver;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -25,13 +27,8 @@ import java.util.Map;
  */
 @Configuration
 @EnableWebMvc
-public class ViewResolverConfig implements WebMvcConfigurer {
-
-    @Value("${agile.upload.max_upload_size}")
-    private int maxUploadSize;
-
-    @Value("${agile.upload.default_encoding}")
-    private String defaultEncoding;
+public class ViewResolverConfig implements WebMvcConfigurer , EnvironmentAware {
+    private Environment env;
 
     private final JsonViewResolver jsonViewResolver;
 
@@ -69,8 +66,8 @@ public class ViewResolverConfig implements WebMvcConfigurer {
     @Bean
     public CommonsMultipartResolver contentCommonsMultipartResolver(){
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxUploadSize(maxUploadSize);
-        resolver.setDefaultEncoding(defaultEncoding);
+        resolver.setMaxUploadSize(env.getProperty("agile.upload.max_upload_size",long.class));
+        resolver.setDefaultEncoding(env.getProperty("agile.upload.default_encoding"));
         return resolver;
     }
 
@@ -97,5 +94,10 @@ public class ViewResolverConfig implements WebMvcConfigurer {
                 .favorParameter(false)
                 .defaultContentType(MediaType.APPLICATION_JSON_UTF8)
                 .mediaTypes(map);
+    }
+
+    @Override
+    public void setEnvironment(@NotNull Environment environment) {
+        env = environment;
     }
 }

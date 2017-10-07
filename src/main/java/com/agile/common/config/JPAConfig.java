@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -24,10 +22,6 @@ import java.util.Properties;
  * Created by 佟盟 on 2017/10/7
  */
 @Configuration
-@PropertySources({
-//        @PropertySource("classpath:com/agile/configure/agile-core.properties"),
-        @PropertySource("classpath:com/agile/configure/agile.properties")
-})
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"com.agile.mvc.model.dao"},transactionManagerRef = "transactionManager",entityManagerFactoryRef = "entityManagerFactory")
 public class JPAConfig implements EnvironmentAware {
