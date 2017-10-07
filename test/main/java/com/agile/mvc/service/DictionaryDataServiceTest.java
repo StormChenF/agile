@@ -18,8 +18,8 @@ public class DictionaryDataServiceTest extends MainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setIsFixed", "");
         this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
@@ -32,8 +32,8 @@ public class DictionaryDataServiceTest extends MainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setIsFixed", "");
         this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
@@ -46,8 +46,8 @@ public class DictionaryDataServiceTest extends MainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setIsFixed", "");
         this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }
@@ -60,8 +60,8 @@ public class DictionaryDataServiceTest extends MainControllerTest {
         this.setParameter("setName", "");
         this.setParameter("setValue", "");
         this.setParameter("setCode", "");
-        this.setParameter("setIsFixed", "");
         this.setParameter("setDicCode", "");
+        this.setParameter("setIsFixed", "");
 
         this.processor();
     }

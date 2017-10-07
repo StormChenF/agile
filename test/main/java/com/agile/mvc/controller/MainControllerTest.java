@@ -1,8 +1,6 @@
 package com.agile.mvc.controller;
 
-import com.agile.common.config.SecurityConfig;
-import com.agile.common.config.SpringConfig;
-import com.agile.common.config.ViewResolverConfig;
+import com.agile.common.config.*;
 import com.agile.common.util.JSONUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * Created by 佟盟 on 2017/5/5
  */
 @WebAppConfiguration
-@ContextConfiguration(classes = {ViewResolverConfig.class,SpringConfig.class,SecurityConfig.class})
+@ContextConfiguration(classes = {ViewResolverConfig.class,SpringConfig.class,SecurityConfig.class,DruidConfig.class, JPAConfig.class})
 @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
 public class MainControllerTest {
     //日志工具

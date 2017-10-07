@@ -7,7 +7,6 @@ import com.agile.common.exception.NoSuchRequestServiceException;
 import com.agile.common.exception.UnlawfulRequestException;
 import com.agile.common.server.ServiceInterface;
 import com.agile.common.util.FactoryUtil;
-import com.agile.common.util.ServletUtil;
 import com.agile.common.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;

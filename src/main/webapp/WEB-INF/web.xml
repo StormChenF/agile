@@ -2,6 +2,18 @@
 <web-app>
     <display-name>agile</display-name>
 
+    <!--spring上下文配置文件位子-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:com/agile/configure/spring-container.xml;</param-value>
+    </context-param>
+
+    <!--log4j2 配置-->
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>classpath:com/agile/configure/agile-log4j2.properties</param-value>
+    </context-param>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/favicon.ico</url-pattern>
