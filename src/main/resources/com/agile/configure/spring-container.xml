@@ -7,7 +7,7 @@
                        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <agile-container:description>spring 总配置容器</agile-container:description>
-
+    <context:component-scan base-package="com.agile"/>
     <!--属性文件引入-->
     <!--<context:property-placeholder location="classpath:com/agile/configure/agile.properties" ignore-unresolvable="true" ignore-resource-not-found="true" file-encoding="UTF-8"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-web-mvc.xml"/>-->
@@ -16,5 +16,5 @@
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-security.xml"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-ehcache.xml"/>-->
     <!--<agile-container:import resource="classpath:com/agile/configure/spring-redis.xml"/>-->
-    <agile-container:import resource="classpath:com/agile/configure/spring-annotation.xml"/>
+    <!--<agile-container:import resource="classpath:com/agile/configure/spring-annotation.xml"/>-->
 </agile-container:beans>

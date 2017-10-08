@@ -30,7 +30,7 @@ public class AgileGenerator {
             String schema = DataBaseUtil.connection.getSchema();
 
             //获取表信息
-            ResultSet tablesData = DataBaseUtil.databaseMetaData.getTables(catalog, schema, propertiesUtil.getProperty("agile.generator.table_name"), new String[]{"TABLE"});
+            ResultSet tablesData = DataBaseUtil.databaseMetaData.getTables(catalog, schema, propertiesUtil.getPropertyOfNoStatic("agile.generator.table_name"), new String[]{"TABLE"});
 
             while (tablesData.next()) {
 
@@ -73,7 +73,7 @@ public class AgileGenerator {
                     param.put("columnType", columnsData.getString("TYPE_NAME"));
 
                     //属性类型
-                    propertyType = propertiesUtil.getProperty("agile.generator.column_type." + columnsData.getString("TYPE_NAME").toLowerCase());
+                    propertyType = propertiesUtil.getPropertyOfNoStatic("agile.generator.column_type." + columnsData.getString("TYPE_NAME").toLowerCase());
 
                     //get方法
                     param.put("getMethod", "get" + StringUtil.toUpperName(columnName));
@@ -156,7 +156,7 @@ public class AgileGenerator {
 
                 //Entity生成器
                 Template entityTemp = cfg.getTemplate("agileTemplate/Entity.ftl");
-                String entityFileName = propertiesUtil.getProperty("agile.generator.entity_prefix") + className + propertiesUtil.getProperty("agile.generator.entity_suffix") + ".java";
+                String entityFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.entity_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.entity_suffix") + ".java";
                 File entityFile = new File("./src/main/java/com/agile/mvc/model/entity/" + entityFileName);
                 FileWriter entityFileFw = new FileWriter(entityFile);
                 BufferedWriter entityFileBw = new BufferedWriter(entityFileFw);
@@ -166,7 +166,7 @@ public class AgileGenerator {
 
                 //DAO生成器
                 Template repositoryTemp = cfg.getTemplate("agileTemplate/Repository.ftl");
-                String repositoryFileName = propertiesUtil.getProperty("agile.generator.repository_prefix") + className + propertiesUtil.getProperty("agile.generator.repository_suffix") + ".java";
+                String repositoryFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.repository_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.repository_suffix") + ".java";
                 File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
                 FileWriter repositoryFileFw = new FileWriter(repositoryFile);
                 BufferedWriter repositoryFileBw = new BufferedWriter(repositoryFileFw);
@@ -176,7 +176,7 @@ public class AgileGenerator {
 
                 //service生成器
                 Template serviceTemp = cfg.getTemplate("agileTemplate/Service.ftl");
-                String ServiceFileName = propertiesUtil.getProperty("agile.generator.service_prefix") + className + propertiesUtil.getProperty("agile.generator.service_suffix") + ".java";
+                String ServiceFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.service_suffix") + ".java";
                 File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
                 FileWriter serviceFileFw = new FileWriter(serviceFile);
                 BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);

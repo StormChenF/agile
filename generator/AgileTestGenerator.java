@@ -46,10 +46,10 @@ public class AgileTestGenerator {
                         }
                     }
 
-                    String servicePrefix = propertiesUtil.getProperty("agile.generator.service_prefix");
-                    String serviceSuffix = propertiesUtil.getProperty("agile.generator.service_suffix");
-                    String entityPrefix = propertiesUtil.getProperty("agile.generator.entity_prefix");
-                    String entitySuffix = propertiesUtil.getProperty("agile.generator.entity_suffix");
+                    String servicePrefix = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_prefix");
+                    String serviceSuffix = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_suffix");
+                    String entityPrefix = propertiesUtil.getPropertyOfNoStatic("agile.generator.entity_prefix");
+                    String entitySuffix = propertiesUtil.getPropertyOfNoStatic("agile.generator.entity_suffix");
                     if (serviceName.startsWith(servicePrefix)){
                         entityName = serviceName.replaceFirst(servicePrefix,"");
                     }

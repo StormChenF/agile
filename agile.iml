@@ -4,15 +4,17 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/DruidConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/EhCacheConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/JPAConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/KaptchaConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/RedisConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/ScanConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/SecurityConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/SpringConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/com/agile/common/config/ViewResolverConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-annotation.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-container.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-druid.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-ehcache.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-jpa.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/com/agile/configure/spring-redis.xml</file>
         </fileset>
       </configuration>
     </facet>

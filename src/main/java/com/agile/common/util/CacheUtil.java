@@ -10,7 +10,7 @@ public class CacheUtil {
     public static AbstractCacheUtil getCache(){
         if (ObjectUtil.isEmpty(cache)){
             String cacheProperty = "agile.cache.proxy";
-            cache = (AbstractCacheUtil) FactoryUtil.getBean(PropertiesUtil.getProperties(cacheProperty)+"Service");
+            cache = (AbstractCacheUtil) FactoryUtil.getBean(PropertiesUtil.getProperty(cacheProperty)+"Service");
         }
         return cache;
     }
