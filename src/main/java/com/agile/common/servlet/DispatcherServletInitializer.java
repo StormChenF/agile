@@ -27,6 +27,13 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(@NotNull ServletContext servletContext) {
+        servletContext.setInitParameter("webAppRootKey","agile.root");
+//        servletContext.setInitParameter("contextConfigLocation","classpath:com/agile/configure/spring-container.xml;");
+//        servletContext.setAttribute("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
+        servletContext.setInitParameter("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
+        servletContext.setSessionTimeout(30);
+        servletContext.setRequestCharacterEncoding("UTF-8");
+        servletContext.setResponseCharacterEncoding("UTF-8");
         /*
           编码过滤器
          */
@@ -116,11 +123,6 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
          */
         servletContext.addListener(WebAppRootListener.class);
 
-        servletContext.setInitParameter("webAppRootKey","agile.root");
-//        servletContext.setInitParameter("contextConfigLocation","classpath:com/agile/configure/spring-container.xml;");
-//        servletContext.setAttribute("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
-        servletContext.setSessionTimeout(30);
-        servletContext.setRequestCharacterEncoding("UTF-8");
-        servletContext.setResponseCharacterEncoding("UTF-8");
+
     }
 }

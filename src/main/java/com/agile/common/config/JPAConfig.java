@@ -22,7 +22,7 @@ import java.util.Properties;
  * Created by 佟盟 on 2017/10/7
  */
 @Configuration
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories(basePackages = {"com.agile.mvc.model.dao"},transactionManagerRef = "transactionManager",entityManagerFactoryRef = "entityManagerFactory")
 public class JPAConfig implements EnvironmentAware {
 
