@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.sql.Timestamp;
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 @Entity
 @Table(name = "sys_persistent_logins",  catalog = "agile_db")
 public class SysPersistentLoginsEntity implements Serializable {

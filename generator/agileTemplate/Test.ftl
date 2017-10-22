@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ${className}Test extends MainControllerTest {
 <#list methodList as method>

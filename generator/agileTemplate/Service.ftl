@@ -1,5 +1,6 @@
 package ${servicePackage};
 
+import com.agile.common.annotation.RestFul;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
@@ -10,8 +11,8 @@ import com.agile.mvc.model.entity.${className}Entity;
 import org.springframework.data.domain.PageRequest;
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 @Service
 public class ${className}Service extends MainService {
 

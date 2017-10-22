@@ -2,6 +2,7 @@ package com.agile.common.config;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +32,7 @@ public class JPAConfig implements EnvironmentAware {
     private final DataSource dataSource;
 
     @Autowired
-    public JPAConfig(DataSource dataSource) {
+    public JPAConfig(@Qualifier(value = "dataSource1") DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -64,6 +65,7 @@ public class JPAConfig implements EnvironmentAware {
         properties.setProperty("hibernate.format_sql",env.getProperty("agile.jpa.format_sql"));
         return properties;
     }
+
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableWebMvc
-public class ViewResolverConfig implements WebMvcConfigurer , EnvironmentAware {
+public class SpringMvcConfig implements WebMvcConfigurer , EnvironmentAware {
     private Environment env;
 
     private final JsonViewResolver jsonViewResolver;
@@ -35,7 +35,7 @@ public class ViewResolverConfig implements WebMvcConfigurer , EnvironmentAware {
     private final XmlViewResolver xmlViewResolver;
 
     @Autowired
-    public ViewResolverConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver) {
+    public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver) {
         this.jsonViewResolver = jsonViewResolver;
         this.xmlViewResolver = xmlViewResolver;
     }

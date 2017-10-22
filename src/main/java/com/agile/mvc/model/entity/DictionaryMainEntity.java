@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 @Entity
 @Table(name = "dictionary_main",  catalog = "agile_db")
 public class DictionaryMainEntity implements Serializable {

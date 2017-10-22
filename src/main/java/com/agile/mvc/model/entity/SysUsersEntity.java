@@ -8,8 +8,8 @@ import java.sql.Date;
 import java.sql.Date;
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 @Entity
 @Table(name = "sys_users",  catalog = "agile_db")
 public class SysUsersEntity implements Serializable {

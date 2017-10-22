@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DruidConfig implements EnvironmentAware {
     private Environment env;
 
-    @Bean(initMethod = "init",destroyMethod = "close")
+    @Bean(initMethod = "init",destroyMethod = "close",name = "dataSource1")
     DruidDataSource dataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(env.getProperty("agile.druid.driver_class_name"));

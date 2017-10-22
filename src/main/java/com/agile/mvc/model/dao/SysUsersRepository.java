@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Set;
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 public interface SysUsersRepository extends JpaRepository<SysUsersEntity,Integer> {
     SysUsersEntity findByName(String name);
 

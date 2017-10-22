@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * Created by 佟盟 on 2017/5/5
  */
 @WebAppConfiguration
-@ContextConfiguration(classes = {ViewResolverConfig.class,SpringConfig.class,SecurityConfig.class,DruidConfig.class, JPAConfig.class,EhCacheConfig.class,RedisConfig.class})
+@ContextConfiguration(classes = {SpringMvcConfig.class,SpringConfig.class,SecurityConfig.class,DruidConfig.class, JPAConfig.class,EhCacheConfig.class,RedisConfig.class})
 @Transactional(transactionManager = "transactionManager",isolation = Isolation.READ_COMMITTED)
 public class MainControllerTest {
     //日志工具

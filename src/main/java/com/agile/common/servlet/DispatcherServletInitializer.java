@@ -27,6 +27,7 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(@NotNull ServletContext servletContext) {
+        System.setProperty("log4j.configuration", "classpath:com/agile/configure/agile-log4j2.properties");
         servletContext.setInitParameter("webAppRootKey","agile.root");
 //        servletContext.setInitParameter("contextConfigLocation","classpath:com/agile/configure/spring-container.xml;");
 //        servletContext.setAttribute("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
@@ -93,7 +94,8 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
           SpringDispatcherServlet
          */
         ServletRegistration.Dynamic springDispatcherServlet = servletContext.addServlet("SpringDispatcherServlet", DispatcherServlet.class);
-        springDispatcherServlet.setInitParameter("contextConfigLocation","classpath:com/agile/configure/spring-container.xml;");
+        springDispatcherServlet.setInitParameter("contextClass","org.springframework.web.context.support.AnnotationConfigWebApplicationContext");
+        springDispatcherServlet.setInitParameter("contextConfigLocation","com.agile.common.config.SpringConfig");
         springDispatcherServlet.setInitParameter("dispatchOptionsRequest","true");
         springDispatcherServlet.setLoadOnStartup(1);
         springDispatcherServlet.addMapping("/*");

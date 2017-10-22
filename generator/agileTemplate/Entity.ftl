@@ -8,8 +8,8 @@ import ${import}
 </#list>
 
 /**
-* Created by 佟盟
-*/
+ * Created by 佟盟
+ */
 @Entity
 @Table(name = "${tableName}", <#if schemaName??>schema = "${schemaName}",</#if> catalog = "${catalogName}")
 public class ${className}Entity implements Serializable {
