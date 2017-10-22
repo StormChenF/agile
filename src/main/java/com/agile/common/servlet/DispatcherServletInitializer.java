@@ -3,6 +3,7 @@ package com.agile.common.servlet;
 import com.agile.common.filter.CORSFilter;
 import com.agile.common.filter.SecurityCsrfHeaderFilter;
 import com.agile.common.listener.CacheListener;
+import com.agile.common.listener.Log4jListener;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
@@ -15,7 +16,6 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.util.IntrospectorCleanupListener;
 import org.springframework.web.util.WebAppRootListener;
-
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
@@ -29,8 +29,6 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
     public void onStartup(@NotNull ServletContext servletContext) {
         System.setProperty("log4j.configuration", "classpath:com/agile/configure/agile-log4j2.properties");
         servletContext.setInitParameter("webAppRootKey","agile.root");
-//        servletContext.setInitParameter("contextConfigLocation","classpath:com/agile/configure/spring-container.xml;");
-//        servletContext.setAttribute("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
         servletContext.setInitParameter("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
         servletContext.setSessionTimeout(30);
         servletContext.setRequestCharacterEncoding("UTF-8");
@@ -99,6 +97,8 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
         springDispatcherServlet.setInitParameter("dispatchOptionsRequest","true");
         springDispatcherServlet.setLoadOnStartup(1);
         springDispatcherServlet.addMapping("/*");
+
+        servletContext.addListener(Log4jListener.class);
 
         /*
           初始化缓存监听
