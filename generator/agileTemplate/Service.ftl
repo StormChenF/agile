@@ -1,6 +1,5 @@
 package ${servicePackage};
 
-import com.agile.common.annotation.RestFul;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
@@ -37,7 +36,7 @@ public class ${className}Service extends MainService {
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }

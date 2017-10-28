@@ -3,6 +3,7 @@ package com.agile.mvc.service;
 import com.agile.common.annotation.RestFul;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
+import com.agile.common.util.CacheUtil;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class SysBtUsersRolesService extends MainService {
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.delete((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }
@@ -61,6 +62,7 @@ public class SysBtUsersRolesService extends MainService {
      * 地址：http://localhost:8080/SysBtUsersRolesService/query
      */
     public RETURN query(){
+        CacheUtil.setCache("12","234234");
         SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
         this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
         return RETURN.SUCCESS;
