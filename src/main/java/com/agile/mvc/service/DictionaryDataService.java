@@ -1,6 +1,6 @@
 package com.agile.mvc.service;
 
-import com.agile.common.annotation.RestFul;
+import com.agile.common.annotation.Init;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
@@ -60,9 +60,10 @@ public class DictionaryDataService extends MainService {
      * 查询
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
+    @Init
     public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
-        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
+        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
         return RETURN.SUCCESS;
     }
 }

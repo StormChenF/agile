@@ -1,9 +1,7 @@
 package com.agile.mvc.service;
 
-import com.agile.common.annotation.RestFul;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.CacheUtil;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
@@ -62,9 +60,8 @@ public class SysBtUsersRolesService extends MainService {
      * 地址：http://localhost:8080/SysBtUsersRolesService/query
      */
     public RETURN query(){
-        CacheUtil.setCache("12","234234");
         SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
-        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
+        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
         return RETURN.SUCCESS;
     }
 }

@@ -1,6 +1,5 @@
 package com.agile.mvc.service;
 
-import com.agile.common.annotation.RestFul;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
@@ -62,7 +61,7 @@ public class SysRolesService extends MainService {
      */
     public RETURN query(){
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
-        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
+        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
         return RETURN.SUCCESS;
     }
 }

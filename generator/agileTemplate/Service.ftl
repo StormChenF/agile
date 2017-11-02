@@ -61,7 +61,7 @@ public class ${className}Service extends MainService {
      */
     public RETURN query(){
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
-        this.setOutParam("queryList",dao.findAll(new PageRequest(0,10)));
+        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
         return RETURN.SUCCESS;
     }
 }

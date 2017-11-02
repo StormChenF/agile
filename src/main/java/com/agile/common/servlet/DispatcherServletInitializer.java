@@ -1,13 +1,13 @@
 package com.agile.common.servlet;
 
+import com.agile.common.config.LoggerFactoryConfig;
 import com.agile.common.filter.CORSFilter;
 import com.agile.common.filter.SecurityCsrfHeaderFilter;
 import com.agile.common.listener.CacheListener;
-import com.agile.common.listener.Log4jListener;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
-import org.apache.logging.log4j.web.Log4jServletContextListener;
+import org.apache.logging.log4j.core.config.ConfigurationFactory;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
@@ -27,12 +27,16 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(@NotNull ServletContext servletContext) {
-        System.setProperty("log4j.configuration", "classpath:com/agile/configure/agile-log4j2.properties");
         servletContext.setInitParameter("webAppRootKey","agile.root");
-        servletContext.setInitParameter("log4jConfiguration","classpath:com/agile/configure/agile-log4j2.properties");
         servletContext.setSessionTimeout(30);
         servletContext.setRequestCharacterEncoding("UTF-8");
         servletContext.setResponseCharacterEncoding("UTF-8");
+
+        /*
+          优先启动log4j2配置
+         */
+        ConfigurationFactory.setConfigurationFactory(LoggerFactoryConfig.getInstance());
+
         /*
           编码过滤器
          */
@@ -98,7 +102,7 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
         springDispatcherServlet.setLoadOnStartup(1);
         springDispatcherServlet.addMapping("/*");
 
-        servletContext.addListener(Log4jListener.class);
+//        servletContext.addListener(Log4jListener.class);
 
         /*
           初始化缓存监听
@@ -109,11 +113,6 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
           内存溢出监听
          */
         servletContext.addListener(IntrospectorCleanupListener.class);
-
-        /*
-          日志监听
-         */
-        servletContext.addListener(Log4jServletContextListener.class);
 
         /*
           session监听

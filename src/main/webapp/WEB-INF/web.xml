@@ -2,12 +2,6 @@
 <web-app>
     <display-name>agile</display-name>
 
-    <!--log4j2 配置-->
-    <context-param>
-        <param-name>log4jConfiguration</param-name>
-        <param-value>classpath:com/agile/configure/agile-log4j2.properties</param-value>
-    </context-param>
-
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/favicon.ico</url-pattern>
