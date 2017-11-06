@@ -1,5 +1,6 @@
 package com.agile.common.config;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,6 +47,7 @@ public class JPAConfig implements EnvironmentAware {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setPackagesToScan("com.agile.mvc.model.entity");
+        entityManagerFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
         entityManagerFactory.setJpaProperties(jpaProperties());
         return entityManagerFactory;
@@ -63,6 +65,7 @@ public class JPAConfig implements EnvironmentAware {
         properties.setProperty("hibernate.ejb.naming_strategy","org.hibernate.cfg.ImprovedNamingStrategy");
         properties.setProperty("hibernate.show_sql",env.getProperty("agile.jpa.show_sql"));
         properties.setProperty("hibernate.format_sql",env.getProperty("agile.jpa.format_sql"));
+        properties.setProperty("hibernate.ejb.interceptor","com.agile.common.interceptor.JpaInterceptor");
         return properties;
     }
 

@@ -6,7 +6,6 @@ import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
@@ -19,7 +18,7 @@ import java.util.HashMap;
 public class LogAop {
 
     @Autowired
-    LogProcessor logProccer;
+    LogProcessor logProcessor;
 
     @Autowired
     HttpServletRequest request;
@@ -40,7 +39,7 @@ public class LogAop {
         HashMap<String,Object> inParam = (HashMap<String,Object>) mainService.getDeclaredMethod("getInParam").invoke(target);
         @SuppressWarnings("unchecked")
         HashMap<String,Object> outParam = (HashMap<String,Object>) mainService.getDeclaredMethod("getOutParam").invoke(target);
-        logProccer.buildLog(target.getClass().getSimpleName(),joinPoint.getArgs()[0].toString(),logger,inParam,outParam,ServletUtil.getCustomerIPAddr(request),request.getRequestURL());
+        logProcessor.buildLog(target.getClass().getSimpleName(),joinPoint.getArgs()[0].toString(),logger,inParam,outParam,ServletUtil.getCustomerIPAddr(request),request.getRequestURL());
 
     }
 

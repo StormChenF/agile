@@ -1,6 +1,6 @@
 package com.agile.mvc.controller;
 
-import com.agile.common.base.RequestHead;
+import com.agile.common.base.ResponseHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
@@ -109,7 +109,7 @@ public class MainController {
         }
 
         //调用目标方法后处理视图
-        modelAndView.addObject(Constant.ResponseAbout.HEAD, new RequestHead(returnState, request));
+        modelAndView.addObject(Constant.ResponseAbout.HEAD, new ResponseHead(returnState));
 
         //响应数据装填
         modelAndView.addObject(Constant.ResponseAbout.RESULT, this.getService().getOutParam());

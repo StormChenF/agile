@@ -60,7 +60,6 @@ public class DictionaryDataService extends MainService {
      * 查询
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
-    @Init
     public RETURN query(){
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
         this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));

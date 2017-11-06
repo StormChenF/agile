@@ -106,6 +106,9 @@ public final class StringUtil extends StringUtils {
         return null;
     }
 
+    public static boolean isString(Object object){
+        return object instanceof String;
+    }
     public static int compareTo(String resource,String target){
         return resource.length()-target.length();
     }

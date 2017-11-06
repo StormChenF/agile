@@ -1,6 +1,6 @@
 package com.agile.common.exception;
 
-import com.agile.common.base.RequestHead;
+import com.agile.common.base.ResponseHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.StringUtil;
@@ -79,7 +79,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
             r = RETURN.NO_COMPLETE;
         }
 
-        modelAndView.addObject(Constant.ResponseAbout.HEAD,new RequestHead(r,request));
+        modelAndView.addObject(Constant.ResponseAbout.HEAD,new ResponseHead(r));
         modelAndView.addObject(Constant.ResponseAbout.RESULT,msgStr);
         return modelAndView;
     }
