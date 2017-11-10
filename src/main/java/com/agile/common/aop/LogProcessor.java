@@ -1,5 +1,7 @@
 package com.agile.common.aop;
 
+import com.agile.common.base.Constant;
+import com.agile.common.config.LoggerFactory;
 import com.agile.common.util.JSONUtil;
 import com.agile.common.util.ObjectUtil;
 import org.slf4j.Logger;
@@ -15,7 +17,9 @@ import java.util.Map;
 public class LogProcessor {
 
     @Async
-    void buildLog(String serviceName, String methodName, Logger logger, HashMap<String,Object> inParam, HashMap<String,Object> outParam,String ip,StringBuffer url) {
+    void buildLog(String serviceName, String methodName, HashMap<String,Object> inParam, HashMap<String,Object> outParam,String ip,StringBuffer url) {
+        Logger logger = LoggerFactory.createLogger(Constant.FileAbout.LOGGER_FILE, this.getClass());
+        
         StringBuilder logMsg = new StringBuilder("\nIP:").append(ip);
         logMsg.append("\nURL:").append(url).append("\n服务:").append(serviceName).append("\n方法:").append(methodName).append("\n入参:");
         if (ObjectUtil.isEmpty(inParam)){

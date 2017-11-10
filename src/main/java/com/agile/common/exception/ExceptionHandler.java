@@ -5,12 +5,10 @@ import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.StringUtil;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
@@ -27,7 +25,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     /**
      * 日志工具
      */
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = com.agile.common.config.LoggerFactory.createLogger(Constant.FileAbout.LOGGER_FILE, this.getClass());
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
@@ -79,6 +77,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
             r = RETURN.NO_COMPLETE;
         }
 
+        logger.error(msgStr.toString());
         modelAndView.addObject(Constant.ResponseAbout.HEAD,new ResponseHead(r));
         modelAndView.addObject(Constant.ResponseAbout.RESULT,msgStr);
         return modelAndView;

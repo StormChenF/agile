@@ -1,13 +1,9 @@
 package com.agile.common.server;
 
-import com.agile.common.base.Constant;
-import com.agile.common.config.LoggerFactory;
 import com.agile.common.exception.ExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
-import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Date;
@@ -18,9 +14,6 @@ import java.util.Map;
  * Created by 佟盟 on 2017/1/9
  */
 public class MainService extends ExceptionHandler implements ServiceInterface {
-
-    //日志工具
-    private ThreadLocal<Logger> logger = new ThreadLocal<>();
 
     //输入
     private ThreadLocal<Map<String, Object>> inParam = new ThreadLocal<>();
@@ -36,9 +29,6 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      */
     @Transactional
     public RETURN executeMethod(String methodName,Object object) throws Throwable {
-        //初始化日志控件
-        setLogger(LoggerFactory.createLogger(Constant.FileAbout.LOGGER_FILE,this.getClass()));
-
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);
             //取消安全检测，提高性能
@@ -214,20 +204,6 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      */
     public void setOutParam(String key, Object value) {
         this.outParam.get().put(key,value);
-    }
-
-    /**
-     * 日志工具
-     */
-    public void setLogger(Logger logger){
-        this.logger.set(logger);
-    }
-
-    /**
-     * 日志工具
-     */
-    public Logger getLogger(){
-        return this.logger.get();
     }
 
     /**

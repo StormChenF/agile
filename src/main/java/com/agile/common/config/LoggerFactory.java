@@ -17,6 +17,10 @@ import org.apache.logging.log4j.core.filter.LevelRangeFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.slf4j.Logger;
 
+/**
+ * Created by 佟盟 on 2017/2/23
+ * 日志工厂
+ */
 public class LoggerFactory {
     private static LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
     private static Configuration config = ctx.getConfiguration();
@@ -52,18 +56,22 @@ public class LoggerFactory {
     }
     private static String createFileAppender(String baseName,String fileName,Layout layout){
         String name = fileName + "_file";
-        @SuppressWarnings("unchecked")
-        Appender appender = FileAppender.newBuilder().withName(name).withFileName(String.format(path + "/logs/"+baseName+"/%s.log", fileName)).withAppend(true).withLocking(false).withIgnoreExceptions(true).withBufferedIo(true).withLayout(layout).build();
-        appender.start();
-        config.addAppender(appender);
+        if(ObjectUtil.isEmpty(config.getAppender(name))){
+            @SuppressWarnings("unchecked")
+            Appender appender = FileAppender.newBuilder().withName(name).withFileName(String.format(path + "/logs/"+baseName+"/%s.log", fileName)).withAppend(true).withLocking(false).withIgnoreExceptions(true).withBufferedIo(true).withLayout(layout).build();
+            appender.start();
+            config.addAppender(appender);
+        }
         return name;
     }
     private static String createConsoleAppender(String name,Layout layout){
         name += "_console";
-        @SuppressWarnings("unchecked")
-        Appender consoleAppender = ConsoleAppender.newBuilder().withName(name).setTarget(ConsoleAppender.Target.SYSTEM_OUT).withIgnoreExceptions(true).withBufferedIo(true).withLayout(layout).build();
-        consoleAppender.start();
-        config.addAppender(consoleAppender);
+        if(ObjectUtil.isEmpty(config.getAppender(name))) {
+            @SuppressWarnings("unchecked")
+            Appender consoleAppender = ConsoleAppender.newBuilder().withName(name).setTarget(ConsoleAppender.Target.SYSTEM_OUT).withIgnoreExceptions(true).withBufferedIo(true).withLayout(layout).build();
+            consoleAppender.start();
+            config.addAppender(consoleAppender);
+        }
         return name;
     }
 
