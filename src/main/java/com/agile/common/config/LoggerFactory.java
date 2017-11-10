@@ -1,85 +1,107 @@
 package com.agile.common.config;
 
+import com.agile.common.util.ObjectUtil;
+import com.agile.common.util.StringUtil;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
 import org.apache.logging.log4j.core.appender.FileAppender;
 import org.apache.logging.log4j.core.config.AppenderRef;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.core.filter.LevelRangeFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.slf4j.Logger;
 
-/**
- *
- */
 public class LoggerFactory {
+    private static LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+    private static Configuration config = ctx.getConfiguration();
+    private static String path = System.getProperty("agile.root");
     private LoggerFactory() {}
-    public static void start(String jobId) {
+    private static void createLogger(String baseName, Level[] levels, String packagePath) {
+        //创建输出格式
+        Layout layout = PatternLayout.newBuilder().withConfiguration(config).withPattern("%-d{yyyy-MM-dd HH:mm:ss} [ %p ] [ %c ] %m%n").build();
+        baseName = StringUtil.camelToUnderline(baseName);
+        AppenderRef[] refs = new AppenderRef[levels.length*2];
+        String[] appenders = new String[levels.length*2];
+        for (int i = 0 ; i < levels.length;i ++){
+            String targetFileName = (baseName + "_" + levels[i].name()).toLowerCase();
+            if(ObjectUtil.isEmpty(config.getAppender(targetFileName))){
+                //输出引擎
+                appenders[i*2] = createFileAppender(baseName,targetFileName,layout);
+                refs[i*2] = AppenderRef.createAppenderRef(appenders[i*2], null, null);
 
-        //为false时，返回多个LoggerContext对象，   true：返回唯一的单例LoggerContext
-        final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-        final Configuration config = ctx.getConfiguration();
+                appenders[i*2+1] = createConsoleAppender(targetFileName,layout);
+                refs[i*2+1] = AppenderRef.createAppenderRef(appenders[i*2+1], null, null);
+            }
+        }
 
-        //创建一个展示的样式：PatternLayout，   还有其他的日志打印样式。
-        Layout layout = PatternLayout.createLayout(PatternLayout.DEFAULT_CONVERSION_PATTERN, null,config, null, null, true, false, null, null);
-        // TriggeringPolicy tp = SizeBasedTriggeringPolicy.createPolicy("10MB");
-        // Appender appender = RollingFileAppender.createAppender(String.format("
-        // logs/test/syncshows-job-%s.log", jobID),
-        //       "/logs/test/" + jobID + "/syncshows-job-" + jobID + ".log.gz",
-        //       "true", jobID, null, null, null, tp, null, layout, null,
-        //       null, null, null, config);
-        //  日志打印方式——输出为文件
-
-        Appender appender = FileAppender.createAppender(
-                String.format("logs/test/syncshows-job-%s.log", jobId), "true", "false",
-                "" + jobId, null, "true", "true", null, layout, null, null, null, config);
+        LoggerConfig loggerConfig = LoggerConfig.createLogger(Boolean.FALSE, Level.ALL,  packagePath,"true", refs, null, config, null);
+        for (int i = 0 ; i < levels.length;i ++) {
+            if(ObjectUtil.isEmpty(appenders[i]))break;
+            Filter filter = LevelRangeFilter.createFilter(levels[i], levels[i], Filter.Result.ACCEPT, Filter.Result.DENY);
+            loggerConfig.addAppender(config.getAppender(appenders[i*2]), levels[i], filter);
+            loggerConfig.addAppender(config.getAppender(appenders[i*2+1]), levels[i], filter);
+        }
+        config.addLogger(packagePath,loggerConfig);
+        ctx.updateLoggers();
+    }
+    private static String createFileAppender(String baseName,String fileName,Layout layout){
+        String name = fileName + "_file";
+        @SuppressWarnings("unchecked")
+        Appender appender = FileAppender.newBuilder().withName(name).withFileName(String.format(path + "/logs/"+baseName+"/%s.log", fileName)).withAppend(true).withLocking(false).withIgnoreExceptions(true).withBufferedIo(true).withLayout(layout).build();
         appender.start();
         config.addAppender(appender);
-        AppenderRef ref = AppenderRef.createAppenderRef("" + jobId, null, null);
-        AppenderRef[] refs = new AppenderRef[] { ref };
-        LoggerConfig loggerConfig = LoggerConfig.createLogger("false", Level.ALL, "" + jobId,
-                "true", refs, null, config, null);
-        loggerConfig.addAppender(appender, null, null);
-        config.addLogger("" + jobId, loggerConfig);
+        return name;
+    }
+    private static String createConsoleAppender(String name,Layout layout){
+        name += "_console";
+        @SuppressWarnings("unchecked")
+        Appender consoleAppender = ConsoleAppender.newBuilder().withName(name).setTarget(ConsoleAppender.Target.SYSTEM_OUT).withIgnoreExceptions(true).withBufferedIo(true).withLayout(layout).build();
+        consoleAppender.start();
+        config.addAppender(consoleAppender);
+        return name;
+    }
+
+    public static void stop(String fileName) {
+        Level[] levels = Level.values();
+        for (int i = 0 ; i < levels.length;i++){
+            String filename = StringUtil.camelToUnderline(fileName) + "_" + levels[i].name();
+            config.getRootLogger().removeAppender(filename);
+        }
         ctx.updateLoggers();
     }
-    public static void stop(String jobId) {
-        final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-        final Configuration config = ctx.getConfiguration();
-        config.getAppender("" + jobId).stop();
-        config.getLoggerConfig("" + jobId).removeAppender("" + jobId);
-        config.removeLogger("" + jobId);
-        ctx.updateLoggers();
+
+    public static Logger createLogger(String fileName,Class clazz) {
+        createLogger(fileName,new Level[]{Level.INFO,Level.ERROR},clazz.getName());
+        return org.slf4j.LoggerFactory.getLogger(clazz);
     }
-    /**
-     * 获取Logger
-     *
-     * 如果不想使用slf4j,那这里改成直接返回Log4j的Logger即可
-     * @param jobId
-     * @return
-     */
-    public static Logger createLogger(String jobId) {
-        start(jobId);
-        return org.slf4j.LoggerFactory.getLogger(jobId);
+
+    public static Logger createLogger(String fileName,Class clazz,Level[] levels) {
+        createLogger(fileName,levels,null);
+        return org.slf4j.LoggerFactory.getLogger(clazz);
+    }
+
+    public static Logger createLogger(String fileName,Class clazz,Level[] levels,String packagePath) {
+        createLogger(fileName,levels,packagePath);
+        return org.slf4j.LoggerFactory.getLogger(clazz);
+    }
+    public static Logger createLogger(String fileName,Class clazz,String packagePath) {
+        createLogger(fileName,new Level[]{Level.INFO,Level.ERROR},packagePath);
+        return org.slf4j.LoggerFactory.getLogger(clazz);
     }
 
     public static void main(String[] args) {
-        System.setProperty("log4j2.debug","true");
-
-        Logger logger = LoggerFactory.createLogger("com.alibaba.druid.support.logging.SLF4JImpl");
-        logger.info("Testing testing testing 111");
-        logger.debug("Testing testing testing 222");
-        logger.error("Testing testing testing 333");
-        LoggerFactory.stop("com.alibaba.druid.support.logging.SLF4JImpl");
-//        for (int i = 0; i < 10; i++) {
-//            Logger logger = LogConfig.createLogger(i+"");
-//            logger.info("Testing testing testing 111");
-//            logger.debug("Testing testing testing 222");
-//            logger.error("Testing testing testing 333");
-//            LogConfig.stop(i+"");
-//        }
+        for (int i = 0; i < 2; i++) {
+            Logger logger = LoggerFactory.createLogger("test",LoggerFactory.class);
+            logger.info("Testing testing testing 111");
+            logger.debug("Testing testing testing 222");
+            logger.error("Testing testing testing 333");
+            LoggerFactory.stop("test");
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.agile.common.server;
 
 import com.agile.common.base.RETURN;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Map;
 
 public interface ServiceInterface {

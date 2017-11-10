@@ -17,6 +17,28 @@ public final class StringUtil extends StringUtils {
      * @param text 任意字符串
      * @return 返回驼峰字符串
      */
+    public static String camelToUnderline(String text){
+        String regex = Constant.RegularAbout.UPER;
+        if(ObjectUtil.isEmpty(getMatchedString(regex, text)))return text;
+
+        StringBuilder cacheStr = new StringBuilder(text);
+        Matcher matcher = Pattern.compile(regex).matcher(text);
+        int i = 0;
+        while (matcher.find()){
+            int position = matcher.start()+i;
+            if(position>=1 && !"_".equals(cacheStr.substring(position-1,position))){
+                cacheStr.replace(position,position+1,"_" + cacheStr.substring(position,position+1));
+                i++;
+            }
+        }
+        return cacheStr.toString();
+    }
+
+    /**
+     * 特殊符号转驼峰式
+     * @param text 任意字符串
+     * @return 返回驼峰字符串
+     */
     public static String signToCamel(String text){
         String regex = Constant.RegularAbout.HUMP;
         if(ObjectUtil.isEmpty(getMatchedString(regex, text)))return text;

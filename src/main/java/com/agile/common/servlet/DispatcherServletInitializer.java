@@ -102,8 +102,6 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
         springDispatcherServlet.setLoadOnStartup(1);
         springDispatcherServlet.addMapping("/*");
 
-//        servletContext.addListener(Log4jListener.class);
-
         /*
           初始化缓存监听
          */

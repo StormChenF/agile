@@ -19,27 +19,30 @@ import java.net.URI;
  * Created by 佟盟 on 2017/11/2
  */
 @Plugin(name = "LoggerFactoryConfig", category = ConfigurationFactory.CATEGORY)
-@Order(1)
+@Order(0)
 public class LoggerFactoryConfig extends ConfigurationFactory {
 
-    private static Configuration createConfiguration(final String name, ConfigurationBuilder<BuiltConfiguration> builder) {
+    private static Configuration createConfiguration(final String name, ConfigurationBuilder<BuiltConfiguration> builder){
         builder.setConfigurationName(name);
 
         //log4j2自身内部日志级别
         builder.setStatusLevel(Level.INFO);
 
-        //总日志过滤级别
-        builder.add(builder.newFilter("RegexFilter", Filter.Result.ACCEPT, Filter.Result.NEUTRAL).addAttribute("regex", "com.agile .*"));
+//        //总日志过滤级别
+//        builder.add(builder.newFilter("RegexFilter", Filter.Result.ACCEPT, Filter.Result.DENY).addAttribute("regex", ".*Agile.*"));
 
         //控制台日志
-        AppenderComponentBuilder consoleConfig = builder.newAppender("Stdout", "CONSOLE").addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT);
-        consoleConfig.add(builder.newLayout("PatternLayout").addAttribute("pattern", " %-d{yyyy-MM-dd HH:mm:ss} [ %p ] [ %c ] %m%n"));
+        AppenderComponentBuilder consoleConfig = builder.newAppender("Stdout", "CONSOLE")
+                .addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT);
+        consoleConfig.add(builder.newLayout("PatternLayout")
+                .addAttribute("pattern", " %-d{yyyy-MM-dd HH:mm:ss} [ %p ] [ %c ] %m%n"));
         builder.add(consoleConfig);
 
-        //打开工程自身日志
-        builder.add(builder.newLogger("com.agile", Level.DEBUG).add(builder.newAppenderRef("Stdout")).addAttribute("additivity", false));
-
-        builder.add(builder.newRootLogger(Level.OFF).add(builder.newAppenderRef("Stdout")));
+//        builder.add(builder.newLogger("com.agile.common.server", Level.ALL)
+//                .add(builder.newAppenderRef("Stdout"))
+//                .addAttribute("additivity", false));
+        builder.add(builder.newRootLogger(Level.OFF)
+                .add(builder.newAppenderRef("Stdout")));
         return builder.build();
 
     }

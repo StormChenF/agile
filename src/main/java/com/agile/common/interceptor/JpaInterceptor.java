@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class JpaInterceptor extends EmptyInterceptor {
     private static final long serialVersionUID = -4455619920711458111L;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = com.agile.common.config.LoggerFactory.createLogger("sql",JpaInterceptor.class);
 
     @Override
     public String onPrepareStatement(String sql) {
-        logger.info("[SQL语句:]"+sql);
+        logger.info("\n[SQL语句:]"+sql+"\n");
         return super.onPrepareStatement(sql);
     }
 }

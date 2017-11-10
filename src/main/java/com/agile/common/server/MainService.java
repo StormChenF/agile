@@ -1,11 +1,13 @@
 package com.agile.common.server;
 
+import com.agile.common.base.Constant;
+import com.agile.common.config.LoggerFactory;
 import com.agile.common.exception.ExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Date;
@@ -35,7 +37,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
     @Transactional
     public RETURN executeMethod(String methodName,Object object) throws Throwable {
         //初始化日志控件
-        setLogger(LoggerFactory.getLogger(this.getClass()));
+        setLogger(LoggerFactory.createLogger(Constant.FileAbout.LOGGER_FILE,this.getClass()));
 
         try {
             Method method = this.getClass().getDeclaredMethod(methodName);
