@@ -19,7 +19,7 @@ public class LogMainService extends MainService {
      * 新增
      * 地址：http://localhost:8080/LogMainService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class LogMainService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getLogMainId())) return RETURN.PARAMETER_ERROR;

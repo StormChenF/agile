@@ -19,7 +19,7 @@ public class LogValueService extends MainService {
      * 新增
      * 地址：http://localhost:8080/LogValueService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         LogValueRepository dao = FactoryUtil.getBean(LogValueRepository.class);
         LogValueEntity entity = ObjectUtil.getObjectFromMap(LogValueEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class LogValueService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         LogValueRepository dao = FactoryUtil.getBean(LogValueRepository.class);
         LogValueEntity entity = ObjectUtil.getObjectFromMap(LogValueEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getLogValueId())) return RETURN.PARAMETER_ERROR;

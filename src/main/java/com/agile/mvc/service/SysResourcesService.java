@@ -19,7 +19,7 @@ public class SysResourcesService extends MainService {
      * 新增
      * 地址：http://localhost:8080/SysResourcesService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
         SysResourcesEntity entity = ObjectUtil.getObjectFromMap(SysResourcesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class SysResourcesService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         SysResourcesRepository dao = FactoryUtil.getBean(SysResourcesRepository.class);
         SysResourcesEntity entity = ObjectUtil.getObjectFromMap(SysResourcesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysResourcesId())) return RETURN.PARAMETER_ERROR;

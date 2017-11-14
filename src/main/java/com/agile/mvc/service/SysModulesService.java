@@ -19,7 +19,7 @@ public class SysModulesService extends MainService {
      * 新增
      * 地址：http://localhost:8080/SysModulesService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         SysModulesEntity entity = ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class SysModulesService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         SysModulesEntity entity = ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysModulesId())) return RETURN.PARAMETER_ERROR;

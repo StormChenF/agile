@@ -19,7 +19,7 @@ public class SysBtAuthoritiesResourcesService extends MainService {
      * 新增
      * 地址：http://localhost:8080/SysBtAuthoritiesResourcesService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
         SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class SysBtAuthoritiesResourcesService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         SysBtAuthoritiesResourcesRepository dao = FactoryUtil.getBean(SysBtAuthoritiesResourcesRepository.class);
         SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtAuthoritiesResourcesId())) return RETURN.PARAMETER_ERROR;

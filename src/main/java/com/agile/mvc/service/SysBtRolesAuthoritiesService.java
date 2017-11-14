@@ -19,7 +19,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
      * 新增
      * 地址：http://localhost:8080/SysBtRolesAuthoritiesService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);
         SysBtRolesAuthoritiesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesAuthoritiesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         SysBtRolesAuthoritiesRepository dao = FactoryUtil.getBean(SysBtRolesAuthoritiesRepository.class);
         SysBtRolesAuthoritiesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesAuthoritiesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtRolesAuthoritiesId())) return RETURN.PARAMETER_ERROR;

@@ -25,13 +25,13 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     /**
      * 日志工具
      */
-    private Logger logger = com.agile.common.config.LoggerFactory.createLogger(Constant.FileAbout.LOGGER_FILE, this.getClass());
+    private Logger logger = com.agile.common.config.LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
 
         StackTraceElement[] msg = e.getStackTrace();
-        StringBuilder msgStr = new StringBuilder();
+        StringBuffer msgStr = new StringBuffer();
         String exclass = msg[0].getClassName();
         String method = msg[0].getMethodName();
         msgStr.append("【异常定位:[类:").append(exclass).append("]调用[方法:").append(method).append("]时在第").append(msg[0].getLineNumber()).append("行代码处发生错误!】");

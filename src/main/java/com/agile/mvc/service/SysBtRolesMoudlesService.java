@@ -19,7 +19,7 @@ public class SysBtRolesMoudlesService extends MainService {
      * 新增
      * 地址：http://localhost:8080/SysBtRolesMoudlesService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         SysBtRolesMoudlesRepository dao = FactoryUtil.getBean(SysBtRolesMoudlesRepository.class);
         SysBtRolesMoudlesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesMoudlesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class SysBtRolesMoudlesService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         SysBtRolesMoudlesRepository dao = FactoryUtil.getBean(SysBtRolesMoudlesRepository.class);
         SysBtRolesMoudlesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesMoudlesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtRolesMoudlesId())) return RETURN.PARAMETER_ERROR;

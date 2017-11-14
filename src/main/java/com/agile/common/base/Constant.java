@@ -28,7 +28,7 @@ public class Constant {
         public final static String FILE_SIZE = "fileSize";
         public final static String CONTENT_TYPE = "contentType";
         public final static String UP_LOUD_FILE_INFO = "upLoadFileInfo";
-        public final static String LOGGER_FILE = "service";
+        public final static String SERVICE_LOGGER_FILE = "service";
     }
 
     /**
@@ -38,6 +38,9 @@ public class Constant {
         public final static String ATTACHMENT = "attachment";
     }
 
+    /**
+     * 正则表达式
+     */
     public static class RegularAbout {
         public final static String NULL = "";
         public final static String QUESTION_MARK = "?";

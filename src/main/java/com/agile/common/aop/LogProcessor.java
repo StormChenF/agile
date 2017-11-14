@@ -18,9 +18,9 @@ public class LogProcessor {
 
     @Async
     void buildLog(String serviceName, String methodName, HashMap<String,Object> inParam, HashMap<String,Object> outParam,String ip,StringBuffer url) {
-        Logger logger = LoggerFactory.createLogger(Constant.FileAbout.LOGGER_FILE, this.getClass());
+        Logger logger = LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
         
-        StringBuilder logMsg = new StringBuilder("\nIP:").append(ip);
+        StringBuffer logMsg = new StringBuffer("\nIP:").append(ip);
         logMsg.append("\nURL:").append(url).append("\n服务:").append(serviceName).append("\n方法:").append(methodName).append("\n入参:");
         if (ObjectUtil.isEmpty(inParam)){
             logMsg.append("无");

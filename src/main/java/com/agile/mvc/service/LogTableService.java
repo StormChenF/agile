@@ -19,7 +19,7 @@ public class LogTableService extends MainService {
      * 新增
      * 地址：http://localhost:8080/LogTableService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         LogTableRepository dao = FactoryUtil.getBean(LogTableRepository.class);
         LogTableEntity entity = ObjectUtil.getObjectFromMap(LogTableEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class LogTableService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         LogTableRepository dao = FactoryUtil.getBean(LogTableRepository.class);
         LogTableEntity entity = ObjectUtil.getObjectFromMap(LogTableEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getLogTableId())) return RETURN.PARAMETER_ERROR;

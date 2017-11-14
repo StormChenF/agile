@@ -28,9 +28,6 @@ public class LoggerFactoryConfig extends ConfigurationFactory {
         //log4j2自身内部日志级别
         builder.setStatusLevel(Level.INFO);
 
-//        //总日志过滤级别
-//        builder.add(builder.newFilter("RegexFilter", Filter.Result.ACCEPT, Filter.Result.DENY).addAttribute("regex", ".*Agile.*"));
-
         //控制台日志
         AppenderComponentBuilder consoleConfig = builder.newAppender("Stdout", "CONSOLE")
                 .addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT);
@@ -38,9 +35,6 @@ public class LoggerFactoryConfig extends ConfigurationFactory {
                 .addAttribute("pattern", " %-d{yyyy-MM-dd HH:mm:ss} [ %p ] [ %c ] %m%n"));
         builder.add(consoleConfig);
 
-//        builder.add(builder.newLogger("com.agile.common.server", Level.ALL)
-//                .add(builder.newAppenderRef("Stdout"))
-//                .addAttribute("additivity", false));
         builder.add(builder.newRootLogger(Level.OFF)
                 .add(builder.newAppenderRef("Stdout")));
         return builder.build();

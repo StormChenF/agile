@@ -19,7 +19,7 @@ public class ${className}Service extends MainService {
      * 新增
      * 地址：http://localhost:8080/${className}Service/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
         ${className}Entity entity = ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class ${className}Service extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         ${className}Repository dao = FactoryUtil.getBean(${className}Repository.class);
         ${className}Entity entity = ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.get${primaryKeyPropertyName}())) return RETURN.PARAMETER_ERROR;

@@ -85,7 +85,7 @@ public class MainController {
 
         //判断是否转发
         if (!StringUtil.isEmpty(forward) && RETURN.SUCCESS.equals(returnState)) {
-            StringBuilder url = new StringBuilder(forward);
+            StringBuffer url = new StringBuffer(forward);
             if(!forward.startsWith(Constant.RegularAbout.SLASH)){
                 url.insert(0,Constant.RegularAbout.SLASH);
             }

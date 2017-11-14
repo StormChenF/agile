@@ -21,7 +21,7 @@ public final class StringUtil extends StringUtils {
         String regex = Constant.RegularAbout.UPER;
         if(ObjectUtil.isEmpty(getMatchedString(regex, text)))return text;
 
-        StringBuilder cacheStr = new StringBuilder(text);
+        StringBuffer cacheStr = new StringBuffer(text);
         Matcher matcher = Pattern.compile(regex).matcher(text);
         int i = 0;
         while (matcher.find()){
@@ -43,7 +43,7 @@ public final class StringUtil extends StringUtils {
         String regex = Constant.RegularAbout.HUMP;
         if(ObjectUtil.isEmpty(getMatchedString(regex, text)))return text;
 
-        StringBuilder cacheStr = new StringBuilder(text);
+        StringBuffer cacheStr = new StringBuffer(text);
         Matcher matcher = Pattern.compile(regex).matcher(text);
         int i = 0;
         while (matcher.find()){
@@ -81,7 +81,7 @@ public final class StringUtil extends StringUtils {
      * @return url参数
      */
     public static String fromMapToUrl(Map<String,Object> map){
-        StringBuilder mapOfString = new StringBuilder(Constant.RegularAbout.NULL);
+        StringBuffer mapOfString = new StringBuffer(Constant.RegularAbout.NULL);
         for (Map.Entry<String, Object> entity : map.entrySet()) {
             if(!(entity.getValue() instanceof Page)){
                 mapOfString.append(Constant.RegularAbout.AND).append(entity.getKey());

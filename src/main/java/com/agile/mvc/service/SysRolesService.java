@@ -19,7 +19,7 @@ public class SysRolesService extends MainService {
      * 新增
      * 地址：http://localhost:8080/SysRolesService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
         SysRolesEntity entity = ObjectUtil.getObjectFromMap(SysRolesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class SysRolesService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         SysRolesRepository dao = FactoryUtil.getBean(SysRolesRepository.class);
         SysRolesEntity entity = ObjectUtil.getObjectFromMap(SysRolesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysRolesId())) return RETURN.PARAMETER_ERROR;

@@ -19,7 +19,7 @@ public class DictionaryMainService extends MainService {
      * 新增
      * 地址：http://localhost:8080/DictionaryMainService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
         DictionaryMainEntity entity = ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -47,7 +47,7 @@ public class DictionaryMainService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         DictionaryMainRepository dao = FactoryUtil.getBean(DictionaryMainRepository.class);
         DictionaryMainEntity entity = ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getCode())) return RETURN.PARAMETER_ERROR;

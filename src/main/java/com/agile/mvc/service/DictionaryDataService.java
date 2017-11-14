@@ -1,6 +1,5 @@
 package com.agile.mvc.service;
 
-import com.agile.common.annotation.Init;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
@@ -20,7 +19,7 @@ public class DictionaryDataService extends MainService {
      * 新增
      * 地址：http://localhost:8080/DictionaryDataService/save
      */
-    public RETURN save() {
+    public RETURN save() throws IllegalAccessException {
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
         DictionaryDataEntity entity = ObjectUtil.getObjectFromMap(DictionaryDataEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
@@ -48,7 +47,7 @@ public class DictionaryDataService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    public RETURN update() {
+    public RETURN update() throws IllegalAccessException {
         DictionaryDataRepository dao = FactoryUtil.getBean(DictionaryDataRepository.class);
         DictionaryDataEntity entity = ObjectUtil.getObjectFromMap(DictionaryDataEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getCode())) return RETURN.PARAMETER_ERROR;
