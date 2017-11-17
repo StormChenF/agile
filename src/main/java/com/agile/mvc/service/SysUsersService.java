@@ -2,12 +2,9 @@ package com.agile.mvc.service;
 
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
-import com.agile.mvc.model.dao.SysUsersRepository;
 import com.agile.mvc.model.entity.SysUsersEntity;
-import org.springframework.data.domain.PageRequest;
 
 /**
  * Created by 佟盟
@@ -20,7 +17,6 @@ public class SysUsersService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/save
      */
     public RETURN save() throws IllegalAccessException {
-        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
         SysUsersEntity entity = ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
@@ -32,11 +28,10 @@ public class SysUsersService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/delete
      */
     public RETURN delete(){
-        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.deleteById(SysUsersEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }
@@ -48,10 +43,9 @@ public class SysUsersService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException {
-        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
         SysUsersEntity entity = ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysUsersId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(entity);
+        dao.saveAndFlush(SysUsersEntity.class, entity);
         return RETURN.SUCCESS;
     }
 
@@ -60,8 +54,7 @@ public class SysUsersService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/query
      */
     public RETURN query(){
-        SysUsersRepository dao = FactoryUtil.getBean(SysUsersRepository.class);
-        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
+        this.setOutParam("queryList",dao.findAll(SysUsersEntity.class,0,10));
         return RETURN.SUCCESS;
     }
 }

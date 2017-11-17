@@ -1,6 +1,6 @@
 package com.agile.common.security;
 
-import com.agile.mvc.model.dao.SysUsersRepository;
+import com.agile.mvc.model.dao.Dao;
 import com.agile.mvc.model.entity.SysAuthoritiesEntity;
 import com.agile.mvc.model.entity.SysUsersEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,11 +18,30 @@ import java.util.Set;
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
     @Autowired
-    private SysUsersRepository sysUsersRepository;
+    private Dao dao;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUsersEntity user = sysUsersRepository.findByName(username);
-        Set<SysAuthoritiesEntity> sysAuthoritiesEntities = sysUsersRepository.querySysAuthoritiesByName(username);
+        SysUsersEntity user = dao.findOne("SELECT * FROM sys_users",SysUsersEntity.class);
+        String sql = "SELECT\n" +
+                "\tsys_authorities.SYS_AUTHORITY_ID,\n" +
+                "\tsys_authorities.AUTHORITY_MARK,\n" +
+                "\tsys_authorities.AUTHORITY_NAME,\n" +
+                "\tsys_authorities.AUTHORITY_DESC,\n" +
+                "\tsys_authorities.MESSAGE,\n" +
+                "\tsys_authorities.`ENABLE`,\n" +
+                "\tsys_authorities.ISSYS,\n" +
+                "\tsys_authorities.MODULE_ID \n" +
+                "FROM\n" +
+                "\tsys_users\n" +
+                "\tLEFT JOIN sys_bt_users_roles ON sys_users.SYS_USERS_ID = sys_bt_users_roles.USER_ID\n" +
+                "\tLEFT JOIN sys_roles ON sys_roles.SYS_ROLES_ID = sys_bt_users_roles.ROLE_ID\n" +
+                "\tLEFT JOIN sys_bt_roles_authorities ON sys_roles.SYS_ROLES_ID = sys_bt_roles_authorities.ROLE_ID\n" +
+                "\tLEFT JOIN sys_authorities ON sys_authorities.SYS_AUTHORITY_ID = sys_bt_roles_authorities.AUTHORITY_ID \n" +
+                "WHERE\n" +
+                "\tsys_users.USERNAME = '%s'";
+        sql = String.format(sql, username);
+        @SuppressWarnings("unchecked")
+        Set<SysAuthoritiesEntity> sysAuthoritiesEntities = new HashSet(dao.findAll(sql,SysAuthoritiesEntity.class));
         return new SecurityUser(user,sysAuthoritiesEntities);
     }
 }

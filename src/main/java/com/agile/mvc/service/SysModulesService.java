@@ -2,12 +2,9 @@ package com.agile.mvc.service;
 
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
-import com.agile.mvc.model.dao.SysModulesRepository;
 import com.agile.mvc.model.entity.SysModulesEntity;
-import org.springframework.data.domain.PageRequest;
 
 /**
  * Created by 佟盟
@@ -20,7 +17,6 @@ public class SysModulesService extends MainService {
      * 地址：http://localhost:8080/SysModulesService/save
      */
     public RETURN save() throws IllegalAccessException {
-        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         SysModulesEntity entity = ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
@@ -32,11 +28,10 @@ public class SysModulesService extends MainService {
      * 地址：http://localhost:8080/SysModulesService/delete
      */
     public RETURN delete(){
-        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.deleteById(SysModulesEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }
@@ -48,10 +43,9 @@ public class SysModulesService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException {
-        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
         SysModulesEntity entity = ObjectUtil.getObjectFromMap(SysModulesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysModulesId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(entity);
+        dao.saveAndFlush(SysModulesEntity.class, entity);
         return RETURN.SUCCESS;
     }
 
@@ -60,8 +54,7 @@ public class SysModulesService extends MainService {
      * 地址：http://localhost:8080/SysModulesService/query
      */
     public RETURN query(){
-        SysModulesRepository dao = FactoryUtil.getBean(SysModulesRepository.class);
-        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
+        this.setOutParam("queryList",dao.findAll(SysModulesEntity.class,0,10));
         return RETURN.SUCCESS;
     }
 }

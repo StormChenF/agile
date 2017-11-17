@@ -3,6 +3,8 @@ package com.agile.common.server;
 import com.agile.common.exception.ExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
+import com.agile.mvc.model.dao.Dao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,6 +16,10 @@ import java.util.Map;
  * Created by 佟盟 on 2017/1/9
  */
 public class MainService extends ExceptionHandler implements ServiceInterface {
+
+
+    @Autowired
+    public Dao dao;
 
     //输入
     private ThreadLocal<Map<String, Object>> inParam = new ThreadLocal<>();

@@ -165,14 +165,14 @@ public class AgileGenerator {
                 entityFileFw.close();
 
                 //DAO生成器
-                Template repositoryTemp = cfg.getTemplate("agileTemplate/Repository.ftl");
-                String repositoryFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.repository_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.repository_suffix") + ".java";
-                File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
-                FileWriter repositoryFileFw = new FileWriter(repositoryFile);
-                BufferedWriter repositoryFileBw = new BufferedWriter(repositoryFileFw);
-                repositoryTemp.process(data, repositoryFileBw);
-                repositoryFileBw.flush();
-                repositoryFileFw.close();
+//                Template repositoryTemp = cfg.getTemplate("agileTemplate/Repository.ftl");
+//                String repositoryFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.repository_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.repository_suffix") + ".java";
+//                File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
+//                FileWriter repositoryFileFw = new FileWriter(repositoryFile);
+//                BufferedWriter repositoryFileBw = new BufferedWriter(repositoryFileFw);
+//                repositoryTemp.process(data, repositoryFileBw);
+//                repositoryFileBw.flush();
+//                repositoryFileFw.close();
 
                 //service生成器
                 Template serviceTemp = cfg.getTemplate("agileTemplate/Service.ftl");

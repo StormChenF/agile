@@ -2,12 +2,9 @@ package com.agile.mvc.service;
 
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
-import com.agile.mvc.model.dao.LogMainRepository;
 import com.agile.mvc.model.entity.LogMainEntity;
-import org.springframework.data.domain.PageRequest;
 
 /**
  * Created by 佟盟
@@ -20,7 +17,6 @@ public class LogMainService extends MainService {
      * 地址：http://localhost:8080/LogMainService/save
      */
     public RETURN save() throws IllegalAccessException {
-        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
@@ -32,11 +28,10 @@ public class LogMainService extends MainService {
      * 地址：http://localhost:8080/LogMainService/delete
      */
     public RETURN delete(){
-        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.deleteById(LogMainEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }
@@ -48,10 +43,9 @@ public class LogMainService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException {
-        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
         LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getLogMainId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(entity);
+        dao.saveAndFlush(LogMainEntity.class, entity);
         return RETURN.SUCCESS;
     }
 
@@ -60,8 +54,7 @@ public class LogMainService extends MainService {
      * 地址：http://localhost:8080/LogMainService/query
      */
     public RETURN query(){
-        LogMainRepository dao = FactoryUtil.getBean(LogMainRepository.class);
-        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
+        this.setOutParam("queryList",dao.findAll(LogMainEntity.class,0,10));
         return RETURN.SUCCESS;
     }
 }

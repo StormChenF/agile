@@ -2,12 +2,9 @@ package com.agile.mvc.service;
 
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
-import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
-import com.agile.mvc.model.dao.SysBtUsersRolesRepository;
 import com.agile.mvc.model.entity.SysBtUsersRolesEntity;
-import org.springframework.data.domain.PageRequest;
 
 /**
  * Created by 佟盟
@@ -20,7 +17,6 @@ public class SysBtUsersRolesService extends MainService {
      * 地址：http://localhost:8080/SysBtUsersRolesService/save
      */
     public RETURN save() throws IllegalAccessException {
-        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
         SysBtUsersRolesEntity entity = ObjectUtil.getObjectFromMap(SysBtUsersRolesEntity.class, this.getInParam());
         if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
@@ -32,11 +28,10 @@ public class SysBtUsersRolesService extends MainService {
      * 地址：http://localhost:8080/SysBtUsersRolesService/delete
      */
     public RETURN delete(){
-        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
             for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById((Integer) ObjectUtil.cast(Integer.class,ids[i].trim()));
+                dao.deleteById(SysBtUsersRolesEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
             }
             return RETURN.SUCCESS;
         }
@@ -48,10 +43,9 @@ public class SysBtUsersRolesService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() throws IllegalAccessException {
-        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
         SysBtUsersRolesEntity entity = ObjectUtil.getObjectFromMap(SysBtUsersRolesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtUsersRolesId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(entity);
+        dao.saveAndFlush(SysBtUsersRolesEntity.class, entity);
         return RETURN.SUCCESS;
     }
 
@@ -60,8 +54,7 @@ public class SysBtUsersRolesService extends MainService {
      * 地址：http://localhost:8080/SysBtUsersRolesService/query
      */
     public RETURN query(){
-        SysBtUsersRolesRepository dao = FactoryUtil.getBean(SysBtUsersRolesRepository.class);
-        this.setOutParam("queryList",dao.findAll(PageRequest.of(0,10)));
+        this.setOutParam("queryList",dao.findAll(SysBtUsersRolesEntity.class,0,10));
         return RETURN.SUCCESS;
     }
 }
