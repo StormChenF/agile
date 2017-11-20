@@ -30,9 +30,7 @@ public class SysBtAuthoritiesResourcesService extends MainService {
     public RETURN delete(){
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
-            for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById(SysBtAuthoritiesResourcesEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
-            }
+            dao.deleteInBatch(SysBtAuthoritiesResourcesEntity.class,ids);
             return RETURN.SUCCESS;
         }
         return RETURN.PARAMETER_ERROR;
@@ -45,7 +43,7 @@ public class SysBtAuthoritiesResourcesService extends MainService {
     public RETURN update() throws IllegalAccessException {
         SysBtAuthoritiesResourcesEntity entity = ObjectUtil.getObjectFromMap(SysBtAuthoritiesResourcesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtAuthoritiesResourcesId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(SysBtAuthoritiesResourcesEntity.class, entity);
+        dao.update(entity);
         return RETURN.SUCCESS;
     }
 

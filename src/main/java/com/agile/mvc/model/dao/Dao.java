@@ -56,22 +56,15 @@ public class Dao {
      * 保存
      * @param o ORM对象
      */
-    public void save(Object o){
-        this.entityManager.persist(o);
-    }
-
-    /**
-     * 保存并刷新
-     * @param tableClass ORM对象类型
-     */
-    @SuppressWarnings("unchecked")
-    public <T>Object save(Class<T> tableClass,Object o){
+    public boolean save(Object o){
+        boolean isTrue = false;
         try {
-            return getRepository(tableClass).save(o);
-        } catch (NoSuchIDException e) {
+            this.entityManager.persist(o);
+            isTrue = true;
+        }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return isTrue;
     }
 
     /**
@@ -104,7 +97,7 @@ public class Dao {
     }
 
     /**
-     * 刷新表
+     * 刷新数据库中表
      * @param tableClass ORM对象类型
      */
     @SuppressWarnings("unchecked")
@@ -118,19 +111,50 @@ public class Dao {
     }
 
     /**
-     * 更新
+     * 刷新数据库中全部表
+     */
+    @SuppressWarnings("unchecked")
+    public void flush(){
+        this.entityManager.flush();
+    }
+
+
+    /**
+     * 刷新数据库数据到实体类当中
+     */
+    @SuppressWarnings("unchecked")
+    public void refresh(Object o){
+        this.entityManager.refresh(o);
+    }
+
+    /**
+     * 更新或新增
      * @param o ORM对象
      */
-    public <T>T update(T o){
-        return this.entityManager.merge(o);
+    public boolean update(Object o){
+        boolean isTrue = false;
+        try {
+            this.entityManager.merge(o);
+            isTrue = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return isTrue;
     }
 
     /**
      * 删除
      * @param o ORM对象
      */
-    public void delete(Object o){
-        this.entityManager.remove(o);
+    public boolean delete(Object o){
+        boolean isTrue = false;
+        try {
+            this.entityManager.remove(o);
+            isTrue = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return isTrue;
     }
 
     /**
@@ -283,8 +307,11 @@ public class Dao {
      * @param clazz 返回ORM类型列表
      */
     @SuppressWarnings("unchecked")
-    public <T>T findOne(String sql, Class<T> clazz){
+    public <T>T findOne(String sql, Class<T> clazz,Object... parameters){
         Query query = this.entityManager.createNativeQuery(sql, clazz);
+        for (int i = 0 ; i < parameters.length ; i++ ){
+            query.setParameter(i+1,parameters[i]);
+        }
         List list = query.getResultList();
         if (ObjectUtil.isEmpty(list) || list.size()<1)return null;
         return (T) query.getResultList().get(0);
@@ -296,8 +323,11 @@ public class Dao {
      * @param clazz 返回ORM类型列表
      */
     @SuppressWarnings("unchecked")
-    public <T>List<T> findAll(String sql, Class<T> clazz){
+    public <T>List<T> findAll(String sql, Class<T> clazz,Object... parameters){
         Query query = this.entityManager.createNativeQuery(sql, clazz);
+        for (int i = 0 ; i < parameters.length ; i++ ){
+            query.setParameter(i+1,parameters[i]);
+        }
         return query.getResultList();
     }
 
@@ -306,9 +336,12 @@ public class Dao {
      * @param sql sql
      */
     @SuppressWarnings("unchecked")
-    public List<Map<String,Object>> findAll(String sql){
+    public List<Map<String,Object>> findAll(String sql,Object... parameters){
         Query query = this.entityManager.createNativeQuery(sql);
-        query.unwrap(org.hibernate.Query.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        for (int i = 0 ; i < parameters.length ; i++ ){
+            query.setParameter(i+1,parameters[i]);
+        }
+        query.unwrap(org.hibernate.query.Query.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         return query.getResultList();
     }
 

@@ -30,9 +30,7 @@ public class LogMainService extends MainService {
     public RETURN delete(){
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
-            for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById(LogMainEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
-            }
+            dao.deleteInBatch(LogMainEntity.class,ids);
             return RETURN.SUCCESS;
         }
         return RETURN.PARAMETER_ERROR;
@@ -45,7 +43,7 @@ public class LogMainService extends MainService {
     public RETURN update() throws IllegalAccessException {
         LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getLogMainId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(LogMainEntity.class, entity);
+        dao.update(entity);
         return RETURN.SUCCESS;
     }
 

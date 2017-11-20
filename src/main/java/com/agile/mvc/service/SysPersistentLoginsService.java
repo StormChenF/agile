@@ -30,9 +30,7 @@ public class SysPersistentLoginsService extends MainService {
     public RETURN delete(){
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
-            for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById(SysPersistentLoginsEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
-            }
+            dao.deleteInBatch(SysPersistentLoginsEntity.class,ids);
             return RETURN.SUCCESS;
         }
         return RETURN.PARAMETER_ERROR;
@@ -45,7 +43,7 @@ public class SysPersistentLoginsService extends MainService {
     public RETURN update() throws IllegalAccessException {
         SysPersistentLoginsEntity entity = ObjectUtil.getObjectFromMap(SysPersistentLoginsEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysPersistentLoginsId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(SysPersistentLoginsEntity.class, entity);
+        dao.update(entity);
         return RETURN.SUCCESS;
     }
 

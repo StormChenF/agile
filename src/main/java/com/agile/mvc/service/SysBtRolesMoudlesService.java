@@ -30,9 +30,7 @@ public class SysBtRolesMoudlesService extends MainService {
     public RETURN delete(){
         if (this.containsKey("ids")){
             String[] ids = this.getInParamOfString("ids").split(",");
-            for (int i = 0 ; i < ids.length ; i++) {
-                dao.deleteById(SysBtRolesMoudlesEntity.class, ObjectUtil.cast(Integer.class,ids[i].trim()));
-            }
+            dao.deleteInBatch(SysBtRolesMoudlesEntity.class,ids);
             return RETURN.SUCCESS;
         }
         return RETURN.PARAMETER_ERROR;
@@ -45,7 +43,7 @@ public class SysBtRolesMoudlesService extends MainService {
     public RETURN update() throws IllegalAccessException {
         SysBtRolesMoudlesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesMoudlesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtRolesMoudlesId())) return RETURN.PARAMETER_ERROR;
-        dao.saveAndFlush(SysBtRolesMoudlesEntity.class, entity);
+        dao.update(entity);
         return RETURN.SUCCESS;
     }
 
