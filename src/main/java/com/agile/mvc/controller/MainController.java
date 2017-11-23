@@ -98,7 +98,7 @@ public class MainController {
 
 
             url = (StringUtil.isEmpty(beforeParam) && StringUtil.isEmpty(afterParam))?url
-                    :(StringUtil.compareTo(beforeParam,afterParam)>0)?url.append(Constant.RegularAbout.QUESTION_MARK).append(beforeParam).append(Constant.RegularAbout.AND).append(afterParam)
+                    :StringUtil.compareTo(beforeParam,afterParam)?url.append(Constant.RegularAbout.QUESTION_MARK).append(beforeParam).append(Constant.RegularAbout.AND).append(afterParam)
                     :url.append(Constant.RegularAbout.QUESTION_MARK).append(afterParam).append(Constant.RegularAbout.AND).append(beforeParam);
             url = url.toString().endsWith(Constant.RegularAbout.AND)?url.deleteCharAt(url.lastIndexOf(Constant.RegularAbout.AND)):url;
 

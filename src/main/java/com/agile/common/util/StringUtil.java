@@ -19,7 +19,7 @@ public final class StringUtil extends StringUtils {
      */
     public static String camelToUnderline(String text){
         String regex = Constant.RegularAbout.UPER;
-        if(ObjectUtil.isEmpty(getMatchedString(regex, text)))return text;
+        if(!haveMatchedString(regex, text))return text;
 
         StringBuffer cacheStr = new StringBuffer(text);
         Matcher matcher = Pattern.compile(regex).matcher(text);
@@ -41,7 +41,7 @@ public final class StringUtil extends StringUtils {
      */
     public static String signToCamel(String text){
         String regex = Constant.RegularAbout.HUMP;
-        if(ObjectUtil.isEmpty(getMatchedString(regex, text)))return text;
+        if(!haveMatchedString(regex, text))return text;
 
         StringBuffer cacheStr = new StringBuffer(text);
         Matcher matcher = Pattern.compile(regex).matcher(text);
@@ -108,8 +108,49 @@ public final class StringUtil extends StringUtils {
      * @param text 正文
      * @return 匹配的字符串
      */
-    public static String getMatchedString(String regex,String text){
-        return getMatchedString(regex,text,0);
+    public static boolean containMatchedString(String regex,String text){
+        Pattern pattern=Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        return matcher.matches();
+    }
+
+    /**
+     * 获取字符串中匹配正则表达式的部分
+     * @param regex 正则表达式
+     * @param text 正文
+     * @return 匹配的字符串
+     */
+    public static String[] getMatchedString(String regex,String text){
+        Pattern pattern=Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        StringBuilder sb = new StringBuilder();
+        while (matcher.find()){
+            sb.append(matcher.group()).append(",");
+        }
+        if(isEmpty(sb.toString())){
+            return null;
+        }
+        return sb.toString().split(",");
+    }
+
+    public static String[] getGroupString(String regex,String text){
+        Pattern pattern=Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        int count = matcher.groupCount();
+        if (count>0){
+            String[] s = new String[count-1];
+            if (matcher.find()){
+                for (int i = 1 ; i < count;i++)
+                s[i-1] = matcher.group(i);
+            }
+            return s;
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        String a = "select sf order by asfdsfsdfa asdf order fdsfsd order by fdf";
+        getMatchedString("(order)([\\w `,\\(\\)]+)(?:by)(?=([\\w `,\\(\\)]+))(?!order)",a);
     }
 
     /**
@@ -122,16 +163,42 @@ public final class StringUtil extends StringUtils {
     public static String getMatchedString(String regex,String text,int index){
         Pattern pattern=Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(text);
+        int i = 0 ;
         while(matcher.find()){
-            return matcher.group(index);
+            if(i==index){
+                return matcher.group();
+            }
+            i++;
         }
         return null;
     }
 
+    /**
+     * 获取字符串中匹配正则表达式的部分
+     * @param regex 正则表达式
+     * @param text 正文
+     * @return 匹配的字符串
+     */
+    public static boolean haveMatchedString(String regex,String text){
+        Pattern pattern=Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        if(matcher.find()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否为字符串
+     */
     public static boolean isString(Object object){
         return object instanceof String;
     }
-    public static int compareTo(String resource,String target){
-        return resource.length()-target.length();
+
+    /**
+     * 比较长短
+     */
+    public static boolean compareTo(String resource,String target){
+        return resource.length()>target.length();
     }
 }

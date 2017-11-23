@@ -8,6 +8,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Component;
@@ -314,7 +315,7 @@ public class Dao {
         }
         List list = query.getResultList();
         if (ObjectUtil.isEmpty(list) || list.size()<1)return null;
-        return (T) query.getResultList().get(0);
+        return (T)query.getSingleResult();
     }
 
     /**
@@ -336,6 +337,103 @@ public class Dao {
      * @param sql sql
      */
     @SuppressWarnings("unchecked")
+    public Page findAll(String sql,int page,int size){
+        return this.findAll( sql, page, size,new Object[]{});
+    }
+    /**
+     * 查询列表
+     * @param sql sql
+     */
+    @SuppressWarnings("unchecked")
+    public Page findAll(String sql,int page,int size,Object... parameters){
+        if(size<=0){
+            new IllegalArgumentException().printStackTrace();
+            return null;
+        }
+        com.agile.common.base.Page pageDate = new com.agile.common.base.Page();
+        pageDate.setSize(size);
+        pageDate.setNumber(page);
+        pageDate.setPaged(true);
+        pageDate.setUnpaged(false);
+        pageDate.setOffset(0);
+
+        //sql格式化
+        sql = sql.trim().toLowerCase().replaceAll("[\t\r\n\\s]"," ");
+
+        //取排序
+        String[] orders = StringUtil.getMatchedString("(order by)(\\s)([\\S]+)(\\s)?(desc|asc)?",sql);
+        if(!ObjectUtil.isEmpty(orders) && orders.length>0){
+            String order = ArrayUtil.getLast(orders).toString();
+            String[] sortMsg = StringUtil.getGroupString("(order by)(\\s)([\\S]+)(\\s)?(desc|asc)?", order);
+            if(!ObjectUtil.isEmpty(sortMsg) && sortMsg.length>2){
+                Sort.Direction direction = null;
+                if(sortMsg.length>4 && !StringUtil.isEmpty(sortMsg[4])){
+                    switch (sortMsg[4]){
+                        case "desc":
+                            direction = Sort.Direction.DESC;
+                            break;
+                        default:
+                            direction = Sort.Direction.ASC;
+                            break;
+                    }
+                }else {
+                    direction = Sort.Direction.ASC;
+                }
+                com.agile.common.base.Page.Sort sort = new com.agile.common.base.Page.Sort(direction,sortMsg[2].replaceAll("[\\s`]",""));
+                pageDate.setSort(sort);
+                pageDate.setSorted(true);
+            }
+        }
+
+        //按照union分段，计算total总数
+        String[] sqls = sql.split("union all|union");
+        String[] unions = StringUtil.getMatchedString("(union)[\\s\\S](?:all)?",sql);
+
+        StringBuilder sb = new StringBuilder("select sum(count_table.count) as count from (");
+        for(int i = 0 ; i < sqls.length;i++){
+            String countSon = sqls[i].replaceAll("(select)([\\s\\S]+)(?=from)", "select count(*) count ").replaceAll("(order)([\\s\\S]+)(?:by)([\\s\\S]+)", "");
+            sb.append(countSon).append(" ");
+            if(i<sqls.length-1){
+                sb.append(unions[i]).append(" ");
+            }
+        }
+        sb.append(" ) as count_table");
+        Query countQuery = this.entityManager.createNativeQuery(sb.toString());
+        int count = Integer.parseInt(countQuery.getSingleResult().toString());
+        int countPage = count % size > 0 ? count / size + 1 : count / size;
+        pageDate.setTotalElements(count);
+        pageDate.setTotalPages(countPage);
+
+        //取查询结果集
+        if(count>0){
+            Query query = this.entityManager.createNativeQuery(sql);
+            for (int i = 0 ; i < parameters.length ; i++ ){
+                query.setParameter(i+1,parameters[i]);
+            }
+            query.setFirstResult(page*size);
+            query.setMaxResults(size);
+            query.unwrap(org.hibernate.query.Query.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+            List content = query.getResultList();
+            pageDate.setContent(content);
+            pageDate.setNumberOfElements(content.size());
+        }
+
+        //首/尾页判断
+        if(page==0){
+            pageDate.setFirst(true);
+        }
+        if(page==countPage){
+            pageDate.setLast(true);
+        }
+
+        return pageDate;
+    }
+
+    /**
+     * 查询列表
+     * @param sql sql
+     */
+    @SuppressWarnings("unchecked")
     public List<Map<String,Object>> findAll(String sql,Object... parameters){
         Query query = this.entityManager.createNativeQuery(sql);
         for (int i = 0 ; i < parameters.length ; i++ ){
@@ -343,6 +441,20 @@ public class Dao {
         }
         query.unwrap(org.hibernate.query.Query.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         return query.getResultList();
+    }
+
+    /**
+     * 查询属性
+     * sql查询结果必须只包含一个字段
+     * @param sql sql
+     */
+    @SuppressWarnings("unchecked")
+    public Object findParameter(String sql,Object... parameters){
+        Query query = this.entityManager.createNativeQuery(sql);
+        for (int i = 0 ; i < parameters.length ; i++ ){
+            query.setParameter(i+1,parameters[i]);
+        }
+        return query.getSingleResult();
     }
 
     /**
@@ -377,6 +489,7 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T>Page<T> findAll(Class<T> tableClass,int page, int size){
         try {
+            page--;
             return getRepository(tableClass).findAll(PageRequest.of(page,size));
         } catch (NoSuchIDException e) {
             e.printStackTrace();
@@ -396,5 +509,4 @@ public class Dao {
         }
         return 0;
     }
-
 }

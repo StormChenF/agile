@@ -52,7 +52,15 @@ public class DictionaryDataService extends MainService {
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
     public RETURN query(){
-        this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,0,10));
+
+        this.setOutParam("queryList",dao.findAll("SELECT\n" +
+                "`code`,\n" +
+                "dic_code,\n" +
+                "`name`,\n" +
+                "`value`,\n" +
+                "is_fixed\n" +
+                "FROM\n" +
+                "dictionary_data order by `name`\n",getInParamOfInteger("page",0),getInParamOfInteger("size",10)));
         return RETURN.SUCCESS;
     }
 }

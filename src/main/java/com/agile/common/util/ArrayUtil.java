@@ -20,6 +20,10 @@ public class ArrayUtil extends ArrayUtils {
         return temp;
     }
 
+    public static Object getLast(Object[] array){
+        return array[array.length-1];
+    }
+
     /**
      * 数组转list
      * @param array 数组
