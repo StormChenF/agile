@@ -1,4 +1,4 @@
-package com.agile.common.config;
+package com.agile.common.factory;
 
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
@@ -101,15 +101,5 @@ public class LoggerFactory {
     public static Logger createLogger(String fileName,Class clazz,String packagePath) {
         createLogger(fileName,new Level[]{Level.INFO,Level.ERROR},packagePath);
         return org.slf4j.LoggerFactory.getLogger(clazz);
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 2; i++) {
-            Logger logger = LoggerFactory.createLogger("test",LoggerFactory.class);
-            logger.info("Testing testing testing 111");
-            logger.debug("Testing testing testing 222");
-            logger.error("Testing testing testing 333");
-            LoggerFactory.stop("test");
-        }
     }
 }

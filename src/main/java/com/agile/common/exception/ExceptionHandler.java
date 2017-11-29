@@ -3,7 +3,9 @@ package com.agile.common.exception;
 import com.agile.common.base.ResponseHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
+import com.agile.common.factory.LoggerFactory;
 import com.agile.common.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
@@ -25,13 +27,14 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     /**
      * 日志工具
      */
-    private Logger logger = com.agile.common.config.LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
+    private Logger logger = LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
+    @NotNull
     @Override
-    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
+    public ModelAndView resolveException(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, Object o, Exception e) {
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
 
         StackTraceElement[] msg = e.getStackTrace();
-        StringBuffer msgStr = new StringBuffer();
+        StringBuilder msgStr = new StringBuilder();
         String exclass = msg[0].getClassName();
         String method = msg[0].getMethodName();
         msgStr.append("【异常定位:[类:").append(exclass).append("]调用[方法:").append(method).append("]时在第").append(msg[0].getLineNumber()).append("行代码处发生错误!】");

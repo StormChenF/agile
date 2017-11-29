@@ -52,7 +52,6 @@ public class DictionaryDataService extends MainService {
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
     public RETURN query(){
-
         this.setOutParam("queryList",dao.findAll("SELECT\n" +
                 "`code`,\n" +
                 "dic_code,\n" +
