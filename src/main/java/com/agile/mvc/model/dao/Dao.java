@@ -489,7 +489,6 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T>Page<T> findAll(Class<T> tableClass,int page, int size){
         try {
-            page--;
             return getRepository(tableClass).findAll(PageRequest.of(page,size));
         } catch (NoSuchIDException e) {
             e.printStackTrace();
