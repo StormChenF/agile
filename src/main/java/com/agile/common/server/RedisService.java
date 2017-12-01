@@ -51,4 +51,12 @@ public class RedisService implements AbstractCacheUtil {
     public Object getCache(String key) {
         return this.getJedis().get(key);
     }
+
+    public Long setNx(String name,String time){
+        return this.getJedis().setnx(name,time);
+    }
+
+    public Long expire(String name,int time){
+        return this.getJedis().expire(name,time);
+    }
 }

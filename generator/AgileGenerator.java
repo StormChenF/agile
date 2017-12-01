@@ -5,7 +5,6 @@ import com.agile.common.util.StringUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -83,7 +82,7 @@ public class AgileGenerator {
 
                     //API导入
                     if ("Timestamp".equals(propertyType)) importList.add("java.sql.Timestamp;");
-                    if ("Date".equals(propertyType)) importList.add("java.sql.Date;");
+                    if ("Date".equals(propertyType)) importList.add("java.util.Date;");
                     if ("Clob".equals(propertyType)) importList.add("import java.sql.Clob;");
                     if ("Blob".equals(propertyType)) importList.add("import java.sql.Blob;");
 
