@@ -3,9 +3,9 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.sql.Date;
-import java.sql.Date;
-import java.sql.Date;
+import java.util.Date;
+import java.util.Date;
+import java.util.Date;
 
 /**
  * Created by 佟盟
@@ -41,19 +41,19 @@ public class SysUsersEntity implements Serializable {
     //地区名称
     private String depName;
     //是否可用
-    private boolean enabled;
+    private Boolean enabled;
     //用户是否过期
-    private boolean accountNonExpired;
+    private Boolean accountNonExpired;
     //用户是否锁定
-    private boolean accountNonLocked;
+    private Boolean accountNonLocked;
     //用户证书是否有效
-    private boolean credentialsNonExpired;
+    private Boolean credentialsNonExpired;
 
     //无参构造器
     public SysUsersEntity(){}
 
     //有参构造器
-    public SysUsersEntity(Integer sysUsersId,String username,String name,String password,Date dtCreate,Date lastLogin,Date deadline,String loginIp,String vQzjgid,String vQzjgmc,String depId,String depName,boolean enabled,boolean accountNonExpired,boolean accountNonLocked,boolean credentialsNonExpired){
+    public SysUsersEntity(Integer sysUsersId,String username,String name,String password,Date dtCreate,Date lastLogin,Date deadline,String loginIp,String vQzjgid,String vQzjgmc,String depId,String depName,Boolean enabled,Boolean accountNonExpired,Boolean accountNonLocked,Boolean credentialsNonExpired){
         this.sysUsersId = sysUsersId;
         this.username = username;
         this.name = name;
@@ -195,41 +195,41 @@ public class SysUsersEntity implements Serializable {
 
     @Basic
     @Column(name = "enabled" , nullable = false )
-    public boolean getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
     @Basic
     @Column(name = "account_non_expired" , nullable = false )
-    public boolean getAccountNonExpired() {
+    public Boolean getAccountNonExpired() {
         return accountNonExpired;
     }
 
-    public void setAccountNonExpired(boolean accountNonExpired) {
+    public void setAccountNonExpired(Boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
 
     @Basic
     @Column(name = "account_non_locked" , nullable = false )
-    public boolean getAccountNonLocked() {
+    public Boolean getAccountNonLocked() {
         return accountNonLocked;
     }
 
-    public void setAccountNonLocked(boolean accountNonLocked) {
+    public void setAccountNonLocked(Boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
 
     @Basic
     @Column(name = "credentials_non_expired" , nullable = false )
-    public boolean getCredentialsNonExpired() {
+    public Boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
@@ -275,10 +275,10 @@ public class SysUsersEntity implements Serializable {
         result = 31 * result + (vQzjgmc != null ? vQzjgmc.hashCode() : 0);
         result = 31 * result + (depId != null ? depId.hashCode() : 0);
         result = 31 * result + (depName != null ? depName.hashCode() : 0);
-        result = 31 * result + (enabled ? 1 : 0);
-        result = 31 * result + (accountNonExpired ? 1 : 0);
-        result = 31 * result + (accountNonLocked ? 1 : 0);
-        result = 31 * result + (credentialsNonExpired ? 1 : 0);
+        result = 31 * result + (getEnabled() != null && enabled ? 1 : 0);
+        result = 31 * result + (getAccountNonExpired() != null && accountNonExpired ? 1 : 0);
+        result = 31 * result + (getAccountNonLocked() != null && accountNonLocked ? 1 : 0);
+        result = 31 * result + (getCredentialsNonExpired() != null && credentialsNonExpired ? 1 : 0);
         return result;
     }
 

@@ -3,7 +3,7 @@ package com.agile.mvc.model.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by 佟盟

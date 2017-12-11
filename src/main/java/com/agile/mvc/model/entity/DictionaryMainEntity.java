@@ -18,13 +18,13 @@ public class DictionaryMainEntity implements Serializable {
     //字典名称
     private String name;
     //是否是常量
-    private boolean isConstant;
+    private Boolean isConstant;
 
     //无参构造器
     public DictionaryMainEntity(){}
 
     //有参构造器
-    public DictionaryMainEntity(Integer code,String name,boolean isConstant){
+    public DictionaryMainEntity(Integer code,String name,Boolean isConstant){
         this.code = code;
         this.name = name;
         this.isConstant = isConstant;
@@ -53,11 +53,11 @@ public class DictionaryMainEntity implements Serializable {
 
     @Basic
     @Column(name = "is_constant" )
-    public boolean getIsConstant() {
+    public Boolean getIsConstant() {
         return isConstant;
     }
 
-    public void setIsConstant(boolean isConstant) {
+    public void setIsConstant(Boolean isConstant) {
         this.isConstant = isConstant;
     }
 
@@ -80,7 +80,7 @@ public class DictionaryMainEntity implements Serializable {
         int result = 0;
         result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (isConstant ? 1 : 0);
+        result = 31 * result + (getIsConstant() != null && isConstant ? 1 : 0);
         return result;
     }
 

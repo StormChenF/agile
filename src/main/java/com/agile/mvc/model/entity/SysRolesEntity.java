@@ -20,9 +20,9 @@ public class SysRolesEntity implements Serializable {
     //角色说明
     private String roleDesc;
     //是否可用
-    private boolean enable;
+    private Boolean enable;
     //是否系统权限
-    private boolean issys;
+    private Boolean issys;
     //模块
     private String moduleId;
 
@@ -30,7 +30,7 @@ public class SysRolesEntity implements Serializable {
     public SysRolesEntity(){}
 
     //有参构造器
-    public SysRolesEntity(Integer sysRolesId,String roleName,String roleDesc,boolean enable,boolean issys,String moduleId){
+    public SysRolesEntity(Integer sysRolesId,String roleName,String roleDesc,Boolean enable,Boolean issys,String moduleId){
         this.sysRolesId = sysRolesId;
         this.roleName = roleName;
         this.roleDesc = roleDesc;
@@ -72,21 +72,21 @@ public class SysRolesEntity implements Serializable {
 
     @Basic
     @Column(name = "enable" , nullable = false )
-    public boolean getEnable() {
+    public Boolean getEnable() {
         return enable;
     }
 
-    public void setEnable(boolean enable) {
+    public void setEnable(Boolean enable) {
         this.enable = enable;
     }
 
     @Basic
     @Column(name = "issys" , nullable = false )
-    public boolean getIssys() {
+    public Boolean getIssys() {
         return issys;
     }
 
-    public void setIssys(boolean issys) {
+    public void setIssys(Boolean issys) {
         this.issys = issys;
     }
 
@@ -123,8 +123,8 @@ public class SysRolesEntity implements Serializable {
         result = 31 * result + (getSysRolesId() != null ? getSysRolesId().hashCode() : 0);
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         result = 31 * result + (roleDesc != null ? roleDesc.hashCode() : 0);
-        result = 31 * result + (enable ? 1 : 0);
-        result = 31 * result + (issys ? 1 : 0);
+        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
+        result = 31 * result + (getIssys() != null && issys ? 1 : 0);
         result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
         return result;
     }

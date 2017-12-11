@@ -1,11 +1,9 @@
 package com.agile.common.base;
 
-import com.agile.common.annotation.Task;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.support.CronTrigger;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,9 +14,10 @@ public class TaskTrigger implements Trigger, Serializable {
     private static final long serialVersionUID = -3781970872540402463L;
     private String cron;
     private boolean sync;
-    public TaskTrigger(Task task){
-        this.cron = task.cron();
-        this.sync = task.sync();
+
+    public TaskTrigger(String cron,boolean sync){
+        this.cron = cron;
+        this.sync = sync;
     }
 
     @NotNull

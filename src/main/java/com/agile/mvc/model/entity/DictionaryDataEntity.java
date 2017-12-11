@@ -22,13 +22,13 @@ public class DictionaryDataEntity implements Serializable {
     //字典值代表值
     private String value;
     //字典值是否固定
-    private boolean isFixed;
+    private Boolean isFixed;
 
     //无参构造器
     public DictionaryDataEntity(){}
 
     //有参构造器
-    public DictionaryDataEntity(Integer code,String dicCode,String name,String value,boolean isFixed){
+    public DictionaryDataEntity(Integer code,String dicCode,String name,String value,Boolean isFixed){
         this.code = code;
         this.dicCode = dicCode;
         this.name = name;
@@ -79,11 +79,11 @@ public class DictionaryDataEntity implements Serializable {
 
     @Basic
     @Column(name = "is_fixed" )
-    public boolean getIsFixed() {
+    public Boolean getIsFixed() {
         return isFixed;
     }
 
-    public void setIsFixed(boolean isFixed) {
+    public void setIsFixed(Boolean isFixed) {
         this.isFixed = isFixed;
     }
 
@@ -110,7 +110,7 @@ public class DictionaryDataEntity implements Serializable {
         result = 31 * result + (dicCode != null ? dicCode.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (isFixed ? 1 : 0);
+        result = 31 * result + (getIsFixed() != null && isFixed ? 1 : 0);
         return result;
     }
 

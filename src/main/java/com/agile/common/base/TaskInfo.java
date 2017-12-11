@@ -8,15 +8,17 @@ import com.agile.mvc.model.entity.SysTaskEntity;
  */
 public class TaskInfo extends SysTaskEntity {
 
+    private static final long serialVersionUID = 9011368858242396036L;
     private TaskTrigger trigger; //触发器
     private TaskConfig.Job job; //任务
 
-    public TaskInfo(SysTaskEntity sysTaskEntity) {
+    public TaskInfo(SysTaskEntity sysTaskEntity,TaskTrigger trigger,TaskConfig.Job job) {
         this.setName(sysTaskEntity.getName());
-        this.setLockName(sysTaskEntity.getLockName());
         this.setCron(sysTaskEntity.getCron());
         this.setState(sysTaskEntity.getState());
         this.setCreateTime(sysTaskEntity.getCreateTime());
+        this.trigger = trigger;
+        this.job = job;
     }
 
     public TaskTrigger getTrigger() {

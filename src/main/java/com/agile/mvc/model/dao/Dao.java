@@ -70,14 +70,43 @@ public class Dao {
 
     /**
      * 保存并刷新
-     * @param tableClass ORM对象类型
      */
     @SuppressWarnings("unchecked")
-    public <T>Object saveAndFlush(Class<T> tableClass,Object o){
+    public <T>T saveAndReturn(T o,boolean isFlush){
         try {
-            return getRepository(tableClass).saveAndFlush(o);
+            if(isFlush){
+                return (T)getRepository(o.getClass()).saveAndFlush(o);
+            }else {
+                return (T)getRepository(o.getClass()).save(o);
+            }
         } catch (NoSuchIDException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 保存
+     */
+    @SuppressWarnings("unchecked")
+    public <T>T saveAndReturn(T o){
+        return saveAndReturn(o,Boolean.FALSE);
+    }
+
+    /**
+     * 批量保存
+     * @param list 要保存的ORM对象
+     */
+    @SuppressWarnings("unchecked")
+    public <T> List<T> save(Iterable<T> list){
+        Iterator<T> iterator = list.iterator();
+        if(iterator.hasNext()){
+            T obj = iterator.next();
+            try {
+                getRepository(obj.getClass()).saveAll(list);
+            } catch (NoSuchIDException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

@@ -34,7 +34,7 @@ public class SysModulesEntity implements Serializable {
     //控制器名称
     private String controller;
     //是否可用
-    private boolean enable;
+    private Boolean enable;
     //优先级
     private String priority;
 
@@ -42,7 +42,7 @@ public class SysModulesEntity implements Serializable {
     public SysModulesEntity(){}
 
     //有参构造器
-    public SysModulesEntity(Integer sysModulesId,String moduleName,String moduleDesc,String moduleType,String parent,String moduleUrl,String iLevel,String leaf,String application,String controller,boolean enable,String priority){
+    public SysModulesEntity(Integer sysModulesId,String moduleName,String moduleDesc,String moduleType,String parent,String moduleUrl,String iLevel,String leaf,String application,String controller,Boolean enable,String priority){
         this.sysModulesId = sysModulesId;
         this.moduleName = moduleName;
         this.moduleDesc = moduleDesc;
@@ -160,11 +160,11 @@ public class SysModulesEntity implements Serializable {
 
     @Basic
     @Column(name = "enable" , nullable = false )
-    public boolean getEnable() {
+    public Boolean getEnable() {
         return enable;
     }
 
-    public void setEnable(boolean enable) {
+    public void setEnable(Boolean enable) {
         this.enable = enable;
     }
 
@@ -214,7 +214,7 @@ public class SysModulesEntity implements Serializable {
         result = 31 * result + (leaf != null ? leaf.hashCode() : 0);
         result = 31 * result + (application != null ? application.hashCode() : 0);
         result = 31 * result + (controller != null ? controller.hashCode() : 0);
-        result = 31 * result + (enable ? 1 : 0);
+        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
         result = 31 * result + (priority != null ? priority.hashCode() : 0);
         return result;
     }

@@ -139,10 +139,11 @@ public class ObjectUtil extends ObjectUtils {
      * @param prefix 属性前缀
      * @return 返回指定对象类型对象
      */
-    public static <T> T getObjectFromMap(Class<T> clazz,Map<String, Object> map, String prefix, String suffix) throws IllegalAccessException {
+    public static <T> T getObjectFromMap(Class<T> clazz,Map<String, Object> map, String prefix, String suffix) {
         T object = null;
         try {
             object = clazz.newInstance();
+            if(ObjectUtil.isEmpty(map))return object;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }

@@ -26,9 +26,9 @@ public class SysResourcesEntity implements Serializable {
     //优先级
     private String priority;
     //是否可用
-    private boolean enable;
+    private Boolean enable;
     //是否系统权限
-    private boolean issys;
+    private Boolean issys;
     //模块
     private int moduleId;
 
@@ -36,7 +36,7 @@ public class SysResourcesEntity implements Serializable {
     public SysResourcesEntity(){}
 
     //有参构造器
-    public SysResourcesEntity(Integer sysResourcesId,String resourceType,String resourceName,String resourceDesc,String resourcePath,String priority,boolean enable,boolean issys,int moduleId){
+    public SysResourcesEntity(Integer sysResourcesId,String resourceType,String resourceName,String resourceDesc,String resourcePath,String priority,Boolean enable,Boolean issys,int moduleId){
         this.sysResourcesId = sysResourcesId;
         this.resourceType = resourceType;
         this.resourceName = resourceName;
@@ -111,21 +111,21 @@ public class SysResourcesEntity implements Serializable {
 
     @Basic
     @Column(name = "enable" , nullable = false )
-    public boolean getEnable() {
+    public Boolean getEnable() {
         return enable;
     }
 
-    public void setEnable(boolean enable) {
+    public void setEnable(Boolean enable) {
         this.enable = enable;
     }
 
     @Basic
     @Column(name = "issys" , nullable = false )
-    public boolean getIssys() {
+    public Boolean getIssys() {
         return issys;
     }
 
-    public void setIssys(boolean issys) {
+    public void setIssys(Boolean issys) {
         this.issys = issys;
     }
 
@@ -168,8 +168,8 @@ public class SysResourcesEntity implements Serializable {
         result = 31 * result + (resourceDesc != null ? resourceDesc.hashCode() : 0);
         result = 31 * result + (resourcePath != null ? resourcePath.hashCode() : 0);
         result = 31 * result + (priority != null ? priority.hashCode() : 0);
-        result = 31 * result + (enable ? 1 : 0);
-        result = 31 * result + (issys ? 1 : 0);
+        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
+        result = 31 * result + (getIssys() != null && issys ? 1 : 0);
         result = 31 * result + moduleId;
         return result;
     }
