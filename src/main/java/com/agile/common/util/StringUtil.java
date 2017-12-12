@@ -148,11 +148,6 @@ public final class StringUtil extends StringUtils {
         return null;
     }
 
-    public static void main(String[] args) {
-        String a = "select sf order by asfdsfsdfa asdf order fdsfsd order by fdf";
-        getMatchedString("(order)([\\w `,\\(\\)]+)(?:by)(?=([\\w `,\\(\\)]+))(?!order)",a);
-    }
-
     /**
      * 获取字符串中匹配正则表达式的部分
      * @param regex 正则表达式

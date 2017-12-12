@@ -115,33 +115,22 @@ public class LogValueEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LogValueEntity that = (LogValueEntity) o;
-
-        return 
-            Objects.equals(logValueId, that.logValueId)  && 
-            Objects.equals(logTableId, that.logTableId)  && 
-            (columnName != null ? columnName.equals(that.columnName) : that.columnName == null)  && 
-            (columnType != null ? columnType.equals(that.columnType) : that.columnType == null)  && 
-            (newValue != null ? newValue.equals(that.newValue) : that.newValue == null)  && 
-            (oldValue != null ? oldValue.equals(that.oldValue) : that.oldValue == null)  && 
-            (columnInfo != null ? columnInfo.equals(that.columnInfo) : that.columnInfo == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof LogValueEntity)) return false;
+        LogValueEntity that = (LogValueEntity) object;
+        return Objects.equals(getLogValueId(), that.getLogValueId()) &&
+            Objects.equals(getLogTableId(), that.getLogTableId()) &&
+            Objects.equals(getColumnName(), that.getColumnName()) &&
+            Objects.equals(getColumnType(), that.getColumnType()) &&
+            Objects.equals(getNewValue(), that.getNewValue()) &&
+            Objects.equals(getOldValue(), that.getOldValue()) &&
+            Objects.equals(getColumnInfo(), that.getColumnInfo());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getLogValueId() != null ? getLogValueId().hashCode() : 0);
-        result = 31 * result + logTableId;
-        result = 31 * result + (columnName != null ? columnName.hashCode() : 0);
-        result = 31 * result + (columnType != null ? columnType.hashCode() : 0);
-        result = 31 * result + (newValue != null ? newValue.hashCode() : 0);
-        result = 31 * result + (oldValue != null ? oldValue.hashCode() : 0);
-        result = 31 * result + (columnInfo != null ? columnInfo.hashCode() : 0);
-        return result;
+        return Objects.hash(getLogValueId(), getLogTableId(), getColumnName(), getColumnType(), getNewValue(), getOldValue(), getColumnInfo());
     }
 
     @Override

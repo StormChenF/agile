@@ -141,37 +141,24 @@ public class SysResourcesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysResourcesEntity that = (SysResourcesEntity) o;
-
-        return 
-            Objects.equals(sysResourcesId, that.sysResourcesId)  && 
-            (resourceType != null ? resourceType.equals(that.resourceType) : that.resourceType == null)  && 
-            (resourceName != null ? resourceName.equals(that.resourceName) : that.resourceName == null)  && 
-            (resourceDesc != null ? resourceDesc.equals(that.resourceDesc) : that.resourceDesc == null)  && 
-            (resourcePath != null ? resourcePath.equals(that.resourcePath) : that.resourcePath == null)  && 
-            (priority != null ? priority.equals(that.priority) : that.priority == null)  && 
-            enable == that.enable  && 
-            issys == that.issys  && 
-            Objects.equals(moduleId, that.moduleId) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysResourcesEntity)) return false;
+        SysResourcesEntity that = (SysResourcesEntity) object;
+        return Objects.equals(getSysResourcesId(), that.getSysResourcesId()) &&
+            Objects.equals(getResourceType(), that.getResourceType()) &&
+            Objects.equals(getResourceName(), that.getResourceName()) &&
+            Objects.equals(getResourceDesc(), that.getResourceDesc()) &&
+            Objects.equals(getResourcePath(), that.getResourcePath()) &&
+            Objects.equals(getPriority(), that.getPriority()) &&
+            Objects.equals(getEnable(), that.getEnable()) &&
+            Objects.equals(getIssys(), that.getIssys()) &&
+            Objects.equals(getModuleId(), that.getModuleId());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysResourcesId() != null ? getSysResourcesId().hashCode() : 0);
-        result = 31 * result + (resourceType != null ? resourceType.hashCode() : 0);
-        result = 31 * result + (resourceName != null ? resourceName.hashCode() : 0);
-        result = 31 * result + (resourceDesc != null ? resourceDesc.hashCode() : 0);
-        result = 31 * result + (resourcePath != null ? resourcePath.hashCode() : 0);
-        result = 31 * result + (priority != null ? priority.hashCode() : 0);
-        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
-        result = 31 * result + (getIssys() != null && issys ? 1 : 0);
-        result = 31 * result + moduleId;
-        return result;
+        return Objects.hash(getSysResourcesId(), getResourceType(), getResourceName(), getResourceDesc(), getResourcePath(), getPriority(), getEnable(), getIssys(), getModuleId());
     }
 
     @Override

@@ -63,25 +63,18 @@ public class SysBtRolesAuthoritiesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysBtRolesAuthoritiesEntity that = (SysBtRolesAuthoritiesEntity) o;
-
-        return 
-            Objects.equals(sysBtRolesAuthoritiesId, that.sysBtRolesAuthoritiesId)  && 
-            Objects.equals(authorityId, that.authorityId)  && 
-            Objects.equals(roleId, that.roleId) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysBtRolesAuthoritiesEntity)) return false;
+        SysBtRolesAuthoritiesEntity that = (SysBtRolesAuthoritiesEntity) object;
+        return Objects.equals(getSysBtRolesAuthoritiesId(), that.getSysBtRolesAuthoritiesId()) &&
+            Objects.equals(getAuthorityId(), that.getAuthorityId()) &&
+            Objects.equals(getRoleId(), that.getRoleId());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysBtRolesAuthoritiesId() != null ? getSysBtRolesAuthoritiesId().hashCode() : 0);
-        result = 31 * result + authorityId;
-        result = 31 * result + roleId;
-        return result;
+        return Objects.hash(getSysBtRolesAuthoritiesId(), getAuthorityId(), getRoleId());
     }
 
     @Override

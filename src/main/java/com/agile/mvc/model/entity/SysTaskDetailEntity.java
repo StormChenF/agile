@@ -101,31 +101,21 @@ public class SysTaskDetailEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysTaskDetailEntity that = (SysTaskDetailEntity) o;
-
-        return 
-            Objects.equals(sysTaskDetailId, that.sysTaskDetailId)  && 
-            Objects.equals(sysTaskId, that.sysTaskId)  && 
-            (targetPackage != null ? targetPackage.equals(that.targetPackage) : that.targetPackage == null)  && 
-            (targetClass != null ? targetClass.equals(that.targetClass) : that.targetClass == null)  && 
-            (targetMethod != null ? targetMethod.equals(that.targetMethod) : that.targetMethod == null)  && 
-            (order != null ? order.equals(that.order) : that.order == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysTaskDetailEntity)) return false;
+        SysTaskDetailEntity that = (SysTaskDetailEntity) object;
+        return Objects.equals(getSysTaskDetailId(), that.getSysTaskDetailId()) &&
+            Objects.equals(getSysTaskId(), that.getSysTaskId()) &&
+            Objects.equals(getTargetPackage(), that.getTargetPackage()) &&
+            Objects.equals(getTargetClass(), that.getTargetClass()) &&
+            Objects.equals(getTargetMethod(), that.getTargetMethod()) &&
+            Objects.equals(getOrder(), that.getOrder());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysTaskDetailId() != null ? getSysTaskDetailId().hashCode() : 0);
-        result = 31 * result + sysTaskId;
-        result = 31 * result + (targetPackage != null ? targetPackage.hashCode() : 0);
-        result = 31 * result + (targetClass != null ? targetClass.hashCode() : 0);
-        result = 31 * result + (targetMethod != null ? targetMethod.hashCode() : 0);
-        result = 31 * result + (order != null ? order.hashCode() : 0);
-        return result;
+        return Objects.hash(getSysTaskDetailId(), getSysTaskId(), getTargetPackage(), getTargetClass(), getTargetMethod(), getOrder());
     }
 
     @Override

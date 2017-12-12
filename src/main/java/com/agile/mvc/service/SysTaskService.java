@@ -18,7 +18,7 @@ public class SysTaskService extends MainService {
      */
     public RETURN save() throws IllegalAccessException {
         SysTaskEntity entity = ObjectUtil.getObjectFromMap(SysTaskEntity.class, this.getInParam());
-        if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
+        if (!ObjectUtil.isValidity(entity)) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
         return RETURN.SUCCESS;
     }

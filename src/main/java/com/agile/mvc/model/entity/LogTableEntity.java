@@ -102,31 +102,21 @@ public class LogTableEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LogTableEntity that = (LogTableEntity) o;
-
-        return 
-            Objects.equals(logTableId, that.logTableId)  && 
-            Objects.equals(logMainId, that.logMainId)  && 
-            (tableSchema != null ? tableSchema.equals(that.tableSchema) : that.tableSchema == null)  && 
-            (tableName != null ? tableName.equals(that.tableName) : that.tableName == null)  && 
-            (operationType != null ? operationType.equals(that.operationType) : that.operationType == null)  && 
-            Objects.equals(operationOrder, that.operationOrder) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof LogTableEntity)) return false;
+        LogTableEntity that = (LogTableEntity) object;
+        return Objects.equals(getLogTableId(), that.getLogTableId()) &&
+            Objects.equals(getLogMainId(), that.getLogMainId()) &&
+            Objects.equals(getTableSchema(), that.getTableSchema()) &&
+            Objects.equals(getTableName(), that.getTableName()) &&
+            Objects.equals(getOperationType(), that.getOperationType()) &&
+            Objects.equals(getOperationOrder(), that.getOperationOrder());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getLogTableId() != null ? getLogTableId().hashCode() : 0);
-        result = 31 * result + logMainId;
-        result = 31 * result + (tableSchema != null ? tableSchema.hashCode() : 0);
-        result = 31 * result + (tableName != null ? tableName.hashCode() : 0);
-        result = 31 * result + (operationType != null ? operationType.hashCode() : 0);
-        result = 31 * result + operationOrder;
-        return result;
+        return Objects.hash(getLogTableId(), getLogMainId(), getTableSchema(), getTableName(), getOperationType(), getOperationOrder());
     }
 
     @Override

@@ -57,31 +57,18 @@ public class ${className}Entity implements Serializable {
 </#list>
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ${className}Entity that = (${className}Entity) o;
-
-        return <#list columnList as property>
-            <#if property.propertyType == "Integer" || property.propertyType == "Double" || property.propertyType == "Float" || property.propertyType == "Long" || property.propertyType == "Short" || property.propertyType == "int" || property.propertyType == "double" || property.propertyType == "float" || property.propertyType == "long" || property.propertyType == "short" >Objects.equals(${property.propertyName}, that.${property.propertyName}) <#if property_has_next> && <#else>;</#if><#elseif property.propertyType == "Boolean" || property.propertyType == "boolean" >${property.propertyName} == that.${property.propertyName} <#if property_has_next> && <#else>;</#if><#elseif property.propertyType == "Date" || property.propertyType == "Timestamp">(${property.getMethod}() != null ? ${property.getMethod}().equals(that.${property.getMethod}()) : that.${property.getMethod}() == null) <#if property_has_next> && <#else>;</#if><#else>(${property.propertyName} != null ? ${property.propertyName}.equals(that.${property.propertyName}) : that.${property.propertyName} == null) <#if property_has_next> && <#else>;</#if></#if></#list>
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof ${className}Entity)) return false;
+        ${className}Entity that = (${className}Entity) object;
+        return <#list columnList as property>Objects.equals(${property.getMethod}(), that.${property.getMethod}())<#if property_has_next> &&
+            <#else >;
+            </#if></#list>
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-    <#list columnList as property>
-        <#if property.propertyType == "int" || property.propertyType == "double" || property.propertyType == "float" || property.propertyType == "long" || property.propertyType == "short" >
-        result = 31 * result + ${property.propertyName};
-        <#elseif property.propertyType == "Boolean" || property.propertyType == "boolean">
-        result = 31 * result + (${property.getMethod}() != null && ${property.propertyName} ? 1 : 0);
-        <#elseif property.propertyType == "Date" || property.propertyType == "Timestamp" || property.propertyType == "Integer" || property.propertyType == "Double" || property.propertyType == "Float" || property.propertyType == "Long" || property.propertyType == "Short">
-        result = 31 * result + (${property.getMethod}() != null ? ${property.getMethod}().hashCode() : 0);
-        <#else>
-        result = 31 * result + (${property.propertyName} != null ? ${property.propertyName}.hashCode() : 0);
-        </#if>
-    </#list>
-        return result;
+        return Objects.hash(<#list columnList as property>${property.getMethod}()<#if property_has_next>, </#if></#list>);
     }
 
     @Override

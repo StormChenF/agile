@@ -18,7 +18,7 @@ public class LogMainService extends MainService {
      */
     public RETURN save() throws IllegalAccessException {
         LogMainEntity entity = ObjectUtil.getObjectFromMap(LogMainEntity.class, this.getInParam());
-        if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
+        if (!ObjectUtil.isValidity(entity)) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
         return RETURN.SUCCESS;
     }

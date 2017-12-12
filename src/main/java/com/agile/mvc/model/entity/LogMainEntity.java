@@ -103,31 +103,21 @@ public class LogMainEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LogMainEntity that = (LogMainEntity) o;
-
-        return 
-            Objects.equals(logMainId, that.logMainId)  && 
-            (businessCode != null ? businessCode.equals(that.businessCode) : that.businessCode == null)  && 
-            (targetType != null ? targetType.equals(that.targetType) : that.targetType == null)  && 
-            (targetCode != null ? targetCode.equals(that.targetCode) : that.targetCode == null)  && 
-            Objects.equals(userId, that.userId)  && 
-            (getCreateTime() != null ? getCreateTime().equals(that.getCreateTime()) : that.getCreateTime() == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof LogMainEntity)) return false;
+        LogMainEntity that = (LogMainEntity) object;
+        return Objects.equals(getLogMainId(), that.getLogMainId()) &&
+            Objects.equals(getBusinessCode(), that.getBusinessCode()) &&
+            Objects.equals(getTargetType(), that.getTargetType()) &&
+            Objects.equals(getTargetCode(), that.getTargetCode()) &&
+            Objects.equals(getUserId(), that.getUserId()) &&
+            Objects.equals(getCreateTime(), that.getCreateTime());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getLogMainId() != null ? getLogMainId().hashCode() : 0);
-        result = 31 * result + (businessCode != null ? businessCode.hashCode() : 0);
-        result = 31 * result + (targetType != null ? targetType.hashCode() : 0);
-        result = 31 * result + (targetCode != null ? targetCode.hashCode() : 0);
-        result = 31 * result + userId;
-        result = 31 * result + (getCreateTime() != null ? getCreateTime().hashCode() : 0);
-        return result;
+        return Objects.hash(getLogMainId(), getBusinessCode(), getTargetType(), getTargetCode(), getUserId(), getCreateTime());
     }
 
     @Override

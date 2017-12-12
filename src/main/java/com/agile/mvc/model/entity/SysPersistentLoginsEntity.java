@@ -90,29 +90,20 @@ public class SysPersistentLoginsEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysPersistentLoginsEntity that = (SysPersistentLoginsEntity) o;
-
-        return 
-            Objects.equals(sysPersistentLoginsId, that.sysPersistentLoginsId)  && 
-            (username != null ? username.equals(that.username) : that.username == null)  && 
-            (series != null ? series.equals(that.series) : that.series == null)  && 
-            (token != null ? token.equals(that.token) : that.token == null)  && 
-            (getLastUsed() != null ? getLastUsed().equals(that.getLastUsed()) : that.getLastUsed() == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysPersistentLoginsEntity)) return false;
+        SysPersistentLoginsEntity that = (SysPersistentLoginsEntity) object;
+        return Objects.equals(getSysPersistentLoginsId(), that.getSysPersistentLoginsId()) &&
+            Objects.equals(getUsername(), that.getUsername()) &&
+            Objects.equals(getSeries(), that.getSeries()) &&
+            Objects.equals(getToken(), that.getToken()) &&
+            Objects.equals(getLastUsed(), that.getLastUsed());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysPersistentLoginsId() != null ? getSysPersistentLoginsId().hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (series != null ? series.hashCode() : 0);
-        result = 31 * result + (token != null ? token.hashCode() : 0);
-        result = 31 * result + (getLastUsed() != null ? getLastUsed().hashCode() : 0);
-        return result;
+        return Objects.hash(getSysPersistentLoginsId(), getUsername(), getSeries(), getToken(), getLastUsed());
     }
 
     @Override

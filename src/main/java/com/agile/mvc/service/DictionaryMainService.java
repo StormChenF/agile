@@ -18,7 +18,7 @@ public class DictionaryMainService extends MainService {
      */
     public RETURN save() throws IllegalAccessException {
         DictionaryMainEntity entity = ObjectUtil.getObjectFromMap(DictionaryMainEntity.class, this.getInParam());
-        if (entity.hashCode() == 0) return RETURN.PARAMETER_ERROR;
+        if (!ObjectUtil.isValidity(entity)) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
         return RETURN.SUCCESS;
     }

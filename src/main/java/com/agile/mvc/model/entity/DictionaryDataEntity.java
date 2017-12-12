@@ -89,29 +89,20 @@ public class DictionaryDataEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DictionaryDataEntity that = (DictionaryDataEntity) o;
-
-        return 
-            Objects.equals(code, that.code)  && 
-            (dicCode != null ? dicCode.equals(that.dicCode) : that.dicCode == null)  && 
-            (name != null ? name.equals(that.name) : that.name == null)  && 
-            (value != null ? value.equals(that.value) : that.value == null)  && 
-            isFixed == that.isFixed ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof DictionaryDataEntity)) return false;
+        DictionaryDataEntity that = (DictionaryDataEntity) object;
+        return Objects.equals(getCode(), that.getCode()) &&
+            Objects.equals(getDicCode(), that.getDicCode()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getValue(), that.getValue()) &&
+            Objects.equals(getIsFixed(), that.getIsFixed());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
-        result = 31 * result + (dicCode != null ? dicCode.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (getIsFixed() != null && isFixed ? 1 : 0);
-        return result;
+        return Objects.hash(getCode(), getDicCode(), getName(), getValue(), getIsFixed());
     }
 
     @Override

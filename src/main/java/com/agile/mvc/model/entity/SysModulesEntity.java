@@ -180,43 +180,27 @@ public class SysModulesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysModulesEntity that = (SysModulesEntity) o;
-
-        return 
-            Objects.equals(sysModulesId, that.sysModulesId)  && 
-            (moduleName != null ? moduleName.equals(that.moduleName) : that.moduleName == null)  && 
-            (moduleDesc != null ? moduleDesc.equals(that.moduleDesc) : that.moduleDesc == null)  && 
-            (moduleType != null ? moduleType.equals(that.moduleType) : that.moduleType == null)  && 
-            (parent != null ? parent.equals(that.parent) : that.parent == null)  && 
-            (moduleUrl != null ? moduleUrl.equals(that.moduleUrl) : that.moduleUrl == null)  && 
-            (iLevel != null ? iLevel.equals(that.iLevel) : that.iLevel == null)  && 
-            (leaf != null ? leaf.equals(that.leaf) : that.leaf == null)  && 
-            (application != null ? application.equals(that.application) : that.application == null)  && 
-            (controller != null ? controller.equals(that.controller) : that.controller == null)  && 
-            enable == that.enable  && 
-            (priority != null ? priority.equals(that.priority) : that.priority == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysModulesEntity)) return false;
+        SysModulesEntity that = (SysModulesEntity) object;
+        return Objects.equals(getSysModulesId(), that.getSysModulesId()) &&
+            Objects.equals(getModuleName(), that.getModuleName()) &&
+            Objects.equals(getModuleDesc(), that.getModuleDesc()) &&
+            Objects.equals(getModuleType(), that.getModuleType()) &&
+            Objects.equals(getParent(), that.getParent()) &&
+            Objects.equals(getModuleUrl(), that.getModuleUrl()) &&
+            Objects.equals(getILevel(), that.getILevel()) &&
+            Objects.equals(getLeaf(), that.getLeaf()) &&
+            Objects.equals(getApplication(), that.getApplication()) &&
+            Objects.equals(getController(), that.getController()) &&
+            Objects.equals(getEnable(), that.getEnable()) &&
+            Objects.equals(getPriority(), that.getPriority());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysModulesId() != null ? getSysModulesId().hashCode() : 0);
-        result = 31 * result + (moduleName != null ? moduleName.hashCode() : 0);
-        result = 31 * result + (moduleDesc != null ? moduleDesc.hashCode() : 0);
-        result = 31 * result + (moduleType != null ? moduleType.hashCode() : 0);
-        result = 31 * result + (parent != null ? parent.hashCode() : 0);
-        result = 31 * result + (moduleUrl != null ? moduleUrl.hashCode() : 0);
-        result = 31 * result + (iLevel != null ? iLevel.hashCode() : 0);
-        result = 31 * result + (leaf != null ? leaf.hashCode() : 0);
-        result = 31 * result + (application != null ? application.hashCode() : 0);
-        result = 31 * result + (controller != null ? controller.hashCode() : 0);
-        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
-        result = 31 * result + (priority != null ? priority.hashCode() : 0);
-        return result;
+        return Objects.hash(getSysModulesId(), getModuleName(), getModuleDesc(), getModuleType(), getParent(), getModuleUrl(), getILevel(), getLeaf(), getApplication(), getController(), getEnable(), getPriority());
     }
 
     @Override

@@ -63,25 +63,18 @@ public class SysBtUsersRolesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysBtUsersRolesEntity that = (SysBtUsersRolesEntity) o;
-
-        return 
-            Objects.equals(sysBtUsersRolesId, that.sysBtUsersRolesId)  && 
-            Objects.equals(roleId, that.roleId)  && 
-            Objects.equals(userId, that.userId) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysBtUsersRolesEntity)) return false;
+        SysBtUsersRolesEntity that = (SysBtUsersRolesEntity) object;
+        return Objects.equals(getSysBtUsersRolesId(), that.getSysBtUsersRolesId()) &&
+            Objects.equals(getRoleId(), that.getRoleId()) &&
+            Objects.equals(getUserId(), that.getUserId());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysBtUsersRolesId() != null ? getSysBtUsersRolesId().hashCode() : 0);
-        result = 31 * result + roleId;
-        result = 31 * result + userId;
-        return result;
+        return Objects.hash(getSysBtUsersRolesId(), getRoleId(), getUserId());
     }
 
     @Override

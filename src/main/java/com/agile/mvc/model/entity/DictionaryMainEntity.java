@@ -63,25 +63,18 @@ public class DictionaryMainEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DictionaryMainEntity that = (DictionaryMainEntity) o;
-
-        return 
-            Objects.equals(code, that.code)  && 
-            (name != null ? name.equals(that.name) : that.name == null)  && 
-            isConstant == that.isConstant ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof DictionaryMainEntity)) return false;
+        DictionaryMainEntity that = (DictionaryMainEntity) object;
+        return Objects.equals(getCode(), that.getCode()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getIsConstant(), that.getIsConstant());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (getIsConstant() != null && isConstant ? 1 : 0);
-        return result;
+        return Objects.hash(getCode(), getName(), getIsConstant());
     }
 
     @Override

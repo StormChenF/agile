@@ -1,9 +1,11 @@
 package com.agile.common.util;
 
-import com.agile.mvc.model.entity.DictionaryDataEntity;
 import org.springframework.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.*;
@@ -161,6 +163,29 @@ public class ObjectUtil extends ObjectUtils {
             }
         }
         return object;
+    }
+
+    /**
+     * 判断对象非空属性是否存值（排除主键）
+     */
+    public static boolean isValidity(Object object){
+        boolean result = true;
+        Class<?> clazz = object.getClass();
+        Method[] methods = clazz.getDeclaredMethods();
+        for (int i = 0 ; i < methods.length;i++){
+            Method method = methods[i];
+            try {
+                if(isEmpty(method.getAnnotation(Id.class))){
+                    Column columInfo = method.getAnnotation(Column.class);
+                    if(!isEmpty(columInfo) && columInfo.nullable()){
+                        if(isEmpty(method.invoke(object)))result = false;
+                    }
+                }
+            }catch (Exception e){
+                continue;
+            }
+        }
+        return result;
     }
 
     /**

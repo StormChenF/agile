@@ -63,25 +63,18 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysBtAuthoritiesResourcesEntity that = (SysBtAuthoritiesResourcesEntity) o;
-
-        return 
-            Objects.equals(sysBtAuthoritiesResourcesId, that.sysBtAuthoritiesResourcesId)  && 
-            Objects.equals(resourceId, that.resourceId)  && 
-            Objects.equals(authorityId, that.authorityId) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysBtAuthoritiesResourcesEntity)) return false;
+        SysBtAuthoritiesResourcesEntity that = (SysBtAuthoritiesResourcesEntity) object;
+        return Objects.equals(getSysBtAuthoritiesResourcesId(), that.getSysBtAuthoritiesResourcesId()) &&
+            Objects.equals(getResourceId(), that.getResourceId()) &&
+            Objects.equals(getAuthorityId(), that.getAuthorityId());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysBtAuthoritiesResourcesId() != null ? getSysBtAuthoritiesResourcesId().hashCode() : 0);
-        result = 31 * result + resourceId;
-        result = 31 * result + authorityId;
-        return result;
+        return Objects.hash(getSysBtAuthoritiesResourcesId(), getResourceId(), getAuthorityId());
     }
 
     @Override

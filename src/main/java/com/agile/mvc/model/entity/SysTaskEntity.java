@@ -117,33 +117,22 @@ public class SysTaskEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysTaskEntity that = (SysTaskEntity) o;
-
-        return 
-            Objects.equals(sysTaskId, that.sysTaskId)  && 
-            (name != null ? name.equals(that.name) : that.name == null)  && 
-            state == that.state  && 
-            (cron != null ? cron.equals(that.cron) : that.cron == null)  && 
-            sync == that.sync  && 
-            (getUpdateTime() != null ? getUpdateTime().equals(that.getUpdateTime()) : that.getUpdateTime() == null)  && 
-            (getCreateTime() != null ? getCreateTime().equals(that.getCreateTime()) : that.getCreateTime() == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysTaskEntity)) return false;
+        SysTaskEntity that = (SysTaskEntity) object;
+        return Objects.equals(getSysTaskId(), that.getSysTaskId()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getState(), that.getState()) &&
+            Objects.equals(getCron(), that.getCron()) &&
+            Objects.equals(getSync(), that.getSync()) &&
+            Objects.equals(getUpdateTime(), that.getUpdateTime()) &&
+            Objects.equals(getCreateTime(), that.getCreateTime());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysTaskId() != null ? getSysTaskId().hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (getState() != null && state ? 1 : 0);
-        result = 31 * result + (cron != null ? cron.hashCode() : 0);
-        result = 31 * result + (getSync() != null && sync ? 1 : 0);
-        result = 31 * result + (getUpdateTime() != null ? getUpdateTime().hashCode() : 0);
-        result = 31 * result + (getCreateTime() != null ? getCreateTime().hashCode() : 0);
-        return result;
+        return Objects.hash(getSysTaskId(), getName(), getState(), getCron(), getSync(), getUpdateTime(), getCreateTime());
     }
 
     @Override

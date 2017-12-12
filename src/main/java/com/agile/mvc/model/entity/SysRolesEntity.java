@@ -102,31 +102,21 @@ public class SysRolesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysRolesEntity that = (SysRolesEntity) o;
-
-        return 
-            Objects.equals(sysRolesId, that.sysRolesId)  && 
-            (roleName != null ? roleName.equals(that.roleName) : that.roleName == null)  && 
-            (roleDesc != null ? roleDesc.equals(that.roleDesc) : that.roleDesc == null)  && 
-            enable == that.enable  && 
-            issys == that.issys  && 
-            (moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysRolesEntity)) return false;
+        SysRolesEntity that = (SysRolesEntity) object;
+        return Objects.equals(getSysRolesId(), that.getSysRolesId()) &&
+            Objects.equals(getRoleName(), that.getRoleName()) &&
+            Objects.equals(getRoleDesc(), that.getRoleDesc()) &&
+            Objects.equals(getEnable(), that.getEnable()) &&
+            Objects.equals(getIssys(), that.getIssys()) &&
+            Objects.equals(getModuleId(), that.getModuleId());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysRolesId() != null ? getSysRolesId().hashCode() : 0);
-        result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
-        result = 31 * result + (roleDesc != null ? roleDesc.hashCode() : 0);
-        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
-        result = 31 * result + (getIssys() != null && issys ? 1 : 0);
-        result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
-        return result;
+        return Objects.hash(getSysRolesId(), getRoleName(), getRoleDesc(), getEnable(), getIssys(), getModuleId());
     }
 
     @Override

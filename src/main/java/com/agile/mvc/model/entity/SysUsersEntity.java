@@ -235,51 +235,31 @@ public class SysUsersEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysUsersEntity that = (SysUsersEntity) o;
-
-        return 
-            Objects.equals(sysUsersId, that.sysUsersId)  && 
-            (username != null ? username.equals(that.username) : that.username == null)  && 
-            (name != null ? name.equals(that.name) : that.name == null)  && 
-            (password != null ? password.equals(that.password) : that.password == null)  && 
-            (getDtCreate() != null ? getDtCreate().equals(that.getDtCreate()) : that.getDtCreate() == null)  && 
-            (getLastLogin() != null ? getLastLogin().equals(that.getLastLogin()) : that.getLastLogin() == null)  && 
-            (getDeadline() != null ? getDeadline().equals(that.getDeadline()) : that.getDeadline() == null)  && 
-            (loginIp != null ? loginIp.equals(that.loginIp) : that.loginIp == null)  && 
-            (vQzjgid != null ? vQzjgid.equals(that.vQzjgid) : that.vQzjgid == null)  && 
-            (vQzjgmc != null ? vQzjgmc.equals(that.vQzjgmc) : that.vQzjgmc == null)  && 
-            (depId != null ? depId.equals(that.depId) : that.depId == null)  && 
-            (depName != null ? depName.equals(that.depName) : that.depName == null)  && 
-            enabled == that.enabled  && 
-            accountNonExpired == that.accountNonExpired  && 
-            accountNonLocked == that.accountNonLocked  && 
-            credentialsNonExpired == that.credentialsNonExpired ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysUsersEntity)) return false;
+        SysUsersEntity that = (SysUsersEntity) object;
+        return Objects.equals(getSysUsersId(), that.getSysUsersId()) &&
+            Objects.equals(getUsername(), that.getUsername()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getPassword(), that.getPassword()) &&
+            Objects.equals(getDtCreate(), that.getDtCreate()) &&
+            Objects.equals(getLastLogin(), that.getLastLogin()) &&
+            Objects.equals(getDeadline(), that.getDeadline()) &&
+            Objects.equals(getLoginIp(), that.getLoginIp()) &&
+            Objects.equals(getVQzjgid(), that.getVQzjgid()) &&
+            Objects.equals(getVQzjgmc(), that.getVQzjgmc()) &&
+            Objects.equals(getDepId(), that.getDepId()) &&
+            Objects.equals(getDepName(), that.getDepName()) &&
+            Objects.equals(getEnabled(), that.getEnabled()) &&
+            Objects.equals(getAccountNonExpired(), that.getAccountNonExpired()) &&
+            Objects.equals(getAccountNonLocked(), that.getAccountNonLocked()) &&
+            Objects.equals(getCredentialsNonExpired(), that.getCredentialsNonExpired());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysUsersId() != null ? getSysUsersId().hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (getDtCreate() != null ? getDtCreate().hashCode() : 0);
-        result = 31 * result + (getLastLogin() != null ? getLastLogin().hashCode() : 0);
-        result = 31 * result + (getDeadline() != null ? getDeadline().hashCode() : 0);
-        result = 31 * result + (loginIp != null ? loginIp.hashCode() : 0);
-        result = 31 * result + (vQzjgid != null ? vQzjgid.hashCode() : 0);
-        result = 31 * result + (vQzjgmc != null ? vQzjgmc.hashCode() : 0);
-        result = 31 * result + (depId != null ? depId.hashCode() : 0);
-        result = 31 * result + (depName != null ? depName.hashCode() : 0);
-        result = 31 * result + (getEnabled() != null && enabled ? 1 : 0);
-        result = 31 * result + (getAccountNonExpired() != null && accountNonExpired ? 1 : 0);
-        result = 31 * result + (getAccountNonLocked() != null && accountNonLocked ? 1 : 0);
-        result = 31 * result + (getCredentialsNonExpired() != null && credentialsNonExpired ? 1 : 0);
-        return result;
+        return Objects.hash(getSysUsersId(), getUsername(), getName(), getPassword(), getDtCreate(), getLastLogin(), getDeadline(), getLoginIp(), getVQzjgid(), getVQzjgmc(), getDepId(), getDepName(), getEnabled(), getAccountNonExpired(), getAccountNonLocked(), getCredentialsNonExpired());
     }
 
     @Override

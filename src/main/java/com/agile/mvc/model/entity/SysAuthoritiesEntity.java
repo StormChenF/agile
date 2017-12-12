@@ -128,35 +128,23 @@ public class SysAuthoritiesEntity implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SysAuthoritiesEntity that = (SysAuthoritiesEntity) o;
-
-        return 
-            Objects.equals(sysAuthorityId, that.sysAuthorityId)  && 
-            (authorityMark != null ? authorityMark.equals(that.authorityMark) : that.authorityMark == null)  && 
-            (authorityName != null ? authorityName.equals(that.authorityName) : that.authorityName == null)  && 
-            (authorityDesc != null ? authorityDesc.equals(that.authorityDesc) : that.authorityDesc == null)  && 
-            (message != null ? message.equals(that.message) : that.message == null)  && 
-            enable == that.enable  && 
-            issys == that.issys  && 
-            (moduleId != null ? moduleId.equals(that.moduleId) : that.moduleId == null) ;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof SysAuthoritiesEntity)) return false;
+        SysAuthoritiesEntity that = (SysAuthoritiesEntity) object;
+        return Objects.equals(getSysAuthorityId(), that.getSysAuthorityId()) &&
+            Objects.equals(getAuthorityMark(), that.getAuthorityMark()) &&
+            Objects.equals(getAuthorityName(), that.getAuthorityName()) &&
+            Objects.equals(getAuthorityDesc(), that.getAuthorityDesc()) &&
+            Objects.equals(getMessage(), that.getMessage()) &&
+            Objects.equals(getEnable(), that.getEnable()) &&
+            Objects.equals(getIssys(), that.getIssys()) &&
+            Objects.equals(getModuleId(), that.getModuleId());
     }
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 31 * result + (getSysAuthorityId() != null ? getSysAuthorityId().hashCode() : 0);
-        result = 31 * result + (authorityMark != null ? authorityMark.hashCode() : 0);
-        result = 31 * result + (authorityName != null ? authorityName.hashCode() : 0);
-        result = 31 * result + (authorityDesc != null ? authorityDesc.hashCode() : 0);
-        result = 31 * result + (message != null ? message.hashCode() : 0);
-        result = 31 * result + (getEnable() != null && enable ? 1 : 0);
-        result = 31 * result + (getIssys() != null && issys ? 1 : 0);
-        result = 31 * result + (moduleId != null ? moduleId.hashCode() : 0);
-        return result;
+        return Objects.hash(getSysAuthorityId(), getAuthorityMark(), getAuthorityName(), getAuthorityDesc(), getMessage(), getEnable(), getIssys(), getModuleId());
     }
 
     @Override
