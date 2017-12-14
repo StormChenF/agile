@@ -41,7 +41,7 @@ public class LogTableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_table_id" )
+    @Column(name = "log_table_id" , nullable = false )
     public Integer getLogTableId() {
         return logTableId;
     }
@@ -51,7 +51,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "log_main_id" )
+    @Column(name = "log_main_id" , nullable = false )
     public int getLogMainId() {
         return logMainId;
     }
@@ -61,7 +61,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "table_schema" )
+    @Column(name = "table_schema" , nullable = false )
     public String getTableSchema() {
         return tableSchema;
     }
@@ -71,7 +71,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "table_name" )
+    @Column(name = "table_name" , nullable = false )
     public String getTableName() {
         return tableName;
     }
@@ -81,7 +81,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "operation_type" )
+    @Column(name = "operation_type" , nullable = false )
     public String getOperationType() {
         return operationType;
     }
@@ -91,7 +91,7 @@ public class LogTableEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "operation_order" )
+    @Column(name = "operation_order" , nullable = false )
     public int getOperationOrder() {
         return operationOrder;
     }

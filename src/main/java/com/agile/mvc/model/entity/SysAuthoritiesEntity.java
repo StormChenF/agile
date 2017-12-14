@@ -47,7 +47,7 @@ public class SysAuthoritiesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_authority_id" )
+    @Column(name = "sys_authority_id" , nullable = false )
     public Integer getSysAuthorityId() {
         return sysAuthorityId;
     }
@@ -57,7 +57,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "authority_mark" , nullable = false )
+    @Column(name = "authority_mark" )
     public String getAuthorityMark() {
         return authorityMark;
     }
@@ -67,7 +67,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "authority_name" )
+    @Column(name = "authority_name" , nullable = false )
     public String getAuthorityName() {
         return authorityName;
     }
@@ -77,7 +77,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "authority_desc" , nullable = false )
+    @Column(name = "authority_desc" )
     public String getAuthorityDesc() {
         return authorityDesc;
     }
@@ -87,7 +87,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "message" , nullable = false )
+    @Column(name = "message" )
     public String getMessage() {
         return message;
     }
@@ -97,7 +97,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "enable" , nullable = false )
+    @Column(name = "enable" )
     public Boolean getEnable() {
         return enable;
     }
@@ -107,7 +107,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "issys" , nullable = false )
+    @Column(name = "issys" )
     public Boolean getIssys() {
         return issys;
     }
@@ -117,7 +117,7 @@ public class SysAuthoritiesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "module_id" , nullable = false )
+    @Column(name = "module_id" )
     public String getModuleId() {
         return moduleId;
     }

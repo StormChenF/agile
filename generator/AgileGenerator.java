@@ -96,7 +96,7 @@ public class AgileGenerator {
                     param.put("digits", columnsData.getString("DECIMAL_DIGITS"));
 
                     //是否可为空
-                    param.put("nullable", "0".equals(columnsData.getString("NULLABLE")) ? "true" : "false");
+                    param.put("nullable", "0".equals(columnsData.getString("NULLABLE")) ? "false" : "true");
 
                     //字段默认值
                     param.put("columnDef", columnsData.getString("COLUMN_DEF"));

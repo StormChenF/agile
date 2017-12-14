@@ -69,6 +69,25 @@ public class Dao {
     }
 
     /**
+     * 保存
+     * @param list ORM对象列表
+     */
+    public <T> boolean save(Iterable<T> list){
+        boolean isTrue = false;
+        Iterator<T> iterator = list.iterator();
+        if(iterator.hasNext()){
+            T obj = iterator.next();
+            try {
+                getRepository(obj.getClass()).saveAll(list);
+                isTrue = true;
+            } catch (NoSuchIDException e) {
+                e.printStackTrace();
+            }
+        }
+        return isTrue;
+    }
+
+    /**
      * 保存并刷新
      */
     @SuppressWarnings("unchecked")
@@ -98,7 +117,7 @@ public class Dao {
      * @param list 要保存的ORM对象
      */
     @SuppressWarnings("unchecked")
-    public <T> List<T> save(Iterable<T> list){
+    public <T> List<T> saveAndReturn(Iterable<T> list){
         Iterator<T> iterator = list.iterator();
         if(iterator.hasNext()){
             T obj = iterator.next();

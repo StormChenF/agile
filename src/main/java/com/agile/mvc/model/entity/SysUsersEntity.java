@@ -74,7 +74,7 @@ public class SysUsersEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_users_id" )
+    @Column(name = "sys_users_id" , nullable = false )
     public Integer getSysUsersId() {
         return sysUsersId;
     }
@@ -84,7 +84,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "username" )
+    @Column(name = "username" , nullable = false )
     public String getUsername() {
         return username;
     }
@@ -94,7 +94,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "name" , nullable = false )
+    @Column(name = "name" )
     public String getName() {
         return name;
     }
@@ -104,7 +104,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "password" )
+    @Column(name = "password" , nullable = false )
     public String getPassword() {
         return password;
     }
@@ -114,7 +114,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "dt_create" , nullable = false )
+    @Column(name = "dt_create" )
     public Date getDtCreate() {
         return dtCreate;
     }
@@ -124,7 +124,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "last_login" , nullable = false )
+    @Column(name = "last_login" )
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -134,7 +134,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "deadline" , nullable = false )
+    @Column(name = "deadline" )
     public Date getDeadline() {
         return deadline;
     }
@@ -144,7 +144,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "login_ip" , nullable = false )
+    @Column(name = "login_ip" )
     public String getLoginIp() {
         return loginIp;
     }
@@ -154,7 +154,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "v_qzjgid" , nullable = false )
+    @Column(name = "v_qzjgid" )
     public String getVQzjgid() {
         return vQzjgid;
     }
@@ -164,7 +164,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "v_qzjgmc" , nullable = false )
+    @Column(name = "v_qzjgmc" )
     public String getVQzjgmc() {
         return vQzjgmc;
     }
@@ -174,7 +174,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "dep_id" , nullable = false )
+    @Column(name = "dep_id" )
     public String getDepId() {
         return depId;
     }
@@ -184,7 +184,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "dep_name" , nullable = false )
+    @Column(name = "dep_name" )
     public String getDepName() {
         return depName;
     }
@@ -194,7 +194,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "enabled" , nullable = false )
+    @Column(name = "enabled" )
     public Boolean getEnabled() {
         return enabled;
     }
@@ -204,7 +204,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "account_non_expired" , nullable = false )
+    @Column(name = "account_non_expired" )
     public Boolean getAccountNonExpired() {
         return accountNonExpired;
     }
@@ -214,7 +214,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "account_non_locked" , nullable = false )
+    @Column(name = "account_non_locked" )
     public Boolean getAccountNonLocked() {
         return accountNonLocked;
     }
@@ -224,7 +224,7 @@ public class SysUsersEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "credentials_non_expired" , nullable = false )
+    @Column(name = "credentials_non_expired" )
     public Boolean getCredentialsNonExpired() {
         return credentialsNonExpired;
     }

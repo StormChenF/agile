@@ -8,55 +8,55 @@ import java.util.Objects;
  * Created by 佟盟
  */
 @Entity
-@Table(name = "sys_task_detail",  catalog = "agile_db")
-public class SysTaskDetailEntity implements Serializable {
+@Table(name = "sys_task_target",  catalog = "agile_db")
+public class SysTaskTargetEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //主键
-    private Integer sysTaskDetailId;
-    //定时任务标志
-    private int sysTaskId;
-    //目标方法包路径
+    //唯一标识
+    private Integer sysTaskTargetId;
+    //方法含义名
+    private String name;
+    //包名
     private String targetPackage;
-    //目标方法类名
+    //类名
     private String targetClass;
-    //目标方法名
+    //方法名
     private String targetMethod;
-    //优先级
-    private String order;
+    //备注
+    private String remarks;
 
     //无参构造器
-    public SysTaskDetailEntity(){}
+    public SysTaskTargetEntity(){}
 
     //有参构造器
-    public SysTaskDetailEntity(Integer sysTaskDetailId,int sysTaskId,String targetPackage,String targetClass,String targetMethod,String order){
-        this.sysTaskDetailId = sysTaskDetailId;
-        this.sysTaskId = sysTaskId;
+    public SysTaskTargetEntity(Integer sysTaskTargetId,String name,String targetPackage,String targetClass,String targetMethod,String remarks){
+        this.sysTaskTargetId = sysTaskTargetId;
+        this.name = name;
         this.targetPackage = targetPackage;
         this.targetClass = targetClass;
         this.targetMethod = targetMethod;
-        this.order = order;
+        this.remarks = remarks;
     }
 
     @Id
-    @Column(name = "sys_task_detail_id" )
-    public Integer getSysTaskDetailId() {
-        return sysTaskDetailId;
+    @Column(name = "sys_task_target_id" , nullable = false )
+    public Integer getSysTaskTargetId() {
+        return sysTaskTargetId;
     }
 
-    public void setSysTaskDetailId(int sysTaskDetailId) {
-        this.sysTaskDetailId = sysTaskDetailId;
+    public void setSysTaskTargetId(int sysTaskTargetId) {
+        this.sysTaskTargetId = sysTaskTargetId;
     }
 
     @Basic
-    @Column(name = "sys_task_id" , nullable = false )
-    public int getSysTaskId() {
-        return sysTaskId;
+    @Column(name = "name" , nullable = false )
+    public String getName() {
+        return name;
     }
 
-    public void setSysTaskId(int sysTaskId) {
-        this.sysTaskId = sysTaskId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -90,43 +90,43 @@ public class SysTaskDetailEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "order" , nullable = false )
-    public String getOrder() {
-        return order;
+    @Column(name = "remarks" )
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (!(object instanceof SysTaskDetailEntity)) return false;
-        SysTaskDetailEntity that = (SysTaskDetailEntity) object;
-        return Objects.equals(getSysTaskDetailId(), that.getSysTaskDetailId()) &&
-            Objects.equals(getSysTaskId(), that.getSysTaskId()) &&
+        if (!(object instanceof SysTaskTargetEntity)) return false;
+        SysTaskTargetEntity that = (SysTaskTargetEntity) object;
+        return Objects.equals(getSysTaskTargetId(), that.getSysTaskTargetId()) &&
+            Objects.equals(getName(), that.getName()) &&
             Objects.equals(getTargetPackage(), that.getTargetPackage()) &&
             Objects.equals(getTargetClass(), that.getTargetClass()) &&
             Objects.equals(getTargetMethod(), that.getTargetMethod()) &&
-            Objects.equals(getOrder(), that.getOrder());
+            Objects.equals(getRemarks(), that.getRemarks());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSysTaskDetailId(), getSysTaskId(), getTargetPackage(), getTargetClass(), getTargetMethod(), getOrder());
+        return Objects.hash(getSysTaskTargetId(), getName(), getTargetPackage(), getTargetClass(), getTargetMethod(), getRemarks());
     }
 
     @Override
     public String toString() {
-        return "SysTaskDetailEntity{" +
-        "sysTaskDetailId=" + sysTaskDetailId +
-        ",sysTaskId=" + sysTaskId +
+        return "SysTaskTargetEntity{" +
+        "sysTaskTargetId=" + sysTaskTargetId +
+        ",name='" + name + '\'' +
         ",targetPackage='" + targetPackage + '\'' +
         ",targetClass='" + targetClass + '\'' +
         ",targetMethod='" + targetMethod + '\'' +
-        ",order='" + order + '\'' +
+        ",remarks='" + remarks + '\'' +
         '}';
     }
 }

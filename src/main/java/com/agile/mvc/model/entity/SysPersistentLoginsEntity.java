@@ -39,7 +39,7 @@ public class SysPersistentLoginsEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_persistent_logins_id" )
+    @Column(name = "sys_persistent_logins_id" , nullable = false )
     public Integer getSysPersistentLoginsId() {
         return sysPersistentLoginsId;
     }
@@ -49,7 +49,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "username" , nullable = false )
+    @Column(name = "username" )
     public String getUsername() {
         return username;
     }
@@ -59,7 +59,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "series" )
+    @Column(name = "series" , nullable = false )
     public String getSeries() {
         return series;
     }
@@ -69,7 +69,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "token" , nullable = false )
+    @Column(name = "token" )
     public String getToken() {
         return token;
     }
@@ -79,7 +79,7 @@ public class SysPersistentLoginsEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "last_used" )
+    @Column(name = "last_used" , nullable = false )
     public Timestamp getLastUsed() {
         return lastUsed;
     }

@@ -44,7 +44,7 @@ public class LogValueEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "log_value_id" )
+    @Column(name = "log_value_id" , nullable = false )
     public Integer getLogValueId() {
         return logValueId;
     }
@@ -54,7 +54,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "log_table_id" )
+    @Column(name = "log_table_id" , nullable = false )
     public int getLogTableId() {
         return logTableId;
     }
@@ -64,7 +64,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_name" )
+    @Column(name = "column_name" , nullable = false )
     public String getColumnName() {
         return columnName;
     }
@@ -74,7 +74,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_type" )
+    @Column(name = "column_type" , nullable = false )
     public String getColumnType() {
         return columnType;
     }
@@ -84,7 +84,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "new_value" , nullable = false )
+    @Column(name = "new_value" )
     public String getNewValue() {
         return newValue;
     }
@@ -94,7 +94,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "old_value" , nullable = false )
+    @Column(name = "old_value" )
     public String getOldValue() {
         return oldValue;
     }
@@ -104,7 +104,7 @@ public class LogValueEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "column_info" , nullable = false )
+    @Column(name = "column_info" )
     public String getColumnInfo() {
         return columnInfo;
     }

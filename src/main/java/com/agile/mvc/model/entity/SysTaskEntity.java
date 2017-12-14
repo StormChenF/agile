@@ -46,7 +46,7 @@ public class SysTaskEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_task_id" )
+    @Column(name = "sys_task_id" , nullable = false )
     public Integer getSysTaskId() {
         return sysTaskId;
     }
@@ -56,7 +56,7 @@ public class SysTaskEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "name" , nullable = false )
+    @Column(name = "name" )
     public String getName() {
         return name;
     }
@@ -66,7 +66,7 @@ public class SysTaskEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "state" , nullable = false )
+    @Column(name = "state" )
     public Boolean getState() {
         return state;
     }
@@ -76,7 +76,7 @@ public class SysTaskEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "cron" , nullable = false )
+    @Column(name = "cron" )
     public String getCron() {
         return cron;
     }
@@ -86,7 +86,7 @@ public class SysTaskEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "sync" , nullable = false )
+    @Column(name = "sync" )
     public Boolean getSync() {
         return sync;
     }
@@ -96,7 +96,7 @@ public class SysTaskEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "update_time" , nullable = false )
+    @Column(name = "update_time" )
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -106,7 +106,7 @@ public class SysTaskEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "create_time" , nullable = false )
+    @Column(name = "create_time" )
     public Date getCreateTime() {
         return createTime;
     }

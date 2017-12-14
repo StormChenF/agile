@@ -38,7 +38,7 @@ public class DictionaryDataEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "code" )
+    @Column(name = "code" , nullable = false )
     public Integer getCode() {
         return code;
     }
@@ -48,7 +48,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "dic_code" , nullable = false )
+    @Column(name = "dic_code" )
     public String getDicCode() {
         return dicCode;
     }
@@ -58,7 +58,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "name" )
+    @Column(name = "name" , nullable = false )
     public String getName() {
         return name;
     }
@@ -68,7 +68,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "value" )
+    @Column(name = "value" , nullable = false )
     public String getValue() {
         return value;
     }
@@ -78,7 +78,7 @@ public class DictionaryDataEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_fixed" )
+    @Column(name = "is_fixed" , nullable = false )
     public Boolean getIsFixed() {
         return isFixed;
     }

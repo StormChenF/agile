@@ -32,7 +32,7 @@ public class SysBtUsersRolesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_bt_users_roles_id" )
+    @Column(name = "sys_bt_users_roles_id" , nullable = false )
     public Integer getSysBtUsersRolesId() {
         return sysBtUsersRolesId;
     }
@@ -42,7 +42,7 @@ public class SysBtUsersRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "role_id" )
+    @Column(name = "role_id" , nullable = false )
     public int getRoleId() {
         return roleId;
     }
@@ -52,7 +52,7 @@ public class SysBtUsersRolesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "user_id" )
+    @Column(name = "user_id" , nullable = false )
     public int getUserId() {
         return userId;
     }

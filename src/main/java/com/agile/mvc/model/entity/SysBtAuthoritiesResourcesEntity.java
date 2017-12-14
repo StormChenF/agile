@@ -32,7 +32,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_bt_authorities_resources_id" )
+    @Column(name = "sys_bt_authorities_resources_id" , nullable = false )
     public Integer getSysBtAuthoritiesResourcesId() {
         return sysBtAuthoritiesResourcesId;
     }
@@ -42,7 +42,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "resource_id" )
+    @Column(name = "resource_id" , nullable = false )
     public int getResourceId() {
         return resourceId;
     }
@@ -52,7 +52,7 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "authority_id" )
+    @Column(name = "authority_id" , nullable = false )
     public int getAuthorityId() {
         return authorityId;
     }

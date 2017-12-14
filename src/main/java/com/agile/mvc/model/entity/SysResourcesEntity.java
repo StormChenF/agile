@@ -50,7 +50,7 @@ public class SysResourcesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "sys_resources_id" )
+    @Column(name = "sys_resources_id" , nullable = false )
     public Integer getSysResourcesId() {
         return sysResourcesId;
     }
@@ -60,7 +60,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "resource_type" , nullable = false )
+    @Column(name = "resource_type" )
     public String getResourceType() {
         return resourceType;
     }
@@ -70,7 +70,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "resource_name" , nullable = false )
+    @Column(name = "resource_name" )
     public String getResourceName() {
         return resourceName;
     }
@@ -80,7 +80,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "resource_desc" , nullable = false )
+    @Column(name = "resource_desc" )
     public String getResourceDesc() {
         return resourceDesc;
     }
@@ -90,7 +90,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "resource_path" , nullable = false )
+    @Column(name = "resource_path" )
     public String getResourcePath() {
         return resourcePath;
     }
@@ -100,7 +100,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "priority" , nullable = false )
+    @Column(name = "priority" )
     public String getPriority() {
         return priority;
     }
@@ -110,7 +110,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "enable" , nullable = false )
+    @Column(name = "enable" )
     public Boolean getEnable() {
         return enable;
     }
@@ -120,7 +120,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "issys" , nullable = false )
+    @Column(name = "issys" )
     public Boolean getIssys() {
         return issys;
     }
@@ -130,7 +130,7 @@ public class SysResourcesEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "module_id" , nullable = false )
+    @Column(name = "module_id" )
     public int getModuleId() {
         return moduleId;
     }

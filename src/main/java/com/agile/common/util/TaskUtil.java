@@ -4,13 +4,12 @@ import com.agile.common.base.Future;
 import com.agile.common.base.TaskInfo;
 import com.agile.common.config.TaskConfig;
 import com.agile.mvc.model.dao.Dao;
-import com.agile.mvc.model.entity.SysTaskDetailEntity;
 import com.agile.mvc.model.entity.SysTaskEntity;
+import com.agile.mvc.model.entity.SysTaskTargetEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
@@ -88,51 +87,19 @@ public class TaskUtil {
     /**
      * 新增定时任务
      */
-    public static boolean save(SysTaskEntity sysTaskEntity, List<SysTaskDetailEntity> sysTaskDetailEntityList){
-        try {
-            sysTaskEntity = taskUtil.dao.saveAndReturn(sysTaskEntity);
-            for (SysTaskDetailEntity entity:sysTaskDetailEntityList) {
-                entity.setSysTaskId(sysTaskEntity.getSysTaskId());
-            }
-            taskUtil.taskConfig.addConfigureTasks(sysTaskEntity,taskUtil.dao.save(sysTaskDetailEntityList));
-            return startTask(sysTaskEntity.getSysTaskId().toString());
-        }catch (Exception e){
+    public static boolean update(SysTaskEntity sysTaskEntity){
+        if(!sysTaskEntity.getState()){
+            stopTask(sysTaskEntity.getSysTaskId().toString());
+        };
+        //获取定时任务详情列表
+        List<SysTaskTargetEntity> sysTaskTargetEntityList = taskUtil.dao.findAll("select a.* from sys_task_target a left join sys_bt_task_target b on b.sys_task_target_id = a.sys_task_target_id where b.sys_task_id = ? order by b.order", SysTaskTargetEntity.class, sysTaskEntity.getSysTaskId());
+
+        if(ObjectUtil.isEmpty(sysTaskTargetEntityList)){
             return false;
         }
-    }
 
-    /**
-     * 删除定时任务
-     */
-    public static boolean delete(String[] ids){
-        try {
-            for (String id:ids) {
-                SysTaskEntity entity = taskUtil.dao.findOne(SysTaskEntity.class, id);
-                TaskUtil.stopTask(entity.getSysTaskId().toString());
-                taskUtil.taskConfig.removeConfigureTasks(entity.getName());
-                List<SysTaskDetailEntity> sysTaskDetailEntityList = taskUtil.dao.findAll("select * from sys_task_detail where sys_task_id = ?", SysTaskDetailEntity.class, entity.getSysTaskId());
-                taskUtil.dao.deleteInBatch(sysTaskDetailEntityList);
-                taskUtil.dao.delete(entity);
-            }
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
+        taskUtil.taskConfig.addConfigureTasks(sysTaskEntity,sysTaskTargetEntityList);
+        return changeTask(sysTaskEntity.getSysTaskId().toString());
 
-    /**
-     * 修改
-     */
-    public static boolean edit(SysTaskEntity sysTaskEntity, List<SysTaskDetailEntity> sysTaskDetailEntityList){
-     try {
-         sysTaskEntity = taskUtil.dao.saveAndReturn(sysTaskEntity);
-         for (SysTaskDetailEntity entity:sysTaskDetailEntityList) {
-             entity.setSysTaskId(sysTaskEntity.getSysTaskId());
-         }
-         taskUtil.taskConfig.addConfigureTasks(sysTaskEntity,taskUtil.dao.save(sysTaskDetailEntityList));
-         return changeTask(sysTaskEntity.getSysTaskId().toString());
-     }catch (Exception e){
-         return false;
-     }
     }
 }

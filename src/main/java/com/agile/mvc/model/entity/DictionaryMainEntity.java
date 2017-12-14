@@ -32,7 +32,7 @@ public class DictionaryMainEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "code" )
+    @Column(name = "code" , nullable = false )
     public Integer getCode() {
         return code;
     }
@@ -42,7 +42,7 @@ public class DictionaryMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "name" )
+    @Column(name = "name" , nullable = false )
     public String getName() {
         return name;
     }
@@ -52,7 +52,7 @@ public class DictionaryMainEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_constant" )
+    @Column(name = "is_constant" , nullable = false )
     public Boolean getIsConstant() {
         return isConstant;
     }

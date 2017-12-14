@@ -1,23 +1,27 @@
 package com.agile.common.config;
 
+import com.agile.common.annotation.TaskTarget;
 import com.agile.common.base.TaskInfo;
 import com.agile.common.base.TaskTrigger;
 import com.agile.common.server.RedisService;
-import com.agile.common.util.CollectionsUtil;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import com.agile.mvc.model.dao.Dao;
-import com.agile.mvc.model.entity.SysTaskDetailEntity;
 import com.agile.mvc.model.entity.SysTaskEntity;
+import com.agile.mvc.model.entity.SysTaskTargetEntity;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ReflectionUtils;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,7 +31,7 @@ import java.util.*;
  * Created by 佟盟 on 2017/11/30
  */
 @Component
-public class TaskConfig implements SchedulingConfigurer {
+public class TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
     @Autowired
     private Dao dao;
     @Autowired
@@ -43,6 +47,26 @@ public class TaskConfig implements SchedulingConfigurer {
         return taskInfoMap;
     }
 
+    @Override
+    @Transactional
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        Method[] methods =  ReflectionUtils.getUniqueDeclaredMethods(bean.getClass());
+        int j = 1;
+        for(int i = 0 ; i < methods.length;i++){
+            TaskTarget taskTarget = AnnotationUtils.findAnnotation(methods[i],TaskTarget.class);
+            if(!ObjectUtil.isEmpty(taskTarget)){
+                SysTaskTargetEntity sysTaskTargetEntity = new SysTaskTargetEntity();
+                sysTaskTargetEntity.setSysTaskTargetId(j++);
+                sysTaskTargetEntity.setTargetPackage(bean.getClass().getPackage().getName());
+                sysTaskTargetEntity.setTargetClass(bean.getClass().getSimpleName());
+                sysTaskTargetEntity.setTargetMethod(methods[i].getName());
+                sysTaskTargetEntity.setName(ObjectUtil.isEmpty(taskTarget.name())?bean.getClass().getName()+"."+methods[i].getName():taskTarget.name());
+                dao.update(sysTaskTargetEntity);
+            }
+        }
+        return bean;
+    }
+
     /**
      * 任务对象
      */
@@ -51,12 +75,12 @@ public class TaskConfig implements SchedulingConfigurer {
 
         private String taskName;
         private TaskTrigger trigger;
-        private List<SysTaskDetailEntity> sysTaskDetailEntityList;
+        private List<SysTaskTargetEntity> sysTaskTargetEntityList;
 
-        Job(String taskName, TaskTrigger trigger, List<SysTaskDetailEntity> sysTaskDetailEntityList) {
+        Job(String taskName, TaskTrigger trigger, List<SysTaskTargetEntity> sysTaskTargetEntityList) {
             this.taskName = taskName;
             this.trigger = trigger;
-            this.sysTaskDetailEntityList = sysTaskDetailEntityList;
+            this.sysTaskTargetEntityList = sysTaskTargetEntityList;
         }
 
         @Override
@@ -69,10 +93,10 @@ public class TaskConfig implements SchedulingConfigurer {
 
                     //如果抢到同步锁，设置锁定时间并直接运行
                     if (setNxLock(this.taskName, (int) nextTime)) {
-                        invoke(sysTaskDetailEntityList);
+                        invoke(sysTaskTargetEntityList);
                     }
                 }else{
-                    invoke(sysTaskDetailEntityList);
+                    invoke(sysTaskTargetEntityList);
                 }
             }
         }
@@ -80,18 +104,18 @@ public class TaskConfig implements SchedulingConfigurer {
 
     /**
      * 逐个执行定时任务目标方法
-     * @param sysTaskDetailEntityList 定时任务详情数据集
+     * @param sysTaskTargetEntityList 定时任务详情数据集
      */
-    private void invoke(List<SysTaskDetailEntity> sysTaskDetailEntityList){
+    private void invoke(List<SysTaskTargetEntity> sysTaskTargetEntityList){
         try {
-            CollectionsUtil.sort(sysTaskDetailEntityList,"order");
             //逐个执行定时任务目标方法
-            for(int i=0;i<sysTaskDetailEntityList.size();i++){
-                SysTaskDetailEntity sysTaskDetailEntity = sysTaskDetailEntityList.get(i);
-                String className = sysTaskDetailEntity.getTargetPackage() + "." + sysTaskDetailEntity.getTargetClass();
+            for(int i=0;i<sysTaskTargetEntityList.size();i++){
+                SysTaskTargetEntity sysTaskTargetEntity = sysTaskTargetEntityList.get(i);
+                if(ObjectUtil.isEmpty(sysTaskTargetEntity))return;
+                String className = sysTaskTargetEntity.getTargetPackage() + "." + sysTaskTargetEntity.getTargetClass();
                 Class<?> clazz = Class.forName(className);
                 Object targetBaen = FactoryUtil.getBean(clazz);
-                Method taretMethod = clazz.getDeclaredMethod(sysTaskDetailEntity.getTargetMethod());
+                Method taretMethod = clazz.getDeclaredMethod(sysTaskTargetEntity.getTargetMethod());
                 taretMethod.invoke(targetBaen);
             }
         } catch (IllegalAccessException | InvocationTargetException | ClassNotFoundException | NoSuchMethodException e) {
@@ -114,9 +138,9 @@ public class TaskConfig implements SchedulingConfigurer {
             SysTaskEntity sysTaskEntity = list.get(i);
 
             //获取定时任务详情列表
-            List<SysTaskDetailEntity> sysTaskDetailEntityList = dao.findAll("select * from sys_task_detail where sys_task_id = ?", SysTaskDetailEntity.class, sysTaskEntity.getSysTaskId());
+            List<SysTaskTargetEntity> sysTaskTargetEntityList = dao.findAll("select a.* from sys_task_target a left join sys_bt_task_target b on b.sys_task_target_id = a.sys_task_target_id where b.sys_task_id = ? order by b.order", SysTaskTargetEntity.class, sysTaskEntity.getSysTaskId());
 
-            if(ObjectUtil.isEmpty(sysTaskDetailEntityList)){
+            if(ObjectUtil.isEmpty(sysTaskTargetEntityList)){
                 continue;
             }
 
@@ -124,7 +148,7 @@ public class TaskConfig implements SchedulingConfigurer {
             TaskTrigger trigger = new TaskTrigger(sysTaskEntity.getCron(),sysTaskEntity.getSync());
 
             //新建任务
-            Job job = new Job(sysTaskEntity.getName(), trigger, sysTaskDetailEntityList);
+            Job job = new Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
 
             //定时任务装入缓冲区
             taskInfoMap.put(sysTaskEntity.getSysTaskId().toString(), new TaskInfo(sysTaskEntity,trigger,job));
@@ -138,15 +162,15 @@ public class TaskConfig implements SchedulingConfigurer {
     /**
      * 添加定时任务配置
      */
-    public void addConfigureTasks(SysTaskEntity sysTaskEntity,List<SysTaskDetailEntity> sysTaskDetailEntityList){
-        if(ObjectUtil.isEmpty(sysTaskDetailEntityList)){
+    public void addConfigureTasks(SysTaskEntity sysTaskEntity,List<SysTaskTargetEntity> sysTaskTargetEntityList){
+        if(ObjectUtil.isEmpty(sysTaskTargetEntityList)){
             return;
         }
         //新建定时任务触发器
         TaskTrigger trigger = new TaskTrigger(sysTaskEntity.getCron(),sysTaskEntity.getSync());
 
         //新建任务
-        Job job = new Job(sysTaskEntity.getName(), trigger, sysTaskDetailEntityList);
+        Job job = new Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
 
         //定时任务装入缓冲区
         taskInfoMap.put(sysTaskEntity.getName(), new TaskInfo(sysTaskEntity,trigger,job));
