@@ -20,6 +20,7 @@ public final class RETURN {
     public final static RETURN MADE_DIR_FAIL = new RETURN("000007","文件夹创建失败！");
     public final static RETURN EMPTY_FILE = new RETURN("000008","空文件，上传失败！");
     public final static RETURN EMPTY_FILENAME = new RETURN("000009","空文件名，上传失败！");
+    public final static RETURN ERROR_FORMAT = new RETURN("000010","被禁用的文件格式！");
 
     //登陆类响应状态
     public final static RETURN NO_SIGN_IN = new RETURN("100000","账号尚未登陆！");

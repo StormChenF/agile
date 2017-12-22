@@ -103,14 +103,14 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
         springDispatcherServlet.addMapping("/*");
 
         /*
-          初始化缓存监听
-         */
-        servletContext.addListener(CacheListener.class);
-
-        /*
           内存溢出监听
          */
         servletContext.addListener(IntrospectorCleanupListener.class);
+
+        /*
+          初始化缓存监听
+         */
+        servletContext.addListener(CacheListener.class);
 
         /*
           session监听

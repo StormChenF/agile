@@ -6,9 +6,13 @@ import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
 import com.agile.common.exception.UnlawfulRequestException;
 import com.agile.common.server.ServiceInterface;
+import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.FactoryUtil;
+import com.agile.common.util.FileUtil;
 import com.agile.common.util.StringUtil;
 import org.apache.commons.io.FileUtils;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,10 +36,10 @@ import java.util.*;
  * Created by 佟盟 on 2017/8/22
  */
 @Controller
-public class MainController {
+public class MainController implements EnvironmentAware {
 
     private ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
-
+    private Environment environment;
     /**
      * 非法请求处理器
      */
@@ -162,7 +166,7 @@ public class MainController {
     }
 
     /**
-     * 文件下载
+     * 文件上传
      * @param request  请求对象
      * @param path  文件存储路径
      */
@@ -174,37 +178,40 @@ public class MainController {
 
         //获取所有文件提交的input名
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+
         while (iterator.hasNext()) {
             List<MultipartFile> files = multipartHttpServletRequest.getFiles(iterator.next());
             for (int i = 0 ; i < files.size();i++){
                 MultipartFile file = files.get(i);
                 String fileName = file.getOriginalFilename();
                 HashMap<String,Object> map = new HashMap<>();
-                map.put(Constant.FileAbout.FILE_NAME,fileName);
-                map.put(Constant.FileAbout.FILE_SIZE,file.getSize());
-                map.put(Constant.FileAbout.CONTENT_TYPE,file.getContentType());
+                FileUtil.RETURN fileInfo = new FileUtil.RETURN(fileName, file.getSize(), file.getContentType());
+
+                if(!checkFileFormat((File)file)){
+                    fileInfo.setInfo(RETURN.ERROR_FORMAT);
+                    list.add(map);
+                    continue;
+                }
 
                 //判断文件名
                 if (StringUtil.isEmpty(fileName)) {
-                    map.put(Constant.ResponseAbout.STATE,RETURN.EMPTY_FILENAME.getCode());
-                    map.put(Constant.ResponseAbout.MSG,RETURN.EMPTY_FILENAME.getMsg());
+                    fileInfo.setInfo(RETURN.EMPTY_FILENAME);
                     list.add(map);
                     continue;
                 }
 
                 //判断文件内容为空
                 if (file.isEmpty()) {
-                    map.put(Constant.ResponseAbout.STATE,RETURN.EMPTY_FILE.getCode());
-                    map.put(Constant.ResponseAbout.MSG,RETURN.EMPTY_FILE.getMsg());
+                    fileInfo.setInfo(RETURN.EMPTY_FILE);
                     list.add(map);
                     continue;
                 }
+
                 File newFile = new File(path,fileName);
 
                 //尝试创建文件夹
                 if (!newFile.getParentFile().exists() && !newFile.getParentFile().mkdirs()) {
-                    map.put(Constant.ResponseAbout.STATE,RETURN.MADE_DIR_FAIL.getCode());
-                    map.put(Constant.ResponseAbout.MSG,RETURN.MADE_DIR_FAIL.getMsg());
+                    fileInfo.setInfo(RETURN.MADE_DIR_FAIL);
                     list.add(map);
                     continue;
                 }
@@ -212,17 +219,24 @@ public class MainController {
                 //尝试文件复制
                 try {
                     file.transferTo(newFile);
-                    map.put(Constant.ResponseAbout.STATE,RETURN.UPLOAD_SUCCESS.getCode());
-                    map.put(Constant.ResponseAbout.MSG,RETURN.UPLOAD_SUCCESS.getMsg());
-
+                    fileInfo.setInfo(RETURN.UPLOAD_SUCCESS);
                 }catch (Exception e){
-                    map.put(Constant.ResponseAbout.STATE,RETURN.UPLOAD_ERROR.getCode());
-                    map.put(Constant.ResponseAbout.MSG,RETURN.UPLOAD_ERROR.getMsg());
+                    fileInfo.setInfo(RETURN.UPLOAD_ERROR);
                 }
                 list.add(map);
             }
         }
         this.getService().setOutParam(Constant.FileAbout.UP_LOUD_FILE_INFO,list);
+    }
+
+    /**
+     * 检验文件格式
+     */
+    private boolean checkFileFormat(File file){
+        String format = environment.getProperty("agile.upload.include_format");
+        if(format.isEmpty())return true;
+        String[] formats = format.split(Constant.RegularAbout.COMMA, -1);
+        return ArrayUtil.contains(formats,FileUtil.getFormat(file));
     }
 
     /**
@@ -254,5 +268,10 @@ public class MainController {
 
     private void setService(ServiceInterface service) {
         this.service.set(service);
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

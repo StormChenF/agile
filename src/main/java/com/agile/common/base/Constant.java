@@ -43,6 +43,8 @@ public class Constant {
      */
     public static class RegularAbout {
         public final static String NULL = "";
+        public final static String SPOT = ".";
+        public final static String COMMA = ",";
         public final static String QUESTION_MARK = "?";
         public final static String SLASH = "/";
         public final static String BACKSLASH = "\\";

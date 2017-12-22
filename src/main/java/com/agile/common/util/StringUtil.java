@@ -196,4 +196,23 @@ public final class StringUtil extends StringUtils {
     public static boolean compareTo(String resource,String target){
         return resource.length()>target.length();
     }
+
+
+    /**
+     * 字符数组转16进制字符串
+     */
+    public static String coverToHex(byte[] bytes){
+        StringBuilder result = new StringBuilder();
+        if(ArrayUtil.isEmpty(bytes))return null;
+
+        for (int i = 0; i < bytes.length; i++) {
+            int v = bytes[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                result.append(0);
+            }
+            result.append(hv);
+        }
+        return result.toString().toUpperCase();
+    }
 }

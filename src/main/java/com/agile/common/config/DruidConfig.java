@@ -33,7 +33,9 @@ public class DruidConfig implements EnvironmentAware {
         druidDataSource.setMinEvictableIdleTimeMillis(env.getProperty("agile.druid.min_evictable_idle_time_millis",int.class));
         druidDataSource.setValidationQuery(env.getProperty("agile.druid.validation_query"));
         druidDataSource.setTestWhileIdle(env.getProperty("agile.druid.test_while_idle",boolean.class));
-        druidDataSource.setTestOnReturn(env.getProperty("agile.druid.test_on_borrow",boolean.class));
+        druidDataSource.setTestOnBorrow(env.getProperty("agile.druid.test_on_borrow",boolean.class));
+        druidDataSource.setTestOnReturn(env.getProperty("agile.druid.test_on_return",boolean.class));
+        druidDataSource.setFilters(env.getProperty("agile.druid.filters"));
         druidDataSource.setPoolPreparedStatements(env.getProperty("agile.druid.pool_prepared_statements",boolean.class));
         druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(env.getProperty("agile.druid.max_pool_prepared_statement_per_connection_size",int.class));
         druidDataSource.setFilters(env.getProperty("agile.druid.max_pool_prepared_statement_per_connection_size"));
