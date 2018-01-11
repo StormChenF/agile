@@ -4,11 +4,13 @@ import com.agile.common.config.LoggerFactoryConfig;
 import com.agile.common.filter.CORSFilter;
 import com.agile.common.filter.SecurityCsrfHeaderFilter;
 import com.agile.common.listener.CacheListener;
+import com.agile.common.util.PropertiesUtil;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import org.apache.logging.log4j.core.config.ConfigurationFactory;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -19,6 +21,8 @@ import org.springframework.web.util.WebAppRootListener;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
+import java.io.File;
+import java.net.URL;
 
 /**
  * Created by 佟盟 on 2017/9/27
@@ -81,7 +85,8 @@ public class DispatcherServletInitializer implements WebApplicationInitializer {
           验证码Servlet
          */
         ServletRegistration.Dynamic kaptchaServlet = servletContext.addServlet("VerificationCodeServlet", KaptchaServlet.class);
-        kaptchaServlet.addMapping("/verification");
+        kaptchaServlet.addMapping("/"+PropertiesUtil.getProperty("agile.kaptcha.url"));
+        ;
 
         /*
           DruidServlet

@@ -5,10 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -34,13 +31,26 @@ public class PropertiesUtil {
 
     public PropertiesUtil() {}
 
+    public PropertiesUtil(File file) {
+        try {
+            this.properties = new Properties();
+            InputStream in = new BufferedInputStream(new FileInputStream(file));
+            properties.load(in);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 获取工程配置信息
      * @param key 句柄
      * @return 值
      */
     public static String getProperty(String key){
-        return propertiesUtil.environment.getProperty(key);
+        if(!ObjectUtil.isEmpty(propertiesUtil.environment)){
+            return propertiesUtil.environment.getProperty(key);
+        }
+        return propertiesUtil.properties.getProperty(key);
     }
 
     public static String getProperty(String var1, String var2){
@@ -74,26 +84,9 @@ public class PropertiesUtil {
     public static boolean containsProperty(String var1){
         return propertiesUtil.environment.containsProperty(var1);
     }
-    /**********************************************非静态*********************************************
-     * 构造函数，读取相对路径下的参数文件
-     */
-    public PropertiesUtil(String url) {
-        try {
-            this.properties = new Properties();
-            InputStream in = new BufferedInputStream(new FileInputStream(url));
-            properties.load(in);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * 根据key获取参数文件当中value值
-     * @param key key值
-     * @return value值
-     */
-    public String getPropertyOfNoStatic(String key){
-        return this.properties.getProperty(key);
+    static {
+        File file = new File(PropertiesUtil.class.getResource("/com/agile/configure/agile.properties").getPath());
+        propertiesUtil = new PropertiesUtil(file);
     }
 }

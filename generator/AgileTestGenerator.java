@@ -21,7 +21,6 @@ import java.util.Map;
  */
 public class AgileTestGenerator {
     public static void main(String[] args) throws IOException, TemplateException {
-        PropertiesUtil propertiesUtil = new PropertiesUtil("./test/main/resources/com/agile/configure/agile.properties");
         File directory = new File("./src/main/java/com/agile/mvc/service");
         if (directory.isDirectory()){
             String[] files = directory.list();
@@ -46,10 +45,10 @@ public class AgileTestGenerator {
                         }
                     }
 
-                    String servicePrefix = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_prefix");
-                    String serviceSuffix = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_suffix");
-                    String entityPrefix = propertiesUtil.getPropertyOfNoStatic("agile.generator.entity_prefix");
-                    String entitySuffix = propertiesUtil.getPropertyOfNoStatic("agile.generator.entity_suffix");
+                    String servicePrefix = PropertiesUtil.getProperty("agile.generator.service_prefix");
+                    String serviceSuffix = PropertiesUtil.getProperty("agile.generator.service_suffix");
+                    String entityPrefix = PropertiesUtil.getProperty("agile.generator.entity_prefix");
+                    String entitySuffix = PropertiesUtil.getProperty("agile.generator.entity_suffix");
                     if (serviceName.startsWith(servicePrefix)){
                         entityName = serviceName.replaceFirst(servicePrefix,"");
                     }
