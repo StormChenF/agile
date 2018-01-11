@@ -78,6 +78,8 @@ public class ExceptionHandler implements HandlerExceptionResolver {
             r = RETURN.NO_METHOD;
         }else if (e instanceof UnlawfulRequestException){
             r = RETURN.NO_COMPLETE;
+        }else if (e instanceof NotFoundCacheProxyException){
+            r = RETURN.NOT_FOUND_CACHEPROXY_EXPRESSION;
         }
 
         logger.error(msgStr.toString());

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EhCacheService implements AbstractCacheUtil {
 
-    private final Cache cache = CacheManager.getInstance().getCache("agileCache");
+    private final Cache cache = CacheManager.getCacheManager("agileManager").getCache("agileCache");
 
     /**
      * 设置/更新缓存

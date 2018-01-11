@@ -131,4 +131,54 @@ public class LogMainEntity implements Serializable {
         ",createTime=" + createTime +
         '}';
     }
+
+    private LogMainEntity(Builder builder){
+        this.logMainId = builder.logMainId;
+        this.businessCode = builder.businessCode;
+        this.targetType = builder.targetType;
+        this.targetCode = builder.targetCode;
+        this.userId = builder.userId;
+        this.createTime = builder.createTime;
+    }
+
+    public static class Builder{
+        private Integer logMainId;
+        private String businessCode;
+        private String targetType;
+        private String targetCode;
+        private int userId;
+        private Date createTime;
+
+        public Builder setLogMainId(int logMainId) {
+            this.logMainId = logMainId;
+            return this;
+        }
+        public Builder setBusinessCode(String businessCode) {
+            this.businessCode = businessCode;
+            return this;
+        }
+        public Builder setTargetType(String targetType) {
+            this.targetType = targetType;
+            return this;
+        }
+        public Builder setTargetCode(String targetCode) {
+            this.targetCode = targetCode;
+            return this;
+        }
+        public Builder setUserId(int userId) {
+            this.userId = userId;
+            return this;
+        }
+        public Builder setCreateTime(Date createTime) {
+            this.createTime = createTime;
+            return this;
+        }
+        public LogMainEntity build(){
+            return new LogMainEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

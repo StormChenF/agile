@@ -2,6 +2,7 @@ package com.agile.common.config;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,9 @@ import java.util.Properties;
  * Created by 佟盟 on 2017/10/7
  */
 @Configuration
-public class KaptchaConfig implements EnvironmentAware {
-    private Environment env;
+public class KaptchaConfig {
+    @Autowired
+    private KaptchaConfigProperties kaptchaConfigProperties;
 
     @Bean
     DefaultKaptcha defaultKaptcha(){
@@ -29,19 +31,15 @@ public class KaptchaConfig implements EnvironmentAware {
 
     private Properties properties(){
         Properties properties = new Properties();
-        properties.setProperty("kaptcha.border",env.getProperty("kaptcha.border"));
-        properties.setProperty("kaptcha.border.color",env.getProperty("kaptcha.border.color"));
-        properties.setProperty("kaptcha.textproducer.font.color",env.getProperty("kaptcha.textproducer.font.color"));
-        properties.setProperty("kaptcha.textproducer.font.size",env.getProperty("kaptcha.textproducer.font.size"));
-        properties.setProperty("kaptcha.image.width",env.getProperty("kaptcha.image.width"));
-        properties.setProperty("kaptcha.image.height",env.getProperty("kaptcha.image.height"));
-        properties.setProperty("kaptcha.textproducer.char.length",env.getProperty("kaptcha.textproducer.char.length"));
-        properties.setProperty("kaptcha.textproducer.font.names",env.getProperty("kaptcha.textproducer.font.names"));
+        properties.setProperty("kaptcha.border",kaptchaConfigProperties.getBorder());
+        properties.setProperty("kaptcha.border.color",kaptchaConfigProperties.getBorderColor());
+        properties.setProperty("kaptcha.textproducer.font.color",kaptchaConfigProperties.getTextproducerFontColor());
+        properties.setProperty("kaptcha.textproducer.font.size",kaptchaConfigProperties.getTextproducerFontSize());
+        properties.setProperty("kaptcha.image.width",kaptchaConfigProperties.getImageWidth());
+        properties.setProperty("kaptcha.image.height",kaptchaConfigProperties.getImageHeight());
+        properties.setProperty("kaptcha.textproducer.char.length",kaptchaConfigProperties.getTextproducerCharLength());
+        properties.setProperty("kaptcha.textproducer.font.names",kaptchaConfigProperties.getTextproducerFontNames());
         return properties;
     }
 
-    @Override
-    public void setEnvironment(Environment environment) {
-        env = environment;
-    }
 }

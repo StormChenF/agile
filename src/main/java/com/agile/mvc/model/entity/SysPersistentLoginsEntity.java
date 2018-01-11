@@ -116,4 +116,48 @@ public class SysPersistentLoginsEntity implements Serializable {
         ",lastUsed=" + lastUsed +
         '}';
     }
+
+    private SysPersistentLoginsEntity(Builder builder){
+        this.sysPersistentLoginsId = builder.sysPersistentLoginsId;
+        this.username = builder.username;
+        this.series = builder.series;
+        this.token = builder.token;
+        this.lastUsed = builder.lastUsed;
+    }
+
+    public static class Builder{
+        private Integer sysPersistentLoginsId;
+        private String username;
+        private String series;
+        private String token;
+        private Timestamp lastUsed;
+
+        public Builder setSysPersistentLoginsId(int sysPersistentLoginsId) {
+            this.sysPersistentLoginsId = sysPersistentLoginsId;
+            return this;
+        }
+        public Builder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+        public Builder setSeries(String series) {
+            this.series = series;
+            return this;
+        }
+        public Builder setToken(String token) {
+            this.token = token;
+            return this;
+        }
+        public Builder setLastUsed(Timestamp lastUsed) {
+            this.lastUsed = lastUsed;
+            return this;
+        }
+        public SysPersistentLoginsEntity build(){
+            return new SysPersistentLoginsEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

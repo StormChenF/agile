@@ -20,9 +20,6 @@ public class InitConfig implements InitializingBean {
     @Autowired
     ApplicationContext applicationContext;
 
-    @Autowired
-    ConfigurableListableBeanFactory configurableListableBeanFactory;
-
     @Override
     public void afterPropertiesSet() throws InvocationTargetException, IllegalAccessException {
         String[] beanNames = applicationContext.getBeanDefinitionNames();

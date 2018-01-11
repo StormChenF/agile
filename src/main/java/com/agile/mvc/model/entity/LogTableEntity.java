@@ -130,4 +130,54 @@ public class LogTableEntity implements Serializable {
         ",operationOrder=" + operationOrder +
         '}';
     }
+
+    private LogTableEntity(Builder builder){
+        this.logTableId = builder.logTableId;
+        this.logMainId = builder.logMainId;
+        this.tableSchema = builder.tableSchema;
+        this.tableName = builder.tableName;
+        this.operationType = builder.operationType;
+        this.operationOrder = builder.operationOrder;
+    }
+
+    public static class Builder{
+        private Integer logTableId;
+        private int logMainId;
+        private String tableSchema;
+        private String tableName;
+        private String operationType;
+        private int operationOrder;
+
+        public Builder setLogTableId(int logTableId) {
+            this.logTableId = logTableId;
+            return this;
+        }
+        public Builder setLogMainId(int logMainId) {
+            this.logMainId = logMainId;
+            return this;
+        }
+        public Builder setTableSchema(String tableSchema) {
+            this.tableSchema = tableSchema;
+            return this;
+        }
+        public Builder setTableName(String tableName) {
+            this.tableName = tableName;
+            return this;
+        }
+        public Builder setOperationType(String operationType) {
+            this.operationType = operationType;
+            return this;
+        }
+        public Builder setOperationOrder(int operationOrder) {
+            this.operationOrder = operationOrder;
+            return this;
+        }
+        public LogTableEntity build(){
+            return new LogTableEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

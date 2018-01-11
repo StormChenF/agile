@@ -85,4 +85,36 @@ public class SysBtRolesAuthoritiesEntity implements Serializable {
         ",roleId=" + roleId +
         '}';
     }
+
+    private SysBtRolesAuthoritiesEntity(Builder builder){
+        this.sysBtRolesAuthoritiesId = builder.sysBtRolesAuthoritiesId;
+        this.authorityId = builder.authorityId;
+        this.roleId = builder.roleId;
+    }
+
+    public static class Builder{
+        private Integer sysBtRolesAuthoritiesId;
+        private int authorityId;
+        private int roleId;
+
+        public Builder setSysBtRolesAuthoritiesId(int sysBtRolesAuthoritiesId) {
+            this.sysBtRolesAuthoritiesId = sysBtRolesAuthoritiesId;
+            return this;
+        }
+        public Builder setAuthorityId(int authorityId) {
+            this.authorityId = authorityId;
+            return this;
+        }
+        public Builder setRoleId(int roleId) {
+            this.roleId = roleId;
+            return this;
+        }
+        public SysBtRolesAuthoritiesEntity build(){
+            return new SysBtRolesAuthoritiesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

@@ -283,4 +283,114 @@ public class SysUsersEntity implements Serializable {
         ",credentialsNonExpired=" + credentialsNonExpired +
         '}';
     }
+
+    private SysUsersEntity(Builder builder){
+        this.sysUsersId = builder.sysUsersId;
+        this.username = builder.username;
+        this.name = builder.name;
+        this.password = builder.password;
+        this.dtCreate = builder.dtCreate;
+        this.lastLogin = builder.lastLogin;
+        this.deadline = builder.deadline;
+        this.loginIp = builder.loginIp;
+        this.vQzjgid = builder.vQzjgid;
+        this.vQzjgmc = builder.vQzjgmc;
+        this.depId = builder.depId;
+        this.depName = builder.depName;
+        this.enabled = builder.enabled;
+        this.accountNonExpired = builder.accountNonExpired;
+        this.accountNonLocked = builder.accountNonLocked;
+        this.credentialsNonExpired = builder.credentialsNonExpired;
+    }
+
+    public static class Builder{
+        private Integer sysUsersId;
+        private String username;
+        private String name;
+        private String password;
+        private Date dtCreate;
+        private Date lastLogin;
+        private Date deadline;
+        private String loginIp;
+        private String vQzjgid;
+        private String vQzjgmc;
+        private String depId;
+        private String depName;
+        private Boolean enabled;
+        private Boolean accountNonExpired;
+        private Boolean accountNonLocked;
+        private Boolean credentialsNonExpired;
+
+        public Builder setSysUsersId(int sysUsersId) {
+            this.sysUsersId = sysUsersId;
+            return this;
+        }
+        public Builder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+        public Builder setDtCreate(Date dtCreate) {
+            this.dtCreate = dtCreate;
+            return this;
+        }
+        public Builder setLastLogin(Date lastLogin) {
+            this.lastLogin = lastLogin;
+            return this;
+        }
+        public Builder setDeadline(Date deadline) {
+            this.deadline = deadline;
+            return this;
+        }
+        public Builder setLoginIp(String loginIp) {
+            this.loginIp = loginIp;
+            return this;
+        }
+        public Builder setVQzjgid(String vQzjgid) {
+            this.vQzjgid = vQzjgid;
+            return this;
+        }
+        public Builder setVQzjgmc(String vQzjgmc) {
+            this.vQzjgmc = vQzjgmc;
+            return this;
+        }
+        public Builder setDepId(String depId) {
+            this.depId = depId;
+            return this;
+        }
+        public Builder setDepName(String depName) {
+            this.depName = depName;
+            return this;
+        }
+        public Builder setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+            return this;
+        }
+        public Builder setAccountNonExpired(Boolean accountNonExpired) {
+            this.accountNonExpired = accountNonExpired;
+            return this;
+        }
+        public Builder setAccountNonLocked(Boolean accountNonLocked) {
+            this.accountNonLocked = accountNonLocked;
+            return this;
+        }
+        public Builder setCredentialsNonExpired(Boolean credentialsNonExpired) {
+            this.credentialsNonExpired = credentialsNonExpired;
+            return this;
+        }
+        public SysUsersEntity build(){
+            return new SysUsersEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

@@ -1,58 +1,82 @@
 package com.agile.common.config;
 
-import org.springframework.context.EnvironmentAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.*;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.List;
+
+import static org.springframework.data.redis.cache.RedisCacheConfiguration.defaultCacheConfig;
 
 /**
  * Created by 佟盟 on 2017/10/8
  */
 @Configuration
-public class RedisConfig implements EnvironmentAware {
-    private Environment env;
+public class RedisConfig {
+    @Autowired
+    private RedisConfigProperties properties;
+
+    @Bean
+    RedisConfigProperties redisConfigProperties(){
+        return new RedisConfigProperties();
+    }
 
     @Bean
     JedisPoolConfig redisPool(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxIdle(env.getProperty("agile.redis.max_idle",int.class));
-        jedisPoolConfig.setMinIdle(env.getProperty("agile.redis.min_idle",int.class));
-        jedisPoolConfig.setMaxWaitMillis(env.getProperty("agile.redis.max_wait_millis",int.class));
-        jedisPoolConfig.setTestOnReturn(env.getProperty("agile.redis.test_on_return",boolean.class));
-        jedisPoolConfig.setTestOnBorrow(env.getProperty("agile.redis.test_on_borrow",boolean.class));
+        jedisPoolConfig.setMaxIdle(properties.getMaxIdle());
+        jedisPoolConfig.setMinIdle(properties.getMinIdle());
+        jedisPoolConfig.setMaxWaitMillis(properties.getMaxWaitMillis());
+        jedisPoolConfig.setTestOnReturn(properties.isTestOnReturn());
+        jedisPoolConfig.setTestOnBorrow(properties.isTestOnReturn());
         return jedisPoolConfig;
     }
 
     @Bean
-    JedisConnectionFactory jedisConnectionFactory(){
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        jedisConnectionFactory.setHostName(env.getProperty("agile.redis.host"));
-        jedisConnectionFactory.setPort(env.getProperty("agile.redis.port",int.class));
-        jedisConnectionFactory.setPassword(env.getProperty("agile.redis.pass"));
-        jedisConnectionFactory.setUsePool(true);
-        jedisConnectionFactory.setPoolConfig(redisPool());
-        return jedisConnectionFactory;
+    JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig redisPool){
+        List<String> hosts = properties.getHost();
+        List<Integer> ports = properties.getPort();
+        if(hosts.size()>1){
+            RedisSentinelConfiguration config = new RedisSentinelConfiguration()
+                    .master("master");
+            for(int i = 0 ; i < hosts.size();i++){
+                config.sentinel(hosts.get(i),ports.get(i));
+            }
+            config.setPassword(RedisPassword.of(properties.getPass()));
+            return new JedisConnectionFactory(config,redisPool);
+        }else{
+            RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+            redisStandaloneConfiguration.setHostName(hosts.get(0));
+            redisStandaloneConfiguration.setPort(ports.get(0));
+            redisStandaloneConfiguration.setPassword(RedisPassword.of(properties.getPass()));
+            return new JedisConnectionFactory(redisStandaloneConfiguration);
+        }
     }
 
     @Bean
-    StringRedisTemplate redisTemplate(){
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(jedisConnectionFactory());
-        return stringRedisTemplate;
+    RedisTemplate redisTemplate(JedisPoolConfig redisPool){
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(jedisConnectionFactory(redisPool));
+        return redisTemplate;
     }
 
     @Bean
-    RedisCacheManager redis(RedisConnectionFactory connectionFactory){
-        return RedisCacheManager.create(connectionFactory);
-    }
-
-    @Override
-    public void setEnvironment(Environment environment) {
-        env = environment;
+    public RedisCacheManager redisCacheManager(RedisConnectionFactory connectionFactory) {
+        RedisCacheConfiguration config = defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(1))
+                .disableCachingNullValues();
+        return RedisCacheManager.builder(RedisCacheWriter.lockingRedisCacheWriter(connectionFactory))
+                .cacheDefaults(config)
+                .withInitialCacheConfigurations(Collections.singletonMap("predefined", config.disableCachingNullValues()))
+                .transactionAware()
+                .build();
     }
 }

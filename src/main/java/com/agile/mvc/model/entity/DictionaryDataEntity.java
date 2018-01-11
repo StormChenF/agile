@@ -1,5 +1,9 @@
 package com.agile.mvc.model.entity;
 
+
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,6 +13,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "dictionary_data",  catalog = "agile_db")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE,region = "agileCache")
 public class DictionaryDataEntity implements Serializable {
 
     //序列
@@ -114,5 +119,49 @@ public class DictionaryDataEntity implements Serializable {
         ",value='" + value + '\'' +
         ",isFixed=" + isFixed +
         '}';
+    }
+
+    private DictionaryDataEntity(Builder builder){
+        this.code = builder.code;
+        this.dicCode = builder.dicCode;
+        this.name = builder.name;
+        this.value = builder.value;
+        this.isFixed = builder.isFixed;
+    }
+
+    public static class Builder{
+        private Integer code;
+        private String dicCode;
+        private String name;
+        private String value;
+        private Boolean isFixed;
+
+        public Builder setCode(int code) {
+            this.code = code;
+            return this;
+        }
+        public Builder setDicCode(String dicCode) {
+            this.dicCode = dicCode;
+            return this;
+        }
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder setValue(String value) {
+            this.value = value;
+            return this;
+        }
+        public Builder setIsFixed(Boolean isFixed) {
+            this.isFixed = isFixed;
+            return this;
+        }
+        public DictionaryDataEntity build(){
+            return new DictionaryDataEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
     }
 }

@@ -50,6 +50,8 @@ public final class RETURN {
     public final static RETURN MAX_UPLOAD_SIZE_EXPRESSION = new RETURN("200017","上传文件大小超出最大值！");
     public final static RETURN FILE_NOT_FOUND_EXPRESSION = new RETURN("200018","系统找不到指定路径！");
     public final static RETURN NO_SUCH_METHPD_EXPRESSION = new RETURN("200019","调用方法不存在！");
+    public final static RETURN NOT_FOUND_CACHEPROXY_EXPRESSION = new RETURN("200020","未找到缓存代理类！");
+
     //业务逻辑响应状态
     public final static RETURN PARAMETER_ERROR = new RETURN("300000","请求参数中，未包含可用参数！");
 

@@ -220,4 +220,90 @@ public class SysModulesEntity implements Serializable {
         ",priority='" + priority + '\'' +
         '}';
     }
+
+    private SysModulesEntity(Builder builder){
+        this.sysModulesId = builder.sysModulesId;
+        this.moduleName = builder.moduleName;
+        this.moduleDesc = builder.moduleDesc;
+        this.moduleType = builder.moduleType;
+        this.parent = builder.parent;
+        this.moduleUrl = builder.moduleUrl;
+        this.iLevel = builder.iLevel;
+        this.leaf = builder.leaf;
+        this.application = builder.application;
+        this.controller = builder.controller;
+        this.enable = builder.enable;
+        this.priority = builder.priority;
+    }
+
+    public static class Builder{
+        private Integer sysModulesId;
+        private String moduleName;
+        private String moduleDesc;
+        private String moduleType;
+        private String parent;
+        private String moduleUrl;
+        private String iLevel;
+        private String leaf;
+        private String application;
+        private String controller;
+        private Boolean enable;
+        private String priority;
+
+        public Builder setSysModulesId(int sysModulesId) {
+            this.sysModulesId = sysModulesId;
+            return this;
+        }
+        public Builder setModuleName(String moduleName) {
+            this.moduleName = moduleName;
+            return this;
+        }
+        public Builder setModuleDesc(String moduleDesc) {
+            this.moduleDesc = moduleDesc;
+            return this;
+        }
+        public Builder setModuleType(String moduleType) {
+            this.moduleType = moduleType;
+            return this;
+        }
+        public Builder setParent(String parent) {
+            this.parent = parent;
+            return this;
+        }
+        public Builder setModuleUrl(String moduleUrl) {
+            this.moduleUrl = moduleUrl;
+            return this;
+        }
+        public Builder setILevel(String iLevel) {
+            this.iLevel = iLevel;
+            return this;
+        }
+        public Builder setLeaf(String leaf) {
+            this.leaf = leaf;
+            return this;
+        }
+        public Builder setApplication(String application) {
+            this.application = application;
+            return this;
+        }
+        public Builder setController(String controller) {
+            this.controller = controller;
+            return this;
+        }
+        public Builder setEnable(Boolean enable) {
+            this.enable = enable;
+            return this;
+        }
+        public Builder setPriority(String priority) {
+            this.priority = priority;
+            return this;
+        }
+        public SysModulesEntity build(){
+            return new SysModulesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

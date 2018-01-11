@@ -47,9 +47,10 @@ public class TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
         return taskInfoMap;
     }
 
+    @NotNull
     @Override
     @Transactional
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessBeforeInitialization(@NotNull Object bean, String beanName) throws BeansException {
         Method[] methods =  ReflectionUtils.getUniqueDeclaredMethods(bean.getClass());
         int j = 1;
         for(int i = 0 ; i < methods.length;i++){

@@ -145,4 +145,60 @@ public class LogValueEntity implements Serializable {
         ",columnInfo='" + columnInfo + '\'' +
         '}';
     }
+
+    private LogValueEntity(Builder builder){
+        this.logValueId = builder.logValueId;
+        this.logTableId = builder.logTableId;
+        this.columnName = builder.columnName;
+        this.columnType = builder.columnType;
+        this.newValue = builder.newValue;
+        this.oldValue = builder.oldValue;
+        this.columnInfo = builder.columnInfo;
+    }
+
+    public static class Builder{
+        private Integer logValueId;
+        private int logTableId;
+        private String columnName;
+        private String columnType;
+        private String newValue;
+        private String oldValue;
+        private String columnInfo;
+
+        public Builder setLogValueId(int logValueId) {
+            this.logValueId = logValueId;
+            return this;
+        }
+        public Builder setLogTableId(int logTableId) {
+            this.logTableId = logTableId;
+            return this;
+        }
+        public Builder setColumnName(String columnName) {
+            this.columnName = columnName;
+            return this;
+        }
+        public Builder setColumnType(String columnType) {
+            this.columnType = columnType;
+            return this;
+        }
+        public Builder setNewValue(String newValue) {
+            this.newValue = newValue;
+            return this;
+        }
+        public Builder setOldValue(String oldValue) {
+            this.oldValue = oldValue;
+            return this;
+        }
+        public Builder setColumnInfo(String columnInfo) {
+            this.columnInfo = columnInfo;
+            return this;
+        }
+        public LogValueEntity build(){
+            return new LogValueEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

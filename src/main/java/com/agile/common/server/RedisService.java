@@ -3,9 +3,13 @@ package com.agile.common.server;
 import com.agile.common.util.AbstractCacheUtil;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
+
+import java.util.Map;
 
 /**
  * Created by 佟盟 on 2017/5/18
@@ -56,7 +60,7 @@ public class RedisService implements AbstractCacheUtil {
         return this.getJedis().setnx(name,time);
     }
 
-    public Long expire(String name,int time){
-        return this.getJedis().expire(name,time);
+    public void expire(String name, int time){
+        this.getJedis().expire(name, time);
     }
 }

@@ -85,4 +85,36 @@ public class SysBtRolesMoudlesEntity implements Serializable {
         ",roleId=" + roleId +
         '}';
     }
+
+    private SysBtRolesMoudlesEntity(Builder builder){
+        this.sysBtRolesMoudlesId = builder.sysBtRolesMoudlesId;
+        this.moduleId = builder.moduleId;
+        this.roleId = builder.roleId;
+    }
+
+    public static class Builder{
+        private Integer sysBtRolesMoudlesId;
+        private int moduleId;
+        private int roleId;
+
+        public Builder setSysBtRolesMoudlesId(int sysBtRolesMoudlesId) {
+            this.sysBtRolesMoudlesId = sysBtRolesMoudlesId;
+            return this;
+        }
+        public Builder setModuleId(int moduleId) {
+            this.moduleId = moduleId;
+            return this;
+        }
+        public Builder setRoleId(int roleId) {
+            this.roleId = roleId;
+            return this;
+        }
+        public SysBtRolesMoudlesEntity build(){
+            return new SysBtRolesMoudlesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

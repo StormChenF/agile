@@ -160,4 +160,66 @@ public class SysAuthoritiesEntity implements Serializable {
         ",moduleId='" + moduleId + '\'' +
         '}';
     }
+
+    private SysAuthoritiesEntity(Builder builder){
+        this.sysAuthorityId = builder.sysAuthorityId;
+        this.authorityMark = builder.authorityMark;
+        this.authorityName = builder.authorityName;
+        this.authorityDesc = builder.authorityDesc;
+        this.message = builder.message;
+        this.enable = builder.enable;
+        this.issys = builder.issys;
+        this.moduleId = builder.moduleId;
+    }
+
+    public static class Builder{
+        private Integer sysAuthorityId;
+        private String authorityMark;
+        private String authorityName;
+        private String authorityDesc;
+        private String message;
+        private Boolean enable;
+        private Boolean issys;
+        private String moduleId;
+
+        public Builder setSysAuthorityId(int sysAuthorityId) {
+            this.sysAuthorityId = sysAuthorityId;
+            return this;
+        }
+        public Builder setAuthorityMark(String authorityMark) {
+            this.authorityMark = authorityMark;
+            return this;
+        }
+        public Builder setAuthorityName(String authorityName) {
+            this.authorityName = authorityName;
+            return this;
+        }
+        public Builder setAuthorityDesc(String authorityDesc) {
+            this.authorityDesc = authorityDesc;
+            return this;
+        }
+        public Builder setMessage(String message) {
+            this.message = message;
+            return this;
+        }
+        public Builder setEnable(Boolean enable) {
+            this.enable = enable;
+            return this;
+        }
+        public Builder setIssys(Boolean issys) {
+            this.issys = issys;
+            return this;
+        }
+        public Builder setModuleId(String moduleId) {
+            this.moduleId = moduleId;
+            return this;
+        }
+        public SysAuthoritiesEntity build(){
+            return new SysAuthoritiesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

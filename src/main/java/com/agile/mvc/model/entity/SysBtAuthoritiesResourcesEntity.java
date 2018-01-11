@@ -85,4 +85,36 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
         ",authorityId=" + authorityId +
         '}';
     }
+
+    private SysBtAuthoritiesResourcesEntity(Builder builder){
+        this.sysBtAuthoritiesResourcesId = builder.sysBtAuthoritiesResourcesId;
+        this.resourceId = builder.resourceId;
+        this.authorityId = builder.authorityId;
+    }
+
+    public static class Builder{
+        private Integer sysBtAuthoritiesResourcesId;
+        private int resourceId;
+        private int authorityId;
+
+        public Builder setSysBtAuthoritiesResourcesId(int sysBtAuthoritiesResourcesId) {
+            this.sysBtAuthoritiesResourcesId = sysBtAuthoritiesResourcesId;
+            return this;
+        }
+        public Builder setResourceId(int resourceId) {
+            this.resourceId = resourceId;
+            return this;
+        }
+        public Builder setAuthorityId(int authorityId) {
+            this.authorityId = authorityId;
+            return this;
+        }
+        public SysBtAuthoritiesResourcesEntity build(){
+            return new SysBtAuthoritiesResourcesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

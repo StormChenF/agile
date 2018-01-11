@@ -83,4 +83,30 @@ public class ${className}Entity implements Serializable {
         </#list>
         '}';
     }
+
+    private ${className}Entity(Builder builder){
+        <#list columnList as property>
+        this.${property.propertyName} = builder.${property.propertyName};
+        </#list>
+    }
+
+    public static class Builder{
+        <#list columnList as property>
+        private ${property.propertyType} ${property.propertyName};
+        </#list>
+
+        <#list columnList as property>
+        public Builder ${property.setMethod}(<#if property.propertyType == "Integer" >int <#elseif property.propertyType == "Long" >long <#else>${property.propertyType} </#if>${property.propertyName}) {
+            this.${property.propertyName} = ${property.propertyName};
+            return this;
+        }
+        </#list>
+        public ${className}Entity build(){
+            return new ${className}Entity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

@@ -130,4 +130,54 @@ public class SysRolesEntity implements Serializable {
         ",moduleId='" + moduleId + '\'' +
         '}';
     }
+
+    private SysRolesEntity(Builder builder){
+        this.sysRolesId = builder.sysRolesId;
+        this.roleName = builder.roleName;
+        this.roleDesc = builder.roleDesc;
+        this.enable = builder.enable;
+        this.issys = builder.issys;
+        this.moduleId = builder.moduleId;
+    }
+
+    public static class Builder{
+        private Integer sysRolesId;
+        private String roleName;
+        private String roleDesc;
+        private Boolean enable;
+        private Boolean issys;
+        private String moduleId;
+
+        public Builder setSysRolesId(int sysRolesId) {
+            this.sysRolesId = sysRolesId;
+            return this;
+        }
+        public Builder setRoleName(String roleName) {
+            this.roleName = roleName;
+            return this;
+        }
+        public Builder setRoleDesc(String roleDesc) {
+            this.roleDesc = roleDesc;
+            return this;
+        }
+        public Builder setEnable(Boolean enable) {
+            this.enable = enable;
+            return this;
+        }
+        public Builder setIssys(Boolean issys) {
+            this.issys = issys;
+            return this;
+        }
+        public Builder setModuleId(String moduleId) {
+            this.moduleId = moduleId;
+            return this;
+        }
+        public SysRolesEntity build(){
+            return new SysRolesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

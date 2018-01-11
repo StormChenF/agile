@@ -174,14 +174,14 @@ public class AgileGenerator {
 //                repositoryFileFw.close();
 
                 //service生成器
-                Template serviceTemp = cfg.getTemplate("agileTemplate/Service.ftl");
-                String ServiceFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.service_suffix") + ".java";
-                File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
-                FileWriter serviceFileFw = new FileWriter(serviceFile);
-                BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);
-                serviceTemp.process(data, serviceFileBw);
-                serviceFileBw.flush();
-                serviceFileFw.close();
+//                Template serviceTemp = cfg.getTemplate("agileTemplate/Service.ftl");
+//                String ServiceFileName = propertiesUtil.getPropertyOfNoStatic("agile.generator.service_prefix") + className + propertiesUtil.getPropertyOfNoStatic("agile.generator.service_suffix") + ".java";
+//                File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
+//                FileWriter serviceFileFw = new FileWriter(serviceFile);
+//                BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);
+//                serviceTemp.process(data, serviceFileBw);
+//                serviceFileBw.flush();
+//                serviceFileFw.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

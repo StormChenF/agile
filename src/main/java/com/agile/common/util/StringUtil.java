@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public final class StringUtil extends StringUtils {
     /**
-     * 特殊符号转驼峰式
+     * 驼峰式转下划线
      * @param text 任意字符串
      * @return 返回驼峰字符串
      */
@@ -27,7 +27,7 @@ public final class StringUtil extends StringUtils {
         while (matcher.find()){
             int position = matcher.start()+i;
             if(position>=1 && !"_".equals(cacheStr.substring(position-1,position))){
-                cacheStr.replace(position,position+1,"_" + cacheStr.substring(position,position+1));
+                cacheStr.replace(position,position+1,"_" + cacheStr.substring(position,position+1).toLowerCase());
                 i++;
             }
         }

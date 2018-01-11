@@ -175,4 +175,72 @@ public class SysResourcesEntity implements Serializable {
         ",moduleId=" + moduleId +
         '}';
     }
+
+    private SysResourcesEntity(Builder builder){
+        this.sysResourcesId = builder.sysResourcesId;
+        this.resourceType = builder.resourceType;
+        this.resourceName = builder.resourceName;
+        this.resourceDesc = builder.resourceDesc;
+        this.resourcePath = builder.resourcePath;
+        this.priority = builder.priority;
+        this.enable = builder.enable;
+        this.issys = builder.issys;
+        this.moduleId = builder.moduleId;
+    }
+
+    public static class Builder{
+        private Integer sysResourcesId;
+        private String resourceType;
+        private String resourceName;
+        private String resourceDesc;
+        private String resourcePath;
+        private String priority;
+        private Boolean enable;
+        private Boolean issys;
+        private int moduleId;
+
+        public Builder setSysResourcesId(int sysResourcesId) {
+            this.sysResourcesId = sysResourcesId;
+            return this;
+        }
+        public Builder setResourceType(String resourceType) {
+            this.resourceType = resourceType;
+            return this;
+        }
+        public Builder setResourceName(String resourceName) {
+            this.resourceName = resourceName;
+            return this;
+        }
+        public Builder setResourceDesc(String resourceDesc) {
+            this.resourceDesc = resourceDesc;
+            return this;
+        }
+        public Builder setResourcePath(String resourcePath) {
+            this.resourcePath = resourcePath;
+            return this;
+        }
+        public Builder setPriority(String priority) {
+            this.priority = priority;
+            return this;
+        }
+        public Builder setEnable(Boolean enable) {
+            this.enable = enable;
+            return this;
+        }
+        public Builder setIssys(Boolean issys) {
+            this.issys = issys;
+            return this;
+        }
+        public Builder setModuleId(int moduleId) {
+            this.moduleId = moduleId;
+            return this;
+        }
+        public SysResourcesEntity build(){
+            return new SysResourcesEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

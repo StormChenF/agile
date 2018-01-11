@@ -85,4 +85,36 @@ public class DictionaryMainEntity implements Serializable {
         ",isConstant=" + isConstant +
         '}';
     }
+
+    private DictionaryMainEntity(Builder builder){
+        this.code = builder.code;
+        this.name = builder.name;
+        this.isConstant = builder.isConstant;
+    }
+
+    public static class Builder{
+        private Integer code;
+        private String name;
+        private Boolean isConstant;
+
+        public Builder setCode(int code) {
+            this.code = code;
+            return this;
+        }
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder setIsConstant(Boolean isConstant) {
+            this.isConstant = isConstant;
+            return this;
+        }
+        public DictionaryMainEntity build(){
+            return new DictionaryMainEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

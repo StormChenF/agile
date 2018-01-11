@@ -1,6 +1,7 @@
 package com.agile.common.server;
 
 import com.agile.common.base.RETURN;
+import com.agile.common.util.CacheUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +14,7 @@ public class SignService extends MainService {
         return RETURN.SUCCESS_SIGN_OUT;
     }
     public RETURN notSignIn(){
+        CacheUtil.setCache("asd","23");
         return RETURN.NO_SIGN_IN;
     }
     public RETURN invalidSession(){

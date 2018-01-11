@@ -129,4 +129,54 @@ public class SysTaskTargetEntity implements Serializable {
         ",remarks='" + remarks + '\'' +
         '}';
     }
+
+    private SysTaskTargetEntity(Builder builder){
+        this.sysTaskTargetId = builder.sysTaskTargetId;
+        this.name = builder.name;
+        this.targetPackage = builder.targetPackage;
+        this.targetClass = builder.targetClass;
+        this.targetMethod = builder.targetMethod;
+        this.remarks = builder.remarks;
+    }
+
+    public static class Builder{
+        private Integer sysTaskTargetId;
+        private String name;
+        private String targetPackage;
+        private String targetClass;
+        private String targetMethod;
+        private String remarks;
+
+        public Builder setSysTaskTargetId(int sysTaskTargetId) {
+            this.sysTaskTargetId = sysTaskTargetId;
+            return this;
+        }
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder setTargetPackage(String targetPackage) {
+            this.targetPackage = targetPackage;
+            return this;
+        }
+        public Builder setTargetClass(String targetClass) {
+            this.targetClass = targetClass;
+            return this;
+        }
+        public Builder setTargetMethod(String targetMethod) {
+            this.targetMethod = targetMethod;
+            return this;
+        }
+        public Builder setRemarks(String remarks) {
+            this.remarks = remarks;
+            return this;
+        }
+        public SysTaskTargetEntity build(){
+            return new SysTaskTargetEntity(this);
+        }
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
 }

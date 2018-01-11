@@ -1,6 +1,8 @@
 package com.agile.common.config;
 
+import com.agile.common.exception.NonSupportDBException;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.mysql.jdbc.Driver;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +19,29 @@ public class DruidConfig implements EnvironmentAware {
     private Environment env;
 
     @Bean(initMethod = "init",destroyMethod = "close",name = "dataSource1")
-    DruidDataSource dataSource() throws SQLException {
+    DruidDataSource dataSource() throws SQLException, ClassNotFoundException {
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setDriverClassName(env.getProperty("agile.druid.driver_class_name"));
-        druidDataSource.setUrl(env.getProperty("agile.druid.jdbc_url_prefix")+env.getProperty("agile.druid.data_base_ip")+":"+env.getProperty("agile.druid.data_base_post")+"/"+env.getProperty("agile.druid.data_base_name")+"?"+env.getProperty("agile.druid.data_base_url_param"));
+
+        StringBuilder druidUrl = new StringBuilder();
+        String db = env.getProperty("agile.jpa.db").toLowerCase();
+        switch (db){
+            case "mysql":
+                druidDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+                druidUrl.append("jdbc:mysql://").append(env.getProperty("agile.druid.data_base_ip")).append(":").append(env.getProperty("agile.druid.data_base_post")).append("/").append(env.getProperty("agile.druid.data_base_name")).append("?").append(env.getProperty("agile.druid.data_base_url_param"));
+                break;
+            case "oracle":
+                druidDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+                druidUrl.append("jdbc:oracle:thin:@").append(env.getProperty("agile.druid.data_base_ip")).append(":").append(env.getProperty("agile.druid.data_base_post")).append(":").append(env.getProperty("agile.druid.data_base_name"));
+                break;
+            default:
+                try {
+                    throw new NonSupportDBException();
+                } catch (NonSupportDBException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        druidDataSource.setUrl(druidUrl.toString());
         druidDataSource.setUsername(env.getProperty("agile.druid.data_base_username"));
         druidDataSource.setPassword(env.getProperty("agile.druid.data_base_password"));
         druidDataSource.setInitialSize(env.getProperty("agile.druid.init_size",int.class));

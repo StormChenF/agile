@@ -1,5 +1,7 @@
 package com.agile.common.util;
 
+import com.agile.common.exception.NonSupportDBException;
+
 import java.sql.*;
 
 
@@ -22,11 +24,29 @@ public class DataBaseUtil {
         PropertiesUtil propertiesUtil = new PropertiesUtil("./src/main/resources/com/agile/configure/agile.properties");
 
         //加载数据库驱动类
-        Class.forName(propertiesUtil.getPropertyOfNoStatic("agile.druid.driver_class_name"));
+        StringBuilder druidUrl = new StringBuilder();
+        String db = propertiesUtil.getPropertyOfNoStatic("agile.jpa.db").toLowerCase();
+        switch (db){
+            case "mysql":
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                druidUrl.append("jdbc:mysql://").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_ip")).append(":").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_post")).append("/").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_name")).append("?").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_url_param"));
+                break;
+            case "oracle":
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                druidUrl.append("jdbc:oracle:thin:@").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_ip")).append(":").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_post")).append(":").append(propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_name"));
+                break;
+            default:
+                try {
+                    throw new NonSupportDBException();
+                } catch (NonSupportDBException e) {
+                    e.printStackTrace();
+                }
+        }
 
         //建立数据库连接
-        if (ObjectUtil.isEmpty(connection))
-            connection = DriverManager.getConnection(propertiesUtil.getPropertyOfNoStatic("agile.druid.jdbc_url_prefix") + propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_ip") + ":" + propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_post") + "/" + propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_name") + "?" + propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_url_param"), propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_username"), propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_password"));
+        if (ObjectUtil.isEmpty(connection)){
+            connection = DriverManager.getConnection(druidUrl.toString(),propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_username"), propertiesUtil.getPropertyOfNoStatic("agile.druid.data_base_password"));
+        }
 
         //数据库信息
         if (ObjectUtil.isEmpty(databaseMetaData)) databaseMetaData = connection.getMetaData();
