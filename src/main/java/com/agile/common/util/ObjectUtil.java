@@ -174,6 +174,7 @@ public class ObjectUtil extends ObjectUtils {
         Method[] methods = clazz.getDeclaredMethods();
         for (int i = 0 ; i < methods.length;i++){
             Method method = methods[i];
+            if(!method.getName().startsWith("get"))continue;
             try {
                 if(isEmpty(method.getAnnotation(Id.class))){
                     Column columInfo = method.getAnnotation(Column.class);
@@ -181,6 +182,25 @@ public class ObjectUtil extends ObjectUtils {
                         if(isEmpty(method.invoke(object)))result = false;
                     }
                 }
+            }catch (Exception e){
+                continue;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 判断对象属性是否全空
+     */
+    public static boolean isAllNullValidity(Object object){
+        boolean result = true;
+        Class<?> clazz = object.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        for (int i = 0 ; i < fields.length;i++){
+            Field field = fields[i];
+            field.setAccessible(true);
+            try {
+                if(!isEmpty(field.get(object)))result = false;
             }catch (Exception e){
                 continue;
             }

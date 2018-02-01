@@ -8,7 +8,6 @@ import org.springframework.aop.support.AopUtils;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,96 +40,68 @@ public class AnnotationProcessor implements EnvironmentAware {
         }
     }
 
-    void Properties(Properties properties, Object bean) throws IllegalAccessException, InstantiationException {
+    void Properties(Properties properties, Object bean) throws InstantiationException, IllegalAccessException {
         Class<?> targetClass = bean.getClass();
         if(!ObjectUtil.isEmpty(properties)){
             String prefix = properties.prefix();
-            Field[] fields = targetClass.getDeclaredFields();
-            for(int i = 0 ; i < fields.length;i++){
-                Field field = fields[i];
-                field.setAccessible(true);
-                String name = field.getName();
-                Class<?> typeClass = field.getType();
-                String propertiesName = prefix+"."+ StringUtil.camelToUnderline(name);
-                if(typeClass.isAssignableFrom(List.class)){
+            setProperties(bean,prefix);
+        }
+    }
 
-                    Type type = field.getGenericType();
-                    ParameterizedType parameterizedType = (ParameterizedType) type;
-                    Type[] typeArguments = parameterizedType.getActualTypeArguments();
-                    if(ArrayUtil.isEmpty(typeArguments))continue;
-                    Class genericClazz = (Class)typeArguments[0];
+    private void setProperties(Object target,String prefix) throws IllegalAccessException, InstantiationException {
+        if(ObjectUtil.isEmpty(target))return;
+        Class<?> targetClass = target.getClass();
+        Field[] fields = targetClass.getDeclaredFields();
+        for(int i = 0 ; i < fields.length;i++){
+            Field field = fields[i];
+            field.setAccessible(true);
+            Class<?> type = field.getType();
+            String name = field.getName();
+            if(type.isAssignableFrom(List.class)){
+                Type genericType = field.getGenericType();
+                ParameterizedType parameterizedType = (ParameterizedType) genericType;
+                Type[] typeArguments = parameterizedType.getActualTypeArguments();
+                if(ArrayUtil.isEmpty(typeArguments))continue;
+                Class innerClass = (Class)typeArguments[0];
 
 
-                    List list = new ArrayList();
-                    int j = 0 ;
-                    boolean hasNext = true;
-                    if(ObjectUtil.isEmpty(genericClazz.getPackage()) || genericClazz.getPackage().getName().startsWith("java.")){
-                        while (hasNext){
+                List list = new ArrayList();
+                int j = 0 ;
+                boolean hasNext = true;
 
-                            @SuppressWarnings("unchecked")
-                            Object temp = env.getProperty(propertiesName+"["+j+++"]", genericClazz);
-                            if(j==0 && ObjectUtil.isEmpty(temp)){
-                                temp = env.getProperty(propertiesName, genericClazz);
-                            }
-                            if(ObjectUtil.isEmpty(temp)){
-                                hasNext = false;
-                                continue;
-                            }
-                            list.add(temp);
-                        }
-                    }else{
-                        while (hasNext){
-                            Object temp = genericClazz.newInstance();
-                            Field[] fieldss = genericClazz.getDeclaredFields();
-
-                            int countNull = 0;
-                            for(int k = 0;k<fieldss.length;k++){
-                                Field field2 = fieldss[k];
-                                field2.setAccessible(true);
-                                @SuppressWarnings("unchecked")
-                                Object value = env.getProperty(propertiesName+"."+StringUtil.camelToUnderline(field2.getName())+"["+j+"]", field2.getType());
-                                if(j==0 && ObjectUtil.isEmpty(value)){
-                                    value = env.getProperty(propertiesName+"."+StringUtil.camelToUnderline(field2.getName()), field2.getType());
-                                }
-                                if(ObjectUtil.isEmpty(value)){
-                                    countNull++;
-                                    continue;
-                                }
-                                field2.set(temp,value);
-                            }
-                            if(countNull==fieldss.length){
-                                hasNext = false;
-                            }
+                if(ObjectUtil.isEmpty(innerClass.getPackage()) || innerClass.getPackage().getName().startsWith("java.")){
+                    while (hasNext){
+                        @SuppressWarnings("unchecked")
+                        String key = env.containsProperty(prefix+"."+name+"["+j+"]")?prefix+"."+name+"["+j+"]":prefix+"."+name;
+                        if(env.containsProperty(key)){
+                            Object temp = env.getProperty(key,innerClass);
                             list.add(temp);
                             j++;
+                        }else{
+                            hasNext = false;
                         }
                     }
-
-
-                    field.set(bean,list);
                 }else{
-                    if(ObjectUtil.isEmpty(typeClass.getPackage()) || typeClass.getPackage().getName().startsWith("java.")){
-                        Object temp = env.getProperty(propertiesName, typeClass);
-                        if(ObjectUtil.isEmpty(temp)){
-                            continue;
+                    while (hasNext){
+                        Object temp = innerClass.newInstance();
+                        setProperties(temp,prefix+"."+name+"["+j+++"]");
+                        if(ObjectUtil.compareClass(temp,innerClass.newInstance()) && j!=1){
+                            hasNext = false;
+                        }else{
+                            list.add(temp);
                         }
-                        field.set(bean,temp);
-                    }else{
-                        Object temp = typeClass.newInstance();
-                        Field[] fieldss = typeClass.getDeclaredFields();
-
-                        for(int k = 0;k<fieldss.length;k++){
-                            Field field2 = fieldss[k];
-                            field2.setAccessible(true);
-                            @SuppressWarnings("unchecked")
-                            Object value = env.getProperty(propertiesName+"."+StringUtil.camelToUnderline(field2.getName()), field2.getType());
-                            if(ObjectUtil.isEmpty(value)){
-                                continue;
-                            }
-                            field2.set(temp,value);
-                        }
-                        field.set(bean,temp);
                     }
+                }
+                field.set(target,list);
+            }else{
+                if(ObjectUtil.isEmpty(type.getPackage()) || type.getPackage().getName().startsWith("java.")){
+                    String key = prefix + "." + StringUtil.camelToUnderline(name);
+                    if(env.containsProperty(key))
+                    field.set(target,env.getProperty(key,type));
+                }else{
+                    Object temp = type.newInstance();
+                    setProperties(temp,prefix+"."+StringUtil.camelToUnderline(name));
+                    field.set(target,temp);
                 }
             }
         }

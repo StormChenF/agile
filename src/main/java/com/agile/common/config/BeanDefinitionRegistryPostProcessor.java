@@ -1,8 +1,6 @@
 package com.agile.common.config;
 
 import com.agile.common.annotation.AnnotationProcessor;
-import com.agile.common.properties.KaptchaConfigProperties;
-import com.agile.common.properties.SpringMVCProperties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -62,9 +60,6 @@ public class BeanDefinitionRegistryPostProcessor implements org.springframework.
         for(Map.Entry<String, Object> map: beans.entrySet()){
             Object bean = map.getValue();
             Class<?> targetClass = bean.getClass();
-            if(targetClass == SpringMVCProperties.class || targetClass == KaptchaConfigProperties.class){
-                System.out.println();
-            }
             T properties = targetClass.getAnnotation(clazz);
             try {
                 Method method = AnnotationProcessor.class.getDeclaredMethod(clazz.getSimpleName(), clazz, Object.class);
