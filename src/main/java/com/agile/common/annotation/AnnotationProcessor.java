@@ -71,8 +71,10 @@ public class AnnotationProcessor implements EnvironmentAware {
 
                 if(ObjectUtil.isEmpty(innerClass.getPackage()) || innerClass.getPackage().getName().startsWith("java.")){
                     while (hasNext){
-                        @SuppressWarnings("unchecked")
-                        String key = env.containsProperty(prefix+"."+name+"["+j+"]")?prefix+"."+name+"["+j+"]":prefix+"."+name;
+                        String key = prefix+"."+name+"["+j+"]";
+                        if(j==0){
+                            key = env.containsProperty(prefix+"."+name+"["+j+"]")?prefix+"."+name+"["+j+"]":prefix+"."+name;
+                        }
                         if(env.containsProperty(key)){
                             Object temp = env.getProperty(key,innerClass);
                             list.add(temp);
