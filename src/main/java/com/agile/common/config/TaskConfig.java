@@ -31,7 +31,7 @@ import java.util.*;
  * Created by 佟盟 on 2017/11/30
  */
 @Component
-public class TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
+public class  TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
     @Autowired
     private Dao dao;
     @Autowired
