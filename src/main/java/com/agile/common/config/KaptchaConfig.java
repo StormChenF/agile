@@ -1,12 +1,11 @@
 package com.agile.common.config;
 
+import com.agile.common.properties.KaptchaConfigProperties;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 import java.util.Properties;
 
@@ -15,8 +14,12 @@ import java.util.Properties;
  */
 @Configuration
 public class KaptchaConfig {
+    private final KaptchaConfigProperties kaptchaConfigProperties;
+
     @Autowired
-    private KaptchaConfigProperties kaptchaConfigProperties;
+    public KaptchaConfig(KaptchaConfigProperties kaptchaConfigProperties) {
+        this.kaptchaConfigProperties = kaptchaConfigProperties;
+    }
 
     @Bean
     DefaultKaptcha defaultKaptcha(){
@@ -41,5 +44,4 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.textproducer.font.names",kaptchaConfigProperties.getTextproducerFontNames());
         return properties;
     }
-
 }

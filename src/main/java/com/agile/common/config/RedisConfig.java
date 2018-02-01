@@ -1,5 +1,6 @@
 package com.agile.common.config;
 
+import com.agile.common.properties.RedisConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,11 +24,6 @@ import static org.springframework.data.redis.cache.RedisCacheConfiguration.defau
 public class RedisConfig {
     @Autowired
     private RedisConfigProperties properties;
-
-    @Bean
-    RedisConfigProperties redisConfigProperties(){
-        return new RedisConfigProperties();
-    }
 
     @Bean
     JedisPoolConfig redisPool(){

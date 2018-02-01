@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 /**
  * Created by 佟盟 on 2017/11/2
  */
-@Component
+//@Component
 public class InitConfig implements InitializingBean {
     @Autowired
     ApplicationContext applicationContext;

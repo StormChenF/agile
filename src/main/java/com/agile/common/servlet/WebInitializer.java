@@ -10,6 +10,7 @@ import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import org.apache.logging.log4j.core.config.ConfigurationFactory;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
@@ -27,7 +28,8 @@ import java.net.URL;
 /**
  * Created by 佟盟 on 2017/9/27
  */
-public class DispatcherServletInitializer implements WebApplicationInitializer {
+@Order(0)
+public class WebInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(@NotNull ServletContext servletContext) {

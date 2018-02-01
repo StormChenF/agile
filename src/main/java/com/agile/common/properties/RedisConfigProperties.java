@@ -1,4 +1,4 @@
-package com.agile.common.config;
+package com.agile.common.properties;
 
 import com.agile.common.annotation.Properties;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * Created by 佟盟 on 2018/1/5
  */
-@Component
 @Properties(prefix = "agile.redis")
 public class RedisConfigProperties {
     private String pass;

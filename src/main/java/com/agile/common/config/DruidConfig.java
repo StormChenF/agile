@@ -1,37 +1,54 @@
 package com.agile.common.config;
 
 import com.agile.common.exception.NonSupportDBException;
+import com.agile.common.properties.*;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.mysql.jdbc.Driver;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.PostConstruct;
 import java.sql.SQLException;
 
 /**
  * Created by 佟盟 on 2017/10/7
  */
 @Configuration
-public class DruidConfig implements EnvironmentAware {
-    private Environment env;
+public class DruidConfig {
+    private static int index = 0;
 
-    @Bean(initMethod = "init",destroyMethod = "close",name = "dataSource1")
-    DruidDataSource dataSource() throws SQLException, ClassNotFoundException {
+    private final DBConfigProperties dbConfigProperties;
+    private DruidConfigProperty druidConfigProperty;
+    @Autowired
+    private KaptchaConfigProperties kaptchaConfigProperties;
+
+    @Autowired
+    public DruidConfig(DBConfigProperties dbConfigProperties) {
+        this.dbConfigProperties = dbConfigProperties;
+    }
+
+    @PostConstruct
+    private void init(){
+        this.druidConfigProperty = dbConfigProperties.getDruid().get(index);
+    }
+
+    @Bean(initMethod = "init",destroyMethod = "close",name = "dataSource")
+    DruidDataSource dataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
 
         StringBuilder druidUrl = new StringBuilder();
-        String db = env.getProperty("agile.jpa.db").toLowerCase();
+        String db = druidConfigProperty.getType().toLowerCase();
         switch (db){
             case "mysql":
                 druidDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                druidUrl.append("jdbc:mysql://").append(env.getProperty("agile.druid.data_base_ip")).append(":").append(env.getProperty("agile.druid.data_base_post")).append("/").append(env.getProperty("agile.druid.data_base_name")).append("?").append(env.getProperty("agile.druid.data_base_url_param"));
+                druidUrl.append("jdbc:mysql://").append(druidConfigProperty.getDataBaseIp()).append(":").append(druidConfigProperty.getDataBasePost()).append("/").append(druidConfigProperty.getDataBaseName()).append("?").append(druidConfigProperty.getDataBaseUrlParam());
                 break;
             case "oracle":
                 druidDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-                druidUrl.append("jdbc:oracle:thin:@").append(env.getProperty("agile.druid.data_base_ip")).append(":").append(env.getProperty("agile.druid.data_base_post")).append(":").append(env.getProperty("agile.druid.data_base_name"));
+                druidUrl.append("jdbc:oracle:thin:@").append(druidConfigProperty.getDataBaseIp()).append(":").append(druidConfigProperty.getDataBasePost()).append(":").append(druidConfigProperty.getDataBaseName());
                 break;
             default:
                 try {
@@ -42,31 +59,25 @@ public class DruidConfig implements EnvironmentAware {
         }
 
         druidDataSource.setUrl(druidUrl.toString());
-        druidDataSource.setUsername(env.getProperty("agile.druid.data_base_username"));
-        druidDataSource.setPassword(env.getProperty("agile.druid.data_base_password"));
-        druidDataSource.setInitialSize(env.getProperty("agile.druid.init_size",int.class));
-        druidDataSource.setMinIdle(env.getProperty("agile.druid.min_idle",int.class));
-        druidDataSource.setMaxActive(env.getProperty("agile.druid.max_active",int.class));
-        druidDataSource.setMaxWait(env.getProperty("agile.druid.max_wait",int.class));
-        druidDataSource.setRemoveAbandoned(env.getProperty("agile.druid.remove_abandoned",boolean.class));
-        druidDataSource.setRemoveAbandonedTimeout(env.getProperty("agile.druid.remove_abandoned_timeout",int.class));
-        druidDataSource.setTimeBetweenEvictionRunsMillis(env.getProperty("agile.druid.time_between_eviction_runs_millis",int.class));
-        druidDataSource.setMinEvictableIdleTimeMillis(env.getProperty("agile.druid.min_evictable_idle_time_millis",int.class));
-        druidDataSource.setValidationQuery(env.getProperty("agile.druid.validation_query"));
-        druidDataSource.setTestWhileIdle(env.getProperty("agile.druid.test_while_idle",boolean.class));
-        druidDataSource.setTestOnBorrow(env.getProperty("agile.druid.test_on_borrow",boolean.class));
-        druidDataSource.setTestOnReturn(env.getProperty("agile.druid.test_on_return",boolean.class));
-        druidDataSource.setFilters(env.getProperty("agile.druid.filters"));
-        druidDataSource.setPoolPreparedStatements(env.getProperty("agile.druid.pool_prepared_statements",boolean.class));
-        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(env.getProperty("agile.druid.max_pool_prepared_statement_per_connection_size",int.class));
-        druidDataSource.setFilters(env.getProperty("agile.druid.max_pool_prepared_statement_per_connection_size"));
-        druidDataSource.setUseGlobalDataSourceStat(env.getProperty("agile.druid.global_data_source_stat",boolean.class));
+        druidDataSource.setUsername(druidConfigProperty.getDataBaseUsername());
+        druidDataSource.setPassword(druidConfigProperty.getDataBasePassword());
+        druidDataSource.setInitialSize(druidConfigProperty.getInitSize());
+        druidDataSource.setMinIdle(druidConfigProperty.getMinIdle());
+        druidDataSource.setMaxActive(druidConfigProperty.getMaxActive());
+        druidDataSource.setMaxWait(druidConfigProperty.getMaxWait());
+        druidDataSource.setRemoveAbandoned(druidConfigProperty.isRemoveAbandoned());
+        druidDataSource.setRemoveAbandonedTimeout(druidConfigProperty.getRemoveAbandonedTimeout());
+        druidDataSource.setTimeBetweenEvictionRunsMillis(druidConfigProperty.getTimeBetweenEvictionRunsMillis());
+        druidDataSource.setMinEvictableIdleTimeMillis(druidConfigProperty.getMinEvictableIdleTimeMillis());
+        druidDataSource.setValidationQuery(druidConfigProperty.getValidationQuery());
+        druidDataSource.setTestWhileIdle(druidConfigProperty.isTestWhileIdle());
+        druidDataSource.setTestOnBorrow(druidConfigProperty.isTestOnBorrow());
+        druidDataSource.setTestOnReturn(druidConfigProperty.isTestOnReturn());
+        druidDataSource.setFilters(druidConfigProperty.getFilters());
+        druidDataSource.setPoolPreparedStatements(druidConfigProperty.isPoolPreparedStatements());
+        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(druidConfigProperty.getMaxPoolPreparedStatementPerConnectionSize());
+        druidDataSource.setUseGlobalDataSourceStat(druidConfigProperty.isGlobalDataSourceStat());
         return druidDataSource;
 
-    }
-
-    @Override
-    public void setEnvironment(@NotNull Environment environment) {
-        env = environment;
     }
 }
