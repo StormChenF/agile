@@ -3,13 +3,9 @@ package com.agile.common.config;
 import com.agile.common.exception.NonSupportDBException;
 import com.agile.common.properties.*;
 import com.alibaba.druid.pool.DruidDataSource;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-
 import javax.annotation.PostConstruct;
 import java.sql.SQLException;
 

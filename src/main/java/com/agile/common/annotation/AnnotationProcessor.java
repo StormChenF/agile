@@ -64,7 +64,7 @@ public class AnnotationProcessor implements EnvironmentAware {
                     List list = new ArrayList();
                     int j = 0 ;
                     boolean hasNext = true;
-                    if(genericClazz.getPackage().getName().startsWith("java.")){
+                    if(ObjectUtil.isEmpty(genericClazz.getPackage()) || genericClazz.getPackage().getName().startsWith("java.")){
                         while (hasNext){
 
                             @SuppressWarnings("unchecked")
@@ -109,11 +109,28 @@ public class AnnotationProcessor implements EnvironmentAware {
 
                     field.set(bean,list);
                 }else{
-                    Object temp = env.getProperty(propertiesName, typeClass);
-                    if(ObjectUtil.isEmpty(temp)){
-                        continue;
+                    if(ObjectUtil.isEmpty(typeClass.getPackage()) || typeClass.getPackage().getName().startsWith("java.")){
+                        Object temp = env.getProperty(propertiesName, typeClass);
+                        if(ObjectUtil.isEmpty(temp)){
+                            continue;
+                        }
+                        field.set(bean,temp);
+                    }else{
+                        Object temp = typeClass.newInstance();
+                        Field[] fieldss = typeClass.getDeclaredFields();
+
+                        for(int k = 0;k<fieldss.length;k++){
+                            Field field2 = fieldss[k];
+                            field2.setAccessible(true);
+                            @SuppressWarnings("unchecked")
+                            Object value = env.getProperty(propertiesName+"."+StringUtil.camelToUnderline(field2.getName()), field2.getType());
+                            if(ObjectUtil.isEmpty(value)){
+                                continue;
+                            }
+                            field2.set(temp,value);
+                        }
+                        field.set(bean,temp);
                     }
-                    field.set(bean,temp);
                 }
             }
         }

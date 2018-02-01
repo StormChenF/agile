@@ -1,13 +1,11 @@
 package com.agile.common.config;
 
+import com.agile.common.properties.SpringMVCProperties;
 import com.agile.common.viewResolver.JsonViewResolver;
 import com.agile.common.viewResolver.XmlViewResolver;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,17 +24,19 @@ import java.util.Map;
  */
 @Configuration
 @EnableWebMvc
-public class SpringMvcConfig implements WebMvcConfigurer , EnvironmentAware {
-    private Environment env;
+public class SpringMvcConfig implements WebMvcConfigurer {
 
     private final JsonViewResolver jsonViewResolver;
 
     private final XmlViewResolver xmlViewResolver;
 
+    private final SpringMVCProperties springMVCProperties;
+
     @Autowired
-    public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver) {
+    public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver,SpringMVCProperties springMVCProperties) {
         this.jsonViewResolver = jsonViewResolver;
         this.xmlViewResolver = xmlViewResolver;
+        this.springMVCProperties = springMVCProperties;
     }
 
     /**
@@ -66,8 +65,8 @@ public class SpringMvcConfig implements WebMvcConfigurer , EnvironmentAware {
     @Bean
     public CommonsMultipartResolver contentCommonsMultipartResolver(){
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxUploadSize(env.getProperty("agile.upload.max_upload_size",long.class));
-        resolver.setDefaultEncoding(env.getProperty("agile.upload.default_encoding"));
+        resolver.setMaxUploadSize(springMVCProperties.getUpload().getMaxUploadSize());
+        resolver.setDefaultEncoding(springMVCProperties.getUpload().getDefaultEncoding());
         return resolver;
     }
 
@@ -94,10 +93,5 @@ public class SpringMvcConfig implements WebMvcConfigurer , EnvironmentAware {
                 .favorParameter(false)
                 .defaultContentType(MediaType.APPLICATION_JSON_UTF8)
                 .mediaTypes(map);
-    }
-
-    @Override
-    public void setEnvironment(@NotNull Environment environment) {
-        env = environment;
     }
 }

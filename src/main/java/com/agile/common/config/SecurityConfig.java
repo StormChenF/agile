@@ -1,16 +1,14 @@
 package com.agile.common.config;
 
+import com.agile.common.properties.SecurityProperties;
 import com.agile.common.security.SecurityAuthenticationFilter;
 import com.agile.common.security.SecurityAuthenticationProvider;
 import com.agile.common.security.SecurityKaptchaAuthenticationFilter;
 import com.agile.common.security.SecurityUserDetailsService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -37,18 +35,19 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements EnvironmentAware {
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-    private Environment env;
     private final RequestMatcher securityCsrfRequestMatcher;
     private final AuthenticationProvider securityAuthenticationProvider;
     private final SecurityUserDetailsService securityUserDetailsService;
+    private final SecurityProperties securityProperties;
 
     @Autowired
-    public SecurityConfig(RequestMatcher securityCsrfRequestMatcher, SecurityAuthenticationProvider securityAuthenticationProvider, SecurityUserDetailsService securityUserDetailsService) {
+    public SecurityConfig(RequestMatcher securityCsrfRequestMatcher, SecurityAuthenticationProvider securityAuthenticationProvider, SecurityUserDetailsService securityUserDetailsService,SecurityProperties securityProperties) {
         this.securityCsrfRequestMatcher = securityCsrfRequestMatcher;
         this.securityAuthenticationProvider = securityAuthenticationProvider;
         this.securityUserDetailsService = securityUserDetailsService;
+        this.securityProperties = securityProperties;
     }
 
     //http://localhost:8080/login 输入正确的用户名密码 并且选中remember-me 则登陆成功，转到 index页面
@@ -61,13 +60,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Envi
                 .httpBasic().authenticationEntryPoint(loginUrlAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests().antMatchers("/**").access("isAuthenticated()")
-                .antMatchers(env.getProperty("agile.security.not_login_url"),env.getProperty("agile.security.invalid_session_url"),"/druid/**", "/swagger**","/verification").permitAll()//访问：无需登录认证权限
+                .antMatchers(securityProperties.getNotLoginUrl(),securityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification").permitAll()//访问：无需登录认证权限
 //                .anyRequest().authenticated() //其他所有资源都需要认证，登陆后访问
 //                .antMatchers("/druid/*").hasAuthority("ADMIN") //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
                 .and()
                     .exceptionHandling()
                 .and()
-                    .addFilterBefore(new SecurityKaptchaAuthenticationFilter(env.getProperty("agile.security.login_url"), env.getProperty("agile.security.failure_url"),env.getProperty("agile.security.verification_code")), UsernamePasswordAuthenticationFilter.class)//验证码
+                    .addFilterBefore(new SecurityKaptchaAuthenticationFilter(securityProperties.getLoginUrl(), securityProperties.getFailureUrl(),securityProperties.getVerificationCode()), UsernamePasswordAuthenticationFilter.class)//验证码
                     .csrf()
                     .requireCsrfProtectionMatcher(securityCsrfRequestMatcher)//CSRF
                 .and()
@@ -75,16 +74,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Envi
                     .rememberMe().key("e37f4b31-0c45-11dd-bd0b-0800200c9a66").tokenValiditySeconds(1209600)
                 .and()
                     .logout()
-                        .logoutUrl(env.getProperty("agile.security.login_out_url"))
-                        .logoutSuccessUrl(env.getProperty("agile.security.login_out_success_url"))
+                        .logoutUrl(securityProperties.getLoginOutUrl())
+                        .logoutSuccessUrl(securityProperties.getLoginOutSuccessUrl())
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .logoutSuccessHandler(simpleUrlLogoutSuccessHandler())
                         .permitAll()//退出
-                .and().exceptionHandling().accessDeniedPage(env.getProperty("agile.security.access_denied"))//权限不足跳页
+                .and().exceptionHandling().accessDeniedPage(securityProperties.getAccessDenied())//权限不足跳页
                 .and()
                    .sessionManagement()
-                        .invalidSessionUrl(env.getProperty("agile.security.invalid_session_url")).maximumSessions(1).expiredUrl(env.getProperty("agile.security.expired_session_url")).sessionRegistry(sessionRegistry())//Session
+                        .invalidSessionUrl(securityProperties.getInvalidSessionUrl()).maximumSessions(1).expiredUrl(securityProperties.getExpiredSessionUrl()).sessionRegistry(sessionRegistry())//Session
 
         ;
     }
@@ -93,7 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Envi
 
     @Override
     public void configure(WebSecurity web){
-        web.ignoring().antMatchers(env.getProperty("agile.security.not_login_url"), env.getProperty("agile.security.invalid_session_url"),"/druid/**", "/swagger**","/verification");
+        web.ignoring().antMatchers(securityProperties.getNotLoginUrl(), securityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification");
     }
 
     @Override
@@ -106,22 +105,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Envi
 
     @Bean
     LoginUrlAuthenticationEntryPoint loginUrlAuthenticationEntryPoint(){
-        return new LoginUrlAuthenticationEntryPoint(env.getProperty("agile.security.not_login_url"));
+        return new LoginUrlAuthenticationEntryPoint(securityProperties.getNotLoginUrl());
     }
 
     @Bean
     SecurityAuthenticationFilter securityAuthenticationFilter() throws Exception {
         SecurityAuthenticationFilter filter = new SecurityAuthenticationFilter();
         //切入登陆过滤链路地址
-        filter.setFilterProcessesUrl(env.getProperty("agile.security.login_url"));
+        filter.setFilterProcessesUrl(securityProperties.getLoginUrl());
 
         //成功处理链路
         savedRequestAwareAuthenticationSuccessHandler().setAlwaysUseDefaultTargetUrl(true);
-        savedRequestAwareAuthenticationSuccessHandler().setDefaultTargetUrl(env.getProperty("agile.security.success_url"));
+        savedRequestAwareAuthenticationSuccessHandler().setDefaultTargetUrl(securityProperties.getSuccessUrl());
         filter.setAuthenticationSuccessHandler(savedRequestAwareAuthenticationSuccessHandler());
 
         //失败处理链路
-        simpleUrlAuthenticationFailureHandler().setDefaultFailureUrl(env.getProperty("agile.security.failure_url"));
+        simpleUrlAuthenticationFailureHandler().setDefaultFailureUrl(securityProperties.getFailureUrl());
         filter.setAuthenticationFailureHandler(simpleUrlAuthenticationFailureHandler());
 
         filter.setAuthenticationManager(authenticationManager());
@@ -169,8 +168,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Envi
         return messageSource;
     }
 
-    @Override
-    public void setEnvironment(@NotNull Environment environment) {
-        env = environment;
-    }
 }

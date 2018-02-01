@@ -1,7 +1,6 @@
 package com.agile.common.config;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
 import org.apache.logging.log4j.core.config.Configuration;
