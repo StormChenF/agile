@@ -1,5 +1,6 @@
 package com.agile.mvc.service;
 
+import com.agile.common.annotation.Init;
 import com.agile.common.annotation.TaskTarget;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
@@ -57,5 +58,13 @@ public class DictionaryDataService extends MainService {
     public RETURN query(){
         this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,0,10));
         return RETURN.SUCCESS;
+    }
+
+    @Init
+    private void asd(){
+        System.out.println("11111111111111111111\t");
+        System.out.println("11111111111111111111\t");
+        System.out.println("11111111111111111111\t");
+        System.out.println("11111111111111111111\t");
     }
 }

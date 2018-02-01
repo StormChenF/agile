@@ -24,18 +24,13 @@ public class AnnotationProcessor implements EnvironmentAware {
     public static Class[] classAnnotations = {Properties.class};
     public static Class[] methodAnnotations = {Init.class,TaskTarget.class};
 
-    void Init(Init init, Object bean){
-        Method[] methods = AopUtils.getTargetClass(bean).getMethods();
-        for (int j = 0;j<methods.length;j++){
-            Method method = methods[j];
-            method.setAccessible(true);
-            Init initAnnotation = method.getAnnotation(Init.class);
-            if(!ObjectUtil.isEmpty(initAnnotation)){
-                try {
-                    method.invoke(bean);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+    void Init(Init init, Object bean,Method method){
+        method.setAccessible(true);
+        if(!ObjectUtil.isEmpty(init)){
+            try {
+                method.invoke(bean);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -109,7 +104,7 @@ public class AnnotationProcessor implements EnvironmentAware {
         }
     }
 
-    void TaskTarget(TaskTarget taskTarget, Object bean){
+    void TaskTarget(TaskTarget taskTarget, Object bean,Method method){
 
     }
 
