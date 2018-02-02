@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -93,5 +94,10 @@ public class SpringMvcConfig implements WebMvcConfigurer {
                 .favorParameter(false)
                 .defaultContentType(MediaType.APPLICATION_JSON_UTF8)
                 .mediaTypes(map);
+    }
+
+    @Bean
+    ThreadPoolTaskScheduler threadPoolTaskScheduler(){
+        return new ThreadPoolTaskScheduler();
     }
 }

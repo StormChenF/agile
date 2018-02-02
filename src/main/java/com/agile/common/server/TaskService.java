@@ -1,47 +1,39 @@
-package com.agile.common.config;
+package com.agile.common.server;
 
+import com.agile.common.annotation.Init;
 import com.agile.common.base.TaskInfo;
 import com.agile.common.base.TaskTrigger;
-import com.agile.common.server.RedisService;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
 import com.agile.mvc.model.dao.Dao;
 import com.agile.mvc.model.entity.SysTaskEntity;
 import com.agile.mvc.model.entity.SysTaskTargetEntity;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ScheduledFuture;
 
 /**
- * Created by 佟盟 on 2017/11/30
+ * Created by 佟盟 on 2018/2/2
  */
 @Component
-public class  TaskConfig implements SchedulingConfigurer {
-    @Autowired
-    private Dao dao;
-    @Autowired
-    private RedisService redisService;
-    @Bean
-    ThreadPoolTaskScheduler threadPoolTaskScheduler(){
-        return new ThreadPoolTaskScheduler();
-    }
+public class TaskService {
+    private final Dao dao;
+    private final RedisService redisService;
+    private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-    private Map<String, TaskInfo> taskInfoMap = new HashMap<>();
+    private static Map<String, TaskInfo> taskInfoMap = new HashMap<>();
 
-    public Map <String, TaskInfo> getTaskInfoMap() {
-        return taskInfoMap;
+    @Autowired
+    public TaskService(Dao dao, RedisService redisService, ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+        this.dao = dao;
+        this.redisService = redisService;
+        this.threadPoolTaskScheduler = threadPoolTaskScheduler;
     }
 
     /**
@@ -102,65 +94,113 @@ public class  TaskConfig implements SchedulingConfigurer {
     }
 
     /**
-     * 配置定时器
-     * @param taskRegistrar ScheduledTaskRegistrar
+     * spring容器初始化时初始化全部定时任务
      */
-    @Override
-    @Transactional
-    public void configureTasks(@NotNull ScheduledTaskRegistrar taskRegistrar) {
-
+    @Init
+    private void init(){
         //获取持久层定时任务数据集
-        List<SysTaskEntity> list = dao.findAll("select * from sys_task", SysTaskEntity.class);
-
+        List<SysTaskEntity> list = dao.findAll(SysTaskEntity.class);
         for (int i = 0 ; i < list.size();i++ ) {
             SysTaskEntity sysTaskEntity = list.get(i);
+            addTask(sysTaskEntity);
+        }
+    }
 
+    /**
+     * 根据定时任务对象添加定时任务
+     * @return 是否添加成功
+     */
+    private boolean addTask(SysTaskEntity sysTaskEntity){
+        try {
             //获取定时任务详情列表
             List<SysTaskTargetEntity> sysTaskTargetEntityList = dao.findAll("select a.* from sys_task_target a left join sys_bt_task_target b on b.sys_task_target_id = a.sys_task_target_id where b.sys_task_id = ? order by b.order", SysTaskTargetEntity.class, sysTaskEntity.getSysTaskId());
 
             if(ObjectUtil.isEmpty(sysTaskTargetEntityList)){
-                continue;
+                return false;
             }
 
             //新建定时任务触发器
             TaskTrigger trigger = new TaskTrigger(sysTaskEntity.getCron(),sysTaskEntity.getSync());
 
             //新建任务
-            Job job = new Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
+            TaskService.Job job = new TaskService.Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
+
+            ScheduledFuture scheduledFuture = null;
+            if(sysTaskEntity.getState()){
+                scheduledFuture = threadPoolTaskScheduler.schedule(job, trigger);
+            }
 
             //定时任务装入缓冲区
-            taskInfoMap.put(sysTaskEntity.getSysTaskId().toString(), new TaskInfo(sysTaskEntity,trigger,job));
+            taskInfoMap.put(sysTaskEntity.getSysTaskId().toString(), new TaskInfo(sysTaskEntity,trigger,job,scheduledFuture));
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 
-            if(sysTaskEntity.getState()){
-                taskRegistrar.addTriggerTask(job,trigger);
-            }
+    /**
+     * 删除定时任务
+     * @param id sysTaskEntity主键
+     * @return 是否成功
+     */
+    private boolean removeTask(String id){
+        if(taskInfoMap.containsKey(id)){
+            if(!stopTask(id))return false;
+            taskInfoMap.remove(id);
+        }
+        return true;
+    }
+
+    /**
+     * 停止定时任务
+     * @param id sysTaskEntity主键
+     * @return 是否成功
+     */
+    private boolean stopTask(String id){
+        try {
+            TaskInfo taskInfo = taskInfoMap.get(id);
+            if(ObjectUtil.isEmpty(taskInfo))return true;
+            ScheduledFuture future = taskInfo.getScheduledFuture();
+            if(ObjectUtil.isEmpty(future))return true;
+            future.cancel(Boolean.TRUE);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * 开启定时任务
+     * @param id sysTaskEntity主键
+     * @return 是否成功
+     */
+    private boolean startTask(String id){
+        try {
+            TaskInfo taskInfo = taskInfoMap.get(id);
+            if(ObjectUtil.isEmpty(taskInfo))return false;
+            ScheduledFuture future = threadPoolTaskScheduler.schedule(taskInfo.getJob(), taskInfo.getTrigger());
+            taskInfo.setScheduledFuture(future);
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 
     /**
-     * 添加定时任务配置
+     * 更新定时任务
+     * @param sysTaskEntity 定时任务对象
+     * @return 是否成功
      */
-    public void addConfigureTasks(SysTaskEntity sysTaskEntity,List<SysTaskTargetEntity> sysTaskTargetEntityList){
-        if(ObjectUtil.isEmpty(sysTaskTargetEntityList)){
-            return;
+    private boolean updateTask(SysTaskEntity sysTaskEntity){
+        try {
+            if(!removeTask(sysTaskEntity.getSysTaskId().toString()))return false;
+            return addTask(sysTaskEntity);
+        }catch (Exception e){
+            return false;
         }
-        //新建定时任务触发器
-        TaskTrigger trigger = new TaskTrigger(sysTaskEntity.getCron(),sysTaskEntity.getSync());
-
-        //新建任务
-        Job job = new Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
-
-        //定时任务装入缓冲区
-        taskInfoMap.put(sysTaskEntity.getName(), new TaskInfo(sysTaskEntity,trigger,job));
     }
 
-    /**
-     * 删除定时任务配置
-     */
-    public void removeConfigureTasks(String taskName){
-        if(taskInfoMap.containsKey(taskName))
-        taskInfoMap.remove(taskName);
-    }
 
     /**
      * 获取分布式锁

@@ -6,6 +6,7 @@ import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
 import org.hibernate.transform.Transformers;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -284,7 +285,7 @@ public class Dao {
             Id id = method.getAnnotation(Id.class);
             if(ObjectUtil.isEmpty(id))continue;
             try {
-                return clazz.getDeclaredField(StringUtil.toLowerName(method.getName().replace("get","")));
+                return clazz.getDeclaredField(StringUtil.toLowerName(method.getName().replaceFirst("get","")));
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             }
@@ -351,6 +352,19 @@ public class Dao {
     }
 
     /**
+     * 按照例子查询单条
+     */
+    public <T>T findOne(T object){
+        try {
+            Example<T> example = Example.of(object);
+            return (T) this.getRepository(object.getClass()).findOne(example).get();
+        } catch (NoSuchIDException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 查询列表
      * @param sql sql
      * @param clazz 返回ORM类型列表
@@ -364,6 +378,33 @@ public class Dao {
         List list = query.getResultList();
         if (ObjectUtil.isEmpty(list) || list.size()<1)return null;
         return (T)query.getSingleResult();
+    }
+
+    /**
+     * 按照例子查询多条
+     */
+    public <T>List<T> findAll(T object){
+        try {
+            Example<T> example = Example.of(object);
+            return this.getRepository(object.getClass()).findAll(example);
+        } catch (NoSuchIDException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 按照例子查询多条分页
+     */
+    public <T>Page findAll(T object, int page, int size){
+        try {
+            Example<T> example = Example.of(object);
+            return this.getRepository(object.getClass()).findAll(example,PageRequest.of(page,size));
+        } catch (NoSuchIDException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -538,6 +579,19 @@ public class Dao {
     public <T>Page<T> findAll(Class<T> tableClass,int page, int size){
         try {
             return getRepository(tableClass).findAll(PageRequest.of(page,size));
+        } catch (NoSuchIDException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 查询列表
+     */
+    @SuppressWarnings("unchecked")
+    public <T>List<T> findAll(Class<T> tableClass){
+        try {
+            return getRepository(tableClass).findAll();
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
