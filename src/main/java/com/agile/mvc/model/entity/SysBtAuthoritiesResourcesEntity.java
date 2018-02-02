@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,11 +14,11 @@ public class SysBtAuthoritiesResourcesEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer sysBtAuthoritiesResourcesId;
-    //资源唯一标识
+    @Remark("资源唯一标识")
     private int resourceId;
-    //权限唯一标识
+    @Remark("权限唯一标识")
     private int authorityId;
 
     //无参构造器

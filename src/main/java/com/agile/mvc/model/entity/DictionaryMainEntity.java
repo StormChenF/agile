@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,11 +14,11 @@ public class DictionaryMainEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //字典编码
+    @Remark("字典编码")
     private Integer code;
-    //字典名称
+    @Remark("字典名称")
     private String name;
-    //是否是常量
+    @Remark("是否是常量")
     private Boolean isConstant;
 
     //无参构造器

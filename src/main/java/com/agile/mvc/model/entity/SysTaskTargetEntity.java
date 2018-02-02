@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,24 +14,24 @@ public class SysTaskTargetEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
-    private Integer sysTaskTargetId;
-    //方法含义名
+    @Remark("唯一标识")
+    private String sysTaskTargetId;
+    @Remark("方法含义名")
     private String name;
-    //包名
+    @Remark("包名")
     private String targetPackage;
-    //类名
+    @Remark("类名")
     private String targetClass;
-    //方法名
+    @Remark("方法名")
     private String targetMethod;
-    //备注
+    @Remark("备注")
     private String remarks;
 
     //无参构造器
     public SysTaskTargetEntity(){}
 
     //有参构造器
-    public SysTaskTargetEntity(Integer sysTaskTargetId,String name,String targetPackage,String targetClass,String targetMethod,String remarks){
+    public SysTaskTargetEntity(String sysTaskTargetId,String name,String targetPackage,String targetClass,String targetMethod,String remarks){
         this.sysTaskTargetId = sysTaskTargetId;
         this.name = name;
         this.targetPackage = targetPackage;
@@ -41,16 +42,16 @@ public class SysTaskTargetEntity implements Serializable {
 
     @Id
     @Column(name = "sys_task_target_id" , nullable = false )
-    public Integer getSysTaskTargetId() {
+    public String getSysTaskTargetId() {
         return sysTaskTargetId;
     }
 
-    public void setSysTaskTargetId(int sysTaskTargetId) {
+    public void setSysTaskTargetId(String sysTaskTargetId) {
         this.sysTaskTargetId = sysTaskTargetId;
     }
 
     @Basic
-    @Column(name = "name" , nullable = false )
+    @Column(name = "name" )
     public String getName() {
         return name;
     }
@@ -121,7 +122,7 @@ public class SysTaskTargetEntity implements Serializable {
     @Override
     public String toString() {
         return "SysTaskTargetEntity{" +
-        "sysTaskTargetId=" + sysTaskTargetId +
+        "sysTaskTargetId='" + sysTaskTargetId + '\'' +
         ",name='" + name + '\'' +
         ",targetPackage='" + targetPackage + '\'' +
         ",targetClass='" + targetClass + '\'' +
@@ -140,14 +141,14 @@ public class SysTaskTargetEntity implements Serializable {
     }
 
     public static class Builder{
-        private Integer sysTaskTargetId;
+        private String sysTaskTargetId;
         private String name;
         private String targetPackage;
         private String targetClass;
         private String targetMethod;
         private String remarks;
 
-        public Builder setSysTaskTargetId(int sysTaskTargetId) {
+        public Builder setSysTaskTargetId(String sysTaskTargetId) {
             this.sysTaskTargetId = sysTaskTargetId;
             return this;
         }

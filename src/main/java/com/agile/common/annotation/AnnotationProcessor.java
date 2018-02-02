@@ -3,8 +3,9 @@ package com.agile.common.annotation;
 import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
+import com.agile.mvc.model.dao.Dao;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.aop.support.AopUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class AnnotationProcessor implements EnvironmentAware {
      * 准备处理的注解
      */
     public static Class[] classAnnotations = {Properties.class};
-    public static Class[] methodAnnotations = {Init.class,TaskTarget.class};
+    public static Class[] methodAnnotations = {Init.class};
 
     void Init(Init init, Object bean,Method method){
         method.setAccessible(true);
@@ -102,10 +103,6 @@ public class AnnotationProcessor implements EnvironmentAware {
                 }
             }
         }
-    }
-
-    void TaskTarget(TaskTarget taskTarget, Object bean,Method method){
-
     }
 
     @Override

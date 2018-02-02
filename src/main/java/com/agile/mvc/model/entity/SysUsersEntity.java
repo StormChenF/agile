@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,37 +17,37 @@ public class SysUsersEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer sysUsersId;
-    //用户名
+    @Remark("用户名")
     private String username;
-    //用户姓名
+    @Remark("用户姓名")
     private String name;
-    //密码
+    @Remark("密码")
     private String password;
-    //创建日期
+    @Remark("创建日期")
     private Date dtCreate;
-    //最后登录日期
+    @Remark("最后登录日期")
     private Date lastLogin;
-    //截止日期
+    @Remark("截止日期")
     private Date deadline;
-    //最后登录IP地址
+    @Remark("最后登录IP地址")
     private String loginIp;
-    //所属机构ID
+    @Remark("所属机构ID")
     private String vQzjgid;
-    //所属机构名称
+    @Remark("所属机构名称")
     private String vQzjgmc;
-    //地区编号
+    @Remark("地区编号")
     private String depId;
-    //地区名称
+    @Remark("地区名称")
     private String depName;
-    //是否可用
+    @Remark("是否可用")
     private Boolean enabled;
-    //用户是否过期
+    @Remark("用户是否过期")
     private Boolean accountNonExpired;
-    //用户是否锁定
+    @Remark("用户是否锁定")
     private Boolean accountNonLocked;
-    //用户证书是否有效
+    @Remark("用户证书是否有效")
     private Boolean credentialsNonExpired;
 
     //无参构造器

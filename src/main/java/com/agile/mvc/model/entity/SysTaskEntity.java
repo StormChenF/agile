@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,19 +16,19 @@ public class SysTaskEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //主键
+    @Remark("主键")
     private Integer sysTaskId;
-    //定时任务名
+    @Remark("定时任务名")
     private String name;
-    //状态
+    @Remark("状态")
     private Boolean state;
-    //定时表达式
+    @Remark("定时表达式")
     private String cron;
-    //是否同步
+    @Remark("是否同步")
     private Boolean sync;
-    //更新时间
+    @Remark("更新时间")
     private Date updateTime;
-    //创建时间
+    @Remark("创建时间")
     private Date createTime;
 
     //无参构造器

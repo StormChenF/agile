@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,15 +15,15 @@ public class SysPersistentLoginsEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer sysPersistentLoginsId;
-    //用户名
+    @Remark("用户名")
     private String username;
-    //序列
+    @Remark("序列")
     private String series;
-    //认证信息
+    @Remark("认证信息")
     private String token;
-    //最后时间
+    @Remark("最后时间")
     private Timestamp lastUsed;
 
     //无参构造器

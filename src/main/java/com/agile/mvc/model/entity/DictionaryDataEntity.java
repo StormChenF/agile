@@ -1,9 +1,6 @@
 package com.agile.mvc.model.entity;
 
-
-
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,20 +10,19 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "dictionary_data",  catalog = "agile_db")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE,region = "agileCache")
 public class DictionaryDataEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //字典编码
+    @Remark("字典编码")
     private Integer code;
-    //字典表_字典编码
+    @Remark("字典表_字典编码")
     private String dicCode;
-    //字典值显示名称
+    @Remark("字典值显示名称")
     private String name;
-    //字典值代表值
+    @Remark("字典值代表值")
     private String value;
-    //字典值是否固定
+    @Remark("字典值是否固定")
     private Boolean isFixed;
 
     //无参构造器

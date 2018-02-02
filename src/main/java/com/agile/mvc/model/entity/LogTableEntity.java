@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,17 +14,17 @@ public class LogTableEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer logTableId;
-    //日志标识
+    @Remark("日志标识")
     private int logMainId;
-    //数据库
+    @Remark("数据库")
     private String tableSchema;
-    //表名
+    @Remark("表名")
     private String tableName;
-    //操作类型
+    @Remark("操作类型")
     private String operationType;
-    //操作顺序
+    @Remark("操作顺序")
     private int operationOrder;
 
     //无参构造器

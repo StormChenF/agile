@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,21 +14,21 @@ public class SysAuthoritiesEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer sysAuthorityId;
-    //权限标识
+    @Remark("权限标识")
     private String authorityMark;
-    //权限名称
+    @Remark("权限名称")
     private String authorityName;
-    //权限说明
+    @Remark("权限说明")
     private String authorityDesc;
-    //提示信息
+    @Remark("提示信息")
     private String message;
-    //是否可用
+    @Remark("是否可用")
     private Boolean enable;
-    //是否系统权限
+    @Remark("是否系统权限")
     private Boolean issys;
-    //模块
+    @Remark("模块")
     private String moduleId;
 
     //无参构造器

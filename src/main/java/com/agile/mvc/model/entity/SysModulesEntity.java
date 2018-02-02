@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,29 +14,29 @@ public class SysModulesEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer sysModulesId;
-    //模块名称
+    @Remark("模块名称")
     private String moduleName;
-    //模块说明
+    @Remark("模块说明")
     private String moduleDesc;
-    //模块类型
+    @Remark("模块类型")
     private String moduleType;
-    //模块上级
+    @Remark("模块上级")
     private String parent;
-    //模块地址
+    @Remark("模块地址")
     private String moduleUrl;
-    //菜单级别
+    @Remark("菜单级别")
     private String iLevel;
-    //最下级
+    @Remark("最下级")
     private String leaf;
-    //应用名称
+    @Remark("应用名称")
     private String application;
-    //控制器名称
+    @Remark("控制器名称")
     private String controller;
-    //是否可用
+    @Remark("是否可用")
     private Boolean enable;
-    //优先级
+    @Remark("优先级")
     private String priority;
 
     //无参构造器

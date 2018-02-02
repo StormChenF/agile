@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,17 +14,17 @@ public class SysRolesEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //角色唯一标识
+    @Remark("角色唯一标识")
     private Integer sysRolesId;
-    //角色名称
+    @Remark("角色名称")
     private String roleName;
-    //角色说明
+    @Remark("角色说明")
     private String roleDesc;
-    //是否可用
+    @Remark("是否可用")
     private Boolean enable;
-    //是否系统权限
+    @Remark("是否系统权限")
     private Boolean issys;
-    //模块
+    @Remark("模块")
     private String moduleId;
 
     //无参构造器

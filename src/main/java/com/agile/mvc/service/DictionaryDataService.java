@@ -1,7 +1,6 @@
 package com.agile.mvc.service;
 
 import com.agile.common.annotation.Init;
-import com.agile.common.annotation.TaskTarget;
 import com.agile.common.server.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.ObjectUtil;
@@ -42,7 +41,6 @@ public class DictionaryDataService extends MainService {
      * 修改
      * 地址：http://localhost:8080/SysUsersService/update
      */
-    @TaskTarget(name = "更新")
     public RETURN update() throws IllegalAccessException {
         DictionaryDataEntity entity = ObjectUtil.getObjectFromMap(DictionaryDataEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getCode())) return RETURN.PARAMETER_ERROR;
@@ -54,17 +52,20 @@ public class DictionaryDataService extends MainService {
      * 查询
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
-    @TaskTarget
     public RETURN query(){
         this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,0,10));
         return RETURN.SUCCESS;
     }
-
     @Init
-    private void asd(){
+    private void init(){
+        System.out.println("00000000000000000000\t");
+    }
+
+    private void task1(){
         System.out.println("11111111111111111111\t");
-        System.out.println("11111111111111111111\t");
-        System.out.println("11111111111111111111\t");
-        System.out.println("11111111111111111111\t");
+    }
+
+    private void task2(){
+        System.out.println("22222222222222222222\t");
     }
 }

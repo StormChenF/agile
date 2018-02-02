@@ -1,5 +1,6 @@
 package ${entityPackage};
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class ${className}Entity implements Serializable {
     //序列
     private static final long serialVersionUID = 1L;
 <#list columnList as property>
-    //${property.remarks}
+    @Remark("${property.remarks}")
     private ${property.propertyType} ${property.propertyName};
 </#list>
 

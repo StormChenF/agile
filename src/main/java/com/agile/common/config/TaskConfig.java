@@ -1,6 +1,5 @@
 package com.agile.common.config;
 
-import com.agile.common.annotation.TaskTarget;
 import com.agile.common.base.TaskInfo;
 import com.agile.common.base.TaskTrigger;
 import com.agile.common.server.RedisService;
@@ -14,14 +13,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ReflectionUtils;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -31,7 +28,7 @@ import java.util.*;
  * Created by 佟盟 on 2017/11/30
  */
 @Component
-public class  TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
+public class  TaskConfig implements SchedulingConfigurer {
     @Autowired
     private Dao dao;
     @Autowired
@@ -45,27 +42,6 @@ public class  TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
 
     public Map <String, TaskInfo> getTaskInfoMap() {
         return taskInfoMap;
-    }
-
-    @NotNull
-    @Override
-    @Transactional
-    public Object postProcessBeforeInitialization(@NotNull Object bean, String beanName) throws BeansException {
-        Method[] methods =  ReflectionUtils.getUniqueDeclaredMethods(bean.getClass());
-        int j = 1;
-        for(int i = 0 ; i < methods.length;i++){
-            TaskTarget taskTarget = AnnotationUtils.findAnnotation(methods[i],TaskTarget.class);
-            if(!ObjectUtil.isEmpty(taskTarget)){
-                SysTaskTargetEntity sysTaskTargetEntity = new SysTaskTargetEntity();
-                sysTaskTargetEntity.setSysTaskTargetId(j++);
-                sysTaskTargetEntity.setTargetPackage(bean.getClass().getPackage().getName());
-                sysTaskTargetEntity.setTargetClass(bean.getClass().getSimpleName());
-                sysTaskTargetEntity.setTargetMethod(methods[i].getName());
-                sysTaskTargetEntity.setName(ObjectUtil.isEmpty(taskTarget.name())?bean.getClass().getName()+"."+methods[i].getName():taskTarget.name());
-                dao.update(sysTaskTargetEntity);
-            }
-        }
-        return bean;
     }
 
     /**
@@ -117,6 +93,7 @@ public class  TaskConfig implements BeanPostProcessor, SchedulingConfigurer {
                 Class<?> clazz = Class.forName(className);
                 Object targetBaen = FactoryUtil.getBean(clazz);
                 Method taretMethod = clazz.getDeclaredMethod(sysTaskTargetEntity.getTargetMethod());
+                taretMethod.setAccessible(true);
                 taretMethod.invoke(targetBaen);
             }
         } catch (IllegalAccessException | InvocationTargetException | ClassNotFoundException | NoSuchMethodException e) {

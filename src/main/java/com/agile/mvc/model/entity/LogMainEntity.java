@@ -1,5 +1,6 @@
 package com.agile.mvc.model.entity;
 
+import com.agile.common.annotation.Remark;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,17 +15,17 @@ public class LogMainEntity implements Serializable {
 
     //序列
     private static final long serialVersionUID = 1L;
-    //唯一标识
+    @Remark("唯一标识")
     private Integer logMainId;
-    //业务编码
+    @Remark("业务编码")
     private String businessCode;
-    //业务对象类型
+    @Remark("业务对象类型")
     private String targetType;
-    //业务对象标识
+    @Remark("业务对象标识")
     private String targetCode;
-    //操作人
+    @Remark("操作人")
     private int userId;
-    //操作时间
+    @Remark("操作时间")
     private Date createTime;
 
     //无参构造器

@@ -21,6 +21,7 @@ public class ClassUtil extends ClassUtils {
         if ("double".equals(name))return "Double";
         if ("boolean".equals(name))return "Boolean";
         if ("char".equals(name))return "Character";
+        if ("String".equals(name))return "String";
         return null;
     }
 

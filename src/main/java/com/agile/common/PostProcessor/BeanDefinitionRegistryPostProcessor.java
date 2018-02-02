@@ -1,4 +1,4 @@
-package com.agile.common.config;
+package com.agile.common.PostProcessor;
 
 import com.agile.common.annotation.AnnotationProcessor;
 import org.springframework.beans.BeansException;
@@ -60,11 +60,11 @@ public class BeanDefinitionRegistryPostProcessor implements org.springframework.
         for(Map.Entry<String, Object> map: beans.entrySet()){
             Object bean = map.getValue();
             Class<?> targetClass = bean.getClass();
-            T properties = targetClass.getAnnotation(clazz);
+            T annotation = targetClass.getAnnotation(clazz);
             try {
                 Method method = AnnotationProcessor.class.getDeclaredMethod(clazz.getSimpleName(), clazz, Object.class);
                 method.setAccessible(true);
-                ReflectionUtils.invokeMethod(method,applicationContext.getBean(AnnotationProcessor.class),properties,bean);
+                ReflectionUtils.invokeMethod(method,applicationContext.getBean(AnnotationProcessor.class),annotation,bean);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
