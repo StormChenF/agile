@@ -1,17 +1,18 @@
 package com.agile.common.server;
 
 import com.agile.common.annotation.Init;
-import com.agile.common.base.TaskInfo;
-import com.agile.common.base.TaskTrigger;
+import com.agile.common.base.RETURN;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.ObjectUtil;
-import com.agile.mvc.model.dao.Dao;
 import com.agile.mvc.model.entity.SysTaskEntity;
 import com.agile.mvc.model.entity.SysTaskTargetEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.Trigger;
+import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.scheduling.support.SimpleTriggerContext;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,19 +22,91 @@ import java.util.concurrent.ScheduledFuture;
 /**
  * Created by 佟盟 on 2018/2/2
  */
-@Component
-public class TaskService {
-    private final Dao dao;
+@Service
+public class TaskService extends MainService{
     private final RedisService redisService;
     private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
     private static Map<String, TaskInfo> taskInfoMap = new HashMap<>();
 
     @Autowired
-    public TaskService(Dao dao, RedisService redisService, ThreadPoolTaskScheduler threadPoolTaskScheduler) {
-        this.dao = dao;
+    public TaskService(RedisService redisService, ThreadPoolTaskScheduler threadPoolTaskScheduler) {
         this.redisService = redisService;
         this.threadPoolTaskScheduler = threadPoolTaskScheduler;
+    }
+
+    /**
+     * 定时任务信息
+     */
+    public class TaskInfo extends SysTaskEntity{
+        private TaskTrigger trigger; //触发器
+        private TaskService.Job job; //任务
+        private ScheduledFuture scheduledFuture;
+
+        public TaskInfo(SysTaskEntity sysTaskEntity, TaskTrigger trigger, TaskService.Job job, ScheduledFuture scheduledFuture) {
+            ObjectUtil.copyProperties(sysTaskEntity,this);
+            this.trigger = trigger;
+            this.job = job;
+            this.scheduledFuture = scheduledFuture;
+        }
+
+        public TaskTrigger getTrigger() {
+            return trigger;
+        }
+
+        public void setTrigger(TaskTrigger trigger) {
+            this.trigger = trigger;
+        }
+
+        public TaskService.Job getJob() {
+            return job;
+        }
+
+        public void setJob(TaskService.Job job) {
+            this.job = job;
+        }
+
+        public ScheduledFuture getScheduledFuture() {
+            return scheduledFuture;
+        }
+
+        public void setScheduledFuture(ScheduledFuture scheduledFuture) {
+            this.scheduledFuture = scheduledFuture;
+        }
+    }
+
+    /**
+     * 定时任务触发器
+     */
+    public class TaskTrigger implements Trigger, Serializable{
+        private String cron;
+        private boolean sync;
+
+        TaskTrigger(String cron, boolean sync){
+            this.cron = cron;
+            this.sync = sync;
+        }
+        @Override
+        public Date nextExecutionTime(TriggerContext triggerContext) {
+            CronTrigger cronTrigger = new CronTrigger(this.cron);
+            return cronTrigger.nextExecutionTime(triggerContext);
+        }
+
+        public String getCron() {
+            return cron;
+        }
+
+        public void setCron(String cron) {
+            this.cron = cron;
+        }
+
+        public boolean isSync() {
+            return sync;
+        }
+
+        public void setSync(boolean sync) {
+            this.sync = sync;
+        }
     }
 
     /**
@@ -139,10 +212,31 @@ public class TaskService {
     }
 
     /**
+     * 根据定时任务对象添加定时任务
+     * @return 是否添加成功
+     */
+    public RETURN addTask() throws IllegalAccessException {
+        SysTaskEntity entity = ObjectUtil.getObjectFromMap(SysTaskEntity.class, this.getInParam());
+        if (!ObjectUtil.isValidity(entity)) return RETURN.PARAMETER_ERROR;
+        dao.save(entity);
+        if(this.addTask(entity)){
+            return RETURN.SUCCESS;
+        }
+        return RETURN.EXPRESSION;
+    }
+
+    /**
      * 删除定时任务
-     * @param id sysTaskEntity主键
      * @return 是否成功
      */
+    public RETURN removeTask(){
+        String id = this.getInParamOfString("id");
+        if(this.removeTask(id)){
+            return RETURN.SUCCESS;
+        }
+        return RETURN.EXPRESSION;
+    }
+
     private boolean removeTask(String id){
         if(taskInfoMap.containsKey(id)){
             if(!stopTask(id))return false;
@@ -153,9 +247,15 @@ public class TaskService {
 
     /**
      * 停止定时任务
-     * @param id sysTaskEntity主键
      * @return 是否成功
      */
+    public RETURN stopTask(){
+        String id = this.getInParamOfString("id");
+        if(this.stopTask(id)){
+            return RETURN.SUCCESS;
+        }
+        return RETURN.EXPRESSION;
+    }
     private boolean stopTask(String id){
         try {
             TaskInfo taskInfo = taskInfoMap.get(id);
@@ -172,26 +272,36 @@ public class TaskService {
 
     /**
      * 开启定时任务
-     * @param id sysTaskEntity主键
      * @return 是否成功
      */
-    private boolean startTask(String id){
+    public RETURN startTask(){
         try {
+            String id = this.getInParamOfString("id");
             TaskInfo taskInfo = taskInfoMap.get(id);
-            if(ObjectUtil.isEmpty(taskInfo))return false;
-            ScheduledFuture future = threadPoolTaskScheduler.schedule(taskInfo.getJob(), taskInfo.getTrigger());
+            if(ObjectUtil.isEmpty(taskInfo))return RETURN.EXPRESSION;
+            ScheduledFuture future = this.threadPoolTaskScheduler.schedule(taskInfo.getJob(), taskInfo.getTrigger());
             taskInfo.setScheduledFuture(future);
-            return true;
+            return RETURN.SUCCESS;
         }catch (Exception e){
-            return false;
+            e.printStackTrace();
+            return RETURN.EXPRESSION;
         }
     }
 
     /**
      * 更新定时任务
-     * @param sysTaskEntity 定时任务对象
      * @return 是否成功
      */
+    public RETURN updateTask() throws IllegalAccessException {
+        SysTaskEntity entity = ObjectUtil.getObjectFromMap(SysTaskEntity.class, this.getInParam());
+        if (ObjectUtil.isEmpty(entity.getSysTaskId())) return RETURN.PARAMETER_ERROR;
+        dao.update(entity);
+        if(this.updateTask(entity)){
+            return RETURN.SUCCESS;
+        }
+        return RETURN.EXPRESSION;
+    }
+
     private boolean updateTask(SysTaskEntity sysTaskEntity){
         try {
             if(!removeTask(sysTaskEntity.getSysTaskId().toString()))return false;
@@ -201,7 +311,12 @@ public class TaskService {
         }
     }
 
-
+    public RETURN query(){
+        int page = this.getInParamOfInteger("page", 0);
+        int size = this.getInParamOfInteger("size", 10);
+        this.setOutParam("queryList",dao.findAll(SysTaskEntity.class,page,size));
+        return RETURN.SUCCESS;
+    }
     /**
      * 获取分布式锁
      *

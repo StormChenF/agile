@@ -1,4 +1,4 @@
-package com.agile.common.PostProcessor;
+package com.agile.common.postProcessor;
 
 import com.agile.common.annotation.AnnotationProcessor;
 import com.agile.common.util.ArrayUtil;
@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by 佟盟 on 2018/1/19
+ * bean初始化对象过程
  */
 @Component
 public class BeanPostProcessor implements org.springframework.beans.factory.config.BeanPostProcessor,ApplicationContextAware{
@@ -32,12 +33,12 @@ public class BeanPostProcessor implements org.springframework.beans.factory.conf
     @Transactional
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         testSysTask(bean);
+        annotationProcessor(bean);
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        annotationProcessor(bean);
         return bean;
     }
 

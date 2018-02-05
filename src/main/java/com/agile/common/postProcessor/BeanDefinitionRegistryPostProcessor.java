@@ -1,4 +1,4 @@
-package com.agile.common.PostProcessor;
+package com.agile.common.postProcessor;
 
 import com.agile.common.annotation.AnnotationProcessor;
 import org.springframework.beans.BeansException;
@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by 佟盟 on 2018/1/19
+ * bean定义过程
  */
 @Component
 public class BeanDefinitionRegistryPostProcessor implements org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor,EnvironmentAware,ApplicationContextAware {
@@ -47,7 +48,7 @@ public class BeanDefinitionRegistryPostProcessor implements org.springframework.
     }
 
     /**
-     * 处理自定义注解
+     * 1：处理自定义注解
      */
     private void annotationProcessor(){
         for(int i = 0; i < AnnotationProcessor.classAnnotations.length; i++){
@@ -55,6 +56,9 @@ public class BeanDefinitionRegistryPostProcessor implements org.springframework.
         }
     }
 
+    /**
+     * 2：处理自定义注解
+     */
     private <T extends Annotation> void annotationPricessor(Class<T> clazz){
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(clazz);
         for(Map.Entry<String, Object> map: beans.entrySet()){
