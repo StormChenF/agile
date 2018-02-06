@@ -50,4 +50,13 @@ public final class FactoryUtil {
         return factoryUtil.applicationContext.getBean(clazz);
     }
 
+    /**
+     * 根据类型查询bean对象
+     * @param var1 bean类型
+     * @return bean对象
+     */
+    public static String[] getBeanNamesForType(Class<?> var1){
+        return factoryUtil.applicationContext.getBeanNamesForType(var1);
+    }
+
 }

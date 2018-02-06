@@ -12,6 +12,7 @@ import com.agile.common.util.FileUtil;
 import com.agile.common.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -40,13 +40,13 @@ public class MainController implements EnvironmentAware {
 
     private ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
     private Environment environment;
-    /**
-     * 非法请求处理器
-     */
-    @RequestMapping(value = {"/","/*","/*/*/*/**"})
-    public void processor() throws UnlawfulRequestException {
-        throw new UnlawfulRequestException();
-    }
+//    /**
+//     * 非法请求处理器
+//     */
+//    @RequestMapping(value = {"/","/*","/*/*/*/**"})
+//    public void processor() throws UnlawfulRequestException {
+//        throw new UnlawfulRequestException();
+//    }
 
     /**
      * agile框架处理器
@@ -61,6 +61,7 @@ public class MainController implements EnvironmentAware {
      * @throws NoSuchMethodException 没有这样的方法异常
      * @throws SecurityException 安全异常
      */
+    @Order(1)
     @RequestMapping(value = "/{service}/{method}")
     public ModelAndView processor(
             HttpServletRequest request,
@@ -261,6 +262,11 @@ public class MainController implements EnvironmentAware {
         headers.setContentDispositionFormData(Constant.HeaderAbout.ATTACHMENT,new String(fileName.getBytes(Charset.forName("UTF-8")),Charset.forName("ISO-8859-1")));
         return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
     }
+
+//    @RequestMapping("/api")
+//    private Object api(){
+//        return JSONObject.fromObject(s);
+//    }
 
     private ServiceInterface getService() {
         return service.get();

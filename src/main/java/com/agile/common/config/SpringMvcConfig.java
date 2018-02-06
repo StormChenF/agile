@@ -11,9 +11,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +30,12 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     private final XmlViewResolver xmlViewResolver;
 
     private final SpringMVCProperties springMVCProperties;
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.setOrder(1).addResourceHandler("/**")
+                .addResourceLocations("static/","static/swagger-lib/","static/img/");
+    }
 
     @Autowired
     public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver,SpringMVCProperties springMVCProperties) {

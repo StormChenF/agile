@@ -36,7 +36,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
     @Transactional
     public RETURN executeMethod(String methodName,Object object) throws Throwable {
         try {
-            Method method = this.getClass().getDeclaredMethod(methodName);
+             Method method = this.getClass().getDeclaredMethod(methodName);
             //取消安全检测，提高性能
             method.setAccessible(true);
             return (RETURN) method.invoke(object);

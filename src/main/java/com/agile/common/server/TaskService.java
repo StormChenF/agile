@@ -232,6 +232,7 @@ public class TaskService extends MainService{
     public RETURN removeTask(){
         String id = this.getInParamOfString("id");
         if(this.removeTask(id)){
+            this.dao.deleteById(SysTaskEntity.class,Integer.parseInt(id));
             return RETURN.SUCCESS;
         }
         return RETURN.EXPRESSION;
@@ -252,6 +253,9 @@ public class TaskService extends MainService{
     public RETURN stopTask(){
         String id = this.getInParamOfString("id");
         if(this.stopTask(id)){
+            SysTaskEntity entity = dao.findOne(SysTaskEntity.class, Integer.parseInt(id));
+            entity.setState(false);
+            dao.update(entity);
             return RETURN.SUCCESS;
         }
         return RETURN.EXPRESSION;
@@ -281,6 +285,10 @@ public class TaskService extends MainService{
             if(ObjectUtil.isEmpty(taskInfo))return RETURN.EXPRESSION;
             ScheduledFuture future = this.threadPoolTaskScheduler.schedule(taskInfo.getJob(), taskInfo.getTrigger());
             taskInfo.setScheduledFuture(future);
+
+            SysTaskEntity entity = dao.findOne(SysTaskEntity.class, Integer.parseInt(id));
+            entity.setState(false);
+            dao.update(entity);
             return RETURN.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
