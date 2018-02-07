@@ -1,5 +1,6 @@
 package com.agile.common.postProcessor;
 
+import com.agile.common.annotation.API;
 import com.agile.common.annotation.AnnotationProcessor;
 import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.ObjectUtil;
@@ -9,6 +10,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
@@ -33,7 +35,8 @@ public class BeanPostProcessor implements org.springframework.beans.factory.conf
     @Transactional
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         testSysTask(bean);
-        annotationProcessor(bean);
+        methodAnnotationProcessor(bean);
+        classAnnotationProcessor(bean);
         return bean;
     }
 
@@ -45,7 +48,7 @@ public class BeanPostProcessor implements org.springframework.beans.factory.conf
     /**
      * 处理自定义注解
      */
-    private void annotationProcessor(Object bean) {
+    private void methodAnnotationProcessor(Object bean) {
         Method[] methods =  ReflectionUtils.getUniqueDeclaredMethods(bean.getClass());
         for(int i = 0; i < methods.length; i++){
             Method method = methods[i];
@@ -63,6 +66,27 @@ public class BeanPostProcessor implements org.springframework.beans.factory.conf
                 }
             }
         }
+    }
+
+    /**
+     * 处理自定义注解
+     */
+    private void classAnnotationProcessor(Object bean){
+        Class<?> clazz = bean.getClass();
+        Annotation[] annotations = clazz.getDeclaredAnnotations();
+        for(int i = 0 ; i < annotations.length;i++){
+            Class<? extends Annotation> annotationClazz = annotations[i].annotationType();
+            if(ArrayUtil.contains(AnnotationProcessor.afterClassAnnotations,annotationClazz)){
+                try {
+                    Method annotationMethod = AnnotationProcessor.class.getDeclaredMethod(annotationClazz.getSimpleName(), annotationClazz, Object.class);
+                    annotationMethod.setAccessible(true);
+                    ReflectionUtils.invokeMethod(annotationMethod,applicationContext.getBean(AnnotationProcessor.class),annotations[i],bean);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     /**

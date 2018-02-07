@@ -170,7 +170,7 @@ public class TaskService extends MainService{
      * spring容器初始化时初始化全部定时任务
      */
     @Init
-    private void init(){
+    public void init(){
         //获取持久层定时任务数据集
         List<SysTaskEntity> list = dao.findAll(SysTaskEntity.class);
         for (int i = 0 ; i < list.size();i++ ) {

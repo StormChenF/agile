@@ -51,8 +51,8 @@ public class BeanDefinitionRegistryPostProcessor implements org.springframework.
      * 1：处理自定义注解
      */
     private void annotationProcessor(){
-        for(int i = 0; i < AnnotationProcessor.classAnnotations.length; i++){
-            this.annotationPricessor(AnnotationProcessor.classAnnotations[i]);
+        for(int i = 0; i < AnnotationProcessor.beforeClassAnnotations.length; i++){
+            this.annotationPricessor(AnnotationProcessor.beforeClassAnnotations[i]);
         }
     }
 

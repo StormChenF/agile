@@ -84,8 +84,13 @@ public class ServletUtil {
     /**
      * 获取本地Host名称
      */
-    public static String getLocalHostName() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostName();
+    public static String getLocalHostName(){
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
