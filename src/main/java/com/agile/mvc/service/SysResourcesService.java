@@ -18,8 +18,8 @@ public class SysResourcesService extends MainService {
             @Tag(name = "SysResources",description = "SysResources")
         },
         method = API.Method.POST,
-        summary = "新增SysResourcesEntity",
-        description = "新增SysResourcesEntity",
+        summary = "新增[系统管理]资源",
+        description = "新增[系统管理]资源",
         parameters = {
 
             @Param(name = "resourceType",in = "添加",description = "资源类型",required = true,type = Param.Type.STRING),
@@ -47,8 +47,8 @@ public class SysResourcesService extends MainService {
             @Tag(name = "SysResources",description = "SysResources")
         },
         method = API.Method.POST,
-        summary = "删除SysResourcesEntity",
-        description = "删除SysResourcesEntity",
+        summary = "删除[系统管理]资源",
+        description = "删除[系统管理]资源",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -70,8 +70,8 @@ public class SysResourcesService extends MainService {
             @Tag(name = "SysResources",description = "SysResources")
         },
         method = API.Method.POST,
-        summary = "更新SysResourcesEntity",
-        description = "更新SysResourcesEntity",
+        summary = "更新[系统管理]资源",
+        description = "更新[系统管理]资源",
         parameters = {
             @Param(name = "sysResourcesId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "resourceType",in = "更新",description = "资源类型",type = Param.Type.STRING),
@@ -99,8 +99,8 @@ public class SysResourcesService extends MainService {
             @Tag(name = "SysResources",description = "SysResources")
         },
         method = API.Method.GET,
-        summary = "查询SysResourcesEntity",
-        description = "查询SysResourcesEntity",
+        summary = "查询[系统管理]资源",
+        description = "查询[系统管理]资源",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

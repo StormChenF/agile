@@ -18,8 +18,8 @@ public class SysAuthoritiesService extends MainService {
             @Tag(name = "SysAuthorities",description = "SysAuthorities")
         },
         method = API.Method.POST,
-        summary = "新增SysAuthoritiesEntity",
-        description = "新增SysAuthoritiesEntity",
+        summary = "新增[系统管理]权限",
+        description = "新增[系统管理]权限",
         parameters = {
 
             @Param(name = "authorityMark",in = "添加",description = "权限标识",required = true,type = Param.Type.STRING),
@@ -46,8 +46,8 @@ public class SysAuthoritiesService extends MainService {
             @Tag(name = "SysAuthorities",description = "SysAuthorities")
         },
         method = API.Method.POST,
-        summary = "删除SysAuthoritiesEntity",
-        description = "删除SysAuthoritiesEntity",
+        summary = "删除[系统管理]权限",
+        description = "删除[系统管理]权限",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -69,8 +69,8 @@ public class SysAuthoritiesService extends MainService {
             @Tag(name = "SysAuthorities",description = "SysAuthorities")
         },
         method = API.Method.POST,
-        summary = "更新SysAuthoritiesEntity",
-        description = "更新SysAuthoritiesEntity",
+        summary = "更新[系统管理]权限",
+        description = "更新[系统管理]权限",
         parameters = {
             @Param(name = "sysAuthorityId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "authorityMark",in = "更新",description = "权限标识",type = Param.Type.STRING),
@@ -97,8 +97,8 @@ public class SysAuthoritiesService extends MainService {
             @Tag(name = "SysAuthorities",description = "SysAuthorities")
         },
         method = API.Method.GET,
-        summary = "查询SysAuthoritiesEntity",
-        description = "查询SysAuthoritiesEntity",
+        summary = "查询[系统管理]权限",
+        description = "查询[系统管理]权限",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

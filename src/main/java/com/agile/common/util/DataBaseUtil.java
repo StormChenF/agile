@@ -9,6 +9,7 @@ import java.sql.*;
  * Created by mydeathtrial on 2017/3/10
  */
 public class DataBaseUtil {
+    public static String type;
     public static ResultSet resultSet;
     public static DatabaseMetaData databaseMetaData;
     public static Statement statement;
@@ -26,10 +27,12 @@ public class DataBaseUtil {
         String db = PropertiesUtil.getProperty("agile.jpa.db").toLowerCase();
         switch (db){
             case "mysql":
+                type = "mysql";
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 druidUrl.append("jdbc:mysql://").append(PropertiesUtil.getProperty("agile.druid.data_base_ip")).append(":").append(PropertiesUtil.getProperty("agile.druid.data_base_post")).append("/").append(PropertiesUtil.getProperty("agile.druid.data_base_name")).append("?").append(PropertiesUtil.getProperty("agile.druid.data_base_url_param"));
                 break;
             case "oracle":
+                type = "oracle";
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 druidUrl.append("jdbc:oracle:thin:@").append(PropertiesUtil.getProperty("agile.druid.data_base_ip")).append(":").append(PropertiesUtil.getProperty("agile.druid.data_base_post")).append(":").append(PropertiesUtil.getProperty("agile.druid.data_base_name"));
                 break;

@@ -56,10 +56,10 @@ public class EhCacheRegionFactory extends SingletonEhCacheRegionFactory {
 //                        .properties("port=40004,socketTimeoutMillis=2000")//
 //                )
                 .defaultCache(new CacheConfiguration()
-                        .maxElementsInMemory(10000)
+                        .maxEntriesLocalHeap(10000)
                         .timeToIdleSeconds(120)
                         .timeToLiveSeconds(120)
-                        .maxElementsOnDisk(10000000)
+                        .maxEntriesLocalDisk(10000000)
                         .diskExpiryThreadIntervalSeconds(120)
                         .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LRU))
 //                .cache(new CacheConfiguration("agileCache", 10000)//缓存名称(必须唯一),maxElements内存最多可以存放的元素的数量
@@ -77,27 +77,21 @@ public class EhCacheRegionFactory extends SingletonEhCacheRegionFactory {
 //                        .cacheEventListenerFactory(new CacheConfiguration.CacheEventListenerFactoryConfiguration().className(RMICacheReplicatorFactory.class.getName()))
 //                )
                 .cache(new CacheConfiguration("agileCache", 10000)
-                        .maxElementsInMemory(1000)
-                        .overflowToDisk(true)
-                        .diskPersistent(false)
+                        .maxEntriesLocalHeap(1000)
                         .timeToIdleSeconds(300)
                         .timeToLiveSeconds(600)
                         .diskExpiryThreadIntervalSeconds(600))
                 .cache(new CacheConfiguration("securityCache", 10000)
-                        .maxElementsInMemory(1000)
-                        .overflowToDisk(true)
-                        .diskPersistent(true)
+                        .maxEntriesLocalHeap(1000)
                         .timeToIdleSeconds(300)
                         .timeToLiveSeconds(600)
                         .diskExpiryThreadIntervalSeconds(600))
                 .cache(new CacheConfiguration("org.hibernate.cache.spi.UpdateTimestampsCache", 10000)
-                        .maxElementsInMemory(5)
-                        .timeToLiveSeconds(120)
-                        .overflowToDisk(true))
+                        .maxEntriesLocalHeap(5)
+                        .timeToLiveSeconds(120))
                 .cache(new CacheConfiguration("org.hibernate.cache.internal.StandardQueryCache", 10000)
-                        .maxElementsInMemory(5000)
-                        .eternal(true)
-                        .overflowToDisk(true));
+                        .maxEntriesLocalHeap(5000)
+                        .eternal(true));
         configuration.setName("agileManager");
         return configuration;
     }

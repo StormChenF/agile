@@ -18,8 +18,8 @@ public class SysBtTaskTargetService extends MainService {
             @Tag(name = "SysBtTaskTarget",description = "SysBtTaskTarget")
         },
         method = API.Method.POST,
-        summary = "新增SysBtTaskTargetEntity",
-        description = "新增SysBtTaskTargetEntity",
+        summary = "新增",
+        description = "新增",
         parameters = {
 
             @Param(name = "sysTaskId",in = "添加",description = "定时任务标志",type = Param.Type.STRING),
@@ -42,8 +42,8 @@ public class SysBtTaskTargetService extends MainService {
             @Tag(name = "SysBtTaskTarget",description = "SysBtTaskTarget")
         },
         method = API.Method.POST,
-        summary = "删除SysBtTaskTargetEntity",
-        description = "删除SysBtTaskTargetEntity",
+        summary = "删除",
+        description = "删除",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -65,8 +65,8 @@ public class SysBtTaskTargetService extends MainService {
             @Tag(name = "SysBtTaskTarget",description = "SysBtTaskTarget")
         },
         method = API.Method.POST,
-        summary = "更新SysBtTaskTargetEntity",
-        description = "更新SysBtTaskTargetEntity",
+        summary = "更新",
+        description = "更新",
         parameters = {
             @Param(name = "sysBtTaskTargetId",in = "更新",description = "主键",required = true,type = Param.Type.STRING),
             @Param(name = "sysTaskId",in = "更新",description = "定时任务标志",type = Param.Type.STRING),
@@ -89,8 +89,8 @@ public class SysBtTaskTargetService extends MainService {
             @Tag(name = "SysBtTaskTarget",description = "SysBtTaskTarget")
         },
         method = API.Method.GET,
-        summary = "查询SysBtTaskTargetEntity",
-        description = "查询SysBtTaskTargetEntity",
+        summary = "查询",
+        description = "查询",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

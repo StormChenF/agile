@@ -18,8 +18,8 @@ public class LogTableService extends MainService {
             @Tag(name = "LogTable",description = "LogTable")
         },
         method = API.Method.POST,
-        summary = "新增LogTableEntity",
-        description = "新增LogTableEntity",
+        summary = "新增日志相关表变动信息",
+        description = "新增日志相关表变动信息",
         parameters = {
 
             @Param(name = "logMainId",in = "添加",description = "日志标识",type = Param.Type.STRING),
@@ -44,8 +44,8 @@ public class LogTableService extends MainService {
             @Tag(name = "LogTable",description = "LogTable")
         },
         method = API.Method.POST,
-        summary = "删除LogTableEntity",
-        description = "删除LogTableEntity",
+        summary = "删除日志相关表变动信息",
+        description = "删除日志相关表变动信息",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -67,8 +67,8 @@ public class LogTableService extends MainService {
             @Tag(name = "LogTable",description = "LogTable")
         },
         method = API.Method.POST,
-        summary = "更新LogTableEntity",
-        description = "更新LogTableEntity",
+        summary = "更新日志相关表变动信息",
+        description = "更新日志相关表变动信息",
         parameters = {
             @Param(name = "logTableId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "logMainId",in = "更新",description = "日志标识",type = Param.Type.STRING),
@@ -93,8 +93,8 @@ public class LogTableService extends MainService {
             @Tag(name = "LogTable",description = "LogTable")
         },
         method = API.Method.GET,
-        summary = "查询LogTableEntity",
-        description = "查询LogTableEntity",
+        summary = "查询日志相关表变动信息",
+        description = "查询日志相关表变动信息",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

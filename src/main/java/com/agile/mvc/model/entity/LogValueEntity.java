@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "log_value",  catalog = "agile_db")
+@Remark("日志相关字段值变动信息")
 public class LogValueEntity implements Serializable {
 
     //序列

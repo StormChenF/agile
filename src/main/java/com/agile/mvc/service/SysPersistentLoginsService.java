@@ -18,8 +18,8 @@ public class SysPersistentLoginsService extends MainService {
             @Tag(name = "SysPersistentLogins",description = "SysPersistentLogins")
         },
         method = API.Method.POST,
-        summary = "新增SysPersistentLoginsEntity",
-        description = "新增SysPersistentLoginsEntity",
+        summary = "新增Spring Remember me 持久化",
+        description = "新增Spring Remember me 持久化",
         parameters = {
 
             @Param(name = "username",in = "添加",description = "用户名",required = true,type = Param.Type.STRING),
@@ -43,8 +43,8 @@ public class SysPersistentLoginsService extends MainService {
             @Tag(name = "SysPersistentLogins",description = "SysPersistentLogins")
         },
         method = API.Method.POST,
-        summary = "删除SysPersistentLoginsEntity",
-        description = "删除SysPersistentLoginsEntity",
+        summary = "删除Spring Remember me 持久化",
+        description = "删除Spring Remember me 持久化",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -66,8 +66,8 @@ public class SysPersistentLoginsService extends MainService {
             @Tag(name = "SysPersistentLogins",description = "SysPersistentLogins")
         },
         method = API.Method.POST,
-        summary = "更新SysPersistentLoginsEntity",
-        description = "更新SysPersistentLoginsEntity",
+        summary = "更新Spring Remember me 持久化",
+        description = "更新Spring Remember me 持久化",
         parameters = {
             @Param(name = "sysPersistentLoginsId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "username",in = "更新",description = "用户名",type = Param.Type.STRING),
@@ -91,8 +91,8 @@ public class SysPersistentLoginsService extends MainService {
             @Tag(name = "SysPersistentLogins",description = "SysPersistentLogins")
         },
         method = API.Method.GET,
-        summary = "查询SysPersistentLoginsEntity",
-        description = "查询SysPersistentLoginsEntity",
+        summary = "查询Spring Remember me 持久化",
+        description = "查询Spring Remember me 持久化",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

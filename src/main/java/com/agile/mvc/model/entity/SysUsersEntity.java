@@ -13,6 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "sys_users",  catalog = "agile_db")
+@Remark("[系统管理]用户")
 public class SysUsersEntity implements Serializable {
 
     //序列

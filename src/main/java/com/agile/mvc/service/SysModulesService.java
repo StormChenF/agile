@@ -18,8 +18,8 @@ public class SysModulesService extends MainService {
             @Tag(name = "SysModules",description = "SysModules")
         },
         method = API.Method.POST,
-        summary = "新增SysModulesEntity",
-        description = "新增SysModulesEntity",
+        summary = "新增[系统管理]模块",
+        description = "新增[系统管理]模块",
         parameters = {
 
             @Param(name = "moduleName",in = "添加",description = "模块名称",type = Param.Type.STRING),
@@ -50,8 +50,8 @@ public class SysModulesService extends MainService {
             @Tag(name = "SysModules",description = "SysModules")
         },
         method = API.Method.POST,
-        summary = "删除SysModulesEntity",
-        description = "删除SysModulesEntity",
+        summary = "删除[系统管理]模块",
+        description = "删除[系统管理]模块",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -73,8 +73,8 @@ public class SysModulesService extends MainService {
             @Tag(name = "SysModules",description = "SysModules")
         },
         method = API.Method.POST,
-        summary = "更新SysModulesEntity",
-        description = "更新SysModulesEntity",
+        summary = "更新[系统管理]模块",
+        description = "更新[系统管理]模块",
         parameters = {
             @Param(name = "sysModulesId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "moduleName",in = "更新",description = "模块名称",type = Param.Type.STRING),
@@ -105,8 +105,8 @@ public class SysModulesService extends MainService {
             @Tag(name = "SysModules",description = "SysModules")
         },
         method = API.Method.GET,
-        summary = "查询SysModulesEntity",
-        description = "查询SysModulesEntity",
+        summary = "查询[系统管理]模块",
+        description = "查询[系统管理]模块",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

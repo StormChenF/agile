@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "sys_bt_roles_authorities",  catalog = "agile_db")
+@Remark("[系统管理]角色权限表")
 public class SysBtRolesAuthoritiesEntity implements Serializable {
 
     //序列

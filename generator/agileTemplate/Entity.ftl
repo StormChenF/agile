@@ -13,6 +13,7 @@ import ${import}
  */
 @Entity
 @Table(name = "${tableName}", <#if schemaName??>schema = "${schemaName}",</#if> catalog = "${catalogName}")
+@Remark("${tableComment}")
 public class ${className}Entity implements Serializable {
 
     //序列

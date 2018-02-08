@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "dictionary_data",  catalog = "agile_db")
+@Remark("字典数据表")
 public class DictionaryDataEntity implements Serializable {
 
     //序列

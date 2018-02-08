@@ -18,8 +18,8 @@ public class LogValueService extends MainService {
             @Tag(name = "LogValue",description = "LogValue")
         },
         method = API.Method.POST,
-        summary = "新增LogValueEntity",
-        description = "新增LogValueEntity",
+        summary = "新增日志相关字段值变动信息",
+        description = "新增日志相关字段值变动信息",
         parameters = {
 
             @Param(name = "logTableId",in = "添加",description = "日志相关表标识",type = Param.Type.STRING),
@@ -45,8 +45,8 @@ public class LogValueService extends MainService {
             @Tag(name = "LogValue",description = "LogValue")
         },
         method = API.Method.POST,
-        summary = "删除LogValueEntity",
-        description = "删除LogValueEntity",
+        summary = "删除日志相关字段值变动信息",
+        description = "删除日志相关字段值变动信息",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -68,8 +68,8 @@ public class LogValueService extends MainService {
             @Tag(name = "LogValue",description = "LogValue")
         },
         method = API.Method.POST,
-        summary = "更新LogValueEntity",
-        description = "更新LogValueEntity",
+        summary = "更新日志相关字段值变动信息",
+        description = "更新日志相关字段值变动信息",
         parameters = {
             @Param(name = "logValueId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "logTableId",in = "更新",description = "日志相关表标识",type = Param.Type.STRING),
@@ -95,8 +95,8 @@ public class LogValueService extends MainService {
             @Tag(name = "LogValue",description = "LogValue")
         },
         method = API.Method.GET,
-        summary = "查询LogValueEntity",
-        description = "查询LogValueEntity",
+        summary = "查询日志相关字段值变动信息",
+        description = "查询日志相关字段值变动信息",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

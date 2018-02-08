@@ -18,8 +18,8 @@ public class SysUsersService extends MainService {
             @Tag(name = "SysUsers",description = "SysUsers")
         },
         method = API.Method.POST,
-        summary = "新增SysUsersEntity",
-        description = "新增SysUsersEntity",
+        summary = "新增[系统管理]用户",
+        description = "新增[系统管理]用户",
         parameters = {
 
             @Param(name = "username",in = "添加",description = "用户名",type = Param.Type.STRING),
@@ -54,8 +54,8 @@ public class SysUsersService extends MainService {
             @Tag(name = "SysUsers",description = "SysUsers")
         },
         method = API.Method.POST,
-        summary = "删除SysUsersEntity",
-        description = "删除SysUsersEntity",
+        summary = "删除[系统管理]用户",
+        description = "删除[系统管理]用户",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -77,8 +77,8 @@ public class SysUsersService extends MainService {
             @Tag(name = "SysUsers",description = "SysUsers")
         },
         method = API.Method.POST,
-        summary = "更新SysUsersEntity",
-        description = "更新SysUsersEntity",
+        summary = "更新[系统管理]用户",
+        description = "更新[系统管理]用户",
         parameters = {
             @Param(name = "sysUsersId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "username",in = "更新",description = "用户名",type = Param.Type.STRING),
@@ -113,8 +113,8 @@ public class SysUsersService extends MainService {
             @Tag(name = "SysUsers",description = "SysUsers")
         },
         method = API.Method.GET,
-        summary = "查询SysUsersEntity",
-        description = "查询SysUsersEntity",
+        summary = "查询[系统管理]用户",
+        description = "查询[系统管理]用户",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

@@ -18,8 +18,8 @@ public class SysBtUsersRolesService extends MainService {
             @Tag(name = "SysBtUsersRoles",description = "SysBtUsersRoles")
         },
         method = API.Method.POST,
-        summary = "新增SysBtUsersRolesEntity",
-        description = "新增SysBtUsersRolesEntity",
+        summary = "新增[系统管理]用户角色表",
+        description = "新增[系统管理]用户角色表",
         parameters = {
 
             @Param(name = "roleId",in = "添加",description = "角色唯一标识",type = Param.Type.STRING),
@@ -41,8 +41,8 @@ public class SysBtUsersRolesService extends MainService {
             @Tag(name = "SysBtUsersRoles",description = "SysBtUsersRoles")
         },
         method = API.Method.POST,
-        summary = "删除SysBtUsersRolesEntity",
-        description = "删除SysBtUsersRolesEntity",
+        summary = "删除[系统管理]用户角色表",
+        description = "删除[系统管理]用户角色表",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -64,8 +64,8 @@ public class SysBtUsersRolesService extends MainService {
             @Tag(name = "SysBtUsersRoles",description = "SysBtUsersRoles")
         },
         method = API.Method.POST,
-        summary = "更新SysBtUsersRolesEntity",
-        description = "更新SysBtUsersRolesEntity",
+        summary = "更新[系统管理]用户角色表",
+        description = "更新[系统管理]用户角色表",
         parameters = {
             @Param(name = "sysBtUsersRolesId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "roleId",in = "更新",description = "角色唯一标识",type = Param.Type.STRING),
@@ -87,8 +87,8 @@ public class SysBtUsersRolesService extends MainService {
             @Tag(name = "SysBtUsersRoles",description = "SysBtUsersRoles")
         },
         method = API.Method.GET,
-        summary = "查询SysBtUsersRolesEntity",
-        description = "查询SysBtUsersRolesEntity",
+        summary = "查询[系统管理]用户角色表",
+        description = "查询[系统管理]用户角色表",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

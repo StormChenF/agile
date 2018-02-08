@@ -18,8 +18,8 @@ public class SysBtRolesMoudlesService extends MainService {
             @Tag(name = "SysBtRolesMoudles",description = "SysBtRolesMoudles")
         },
         method = API.Method.POST,
-        summary = "新增SysBtRolesMoudlesEntity",
-        description = "新增SysBtRolesMoudlesEntity",
+        summary = "新增[系统管理]角色模块表",
+        description = "新增[系统管理]角色模块表",
         parameters = {
 
             @Param(name = "moduleId",in = "添加",description = "模块唯一标识",type = Param.Type.STRING),
@@ -41,8 +41,8 @@ public class SysBtRolesMoudlesService extends MainService {
             @Tag(name = "SysBtRolesMoudles",description = "SysBtRolesMoudles")
         },
         method = API.Method.POST,
-        summary = "删除SysBtRolesMoudlesEntity",
-        description = "删除SysBtRolesMoudlesEntity",
+        summary = "删除[系统管理]角色模块表",
+        description = "删除[系统管理]角色模块表",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -64,8 +64,8 @@ public class SysBtRolesMoudlesService extends MainService {
             @Tag(name = "SysBtRolesMoudles",description = "SysBtRolesMoudles")
         },
         method = API.Method.POST,
-        summary = "更新SysBtRolesMoudlesEntity",
-        description = "更新SysBtRolesMoudlesEntity",
+        summary = "更新[系统管理]角色模块表",
+        description = "更新[系统管理]角色模块表",
         parameters = {
             @Param(name = "sysBtRolesMoudlesId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "moduleId",in = "更新",description = "模块唯一标识",type = Param.Type.STRING),
@@ -87,8 +87,8 @@ public class SysBtRolesMoudlesService extends MainService {
             @Tag(name = "SysBtRolesMoudles",description = "SysBtRolesMoudles")
         },
         method = API.Method.GET,
-        summary = "查询SysBtRolesMoudlesEntity",
-        description = "查询SysBtRolesMoudlesEntity",
+        summary = "查询[系统管理]角色模块表",
+        description = "查询[系统管理]角色模块表",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

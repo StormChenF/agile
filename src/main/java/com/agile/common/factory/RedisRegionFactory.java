@@ -3,7 +3,6 @@ package com.agile.common.factory;
 
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.redis.SingletonRedisRegionFactory;
-import org.hibernate.cache.spi.*;
 import org.hibernate.cache.spi.access.AccessType;
 import org.hibernate.cfg.Settings;
 import org.springframework.cache.CacheManager;

@@ -18,8 +18,8 @@ public class DictionaryDataService extends MainService {
             @Tag(name = "DictionaryData",description = "DictionaryData")
         },
         method = API.Method.POST,
-        summary = "新增DictionaryDataEntity",
-        description = "新增DictionaryDataEntity",
+        summary = "新增字典数据表",
+        description = "新增字典数据表",
         parameters = {
 
             @Param(name = "dicCode",in = "添加",description = "字典表_字典编码",required = true,type = Param.Type.STRING),
@@ -43,8 +43,8 @@ public class DictionaryDataService extends MainService {
             @Tag(name = "DictionaryData",description = "DictionaryData")
         },
         method = API.Method.POST,
-        summary = "删除DictionaryDataEntity",
-        description = "删除DictionaryDataEntity",
+        summary = "删除字典数据表",
+        description = "删除字典数据表",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -66,8 +66,8 @@ public class DictionaryDataService extends MainService {
             @Tag(name = "DictionaryData",description = "DictionaryData")
         },
         method = API.Method.POST,
-        summary = "更新DictionaryDataEntity",
-        description = "更新DictionaryDataEntity",
+        summary = "更新字典数据表",
+        description = "更新字典数据表",
         parameters = {
             @Param(name = "code",in = "更新",description = "字典编码",required = true,type = Param.Type.STRING),
             @Param(name = "dicCode",in = "更新",description = "字典表_字典编码",type = Param.Type.STRING),
@@ -91,8 +91,8 @@ public class DictionaryDataService extends MainService {
             @Tag(name = "DictionaryData",description = "DictionaryData")
         },
         method = API.Method.GET,
-        summary = "查询DictionaryDataEntity",
-        description = "查询DictionaryDataEntity",
+        summary = "查询字典数据表",
+        description = "查询字典数据表",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

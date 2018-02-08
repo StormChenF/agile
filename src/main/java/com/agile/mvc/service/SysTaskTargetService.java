@@ -18,8 +18,8 @@ public class SysTaskTargetService extends MainService {
             @Tag(name = "SysTaskTarget",description = "SysTaskTarget")
         },
         method = API.Method.POST,
-        summary = "新增SysTaskTargetEntity",
-        description = "新增SysTaskTargetEntity",
+        summary = "新增任务表",
+        description = "新增任务表",
         parameters = {
 
             @Param(name = "name",in = "添加",description = "方法含义名",required = true,type = Param.Type.STRING),
@@ -44,8 +44,8 @@ public class SysTaskTargetService extends MainService {
             @Tag(name = "SysTaskTarget",description = "SysTaskTarget")
         },
         method = API.Method.POST,
-        summary = "删除SysTaskTargetEntity",
-        description = "删除SysTaskTargetEntity",
+        summary = "删除任务表",
+        description = "删除任务表",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -67,8 +67,8 @@ public class SysTaskTargetService extends MainService {
             @Tag(name = "SysTaskTarget",description = "SysTaskTarget")
         },
         method = API.Method.POST,
-        summary = "更新SysTaskTargetEntity",
-        description = "更新SysTaskTargetEntity",
+        summary = "更新任务表",
+        description = "更新任务表",
         parameters = {
             @Param(name = "sysTaskTargetId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "name",in = "更新",description = "方法含义名",type = Param.Type.STRING),
@@ -93,8 +93,8 @@ public class SysTaskTargetService extends MainService {
             @Tag(name = "SysTaskTarget",description = "SysTaskTarget")
         },
         method = API.Method.GET,
-        summary = "查询SysTaskTargetEntity",
-        description = "查询SysTaskTargetEntity",
+        summary = "查询任务表",
+        description = "查询任务表",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

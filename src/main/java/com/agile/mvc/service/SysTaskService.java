@@ -18,8 +18,8 @@ public class SysTaskService extends MainService {
             @Tag(name = "SysTask",description = "SysTask")
         },
         method = API.Method.POST,
-        summary = "新增SysTaskEntity",
-        description = "新增SysTaskEntity",
+        summary = "新增",
+        description = "新增",
         parameters = {
 
             @Param(name = "name",in = "添加",description = "定时任务名",required = true,type = Param.Type.STRING),
@@ -45,8 +45,8 @@ public class SysTaskService extends MainService {
             @Tag(name = "SysTask",description = "SysTask")
         },
         method = API.Method.POST,
-        summary = "删除SysTaskEntity",
-        description = "删除SysTaskEntity",
+        summary = "删除",
+        description = "删除",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -68,8 +68,8 @@ public class SysTaskService extends MainService {
             @Tag(name = "SysTask",description = "SysTask")
         },
         method = API.Method.POST,
-        summary = "更新SysTaskEntity",
-        description = "更新SysTaskEntity",
+        summary = "更新",
+        description = "更新",
         parameters = {
             @Param(name = "sysTaskId",in = "更新",description = "主键",required = true,type = Param.Type.STRING),
             @Param(name = "name",in = "更新",description = "定时任务名",type = Param.Type.STRING),
@@ -95,8 +95,8 @@ public class SysTaskService extends MainService {
             @Tag(name = "SysTask",description = "SysTask")
         },
         method = API.Method.GET,
-        summary = "查询SysTaskEntity",
-        description = "查询SysTaskEntity",
+        summary = "查询",
+        description = "查询",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

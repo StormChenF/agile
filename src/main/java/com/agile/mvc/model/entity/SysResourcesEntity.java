@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "sys_resources",  catalog = "agile_db")
+@Remark("[系统管理]资源")
 public class SysResourcesEntity implements Serializable {
 
     //序列

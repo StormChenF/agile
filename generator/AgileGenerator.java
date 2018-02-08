@@ -41,6 +41,18 @@ public class AgileGenerator {
                 //获取表名字
                 tableName = tablesData.getString("TABLE_NAME");
                 className = StringUtil.toUpperName(tableName);
+                String tableComment;
+                switch (DataBaseUtil.type){
+                    case "mysql":
+                        ResultSet otherInfo = DataBaseUtil.excuteSQL("SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE table_schema='" + catalog + "' AND TABLE_NAME = '" + tableName + "'");
+                        while (otherInfo.next()){
+                            tableComment = otherInfo.getString("TABLE_COMMENT");
+                            data.put("tableComment", tableComment);
+                        }
+                        break;
+                    case "oracle":
+                        break;
+                }
 
                 //获取主键信息
                 ResultSet primaryKeyResultSet = DataBaseUtil.databaseMetaData.getPrimaryKeys(catalog, schema, tableName);

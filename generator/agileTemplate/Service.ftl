@@ -18,8 +18,8 @@ public class ${className}Service extends MainService {
             @Tag(name = "${className}",description = "${className}")
         },
         method = API.Method.POST,
-        summary = "新增${className}Entity",
-        description = "新增${className}Entity",
+        summary = "新增${tableComment}",
+        description = "新增${tableComment}",
         parameters = {
 <#list columnList as property>
     <#if property.isPrimaryKey == "false">
@@ -42,8 +42,8 @@ public class ${className}Service extends MainService {
             @Tag(name = "${className}",description = "${className}")
         },
         method = API.Method.POST,
-        summary = "删除${className}Entity",
-        description = "删除${className}Entity",
+        summary = "删除${tableComment}",
+        description = "删除${tableComment}",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -65,8 +65,8 @@ public class ${className}Service extends MainService {
             @Tag(name = "${className}",description = "${className}")
         },
         method = API.Method.POST,
-        summary = "更新${className}Entity",
-        description = "更新${className}Entity",
+        summary = "更新${tableComment}",
+        description = "更新${tableComment}",
         parameters = {
 <#list columnList as property>
     <#if property.isPrimaryKey == "true">
@@ -92,8 +92,8 @@ public class ${className}Service extends MainService {
             @Tag(name = "${className}",description = "${className}")
         },
         method = API.Method.GET,
-        summary = "查询${className}Entity",
-        description = "查询${className}Entity",
+        summary = "查询${tableComment}",
+        description = "查询${tableComment}",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

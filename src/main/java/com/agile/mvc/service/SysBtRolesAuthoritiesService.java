@@ -18,8 +18,8 @@ public class SysBtRolesAuthoritiesService extends MainService {
             @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
         },
         method = API.Method.POST,
-        summary = "新增SysBtRolesAuthoritiesEntity",
-        description = "新增SysBtRolesAuthoritiesEntity",
+        summary = "新增[系统管理]角色权限表",
+        description = "新增[系统管理]角色权限表",
         parameters = {
 
             @Param(name = "authorityId",in = "添加",description = "权限唯一标识",type = Param.Type.STRING),
@@ -41,8 +41,8 @@ public class SysBtRolesAuthoritiesService extends MainService {
             @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
         },
         method = API.Method.POST,
-        summary = "删除SysBtRolesAuthoritiesEntity",
-        description = "删除SysBtRolesAuthoritiesEntity",
+        summary = "删除[系统管理]角色权限表",
+        description = "删除[系统管理]角色权限表",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -64,8 +64,8 @@ public class SysBtRolesAuthoritiesService extends MainService {
             @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
         },
         method = API.Method.POST,
-        summary = "更新SysBtRolesAuthoritiesEntity",
-        description = "更新SysBtRolesAuthoritiesEntity",
+        summary = "更新[系统管理]角色权限表",
+        description = "更新[系统管理]角色权限表",
         parameters = {
             @Param(name = "sysBtRolesAuthoritiesId",in = "更新",description = "唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "authorityId",in = "更新",description = "权限唯一标识",type = Param.Type.STRING),
@@ -87,8 +87,8 @@ public class SysBtRolesAuthoritiesService extends MainService {
             @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
         },
         method = API.Method.GET,
-        summary = "查询SysBtRolesAuthoritiesEntity",
-        description = "查询SysBtRolesAuthoritiesEntity",
+        summary = "查询[系统管理]角色权限表",
+        description = "查询[系统管理]角色权限表",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

@@ -18,8 +18,8 @@ public class SysRolesService extends MainService {
             @Tag(name = "SysRoles",description = "SysRoles")
         },
         method = API.Method.POST,
-        summary = "新增SysRolesEntity",
-        description = "新增SysRolesEntity",
+        summary = "新增[系统管理]角色",
+        description = "新增[系统管理]角色",
         parameters = {
 
             @Param(name = "roleName",in = "添加",description = "角色名称",required = true,type = Param.Type.STRING),
@@ -44,8 +44,8 @@ public class SysRolesService extends MainService {
             @Tag(name = "SysRoles",description = "SysRoles")
         },
         method = API.Method.POST,
-        summary = "删除SysRolesEntity",
-        description = "删除SysRolesEntity",
+        summary = "删除[系统管理]角色",
+        description = "删除[系统管理]角色",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -67,8 +67,8 @@ public class SysRolesService extends MainService {
             @Tag(name = "SysRoles",description = "SysRoles")
         },
         method = API.Method.POST,
-        summary = "更新SysRolesEntity",
-        description = "更新SysRolesEntity",
+        summary = "更新[系统管理]角色",
+        description = "更新[系统管理]角色",
         parameters = {
             @Param(name = "sysRolesId",in = "更新",description = "角色唯一标识",required = true,type = Param.Type.STRING),
             @Param(name = "roleName",in = "更新",description = "角色名称",type = Param.Type.STRING),
@@ -93,8 +93,8 @@ public class SysRolesService extends MainService {
             @Tag(name = "SysRoles",description = "SysRoles")
         },
         method = API.Method.GET,
-        summary = "查询SysRolesEntity",
-        description = "查询SysRolesEntity",
+        summary = "查询[系统管理]角色",
+        description = "查询[系统管理]角色",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

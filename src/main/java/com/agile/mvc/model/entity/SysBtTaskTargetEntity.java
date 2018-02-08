@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "sys_bt_task_target",  catalog = "agile_db")
+@Remark("")
 public class SysBtTaskTargetEntity implements Serializable {
 
     //序列
