@@ -79,9 +79,8 @@
                   alert(data['head']['msg']);
               }
               // Build a system
-              var ui = SwaggerUIBundle({
-                  // url: "http://petstore.swagger.io/v2/swagger.json",
-                  spec:data['result']['apiInfo'],
+              window.ui = SwaggerUIBundle({
+                  spec: data['result']['apiInfo'],
                   validatorUrl: "",
                   dom_id: '#swagger-ui',
                   deepLinking: true,
@@ -93,15 +92,12 @@
                       SwaggerUIBundle.plugins.DownloadUrl
                   ],
                   layout: "StandaloneLayout",
-                  jsonEditor:true,
-                  docExpansion:'none'
-              });
-              window.ui = ui
+                  jsonEditor: true,
+                  docExpansion: 'none'
+              })
           }
       });
   });
-
-
 </script>
 </body>
 
