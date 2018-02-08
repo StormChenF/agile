@@ -72,7 +72,7 @@
 
   $(document).ready(function(){
       $.ajax({
-          async:false,
+          async:true,
           url:'apiService/getApiInfo',
           success:function (data) {
               if(data['head']['code'] !== '000001'){

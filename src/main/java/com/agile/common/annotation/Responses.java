@@ -12,4 +12,5 @@ public @interface Responses {
     String code();
     String description();
     Class schema() default Object.class;
+    boolean isArray() default false;
 }

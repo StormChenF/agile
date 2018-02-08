@@ -68,6 +68,7 @@ public class Constant {
     public static JSONObject paths = new JSONObject();
     public static JSONObject definitions = new JSONObject();
     public static Map<String,String> tagMap = new HashMap<>();
+    public static Map<String,String> definitionMap = new HashMap<>();
     static {
         JSONObject contact = new JSONObject();
         contact.put("email","mydeathtrial@163.com");

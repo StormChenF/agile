@@ -99,7 +99,7 @@ public class ${className}Service extends MainService {
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)
         },
         responses = {
-        @Responses(code = "000001",description = "成功"),
+        @Responses(code = "000001",description = "成功",schema = ${className}Entity.class,isArray = true),
         @Responses(code = "300000",description = "系统程序异常")
     })
     public RETURN query(){

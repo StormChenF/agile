@@ -2,6 +2,7 @@ package com.agile.common.annotation;
 
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
+import com.agile.common.server.MainService;
 import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
@@ -52,11 +53,13 @@ public class AnnotationProcessor implements EnvironmentAware {
 
     void Service(Service service, Object bean){
         Class<?> targetClass = bean.getClass();
+        if(targetClass.getGenericSuperclass() != MainService.class)return;
         String name = targetClass.getSimpleName();
 
         Method[] methods = targetClass.getDeclaredMethods();
         for(int i = 0 ; i < methods.length;i++){
             Method method = methods[i];
+            if(method.getGenericReturnType() != RETURN.class)continue;
             JSONObject path = new JSONObject();
             String key = "/"+name+"/"+method.getName();
             API methodApi = method.getAnnotation(API.class);
@@ -117,7 +120,38 @@ public class AnnotationProcessor implements EnvironmentAware {
                             Responses respons = responses[k];
                             JSONObject responsJson = new JSONObject();
                             responsJson.put("description",respons.description());
-                            responsJson.put("schema",respons.schema());
+                            JSONObject ref = new JSONObject();
+                            String objectClassName = respons.schema().getSimpleName();
+                            if(!Constant.definitionMap.containsKey(objectClassName) && !"Object".equals(objectClassName)){
+                                ref.put("$ref","#/definitions/"+objectClassName);
+                                JSONObject object = new JSONObject();
+                                if(respons.isArray()){
+                                    JSONObject schemaInnner = new JSONObject();
+                                    schemaInnner.put("type","array");
+                                    schemaInnner.put("items",ref);
+                                    responsJson.put("schema",schemaInnner);
+                                }else{
+                                    responsJson.put("schema",ref);
+                                }
+                                object.put("type","object");
+                                JSONObject properties = new JSONObject();
+                                Field[] fields = respons.schema().getDeclaredFields();
+                                for(int l = 0 ; l < fields.length;l++){
+                                    Field field = fields[l];
+                                    field.setAccessible(true);
+                                    if("serialVersionUID".equals(field.getName()))continue;
+                                    JSONObject fieldJson = new JSONObject();
+                                    fieldJson.put("type",field.getType().getSimpleName().toLowerCase());
+                                    Remark remark = field.getDeclaredAnnotation(Remark.class);
+                                    if(!ObjectUtil.isEmpty(remark)){
+                                        fieldJson.put("description",remark.value());
+                                    }
+                                    properties.put(field.getName(),fieldJson);
+                                }
+                                object.put("properties",properties);
+                                Constant.definitions.put(objectClassName,object);
+                                Constant.definitionMap.put(objectClassName,"");
+                            }
                             responsesJsons.put(respons.code(),responsJson);
                         }
                         request.put("responses",responsesJsons);
@@ -135,15 +169,19 @@ public class AnnotationProcessor implements EnvironmentAware {
                 request.put("consumes",consumes);
                 request.put("produces",consumes);
                 JSONObject responsJsons = new JSONObject();
-                JSONObject responsJson = new JSONObject();
-                responsJson.put("description",RETURN.SUCCESS.getMsg());
-                responsJsons.put(RETURN.SUCCESS.getCode(),responsJson);
+                JSONObject responsJson0 = new JSONObject();
+                responsJson0.put("description",RETURN.SUCCESS.getMsg());
+                responsJsons.put(RETURN.SUCCESS.getCode(),responsJson0);
+                JSONObject responsJson1 = new JSONObject();
+                responsJson1.put("description",RETURN.EXPRESSION.getMsg());
+                responsJsons.put(RETURN.EXPRESSION.getCode(),responsJson1);
                 request.put("responses",responsJsons);
                 path.put("get",request);
             }
             Constant.paths.put(key,path);
             Constant.apiInfo.put("paths",Constant.paths);
             Constant.apiInfo.put("tags",Constant.tags);
+            Constant.apiInfo.put("definitions",Constant.definitions);
         }
     }
 
