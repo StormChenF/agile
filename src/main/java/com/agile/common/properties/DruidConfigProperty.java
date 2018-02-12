@@ -4,29 +4,29 @@ package com.agile.common.properties;
  * Created by 佟盟 on 2018/1/11
  */
 public class DruidConfigProperty {
-    private String type = "MYSQL";
-    private String dataBaseName = "agile_db";
-    private String dataBaseIp = "127.0.0.1";
-    private String dataBasePost = "3306";
-    private String dataBaseUsername = "root";
-    private String dataBasePassword = "123456";
-    private String dataBaseUrlParam = "serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL";
-    private int initSize = 1;
-    private int minIdle = 1;
-    private int maxActive = 100;
-    private int maxWait = 60000;
-    private boolean removeAbandoned = true;
-    private int removeAbandonedTimeout = 300000;
-    private int timeBetweenEvictionRunsMillis = 60000;
-    private int minEvictableIdleTimeMillis = 300000;
-    private String validationQuery = "SELECT 1";
-    private boolean testWhileIdle = true;
-    private boolean testOnBorrow = false;
-    private boolean testOnReturn = false;
-    private boolean poolPreparedStatements = true;
-    private int maxPoolPreparedStatementPerConnectionSize = 20;
-    private String filters = "stat,wall";
-    private boolean globalDataSourceStat = true;
+    private static String type = "MYSQL";
+    private static String dataBaseName = "agile_db";
+    private static String dataBaseIp = "127.0.0.1";
+    private static String dataBasePost = "3306";
+    private static String dataBaseUsername = "root";
+    private static String dataBasePassword = "123456";
+    private static String dataBaseUrlParam = "serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL";
+    private static int initSize = 1;
+    private static int minIdle = 1;
+    private static int maxActive = 100;
+    private static int maxWait = 60000;
+    private static boolean removeAbandoned = true;
+    private static int removeAbandonedTimeout = 300000;
+    private static int timeBetweenEvictionRunsMillis = 60000;
+    private static int minEvictableIdleTimeMillis = 300000;
+    private static String validationQuery = "SELECT 1";
+    private static boolean testWhileIdle = true;
+    private static boolean testOnBorrow = false;
+    private static boolean testOnReturn = false;
+    private static boolean poolPreparedStatements = true;
+    private static int maxPoolPreparedStatementPerConnectionSize = 20;
+    private static String filters = "stat,wall";
+    private static boolean globalDataSourceStat = true;
 
     public String getType() {
         return type;

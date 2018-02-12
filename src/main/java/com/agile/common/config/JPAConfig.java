@@ -89,10 +89,10 @@ public class JPAConfig {
         properties.setProperty("hibernate.cache.use_second_level_cache",jpaConfigProperty.getUseSecondLevelCache());
         switch (cacheProxy){
             case "redis":
-                properties.setProperty("hibernate.cache.region.factory_class","org.hibernate.cache.redis.SingletonRedisRegionFactory");
+                properties.setProperty("hibernate.cache.region.factory_class","com.agile.common.redis.RedisRegionFactory");
                 break;
             case "ehcache":
-                properties.setProperty("hibernate.cache.region.factory_class","com.agile.common.factory.EhCacheRegionFactory");
+                properties.setProperty("hibernate.cache.region.factory_class","com.agile.common.ehCache.EhCacheRegionFactory");
                 break;
         }
         properties.setProperty("hibernate.cache.use_structured_entries",jpaConfigProperty.getUseStructuredEntries());

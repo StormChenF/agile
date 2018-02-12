@@ -7,18 +7,18 @@ import com.agile.common.annotation.Properties;
  */
 @Properties(prefix = "agile.security")
 public class SecurityProperties {
-    private String loginUrl = "/signService/signIn";
-    private String loginOutUrl = "/signService/signOut";
-    private String loginOutSuccessUrl = "/signService/successSignOut";
-    private String notLoginUrl = "/signService/notSignIn";
-    private String invalidSessionUrl = "/signService/invalidSession";
-    private String expiredSessionUrl = "/signService/expiredSession";
-    private String successUrl = "/signService/homepage";
-    private String failureUrl = "/signService/errorSignIn";
-    private String accessDenied = "/signService/accessDenied";
-    private String csrfAllowUrl;
-    private String csrfAllowMethods = "GET,HEAD,TRACE,OPTIONS";
-    private String verificationCode = "verification";
+    private static String loginUrl = "/signService/signIn";
+    private static String loginOutUrl = "/signService/signOut";
+    private static String loginOutSuccessUrl = "/signService/successSignOut";
+    private static String notLoginUrl = "/signService/notSignIn";
+    private static String invalidSessionUrl = "/signService/invalidSession";
+    private static String expiredSessionUrl = "/signService/expiredSession";
+    private static String successUrl = "/signService/homepage";
+    private static String failureUrl = "/signService/errorSignIn";
+    private static String accessDenied = "/signService/accessDenied";
+    private static String csrfAllowUrl;
+    private static String csrfAllowMethods = "GET,HEAD,TRACE,OPTIONS";
+    private static String verificationCode = "verification";
 
     public String getLoginUrl() {
         return loginUrl;

@@ -10,14 +10,14 @@ import java.util.List;
  */
 @Properties(prefix = "agile.redis")
 public class RedisConfigProperties {
-    private String pass;
-    private int maxIdle;
-    private int minIdle;
-    private int maxWaitMillis;
-    private boolean testOnReturn;
-    private boolean testOnBorrow;
-    private List<String> host;
-    private List<Integer> port;
+    private static String pass;
+    private static int maxIdle;
+    private static int minIdle;
+    private static int maxWaitMillis;
+    private static boolean testOnReturn;
+    private static boolean testOnBorrow;
+    private static List<String> host;
+    private static List<Integer> port;
 
     public String getPass() {
         return pass;

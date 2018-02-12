@@ -4,9 +4,9 @@ package com.agile.common.properties;
  * Created by 佟盟 on 2018/2/1
  */
 public class FileConfigProperty {
-    private long maxUploadSize = 204800;
-    private String defaultEncoding = "utf-8";
-    private String includeFormat = "txt,excel";
+    private static long maxUploadSize = 204800;
+    private static String defaultEncoding = "utf-8";
+    private static String includeFormat = "txt,excel";
 
     public long getMaxUploadSize() {
         return maxUploadSize;

@@ -4,14 +4,14 @@ package com.agile.common.properties;
  * Created by 佟盟 on 2018/1/19
  */
 public class JPAConfigProperty {
-    private String hbm2ddl = "update";
-    private String showSql = "false";
-    private String formatSql = "true";
-    private String generateDdl = "true";
-    private String currentSessionContextClass = "thread";
-    private String useSecondLevelCache = "true";
-    private String useStructuredEntries = "false";
-    private String useQueryCache = "true";
+    private static String hbm2ddl = "update";
+    private static String showSql = "false";
+    private static String formatSql = "true";
+    private static String generateDdl = "true";
+    private static String currentSessionContextClass = "thread";
+    private static String useSecondLevelCache = "true";
+    private static String useStructuredEntries = "false";
+    private static String useQueryCache = "true";
 
     public String getHbm2ddl() {
         return hbm2ddl;

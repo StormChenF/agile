@@ -7,7 +7,7 @@ import com.agile.common.annotation.Properties;
  */
 @Properties(prefix = "agile.cache")
 public class CacheConfigProperties {
-    private String proxy = "ehcache";
+    private static String proxy = "ehcache";
 
     public String getProxy() {
         return proxy;

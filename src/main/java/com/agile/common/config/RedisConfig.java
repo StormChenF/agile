@@ -26,7 +26,7 @@ public class RedisConfig {
     private RedisConfigProperties properties;
 
     @Bean
-    JedisPoolConfig redisPool(){
+    public JedisPoolConfig redisPool(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(properties.getMaxIdle());
         jedisPoolConfig.setMinIdle(properties.getMinIdle());
@@ -37,7 +37,7 @@ public class RedisConfig {
     }
 
     @Bean
-    JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig redisPool){
+    public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig redisPool){
         List<String> hosts = properties.getHost();
         List<Integer> ports = properties.getPort();
         if(hosts.size()>1){
@@ -53,7 +53,8 @@ public class RedisConfig {
             redisStandaloneConfiguration.setHostName(hosts.get(0));
             redisStandaloneConfiguration.setPort(ports.get(0));
             redisStandaloneConfiguration.setPassword(RedisPassword.of(properties.getPass()));
-            return new JedisConnectionFactory(redisStandaloneConfiguration);
+            JedisConnectionFactory je = new JedisConnectionFactory(redisStandaloneConfiguration);
+            return je;
         }
     }
 
@@ -65,7 +66,7 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisCacheManager redisCacheManager(RedisConnectionFactory connectionFactory) {
+    public RedisCacheManager redisCacheManager(JedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration config = defaultCacheConfig()
                 .entryTtl(Duration.ofSeconds(1))
                 .disableCachingNullValues();
@@ -74,5 +75,9 @@ public class RedisConfig {
                 .withInitialCacheConfigurations(Collections.singletonMap("predefined", config.disableCachingNullValues()))
                 .transactionAware()
                 .build();
+    }
+
+    public void setProperties(RedisConfigProperties properties) {
+        this.properties = properties;
     }
 }

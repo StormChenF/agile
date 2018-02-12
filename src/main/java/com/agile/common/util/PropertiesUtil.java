@@ -41,6 +41,10 @@ public class PropertiesUtil {
             e.printStackTrace();
         }
     }
+
+    public static Properties getPropertys(){
+        return propertiesUtil.properties;
+    }
     /**
      * 获取工程配置信息
      * @param key 句柄

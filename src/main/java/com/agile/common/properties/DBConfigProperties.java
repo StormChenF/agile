@@ -10,10 +10,10 @@ import java.util.List;
  */
 @Properties(prefix = "agile")
 public class DBConfigProperties {
-    private List<DruidConfigProperty> druid;
-    private List<JPAConfigProperty> jpa;
+    private static List<DruidConfigProperty> druid;
+    private static List<JPAConfigProperty> jpa;
 
-    public List<DruidConfigProperty> getDruid() {
+    public static List<DruidConfigProperty> getDruid() {
         return druid;
     }
 

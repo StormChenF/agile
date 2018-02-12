@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
  */
 @Properties(prefix = "agile.kaptcha")
 public class KaptchaConfigProperties {
-    private String border;
-    private String borderColor;
-    private String textproducerFontColor;
-    private String textproducerFontSize;
-    private String imageWidth;
-    private String imageHeight;
-    private String textproducerCharLength;
-    private String textproducerFontNames;
+    private static String border;
+    private static String borderColor;
+    private static String textproducerFontColor;
+    private static String textproducerFontSize;
+    private static String imageWidth;
+    private static String imageHeight;
+    private static String textproducerCharLength;
+    private static String textproducerFontNames;
 
     public String getBorder() {
         return border;

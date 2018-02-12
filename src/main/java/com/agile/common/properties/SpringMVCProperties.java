@@ -7,7 +7,7 @@ import com.agile.common.annotation.Properties;
  */
 @Properties(prefix = "agile")
 public class SpringMVCProperties {
-    private FileConfigProperty upload;
+    private static FileConfigProperty upload;
 
     public FileConfigProperty getUpload() {
         return upload;

@@ -13,8 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class EhCacheService implements AbstractCacheUtil {
 
-    private final Cache cache = CacheManager.getCacheManager("agileManager").getCache("agileCache");
-
+    private Cache getCache(){
+        return CacheManager.getCacheManager("agileManager").getCache("agileCache");
+    }
     /**
      * 设置/更新缓存
      *
@@ -24,7 +25,7 @@ public class EhCacheService implements AbstractCacheUtil {
     @Override
     public void setCache(String key, Object object) {
         Element element = new Element(key, object);
-        cache.put(element);
+        getCache().put(element);
     }
 
     /**
@@ -37,7 +38,7 @@ public class EhCacheService implements AbstractCacheUtil {
     public void setCache(String key, Object object, int timeToIdleSeconds) {
         Element element = new Element(key, object);
         element.setTimeToIdle(timeToIdleSeconds);
-        cache.put(element);
+        getCache().put(element);
     }
 
     /**
@@ -47,7 +48,7 @@ public class EhCacheService implements AbstractCacheUtil {
      */
     @Override
     public void removeCache(String key) {
-        cache.remove(key);
+        getCache().remove(key);
     }
 
     /**
@@ -55,7 +56,7 @@ public class EhCacheService implements AbstractCacheUtil {
      */
     @Override
     public void removeAll() {
-        cache.removeAll();
+        getCache().removeAll();
     }
 
     /**
@@ -66,7 +67,7 @@ public class EhCacheService implements AbstractCacheUtil {
      */
     @Override
     public Object getCache(String key) {
-        Element element = cache.get(key);
+        Element element = getCache().get(key);
         return ObjectUtil.isEmpty(element) ? null : element.getObjectValue();
     }
 }
