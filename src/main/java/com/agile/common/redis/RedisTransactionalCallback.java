@@ -5,6 +5,6 @@ import redis.clients.jedis.Transaction;
 /**
  * Created by 佟盟 on 2018/2/9
  */
-public interface JedisTransactionalCallback {
+public interface RedisTransactionalCallback {
     void execute(Transaction var1);
 }

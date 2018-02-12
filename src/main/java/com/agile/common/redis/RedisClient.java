@@ -73,7 +73,7 @@ public class RedisClient {
         } else {
             byte[] rawValue = this.run(jedis -> jedis.hget(rawRegion, rawKey));
             if (rawValue != null && rawValue.length > 0 && expirationInSeconds > 0 && !region.contains("UpdateTimestampsCache")) {
-                this.run((JedisCallback<Object>) jedis -> {
+                this.run((RedisCallback<Object>) jedis -> {
                     byte[] rawZkey = RedisClient.this.rawZkey(region);
                     long score = System.currentTimeMillis() + (long)expirationInSeconds * 1000L;
                     return jedis.zadd(rawZkey, (double)score, rawKey);
@@ -207,7 +207,7 @@ public class RedisClient {
         });
     }
 
-    public void deleteRegion(String region) throws JedisCacheException {
+    public void deleteRegion(String region) throws RedisCacheException {
         final byte[] rawRegion = this.rawRegion(region);
         final byte[] rawZkey = this.rawZkey(region);
         this.runWithTx(tx -> {
@@ -307,7 +307,7 @@ public class RedisClient {
         return this.valueSerializer.deserialize(rawValue);
     }
 
-    private <T> T run(JedisCallback<T> callback) {
+    private <T> T run(RedisCallback<T> callback) {
         Jedis jedis = (Jedis)this.connection.getNativeConnection();
 
         T var3;
@@ -320,7 +320,7 @@ public class RedisClient {
         return var3;
     }
 
-    private List<Object> runWithTx(JedisTransactionalCallback callback) {
+    private List<Object> runWithTx(RedisTransactionalCallback callback) {
         Jedis jedis = (Jedis)this.connection.getNativeConnection();
 
         List<Object> var4;

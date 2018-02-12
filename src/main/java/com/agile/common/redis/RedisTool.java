@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * Created by 佟盟 on 2018/2/9
  */
-public final class JedisTool {
+public final class RedisTool {
     private static final String EXPIRE_IN_SECONDS = "redis.expiryInSeconds";
     private static final String EXPIRY_PROPERTY_PREFIX = "redis.expiryInSeconds.";
     private static final String FILE_URL_PREFIX = "file:";
@@ -19,8 +19,8 @@ public final class JedisTool {
     }
 
     static RedisCacheTimeStamper createTimestamper() {
-        RedisCacheTimeStamperJvmImpl timestamper = new RedisCacheTimeStamperJvmImpl();
-        return timestamper;
+        RedisCacheTimeStamperJvmImpl timeStamper = new RedisCacheTimeStamperJvmImpl();
+        return timeStamper;
     }
 
     private static JedisPoolConfig createJedisPoolConfig() {

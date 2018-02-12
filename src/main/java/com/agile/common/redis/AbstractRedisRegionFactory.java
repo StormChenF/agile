@@ -44,8 +44,8 @@ public abstract class AbstractRedisRegionFactory implements RegionFactory {
         } else {
             initConnectionFactory();
             this.settings = settings;
-            this.redis = JedisTool.createJedisClient(jedisConnectionFactory.getConnection());
-            this.timeStamper = JedisTool.createTimestamper();
+            this.redis = RedisTool.createJedisClient(jedisConnectionFactory.getConnection());
+            this.timeStamper = RedisTool.createTimestamper();
             this.startExpirationThread(this.redis);
         }
     }
