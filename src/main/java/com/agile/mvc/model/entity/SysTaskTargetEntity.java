@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "sys_task_target",  catalog = "agile_db")
-@Remark("任务表")
+@Remark("[系统管理]目标任务表")
 public class SysTaskTargetEntity implements Serializable {
 
     //序列

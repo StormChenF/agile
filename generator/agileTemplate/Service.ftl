@@ -15,7 +15,7 @@ public class ${className}Service extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "${className}",description = "${className}")
+            @Tag(name = "${tableComment}",description = "${className}")
         },
         method = API.Method.POST,
         summary = "新增${tableComment}",
@@ -39,7 +39,7 @@ public class ${className}Service extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "${className}",description = "${className}")
+            @Tag(name = "${tableComment}",description = "${className}")
         },
         method = API.Method.POST,
         summary = "删除${tableComment}",
@@ -62,7 +62,7 @@ public class ${className}Service extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "${className}",description = "${className}")
+            @Tag(name = "${tableComment}",description = "${className}")
         },
         method = API.Method.POST,
         summary = "更新${tableComment}",
@@ -89,7 +89,7 @@ public class ${className}Service extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "${className}",description = "${className}")
+            @Tag(name = "${tableComment}",description = "${className}")
         },
         method = API.Method.GET,
         summary = "查询${tableComment}",

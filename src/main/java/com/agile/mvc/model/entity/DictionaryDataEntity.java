@@ -1,9 +1,6 @@
 package com.agile.mvc.model.entity;
 
 import com.agile.common.annotation.Remark;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.cache.annotation.Cacheable;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,8 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "dictionary_data",  catalog = "agile_db")
-@Remark("字典数据表")
-@Cacheable
+@Remark("[系统管理]字典数据表")
 public class DictionaryDataEntity implements Serializable {
 
     //序列

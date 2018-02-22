@@ -15,7 +15,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
+            @Tag(name = "[系统管理]角色权限表",description = "SysBtRolesAuthorities")
         },
         method = API.Method.POST,
         summary = "新增[系统管理]角色权限表",
@@ -38,7 +38,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
+            @Tag(name = "[系统管理]角色权限表",description = "SysBtRolesAuthorities")
         },
         method = API.Method.POST,
         summary = "删除[系统管理]角色权限表",
@@ -61,7 +61,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
+            @Tag(name = "[系统管理]角色权限表",description = "SysBtRolesAuthorities")
         },
         method = API.Method.POST,
         summary = "更新[系统管理]角色权限表",
@@ -84,7 +84,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "SysBtRolesAuthorities",description = "SysBtRolesAuthorities")
+            @Tag(name = "[系统管理]角色权限表",description = "SysBtRolesAuthorities")
         },
         method = API.Method.GET,
         summary = "查询[系统管理]角色权限表",

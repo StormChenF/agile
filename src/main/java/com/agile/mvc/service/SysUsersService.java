@@ -15,7 +15,7 @@ public class SysUsersService extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "SysUsers",description = "SysUsers")
+            @Tag(name = "[系统管理]用户",description = "SysUsers")
         },
         method = API.Method.POST,
         summary = "新增[系统管理]用户",
@@ -51,7 +51,7 @@ public class SysUsersService extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "SysUsers",description = "SysUsers")
+            @Tag(name = "[系统管理]用户",description = "SysUsers")
         },
         method = API.Method.POST,
         summary = "删除[系统管理]用户",
@@ -74,7 +74,7 @@ public class SysUsersService extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "SysUsers",description = "SysUsers")
+            @Tag(name = "[系统管理]用户",description = "SysUsers")
         },
         method = API.Method.POST,
         summary = "更新[系统管理]用户",
@@ -110,7 +110,7 @@ public class SysUsersService extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "SysUsers",description = "SysUsers")
+            @Tag(name = "[系统管理]用户",description = "SysUsers")
         },
         method = API.Method.GET,
         summary = "查询[系统管理]用户",

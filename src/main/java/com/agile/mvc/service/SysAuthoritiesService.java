@@ -15,7 +15,7 @@ public class SysAuthoritiesService extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "SysAuthorities",description = "SysAuthorities")
+            @Tag(name = "[系统管理]权限",description = "SysAuthorities")
         },
         method = API.Method.POST,
         summary = "新增[系统管理]权限",
@@ -43,7 +43,7 @@ public class SysAuthoritiesService extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "SysAuthorities",description = "SysAuthorities")
+            @Tag(name = "[系统管理]权限",description = "SysAuthorities")
         },
         method = API.Method.POST,
         summary = "删除[系统管理]权限",
@@ -66,7 +66,7 @@ public class SysAuthoritiesService extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "SysAuthorities",description = "SysAuthorities")
+            @Tag(name = "[系统管理]权限",description = "SysAuthorities")
         },
         method = API.Method.POST,
         summary = "更新[系统管理]权限",
@@ -94,7 +94,7 @@ public class SysAuthoritiesService extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "SysAuthorities",description = "SysAuthorities")
+            @Tag(name = "[系统管理]权限",description = "SysAuthorities")
         },
         method = API.Method.GET,
         summary = "查询[系统管理]权限",

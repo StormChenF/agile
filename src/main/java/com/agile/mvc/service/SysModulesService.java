@@ -15,7 +15,7 @@ public class SysModulesService extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "SysModules",description = "SysModules")
+            @Tag(name = "[系统管理]模块",description = "SysModules")
         },
         method = API.Method.POST,
         summary = "新增[系统管理]模块",
@@ -47,7 +47,7 @@ public class SysModulesService extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "SysModules",description = "SysModules")
+            @Tag(name = "[系统管理]模块",description = "SysModules")
         },
         method = API.Method.POST,
         summary = "删除[系统管理]模块",
@@ -70,7 +70,7 @@ public class SysModulesService extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "SysModules",description = "SysModules")
+            @Tag(name = "[系统管理]模块",description = "SysModules")
         },
         method = API.Method.POST,
         summary = "更新[系统管理]模块",
@@ -102,7 +102,7 @@ public class SysModulesService extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "SysModules",description = "SysModules")
+            @Tag(name = "[系统管理]模块",description = "SysModules")
         },
         method = API.Method.GET,
         summary = "查询[系统管理]模块",

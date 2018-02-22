@@ -54,7 +54,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager){
         List<ViewResolver> list = new ArrayList<>();
         list.add(jsonViewResolver);
-        list.add(xmlViewResolver);
+//        list.add(xmlViewResolver);
 
         ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
         resolver.setContentNegotiationManager(manager);

@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "sys_persistent_logins",  catalog = "agile_db")
-@Remark("Spring Remember me 持久化")
+@Remark("[系统管理]登陆用户信息")
 public class SysPersistentLoginsEntity implements Serializable {
 
     //序列

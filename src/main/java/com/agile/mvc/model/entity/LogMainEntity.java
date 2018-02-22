@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "log_main",  catalog = "agile_db")
-@Remark("日志表")
+@Remark("[系统管理]日志表")
 public class LogMainEntity implements Serializable {
 
     //序列

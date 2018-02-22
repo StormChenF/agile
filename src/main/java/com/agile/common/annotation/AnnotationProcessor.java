@@ -165,7 +165,7 @@ public class AnnotationProcessor implements EnvironmentAware {
                 request.put("operationId",operationId);
                 JSONArray consumes = new JSONArray();
                 consumes.element("application/json");
-                consumes.element("application/xml");
+//                consumes.element("application/xml");
                 request.put("consumes",consumes);
                 request.put("produces",consumes);
                 JSONObject responsJsons = new JSONObject();

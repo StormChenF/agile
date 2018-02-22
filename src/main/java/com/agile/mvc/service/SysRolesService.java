@@ -15,7 +15,7 @@ public class SysRolesService extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "SysRoles",description = "SysRoles")
+            @Tag(name = "[系统管理]角色",description = "SysRoles")
         },
         method = API.Method.POST,
         summary = "新增[系统管理]角色",
@@ -41,7 +41,7 @@ public class SysRolesService extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "SysRoles",description = "SysRoles")
+            @Tag(name = "[系统管理]角色",description = "SysRoles")
         },
         method = API.Method.POST,
         summary = "删除[系统管理]角色",
@@ -64,7 +64,7 @@ public class SysRolesService extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "SysRoles",description = "SysRoles")
+            @Tag(name = "[系统管理]角色",description = "SysRoles")
         },
         method = API.Method.POST,
         summary = "更新[系统管理]角色",
@@ -90,7 +90,7 @@ public class SysRolesService extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "SysRoles",description = "SysRoles")
+            @Tag(name = "[系统管理]角色",description = "SysRoles")
         },
         method = API.Method.GET,
         summary = "查询[系统管理]角色",

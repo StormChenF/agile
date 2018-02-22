@@ -15,11 +15,11 @@ public class DictionaryMainService extends MainService {
 
     @API(name="保存",
         tag = {
-            @Tag(name = "DictionaryMain",description = "DictionaryMain")
+            @Tag(name = "[系统管理]字典表",description = "DictionaryMain")
         },
         method = API.Method.POST,
-        summary = "新增字典表",
-        description = "新增字典表",
+        summary = "新增[系统管理]字典表",
+        description = "新增[系统管理]字典表",
         parameters = {
 
             @Param(name = "name",in = "添加",description = "字典名称",type = Param.Type.STRING),
@@ -38,11 +38,11 @@ public class DictionaryMainService extends MainService {
 
     @API(name="删除",
         tag = {
-            @Tag(name = "DictionaryMain",description = "DictionaryMain")
+            @Tag(name = "[系统管理]字典表",description = "DictionaryMain")
         },
         method = API.Method.POST,
-        summary = "删除字典表",
-        description = "删除字典表",
+        summary = "删除[系统管理]字典表",
+        description = "删除[系统管理]字典表",
         parameters = {
                 @Param(name = "ids",in = "删除",description = "主键字符串",required = true,type = Param.Type.STRING),
         },
@@ -61,11 +61,11 @@ public class DictionaryMainService extends MainService {
 
     @API(name="更新",
         tag = {
-            @Tag(name = "DictionaryMain",description = "DictionaryMain")
+            @Tag(name = "[系统管理]字典表",description = "DictionaryMain")
         },
         method = API.Method.POST,
-        summary = "更新字典表",
-        description = "更新字典表",
+        summary = "更新[系统管理]字典表",
+        description = "更新[系统管理]字典表",
         parameters = {
             @Param(name = "code",in = "更新",description = "字典编码",required = true,type = Param.Type.STRING),
             @Param(name = "name",in = "更新",description = "字典名称",type = Param.Type.STRING),
@@ -84,11 +84,11 @@ public class DictionaryMainService extends MainService {
 
     @API(name="查询",
         tag = {
-            @Tag(name = "DictionaryMain",description = "DictionaryMain")
+            @Tag(name = "[系统管理]字典表",description = "DictionaryMain")
         },
         method = API.Method.GET,
-        summary = "查询字典表",
-        description = "查询字典表",
+        summary = "查询[系统管理]字典表",
+        description = "查询[系统管理]字典表",
         parameters = {
             @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
             @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)

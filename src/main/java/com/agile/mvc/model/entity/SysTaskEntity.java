@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "sys_task",  catalog = "agile_db")
-@Remark("")
+@Remark("[系统管理]定时任务")
 public class SysTaskEntity implements Serializable {
 
     //序列
