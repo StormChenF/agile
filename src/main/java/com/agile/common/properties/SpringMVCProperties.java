@@ -9,11 +9,11 @@ import com.agile.common.annotation.Properties;
 public class SpringMVCProperties {
     private static FileConfigProperty upload;
 
-    public FileConfigProperty getUpload() {
+    public static FileConfigProperty getUpload() {
         return upload;
     }
 
-    public void setUpload(FileConfigProperty upload) {
-        this.upload = upload;
+    public static void setUpload(FileConfigProperty upload) {
+        SpringMVCProperties.upload = upload;
     }
 }

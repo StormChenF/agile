@@ -40,14 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final RequestMatcher securityCsrfRequestMatcher;
     private final AuthenticationProvider securityAuthenticationProvider;
     private final SecurityUserDetailsService securityUserDetailsService;
-    private final SecurityProperties securityProperties;
 
     @Autowired
-    public SecurityConfig(RequestMatcher securityCsrfRequestMatcher, SecurityAuthenticationProvider securityAuthenticationProvider, SecurityUserDetailsService securityUserDetailsService,SecurityProperties securityProperties) {
+    public SecurityConfig(RequestMatcher securityCsrfRequestMatcher, SecurityAuthenticationProvider securityAuthenticationProvider, SecurityUserDetailsService securityUserDetailsService) {
         this.securityCsrfRequestMatcher = securityCsrfRequestMatcher;
         this.securityAuthenticationProvider = securityAuthenticationProvider;
         this.securityUserDetailsService = securityUserDetailsService;
-        this.securityProperties = securityProperties;
     }
 
     //http://localhost:8080/login 输入正确的用户名密码 并且选中remember-me 则登陆成功，转到 index页面
@@ -60,13 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .httpBasic().authenticationEntryPoint(loginUrlAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests().antMatchers("/**").access("isAuthenticated()")
-                .antMatchers(securityProperties.getNotLoginUrl(),securityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification").permitAll()//访问：无需登录认证权限
+                .antMatchers(SecurityProperties.getNotLoginUrl(),SecurityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification").permitAll()//访问：无需登录认证权限
 //                .anyRequest().authenticated() //其他所有资源都需要认证，登陆后访问
 //                .antMatchers("/druid/*").hasAuthority("ADMIN") //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
                 .and()
                     .exceptionHandling()
                 .and()
-                    .addFilterBefore(new SecurityKaptchaAuthenticationFilter(securityProperties.getLoginUrl(), securityProperties.getFailureUrl(),securityProperties.getVerificationCode()), UsernamePasswordAuthenticationFilter.class)//验证码
+                    .addFilterBefore(new SecurityKaptchaAuthenticationFilter(SecurityProperties.getLoginUrl(), SecurityProperties.getFailureUrl(),SecurityProperties.getVerificationCode()), UsernamePasswordAuthenticationFilter.class)//验证码
                     .csrf()
                     .requireCsrfProtectionMatcher(securityCsrfRequestMatcher)//CSRF
                 .and()
@@ -74,16 +72,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .rememberMe().key("e37f4b31-0c45-11dd-bd0b-0800200c9a66").tokenValiditySeconds(1209600)
                 .and()
                     .logout()
-                        .logoutUrl(securityProperties.getLoginOutUrl())
-                        .logoutSuccessUrl(securityProperties.getLoginOutSuccessUrl())
+                        .logoutUrl(SecurityProperties.getLoginOutUrl())
+                        .logoutSuccessUrl(SecurityProperties.getLoginOutSuccessUrl())
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .logoutSuccessHandler(simpleUrlLogoutSuccessHandler())
                         .permitAll()//退出
-                .and().exceptionHandling().accessDeniedPage(securityProperties.getAccessDenied())//权限不足跳页
+                .and().exceptionHandling().accessDeniedPage(SecurityProperties.getAccessDenied())//权限不足跳页
                 .and()
                    .sessionManagement()
-                        .invalidSessionUrl(securityProperties.getInvalidSessionUrl()).maximumSessions(1).expiredUrl(securityProperties.getExpiredSessionUrl()).sessionRegistry(sessionRegistry())//Session
+                        .invalidSessionUrl(SecurityProperties.getInvalidSessionUrl()).maximumSessions(1).expiredUrl(SecurityProperties.getExpiredSessionUrl()).sessionRegistry(sessionRegistry())//Session
 
         ;
     }
@@ -92,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web){
-        web.ignoring().antMatchers(securityProperties.getNotLoginUrl(), securityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification");
+        web.ignoring().antMatchers(SecurityProperties.getNotLoginUrl(), SecurityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification");
     }
 
     @Override
@@ -105,22 +103,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     LoginUrlAuthenticationEntryPoint loginUrlAuthenticationEntryPoint(){
-        return new LoginUrlAuthenticationEntryPoint(securityProperties.getNotLoginUrl());
+        return new LoginUrlAuthenticationEntryPoint(SecurityProperties.getNotLoginUrl());
     }
 
     @Bean
     SecurityAuthenticationFilter securityAuthenticationFilter() throws Exception {
         SecurityAuthenticationFilter filter = new SecurityAuthenticationFilter();
         //切入登陆过滤链路地址
-        filter.setFilterProcessesUrl(securityProperties.getLoginUrl());
+        filter.setFilterProcessesUrl(SecurityProperties.getLoginUrl());
 
         //成功处理链路
         savedRequestAwareAuthenticationSuccessHandler().setAlwaysUseDefaultTargetUrl(true);
-        savedRequestAwareAuthenticationSuccessHandler().setDefaultTargetUrl(securityProperties.getSuccessUrl());
+        savedRequestAwareAuthenticationSuccessHandler().setDefaultTargetUrl(SecurityProperties.getSuccessUrl());
         filter.setAuthenticationSuccessHandler(savedRequestAwareAuthenticationSuccessHandler());
 
         //失败处理链路
-        simpleUrlAuthenticationFailureHandler().setDefaultFailureUrl(securityProperties.getFailureUrl());
+        simpleUrlAuthenticationFailureHandler().setDefaultFailureUrl(SecurityProperties.getFailureUrl());
         filter.setAuthenticationFailureHandler(simpleUrlAuthenticationFailureHandler());
 
         filter.setAuthenticationManager(authenticationManager());

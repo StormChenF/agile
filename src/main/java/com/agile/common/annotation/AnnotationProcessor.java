@@ -224,11 +224,14 @@ public class AnnotationProcessor implements EnvironmentAware {
                     while (hasNext){
                         Object temp = innerClass.newInstance();
                         setProperties(temp,prefix+"."+name+"["+j+++"]");
-                        if(ObjectUtil.compareClass(temp,innerClass.newInstance()) && j!=1){
-                            hasNext = false;
-                        }else{
-                            list.add(temp);
+                        if(ObjectUtil.compareValue(temp,innerClass.newInstance()) && j==1){
+                            setProperties(temp,prefix+"."+name);
                         }
+                        if(ObjectUtil.compareValue(temp,innerClass.newInstance()) && j!=1){
+                            hasNext = false;
+                            continue;
+                        }
+                        list.add(temp);
                     }
                 }
                 field.set(target,list);

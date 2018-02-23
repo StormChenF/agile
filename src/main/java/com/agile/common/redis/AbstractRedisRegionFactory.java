@@ -33,7 +33,6 @@ public abstract class AbstractRedisRegionFactory implements RegionFactory {
 
     private void initConnectionFactory(){
         RedisConfig redisConfig = new RedisConfig();
-        redisConfig.setProperties(new RedisConfigProperties());
         JedisPoolConfig jedisPoolConfig = redisConfig.redisPool();
         jedisConnectionFactory = redisConfig.jedisConnectionFactory(jedisPoolConfig);
     }

@@ -1,7 +1,6 @@
 package com.agile.common.config;
 
 import com.agile.common.properties.RedisConfigProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -22,37 +21,35 @@ import static org.springframework.data.redis.cache.RedisCacheConfiguration.defau
  */
 @Configuration
 public class RedisConfig {
-    @Autowired
-    private RedisConfigProperties properties;
 
     @Bean
     public JedisPoolConfig redisPool(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxIdle(properties.getMaxIdle());
-        jedisPoolConfig.setMinIdle(properties.getMinIdle());
-        jedisPoolConfig.setMaxWaitMillis(properties.getMaxWaitMillis());
-        jedisPoolConfig.setTestOnReturn(properties.isTestOnReturn());
-        jedisPoolConfig.setTestOnBorrow(properties.isTestOnReturn());
+        jedisPoolConfig.setMaxIdle(RedisConfigProperties.getMaxIdle());
+        jedisPoolConfig.setMinIdle(RedisConfigProperties.getMinIdle());
+        jedisPoolConfig.setMaxWaitMillis(RedisConfigProperties.getMaxWaitMillis());
+        jedisPoolConfig.setTestOnReturn(RedisConfigProperties.isTestOnReturn());
+        jedisPoolConfig.setTestOnBorrow(RedisConfigProperties.isTestOnReturn());
         return jedisPoolConfig;
     }
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig redisPool){
-        List<String> hosts = properties.getHost();
-        List<Integer> ports = properties.getPort();
+        List<String> hosts = RedisConfigProperties.getHost();
+        List<Integer> ports = RedisConfigProperties.getPort();
         if(hosts.size()>1){
             RedisSentinelConfiguration config = new RedisSentinelConfiguration()
                     .master("master");
             for(int i = 0 ; i < hosts.size();i++){
                 config.sentinel(hosts.get(i),ports.get(i));
             }
-            config.setPassword(RedisPassword.of(properties.getPass()));
+            config.setPassword(RedisPassword.of(RedisConfigProperties.getPass()));
             return new JedisConnectionFactory(config,redisPool);
         }else{
             RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
             redisStandaloneConfiguration.setHostName(hosts.get(0));
             redisStandaloneConfiguration.setPort(ports.get(0));
-            redisStandaloneConfiguration.setPassword(RedisPassword.of(properties.getPass()));
+            redisStandaloneConfiguration.setPassword(RedisPassword.of(RedisConfigProperties.getPass()));
             JedisConnectionFactory je = new JedisConnectionFactory(redisStandaloneConfiguration);
             return je;
         }
@@ -75,9 +72,5 @@ public class RedisConfig {
                 .withInitialCacheConfigurations(Collections.singletonMap("predefined", config.disableCachingNullValues()))
                 .transactionAware()
                 .build();
-    }
-
-    public void setProperties(RedisConfigProperties properties) {
-        this.properties = properties;
     }
 }

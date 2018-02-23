@@ -9,11 +9,11 @@ import com.agile.common.annotation.Properties;
 public class CacheConfigProperties {
     private static String proxy = "ehcache";
 
-    public String getProxy() {
+    public static String getProxy() {
         return proxy;
     }
 
-    public void setProxy(String proxy) {
-        this.proxy = proxy;
+    public static void setProxy(String proxy) {
+        CacheConfigProperties.proxy = proxy;
     }
 }

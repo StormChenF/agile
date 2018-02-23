@@ -61,7 +61,6 @@ public class MainController implements EnvironmentAware {
      * @throws NoSuchMethodException 没有这样的方法异常
      * @throws SecurityException 安全异常
      */
-    @Order(1)
     @RequestMapping(value = "/{service}/{method}")
     public ModelAndView processor(
             HttpServletRequest request,

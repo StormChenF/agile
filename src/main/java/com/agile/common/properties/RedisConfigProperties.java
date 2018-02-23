@@ -19,67 +19,67 @@ public class RedisConfigProperties {
     private static List<String> host;
     private static List<Integer> port;
 
-    public String getPass() {
+    public static String getPass() {
         return pass;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public static void setPass(String pass) {
+        RedisConfigProperties.pass = pass;
     }
 
-    public int getMaxIdle() {
+    public static int getMaxIdle() {
         return maxIdle;
     }
 
-    public void setMaxIdle(int maxIdle) {
-        this.maxIdle = maxIdle;
+    public static void setMaxIdle(int maxIdle) {
+        RedisConfigProperties.maxIdle = maxIdle;
     }
 
-    public int getMinIdle() {
+    public static int getMinIdle() {
         return minIdle;
     }
 
-    public void setMinIdle(int minIdle) {
-        this.minIdle = minIdle;
+    public static void setMinIdle(int minIdle) {
+        RedisConfigProperties.minIdle = minIdle;
     }
 
-    public int getMaxWaitMillis() {
+    public static int getMaxWaitMillis() {
         return maxWaitMillis;
     }
 
-    public void setMaxWaitMillis(int maxWaitMillis) {
-        this.maxWaitMillis = maxWaitMillis;
+    public static void setMaxWaitMillis(int maxWaitMillis) {
+        RedisConfigProperties.maxWaitMillis = maxWaitMillis;
     }
 
-    public boolean isTestOnReturn() {
+    public static boolean isTestOnReturn() {
         return testOnReturn;
     }
 
-    public void setTestOnReturn(boolean testOnReturn) {
-        this.testOnReturn = testOnReturn;
+    public static void setTestOnReturn(boolean testOnReturn) {
+        RedisConfigProperties.testOnReturn = testOnReturn;
     }
 
-    public boolean isTestOnBorrow() {
+    public static boolean isTestOnBorrow() {
         return testOnBorrow;
     }
 
-    public void setTestOnBorrow(boolean testOnBorrow) {
-        this.testOnBorrow = testOnBorrow;
+    public static void setTestOnBorrow(boolean testOnBorrow) {
+        RedisConfigProperties.testOnBorrow = testOnBorrow;
     }
 
-    public List<String> getHost() {
+    public static List<String> getHost() {
         return host;
     }
 
-    public void setHost(List<String> host) {
-        this.host = host;
+    public static void setHost(List<String> host) {
+        RedisConfigProperties.host = host;
     }
 
-    public List<Integer> getPort() {
+    public static List<Integer> getPort() {
         return port;
     }
 
-    public void setPort(List<Integer> port) {
-        this.port = port;
+    public static void setPort(List<Integer> port) {
+        RedisConfigProperties.port = port;
     }
 }

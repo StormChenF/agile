@@ -76,8 +76,29 @@ public class ObjectUtil extends ObjectUtils {
      * @param target 目标对象
      * @return 是否相同
      */
-    public static boolean compareValue(Object source, Object target) {
+    public static boolean compare(Object source, Object target) {
         return isEmpty(source)?isEmpty(target):(source.equals(target));
+    }
+
+    /**
+     * 比较两个对象属性是否相同
+     * @param source 源对象
+     * @param target 目标对象
+     * @return 是否相同
+     */
+    public static boolean compareValue(Object source, Object target) {
+        if(isEmpty(source)){
+            return isEmpty(target);
+        }else{
+            if(isEmpty(target))return false;
+            try {
+                List<Map<String, Object>> list = getDifferenceProperties(source, target);
+                if(list != null && list.size()>0)return false;
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 
     /**
@@ -88,7 +109,7 @@ public class ObjectUtil extends ObjectUtils {
      * @throws IllegalAccessException 调用过程异常
      */
     public static List<Map<String,Object>> getDifferenceProperties(Object source,Object target) throws IllegalAccessException {
-        if(((!compareClass(source, target) || compareValue(source, target)) || isEmpty(source)) != isEmpty(target))return null;
+        if(((!compareClass(source, target) || compare(source, target)) || isEmpty(source)) != isEmpty(target))return null;
         List<Map<String,Object>> result = new ArrayList<>();
         Object sourceObject = isEmpty(source)?target:source;
         Object targetObject = isEmpty(source)?source:target;
@@ -99,7 +120,7 @@ public class ObjectUtil extends ObjectUtils {
             field.setAccessible(true);
             Object sourceValue = field.get(sourceObject);
             Object targetValue = field.get(targetObject);
-            if (compareValue(sourceValue,targetValue)) {
+            if (compare(sourceValue,targetValue)) {
                 continue;
             }
             result.add(new HashMap<String,Object>() {

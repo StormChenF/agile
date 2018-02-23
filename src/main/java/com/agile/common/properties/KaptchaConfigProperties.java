@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  */
 @Properties(prefix = "agile.kaptcha")
 public class KaptchaConfigProperties {
+    private static String url;
     private static String border;
     private static String borderColor;
     private static String textproducerFontColor;
@@ -17,67 +18,75 @@ public class KaptchaConfigProperties {
     private static String textproducerCharLength;
     private static String textproducerFontNames;
 
-    public String getBorder() {
+    public static String getUrl() {
+        return url;
+    }
+
+    public static void setUrl(String url) {
+        KaptchaConfigProperties.url = url;
+    }
+
+    public static String getBorder() {
         return border;
     }
 
-    public void setBorder(String border) {
-        this.border = border;
+    public static void setBorder(String border) {
+        KaptchaConfigProperties.border = border;
     }
 
-    public String getBorderColor() {
+    public static String getBorderColor() {
         return borderColor;
     }
 
-    public void setBorderColor(String borderColor) {
-        this.borderColor = borderColor;
+    public static void setBorderColor(String borderColor) {
+        KaptchaConfigProperties.borderColor = borderColor;
     }
 
-    public String getTextproducerFontColor() {
+    public static String getTextproducerFontColor() {
         return textproducerFontColor;
     }
 
-    public void setTextproducerFontColor(String textproducerFontColor) {
-        this.textproducerFontColor = textproducerFontColor;
+    public static void setTextproducerFontColor(String textproducerFontColor) {
+        KaptchaConfigProperties.textproducerFontColor = textproducerFontColor;
     }
 
-    public String getTextproducerFontSize() {
+    public static String getTextproducerFontSize() {
         return textproducerFontSize;
     }
 
-    public void setTextproducerFontSize(String textproducerFontSize) {
-        this.textproducerFontSize = textproducerFontSize;
+    public static void setTextproducerFontSize(String textproducerFontSize) {
+        KaptchaConfigProperties.textproducerFontSize = textproducerFontSize;
     }
 
-    public String getImageWidth() {
+    public static String getImageWidth() {
         return imageWidth;
     }
 
-    public void setImageWidth(String imageWidth) {
-        this.imageWidth = imageWidth;
+    public static void setImageWidth(String imageWidth) {
+        KaptchaConfigProperties.imageWidth = imageWidth;
     }
 
-    public String getImageHeight() {
+    public static String getImageHeight() {
         return imageHeight;
     }
 
-    public void setImageHeight(String imageHeight) {
-        this.imageHeight = imageHeight;
+    public static void setImageHeight(String imageHeight) {
+        KaptchaConfigProperties.imageHeight = imageHeight;
     }
 
-    public String getTextproducerCharLength() {
+    public static String getTextproducerCharLength() {
         return textproducerCharLength;
     }
 
-    public void setTextproducerCharLength(String textproducerCharLength) {
-        this.textproducerCharLength = textproducerCharLength;
+    public static void setTextproducerCharLength(String textproducerCharLength) {
+        KaptchaConfigProperties.textproducerCharLength = textproducerCharLength;
     }
 
-    public String getTextproducerFontNames() {
+    public static String getTextproducerFontNames() {
         return textproducerFontNames;
     }
 
-    public void setTextproducerFontNames(String textproducerFontNames) {
-        this.textproducerFontNames = textproducerFontNames;
+    public static void setTextproducerFontNames(String textproducerFontNames) {
+        KaptchaConfigProperties.textproducerFontNames = textproducerFontNames;
     }
 }

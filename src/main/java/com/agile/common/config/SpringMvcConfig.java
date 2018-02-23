@@ -29,8 +29,6 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
     private final XmlViewResolver xmlViewResolver;
 
-    private final SpringMVCProperties springMVCProperties;
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.setOrder(1).addResourceHandler("/**")
@@ -38,10 +36,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     }
 
     @Autowired
-    public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver,SpringMVCProperties springMVCProperties) {
+    public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver) {
         this.jsonViewResolver = jsonViewResolver;
         this.xmlViewResolver = xmlViewResolver;
-        this.springMVCProperties = springMVCProperties;
     }
 
     /**
@@ -70,8 +67,8 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     @Bean
     public CommonsMultipartResolver contentCommonsMultipartResolver(){
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxUploadSize(springMVCProperties.getUpload().getMaxUploadSize());
-        resolver.setDefaultEncoding(springMVCProperties.getUpload().getDefaultEncoding());
+        resolver.setMaxUploadSize(SpringMVCProperties.getUpload().getMaxUploadSize());
+        resolver.setDefaultEncoding(SpringMVCProperties.getUpload().getDefaultEncoding());
         return resolver;
     }
 

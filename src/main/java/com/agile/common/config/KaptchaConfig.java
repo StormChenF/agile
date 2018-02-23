@@ -13,12 +13,6 @@ import java.util.Properties;
  */
 @Configuration
 public class KaptchaConfig {
-    private final KaptchaConfigProperties kaptchaConfigProperties;
-
-    @Autowired
-    public KaptchaConfig(KaptchaConfigProperties kaptchaConfigProperties) {
-        this.kaptchaConfigProperties = kaptchaConfigProperties;
-    }
 
     @Bean
     DefaultKaptcha defaultKaptcha(){
@@ -33,14 +27,14 @@ public class KaptchaConfig {
 
     private Properties properties(){
         Properties properties = new Properties();
-        properties.setProperty("kaptcha.border",kaptchaConfigProperties.getBorder());
-        properties.setProperty("kaptcha.border.color",kaptchaConfigProperties.getBorderColor());
-        properties.setProperty("kaptcha.textproducer.font.color",kaptchaConfigProperties.getTextproducerFontColor());
-        properties.setProperty("kaptcha.textproducer.font.size",kaptchaConfigProperties.getTextproducerFontSize());
-        properties.setProperty("kaptcha.image.width",kaptchaConfigProperties.getImageWidth());
-        properties.setProperty("kaptcha.image.height",kaptchaConfigProperties.getImageHeight());
-        properties.setProperty("kaptcha.textproducer.char.length",kaptchaConfigProperties.getTextproducerCharLength());
-        properties.setProperty("kaptcha.textproducer.font.names",kaptchaConfigProperties.getTextproducerFontNames());
+        properties.setProperty("kaptcha.border", KaptchaConfigProperties.getBorder());
+        properties.setProperty("kaptcha.border.color",KaptchaConfigProperties.getBorderColor());
+        properties.setProperty("kaptcha.textproducer.font.color",KaptchaConfigProperties.getTextproducerFontColor());
+        properties.setProperty("kaptcha.textproducer.font.size",KaptchaConfigProperties.getTextproducerFontSize());
+        properties.setProperty("kaptcha.image.width",KaptchaConfigProperties.getImageWidth());
+        properties.setProperty("kaptcha.image.height",KaptchaConfigProperties.getImageHeight());
+        properties.setProperty("kaptcha.textproducer.char.length",KaptchaConfigProperties.getTextproducerCharLength());
+        properties.setProperty("kaptcha.textproducer.font.names",KaptchaConfigProperties.getTextproducerFontNames());
         return properties;
     }
 }

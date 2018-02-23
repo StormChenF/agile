@@ -33,22 +33,18 @@ public class JPAConfig {
 
     private final DataSource dataSource;
 
-    private final DBConfigProperties dbConfigProperties;
     private DruidConfigProperty druidConfigProperty;
     private JPAConfigProperty jpaConfigProperty;
-    private final CacheConfigProperties cacheConfigProperties;
 
     @PostConstruct
     private void init(){
-        this.druidConfigProperty = dbConfigProperties.getDruid().get(index);
-        this.jpaConfigProperty = dbConfigProperties.getJpa().get(index);
+        this.druidConfigProperty = DBConfigProperties.getDruid().get(index);
+        this.jpaConfigProperty = DBConfigProperties.getJpa().get(index);
     }
 
     @Autowired
-    public JPAConfig(@Qualifier(value = "dataSource") DataSource dataSource,DBConfigProperties dbConfigProperties,CacheConfigProperties cacheConfigProperties) {
+    public JPAConfig(@Qualifier(value = "dataSource") DataSource dataSource) {
         this.dataSource = dataSource;
-        this.dbConfigProperties = dbConfigProperties;
-        this.cacheConfigProperties = cacheConfigProperties;
     }
 
     @Bean
@@ -81,7 +77,7 @@ public class JPAConfig {
     }
 
     private Properties jpaProperties(){
-        String cacheProxy = cacheConfigProperties.getProxy().toLowerCase();
+        String cacheProxy = CacheConfigProperties.getProxy().toLowerCase();
 
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto",jpaConfigProperty.getHbm2ddl());

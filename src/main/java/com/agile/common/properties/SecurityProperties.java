@@ -20,99 +20,99 @@ public class SecurityProperties {
     private static String csrfAllowMethods = "GET,HEAD,TRACE,OPTIONS";
     private static String verificationCode = "verification";
 
-    public String getLoginUrl() {
+    public static String getLoginUrl() {
         return loginUrl;
     }
 
-    public void setLoginUrl(String loginUrl) {
-        this.loginUrl = loginUrl;
+    public static void setLoginUrl(String loginUrl) {
+        SecurityProperties.loginUrl = loginUrl;
     }
 
-    public String getLoginOutUrl() {
+    public static String getLoginOutUrl() {
         return loginOutUrl;
     }
 
-    public void setLoginOutUrl(String loginOutUrl) {
-        this.loginOutUrl = loginOutUrl;
+    public static void setLoginOutUrl(String loginOutUrl) {
+        SecurityProperties.loginOutUrl = loginOutUrl;
     }
 
-    public String getLoginOutSuccessUrl() {
+    public static String getLoginOutSuccessUrl() {
         return loginOutSuccessUrl;
     }
 
-    public void setLoginOutSuccessUrl(String loginOutSuccessUrl) {
-        this.loginOutSuccessUrl = loginOutSuccessUrl;
+    public static void setLoginOutSuccessUrl(String loginOutSuccessUrl) {
+        SecurityProperties.loginOutSuccessUrl = loginOutSuccessUrl;
     }
 
-    public String getNotLoginUrl() {
+    public static String getNotLoginUrl() {
         return notLoginUrl;
     }
 
-    public void setNotLoginUrl(String notLoginUrl) {
-        this.notLoginUrl = notLoginUrl;
+    public static void setNotLoginUrl(String notLoginUrl) {
+        SecurityProperties.notLoginUrl = notLoginUrl;
     }
 
-    public String getInvalidSessionUrl() {
+    public static String getInvalidSessionUrl() {
         return invalidSessionUrl;
     }
 
-    public void setInvalidSessionUrl(String invalidSessionUrl) {
-        this.invalidSessionUrl = invalidSessionUrl;
+    public static void setInvalidSessionUrl(String invalidSessionUrl) {
+        SecurityProperties.invalidSessionUrl = invalidSessionUrl;
     }
 
-    public String getExpiredSessionUrl() {
+    public static String getExpiredSessionUrl() {
         return expiredSessionUrl;
     }
 
-    public void setExpiredSessionUrl(String expiredSessionUrl) {
-        this.expiredSessionUrl = expiredSessionUrl;
+    public static void setExpiredSessionUrl(String expiredSessionUrl) {
+        SecurityProperties.expiredSessionUrl = expiredSessionUrl;
     }
 
-    public String getSuccessUrl() {
+    public static String getSuccessUrl() {
         return successUrl;
     }
 
-    public void setSuccessUrl(String successUrl) {
-        this.successUrl = successUrl;
+    public static void setSuccessUrl(String successUrl) {
+        SecurityProperties.successUrl = successUrl;
     }
 
-    public String getFailureUrl() {
+    public static String getFailureUrl() {
         return failureUrl;
     }
 
-    public void setFailureUrl(String failureUrl) {
-        this.failureUrl = failureUrl;
+    public static void setFailureUrl(String failureUrl) {
+        SecurityProperties.failureUrl = failureUrl;
     }
 
-    public String getAccessDenied() {
+    public static String getAccessDenied() {
         return accessDenied;
     }
 
-    public void setAccessDenied(String accessDenied) {
-        this.accessDenied = accessDenied;
+    public static void setAccessDenied(String accessDenied) {
+        SecurityProperties.accessDenied = accessDenied;
     }
 
-    public String getCsrfAllowUrl() {
+    public static String getCsrfAllowUrl() {
         return csrfAllowUrl;
     }
 
-    public void setCsrfAllowUrl(String csrfAllowUrl) {
-        this.csrfAllowUrl = csrfAllowUrl;
+    public static void setCsrfAllowUrl(String csrfAllowUrl) {
+        SecurityProperties.csrfAllowUrl = csrfAllowUrl;
     }
 
-    public String getCsrfAllowMethods() {
+    public static String getCsrfAllowMethods() {
         return csrfAllowMethods;
     }
 
-    public void setCsrfAllowMethods(String csrfAllowMethods) {
-        this.csrfAllowMethods = csrfAllowMethods;
+    public static void setCsrfAllowMethods(String csrfAllowMethods) {
+        SecurityProperties.csrfAllowMethods = csrfAllowMethods;
     }
 
-    public String getVerificationCode() {
+    public static String getVerificationCode() {
         return verificationCode;
     }
 
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
+    public static void setVerificationCode(String verificationCode) {
+        SecurityProperties.verificationCode = verificationCode;
     }
 }

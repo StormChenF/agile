@@ -17,15 +17,15 @@ public class DBConfigProperties {
         return druid;
     }
 
-    public void setDruid(List<DruidConfigProperty> druid) {
-        this.druid = druid;
+    public static void setDruid(List<DruidConfigProperty> druid) {
+        DBConfigProperties.druid = druid;
     }
 
-    public List<JPAConfigProperty> getJpa() {
+    public static List<JPAConfigProperty> getJpa() {
         return jpa;
     }
 
-    public void setJpa(List<JPAConfigProperty> jpa) {
-        this.jpa = jpa;
+    public static void setJpa(List<JPAConfigProperty> jpa) {
+        DBConfigProperties.jpa = jpa;
     }
 }

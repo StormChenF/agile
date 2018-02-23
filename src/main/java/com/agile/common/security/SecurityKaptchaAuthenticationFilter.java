@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 登陆验证码拦截器
  * Created by 佟盟 on 2017/9/27
  */
 public class SecurityKaptchaAuthenticationFilter extends AbstractAuthenticationProcessingFilter {

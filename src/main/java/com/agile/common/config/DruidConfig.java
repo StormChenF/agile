@@ -16,19 +16,11 @@ import java.sql.SQLException;
 public class DruidConfig {
     private static int index = 0;
 
-    private final DBConfigProperties dbConfigProperties;
     private DruidConfigProperty druidConfigProperty;
-    @Autowired
-    private KaptchaConfigProperties kaptchaConfigProperties;
-
-    @Autowired
-    public DruidConfig(DBConfigProperties dbConfigProperties) {
-        this.dbConfigProperties = dbConfigProperties;
-    }
 
     @PostConstruct
     private void init(){
-        this.druidConfigProperty = dbConfigProperties.getDruid().get(index);
+        this.druidConfigProperty = DBConfigProperties.getDruid().get(index);
     }
 
     @Bean(initMethod = "init",destroyMethod = "close",name = "dataSource")
