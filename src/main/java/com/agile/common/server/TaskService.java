@@ -230,7 +230,7 @@ public class TaskService extends MainService{
      * @return 是否成功
      */
     public RETURN removeTask(){
-        String id = this.getInParamOfString("id");
+        String id = this.getInParam("id");
         if(this.removeTask(id)){
             this.dao.deleteById(SysTaskEntity.class,Integer.parseInt(id));
             return RETURN.SUCCESS;
@@ -251,7 +251,7 @@ public class TaskService extends MainService{
      * @return 是否成功
      */
     public RETURN stopTask(){
-        String id = this.getInParamOfString("id");
+        String id = this.getInParam("id");
         if(this.stopTask(id)){
             SysTaskEntity entity = dao.findOne(SysTaskEntity.class, Integer.parseInt(id));
             entity.setState(false);
@@ -280,7 +280,7 @@ public class TaskService extends MainService{
      */
     public RETURN startTask(){
         try {
-            String id = this.getInParamOfString("id");
+            String id = this.getInParam("id");
             TaskInfo taskInfo = taskInfoMap.get(id);
             if(ObjectUtil.isEmpty(taskInfo))return RETURN.EXPRESSION;
             ScheduledFuture future = this.threadPoolTaskScheduler.schedule(taskInfo.getJob(), taskInfo.getTrigger());
@@ -320,8 +320,8 @@ public class TaskService extends MainService{
     }
 
     public RETURN query(){
-        int page = this.getInParamOfInteger("page", 0);
-        int size = this.getInParamOfInteger("size", 10);
+        int page = this.getInParam("page",Integer.class,0);
+        int size = this.getInParam("size",Integer.class,10);
         this.setOutParam("queryList",dao.findAll(SysTaskEntity.class,page,size));
         return RETURN.SUCCESS;
     }

@@ -3,6 +3,9 @@ package com.agile.common.server;
 import com.agile.common.exception.ExceptionHandler;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
+import com.agile.common.util.ArrayUtil;
+import com.agile.common.util.ObjectUtil;
+import com.agile.common.util.StringUtil;
 import com.agile.mvc.model.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +25,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
     public Dao dao;
 
     //输入
-    private ThreadLocal<Map<String, Object>> inParam = new ThreadLocal<>();
+    private ThreadLocal<Map<String, String[]>> inParam = new ThreadLocal<>();
 
     //输出
     private ThreadLocal<Map<String, Object>> outParam = ThreadLocal.withInitial(HashMap::new);
@@ -51,7 +54,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      * 控制层中调用该方法设置服务入参
      * @param inParam 参数集
      */
-    public void setInParam(Map<String, Object> inParam) {
+    public void setInParam(Map<String, String[]> inParam) {
         this.inParam.set(inParam);
     }
 
@@ -60,123 +63,82 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      * @param key 入参索引字符串
      * @return 入参值
      */
-    protected Object getInParam(String key) {
-        return inParam.get().get(key);
+    protected String getInParam(String key) {
+        String[] value = inParam.get().get(key);
+        if(value!=null && value.length>0){
+            return value[0];
+        }
+        return null;
     }
 
+
     /**
-     * 服务中调用该方法获取字符串入参
+     * 服务中调用该方法获取入参
      * @param key 入参索引字符串
      * @return 入参值
      */
-    protected String getInParamOfString(String key) {
-        return String.valueOf(inParam.get().get(key));
+    protected String getInParam(String key,String defaultValue) {
+        String[] value = inParam.get().get(key);
+        if(value!=null && value.length>0){
+            return value[0];
+        }
+        return defaultValue;
     }
 
     /**
-     * 服务中调用该方法获取字符串入参
-     * @param key 入参索引字符串
-     * @param defaultValue 默认值
-     * @return 入参值
-     */
-    protected String getInParamOfString(String key,String defaultValue) {
-        return containsKey(key)?String.valueOf(inParam.get().get(key)):defaultValue;
-    }
-
-    /**
-     * 服务中调用该方法获取整数入参
+     * 服务中调用该方法获取指定类型入参
      * @param key 入参索引字符串
      * @return 入参值
      */
-    protected int getInParamOfInteger(String key) {
-        return Integer.parseInt(getInParamOfString(key));
+    protected <T>T getInParam(String key,Class<T> clazz) {
+        String[] value = inParam.get().get(key);
+        if(value!=null && value.length==1){
+            Object result = ObjectUtil.cast(clazz, value[0]);
+            return ObjectUtil.isEmpty(result)?null:(T)result;
+        }
+        return null;
     }
 
-    /**
-     * 服务中调用该方法获取整数入参
-     * @param key 入参索引字符串
-     * @param defaultValue 默认值
-     * @return 入参值
-     */
-    protected int getInParamOfInteger(String key,int defaultValue) {
-        return containsKey(key)?Integer.parseInt(getInParamOfString(key)):defaultValue;
-    }
 
     /**
-     * 服务中调用该方法获取浮点入参
-     * @param key 入参索引字符串
-     * @param defaultValue 默认值
-     * @return 入参值
-     */
-    protected float getInParamOfFloat(String key,float defaultValue) {
-        return containsKey(key)?Float.parseFloat(getInParamOfString(key)):defaultValue;
-    }
-
-    /**
-     * 服务中调用该方法获取浮点入参
+     * 服务中调用该方法获取指定类型入参
      * @param key 入参索引字符串
      * @return 入参值
      */
-    protected float getInParamOfFloat(String key) {
-        return Float.parseFloat(getInParamOfString(key));
+    protected <T>T getInParam(String key,Class<T> clazz,Object defaultValue) {
+        String[] value = inParam.get().get(key);
+        if(!ArrayUtil.isEmpty(value)){
+            Object result = ObjectUtil.cast(clazz, value[0]);
+            return ObjectUtil.isEmpty(result)?null:(T)result;
+        }
+        return (T)ObjectUtil.cast(clazz,defaultValue);
     }
 
     /**
-     * 服务中调用该方法获取日期入参
-     * @param key 入参索引字符串
-     * @param defaultValue 默认值
-     * @return 入参值
-     */
-    protected Date getInParamOfDate(String key,Date defaultValue) {
-        return containsKey(key)?Date.valueOf(getInParamOfString(key)):defaultValue;
-    }
-
-    /**
-     * 服务中调用该方法获取日期入参
+     * 服务中调用该方法获取字符串数组入参
      * @param key 入参索引字符串
      * @return 入参值
      */
-    protected Date getInParamOfDate(String key) {
-        return Date.valueOf(getInParamOfString(key));
+    protected String[] getInParamOfArray(String key) {
+        String[] value = inParam.get().get(key);
+        if(value!=null && value.length==1){
+            return value;
+        }
+        return null;
     }
 
     /**
-     * 服务中调用该方法获取长整形入参
-     * @param key 入参索引字符串
-     * @param defaultValue 默认值
-     * @return 入参值
-     */
-    protected long getInParamOfLong(String key,long defaultValue) {
-        return containsKey(key)?Long.valueOf(getInParamOfString(key)):defaultValue;
-    }
-
-    /**
-     * 服务中调用该方法获取长整形入参
+     * 服务中调用该方法获取指定类型入参
      * @param key 入参索引字符串
      * @return 入参值
      */
-    protected long getInParamOfLong(String key) {
-        return Long.valueOf(getInParamOfString(key));
+    protected <T>T[] getInParamOfArray(String key,Class<T> clazz) {
+        String[] value = inParam.get().get(key);
+        if(value!=null && value.length>0){
+            return ArrayUtil.cast(clazz,value);
+        }
+        return null;
     }
-
-    /**
-     * 服务中调用该方法获取布尔形入参
-     * @param defaultValue 默认值
-     * @return 入参值
-     */
-    protected boolean getInParamOfBoolean(String key,boolean defaultValue) {
-        return containsKey(key)?Boolean.valueOf(getInParamOfString(key)):defaultValue;
-    }
-
-    /**
-     * 服务中调用该方法获取布尔形入参
-     * @param key 入参索引字符串
-     * @return 入参值
-     */
-    protected boolean getInParamOfBoolean(String key) {
-        return Boolean.valueOf(getInParamOfString(key));
-    }
-
 
     /**
      * 服务中调用该方判断是否存在入参
@@ -191,7 +153,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      * 服务中调用该方法获取入参集合
      * @return 入参集合
      */
-    public Map<String, Object> getInParam() {
+    public Map<String, String[]> getInParam() {
         return inParam.get();
     }
 

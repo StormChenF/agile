@@ -29,7 +29,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
         @Responses(code = "000001",description = "成功"),
         @Responses(code = "300000",description = "系统程序异常")
     })
-    public RETURN save() throws IllegalAccessException {
+    public RETURN save() {
         SysBtRolesAuthoritiesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesAuthoritiesEntity.class, this.getInParam());
         if (!ObjectUtil.isValidity(entity)) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
@@ -51,8 +51,8 @@ public class SysBtRolesAuthoritiesService extends MainService {
         @Responses(code = "300000",description = "系统程序异常")
     })
     public RETURN delete(){
-        if (this.containsKey("ids")){
-            String[] ids = this.getInParamOfString("ids").split(",");
+        if (this.containsKey("id")){
+            String[] ids = this.getInParamOfArray("id");
             dao.deleteInBatch(SysBtRolesAuthoritiesEntity.class,ids);
             return RETURN.SUCCESS;
         }
@@ -75,7 +75,7 @@ public class SysBtRolesAuthoritiesService extends MainService {
         @Responses(code = "000001",description = "成功"),
         @Responses(code = "300000",description = "系统程序异常")
     })
-    public RETURN update() throws IllegalAccessException {
+    public RETURN update() {
         SysBtRolesAuthoritiesEntity entity = ObjectUtil.getObjectFromMap(SysBtRolesAuthoritiesEntity.class, this.getInParam());
         if (ObjectUtil.isEmpty(entity.getSysBtRolesAuthoritiesId())) return RETURN.PARAMETER_ERROR;
         dao.update(entity);
@@ -90,15 +90,15 @@ public class SysBtRolesAuthoritiesService extends MainService {
         summary = "查询[系统管理]角色权限表",
         description = "查询[系统管理]角色权限表",
         parameters = {
-            @Param(name = "page",in = "查询",description = "第几页",required = false,type = Param.Type.INTEGER),
-            @Param(name = "size",in = "查询",description = "每页条数",required = false,type = Param.Type.INTEGER)
+            @Param(name = "page",in = "查询",description = "第几页",type = Param.Type.INTEGER),
+            @Param(name = "size",in = "查询",description = "每页条数",type = Param.Type.INTEGER)
         },
         responses = {
         @Responses(code = "000001",description = "成功",schema = SysBtRolesAuthoritiesEntity.class,isArray = true),
         @Responses(code = "300000",description = "系统程序异常")
     })
     public RETURN query(){
-        this.setOutParam("queryList",dao.findAll(SysBtRolesAuthoritiesEntity.class,getInParamOfInteger("page",0),getInParamOfInteger("size",10)));
+        this.setOutParam("queryList",dao.findAll(SysBtRolesAuthoritiesEntity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
         return RETURN.SUCCESS;
     }
 }

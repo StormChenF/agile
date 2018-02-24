@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface ServiceInterface {
 	//设置请求参数
-	void setInParam(Map<String, Object> inParam);
+	void setInParam(Map<String, String[]> inParam);
 	//设置响应参数
 	void setOutParam(String key, Object value);
 	//清理
