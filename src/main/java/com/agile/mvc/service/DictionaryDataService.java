@@ -1,7 +1,7 @@
 package com.agile.mvc.service;
 
 import com.agile.common.annotation.*;
-import com.agile.common.server.MainService;
+import com.agile.common.service.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
@@ -104,5 +104,11 @@ public class DictionaryDataService extends MainService {
     public RETURN query(){
         this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
         return RETURN.SUCCESS;
+    }
+    void task1(){
+        System.out.println(1111111);
+    }
+    void task2(){
+        System.out.println(2222222);
     }
 }

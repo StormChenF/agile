@@ -1,6 +1,6 @@
 package com.agile.common.config;
 
-import com.agile.common.ehCache.EhCacheManagerFactoryBean;
+import com.agile.common.cache.ehCache.EhCacheManagerFactoryBean;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.DiskStoreConfiguration;

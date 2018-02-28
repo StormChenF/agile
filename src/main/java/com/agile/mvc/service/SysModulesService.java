@@ -1,7 +1,7 @@
 package com.agile.mvc.service;
 
 import com.agile.common.annotation.*;
-import com.agile.common.server.MainService;
+import com.agile.common.service.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;

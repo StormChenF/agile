@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .httpBasic().authenticationEntryPoint(loginUrlAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests().antMatchers("/**").access("isAuthenticated()")
-                .antMatchers(SecurityProperties.getNotLoginUrl(),SecurityProperties.getInvalidSessionUrl(),"/druid/**", "/swagger**","/verification").permitAll()//访问：无需登录认证权限
+                .antMatchers(SecurityProperties.getNotLoginUrl(),SecurityProperties.getInvalidSessionUrl(),"/druid/**","/verification").permitAll()//访问：无需登录认证权限
 //                .anyRequest().authenticated() //其他所有资源都需要认证，登陆后访问
 //                .antMatchers("/druid/*").hasAuthority("ADMIN") //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
                 .and()
@@ -147,6 +147,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("tongmeng").password("tongmeng").roles("ADMIN");
         auth.userDetailsService(securityUserDetailsService).passwordEncoder(passwordEncoder());
         auth.eraseCredentials(false);
     }
@@ -159,7 +160,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource(){
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:com.agile.configure.agile-message.properties");
+        messageSource.setBasename("classpath:org/springframework/security/messages_zh_CN");
         messageSource.setDefaultEncoding("utf-8");
         messageSource.setUseCodeAsDefaultMessage(true);
         messageSource.setCacheSeconds(10);

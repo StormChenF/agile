@@ -25,7 +25,7 @@ public class LogAop {
     /**
      * 服务切面
      */
-    @Pointcut(value = "execution(* com.agile.common.server.ServiceInterface.executeMethod(..))")
+    @Pointcut(value = "execution(* com.agile.common.service.ServiceInterface.executeMethod(..))")
     public void servicePointCut() {
     }
 

@@ -4,15 +4,13 @@ import com.agile.common.base.ResponseHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
-import com.agile.common.exception.UnlawfulRequestException;
-import com.agile.common.server.ServiceInterface;
+import com.agile.common.service.ServiceInterface;
 import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.FactoryUtil;
 import com.agile.common.util.FileUtil;
 import com.agile.common.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.context.EnvironmentAware;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,7 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -55,11 +52,6 @@ public class MainController implements EnvironmentAware {
      * @param method 方法名
      * @param forward 转发信息
      * @return 响应试图数据
-     * @throws IllegalAccessException 非法访问异常
-     * @throws IllegalArgumentException 非法参数异常
-     * @throws InvocationTargetException 调用目标异常
-     * @throws NoSuchMethodException 没有这样的方法异常
-     * @throws SecurityException 安全异常
      */
     @RequestMapping(value = "/{service}/{method}")
     public ModelAndView processor(
@@ -133,7 +125,7 @@ public class MainController implements EnvironmentAware {
             Object service = FactoryUtil.getBean(serviceName);
             this.setService((ServiceInterface) service);
         }catch (Exception e){
-            throw new NoSuchRequestServiceException("[服务类:" + serviceName + "]于系统中不存在！");
+            throw new NoSuchRequestServiceException();
         }
     }
 
@@ -249,11 +241,6 @@ public class MainController implements EnvironmentAware {
         headers.setContentDispositionFormData(Constant.HeaderAbout.ATTACHMENT,new String(fileName.getBytes(Charset.forName("UTF-8")),Charset.forName("ISO-8859-1")));
         return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
     }
-
-//    @RequestMapping("/api")
-//    private Object api(){
-//        return JSONObject.fromObject(s);
-//    }
 
     private ServiceInterface getService() {
         return service.get();

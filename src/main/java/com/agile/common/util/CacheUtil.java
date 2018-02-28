@@ -1,8 +1,8 @@
 package com.agile.common.util;
 
 import com.agile.common.exception.NotFoundCacheProxyException;
-import com.agile.common.server.EhCacheService;
-import com.agile.common.server.RedisService;
+import com.agile.common.service.EhCacheService;
+import com.agile.common.service.RedisService;
 
 /**
  * Created by 佟盟 on 2017/5/19
