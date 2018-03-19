@@ -4,7 +4,7 @@ import com.agile.common.base.Constant;
 import com.agile.common.factory.LoggerFactory;
 import com.agile.common.util.JSONUtil;
 import com.agile.common.util.ObjectUtil;
-import org.slf4j.Logger;
+import org.apache.commons.logging.Log;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class LogProcessor {
 
     @Async
     void buildLog(String serviceName, String methodName, HashMap<String,Object> inParam, HashMap<String,Object> outParam,String ip,StringBuffer url) {
-        Logger logger = LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
+        Log logger = LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
         
         StringBuilder logMsg = new StringBuilder("\nIP:").append(ip);
         logMsg.append("\nURL:").append(url).append("\n服务:").append(serviceName).append("\n方法:").append(methodName).append("\n入参:");

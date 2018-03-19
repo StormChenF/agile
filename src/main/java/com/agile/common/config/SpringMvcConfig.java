@@ -32,7 +32,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.setOrder(1).addResourceHandler("/**")
-                .addResourceLocations("static/","static/swagger-lib/","static/img/");
+                .addResourceLocations("classpath:com/agile/static/","classpath:com/agile/static/img/","classpath:com/agile/static/plus/jquery/","classpath:com/agile/static/plus/swagger/");
     }
 
     @Autowired

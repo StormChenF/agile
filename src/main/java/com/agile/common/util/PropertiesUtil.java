@@ -2,7 +2,6 @@ package com.agile.common.util;
 
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.*;
@@ -90,7 +89,11 @@ public class PropertiesUtil {
     }
 
     static {
-        File file = new File(PropertiesUtil.class.getResource("/com/agile/configure/agile.properties").getPath());
-        propertiesUtil = new PropertiesUtil(file);
+        try {
+            File file = new File(PropertiesUtil.class.getResource("/com/agile/configure/agile.properties").toURI());
+            propertiesUtil = new PropertiesUtil(file);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

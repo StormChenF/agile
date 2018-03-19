@@ -2,6 +2,8 @@ package com.agile.common.factory;
 
 import com.agile.common.util.ObjectUtil;
 import com.agile.common.util.StringUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Appender;
@@ -15,7 +17,7 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.filter.LevelRangeFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
-import org.slf4j.Logger;
+import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  * Created by 佟盟 on 2017/2/23
@@ -84,22 +86,25 @@ public class LoggerFactory {
         ctx.updateLoggers();
     }
 
-    public static Logger createLogger(String fileName,Class clazz) {
+    public static Log createLogger(String fileName, Class clazz) {
         createLogger(fileName,new Level[]{Level.INFO,Level.ERROR},clazz.getName());
-        return org.slf4j.LoggerFactory.getLogger(clazz);
+        return LogFactory.getLog(clazz);
     }
 
-    public static Logger createLogger(String fileName,Class clazz,Level[] levels) {
+    public static Log createLogger(String fileName,Class clazz,Level[] levels) {
         createLogger(fileName,levels,null);
-        return org.slf4j.LoggerFactory.getLogger(clazz);
+        return LogFactory.getLog(clazz);
     }
 
-    public static Logger createLogger(String fileName,Class clazz,Level[] levels,String packagePath) {
+    public static Log createLogger(String fileName,Class clazz,Level[] levels,String packagePath) {
         createLogger(fileName,levels,packagePath);
-        return org.slf4j.LoggerFactory.getLogger(clazz);
+        return LogFactory.getLog(clazz);
     }
-    public static Logger createLogger(String fileName,Class clazz,String packagePath) {
+    public static Log createLogger(String fileName,Class clazz,String packagePath) {
         createLogger(fileName,new Level[]{Level.INFO,Level.ERROR},packagePath);
-        return org.slf4j.LoggerFactory.getLogger(clazz);
+        return LogFactory.getLog(clazz);
+    }
+    static {
+        createLogger("spring",DispatcherServlet.class,new Level[]{Level.ALL,Level.DEBUG,Level.INFO,Level.ERROR},"org.springframework");
     }
 }

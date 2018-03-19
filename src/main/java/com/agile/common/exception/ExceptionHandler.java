@@ -5,8 +5,8 @@ import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.factory.LoggerFactory;
 import com.agile.common.util.StringUtil;
+import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -27,7 +27,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     /**
      * 日志工具
      */
-    private Logger logger = LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
+    private Log logger = LoggerFactory.createLogger(Constant.FileAbout.SERVICE_LOGGER_FILE, this.getClass());
     @NotNull
     @Override
     public ModelAndView resolveException(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, Object o, Exception e) {
