@@ -1,12 +1,14 @@
 package com.agile.common.util;
 
+import com.agile.common.base.Constant;
 import org.apache.commons.io.FileUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by 佟盟 on 2017/12/21
@@ -104,62 +106,39 @@ public class FileUtil extends FileUtils {
         return null;
     }
 
-    public static class RETURN{
-        private String fileName;
-        private long fileSize;
-        private String contentType;
-        private String state;
-        private String msg;
+    /**
+     * 文件上传
+     * @param request  请求对象
+     */
+    public static HashMap<String,Object> getFileFormRequest(HttpServletRequest request){
+        HashMap<String,Object> map = new HashMap<>();
 
-        public RETURN(String fileName, long fileSize, String contentType) {
-            this.fileName = fileName;
-            this.fileSize = fileSize;
-            this.contentType = contentType;
+        //转换成多部分request
+        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+
+        //获取所有文件提交的input名
+        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+
+        while (iterator.hasNext()) {
+            String inputName = iterator.next();
+            List<MultipartFile> files = multipartHttpServletRequest.getFiles(inputName);
+            for(int i = 0 ; i < files.size();i++){
+                if(!checkFileFormat((File) files.get(i)))continue;
+            }
+            map.put(inputName,files);
         }
 
-        public void setInfo(com.agile.common.base.RETURN re){
-            this.setMsg(re.getMsg());
-            this.setState(re.getCode());
-        }
+        return map;
+    }
 
-        public String getFileName() {
-            return fileName;
-        }
 
-        public void setFileName(String fileName) {
-            this.fileName = fileName;
-        }
-
-        public long getFileSize() {
-            return fileSize;
-        }
-
-        public void setFileSize(long fileSize) {
-            this.fileSize = fileSize;
-        }
-
-        public String getContentType() {
-            return contentType;
-        }
-
-        public void setContentType(String contentType) {
-            this.contentType = contentType;
-        }
-
-        public String getState() {
-            return state;
-        }
-
-        public void setState(String state) {
-            this.state = state;
-        }
-
-        public String getMsg() {
-            return msg;
-        }
-
-        public void setMsg(String msg) {
-            this.msg = msg;
-        }
+    /**
+     * 检验文件格式
+     */
+    private static boolean checkFileFormat(File file){
+        String format = PropertiesUtil.getProperty("agile.upload.include_format");
+        if(format.isEmpty())return true;
+        String[] formats = format.split(Constant.RegularAbout.COMMA, -1);
+        return ArrayUtil.contains(formats,FileUtil.getFormat(file));
     }
 }

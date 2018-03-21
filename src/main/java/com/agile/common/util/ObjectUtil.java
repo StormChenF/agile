@@ -141,7 +141,7 @@ public class ObjectUtil extends ObjectUtils {
      * @param map 属性集合
      * @return 返回指定对象类型对象
      */
-    public static  <T> T  getObjectFromMap(Class<T> clazz,Map<String, String[]> map) {
+    public static  <T> T  getObjectFromMap(Class<T> clazz,Map<String, Object> map) {
         return getObjectFromMap(clazz,map,"","");
     }
 
@@ -151,7 +151,7 @@ public class ObjectUtil extends ObjectUtils {
      * @param map 属性集合
      * @return 返回指定对象类型对象
      */
-    public static  <T> T  getObjectFromMap(Class<T> clazz,Map<String, String[]> map, String prefix) {
+    public static  <T> T  getObjectFromMap(Class<T> clazz,Map<String, Object> map, String prefix) {
         return getObjectFromMap(clazz,map,prefix,"");
     }
 
@@ -162,7 +162,7 @@ public class ObjectUtil extends ObjectUtils {
      * @param prefix 属性前缀
      * @return 返回指定对象类型对象
      */
-    public static <T> T getObjectFromMap(Class<T> clazz,Map<String, String[]> map, String prefix, String suffix) {
+    public static <T> T getObjectFromMap(Class<T> clazz,Map<String, Object> map, String prefix, String suffix) {
         T object = null;
         try {
             object = clazz.newInstance();
@@ -175,7 +175,6 @@ public class ObjectUtil extends ObjectUtils {
             Field field = fields[i];
             String propertyName = prefix + field.getName() + suffix;
             if(map.containsKey(propertyName)){
-                Object value = null;
                 try {
                     field.setAccessible(true);
                     field.set(object,cast(field.getType(), cast(field.getType(), map.get(propertyName))));

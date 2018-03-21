@@ -5,10 +5,7 @@ import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
 import com.agile.common.service.ServiceInterface;
-import com.agile.common.util.ArrayUtil;
-import com.agile.common.util.FactoryUtil;
-import com.agile.common.util.FileUtil;
-import com.agile.common.util.StringUtil;
+import com.agile.common.util.*;
 import org.apache.commons.io.FileUtils;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
@@ -33,10 +30,9 @@ import java.util.*;
  * Created by 佟盟 on 2017/8/22
  */
 @Controller
-public class MainController implements EnvironmentAware {
+public class MainController {
 
     private ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
-    private Environment environment;
 //    /**
 //     * 非法请求处理器
 //     */
@@ -58,8 +54,7 @@ public class MainController implements EnvironmentAware {
             HttpServletRequest request,
             @PathVariable String service,
             @PathVariable String method,
-            @RequestParam(value = "forward", required = false) String forward,
-            @RequestParam(value = "file-path", required = false) String filePath
+            @RequestParam(value = "forward", required = false) String forward
     ) throws Throwable {
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
@@ -72,12 +67,6 @@ public class MainController implements EnvironmentAware {
 
         //调用目标方法
         RETURN returnState = this.getService().executeMethod(method,this.getService());
-
-        //判断是否存在文件上传
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-        if (!StringUtil.isEmpty(filePath) && multipartResolver.isMultipart(request)){
-            this.upLoadFile(request, filePath);
-        }
 
         //判断是否转发
         if (!StringUtil.isEmpty(forward) && RETURN.SUCCESS.equals(returnState)) {
@@ -134,89 +123,21 @@ public class MainController implements EnvironmentAware {
      * @param request   servlet请求
      */
     private void handleRequestUrl(HttpServletRequest request) {
-        Map<String,String[]> inParam = new HashMap<>();
+        Map<String,Object> inParam = new HashMap<>();
         if (request.getParameterMap().size()>0){
             for (Map.Entry<String,String[]> map:request.getParameterMap().entrySet() ) {
                 inParam.put(map.getKey(),map.getValue());
             }
         }
 
+        //判断是否存在文件上传
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        if (multipartResolver.isMultipart(request)){
+            inParam.putAll(FileUtil.getFileFormRequest(request));
+        }
+
         //将处理过的所有请求参数传入调用服务对象
         this.getService().setInParam(inParam);
-    }
-
-    /**
-     * 文件上传
-     * @param request  请求对象
-     * @param path  文件存储路径
-     */
-    private void upLoadFile(HttpServletRequest request, String path){
-        List<HashMap<String,Object>> list = new ArrayList<>();
-
-        //转换成多部分request
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-
-        //获取所有文件提交的input名
-        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-
-        while (iterator.hasNext()) {
-            List<MultipartFile> files = multipartHttpServletRequest.getFiles(iterator.next());
-            for (int i = 0 ; i < files.size();i++){
-                MultipartFile file = files.get(i);
-                String fileName = file.getOriginalFilename();
-                HashMap<String,Object> map = new HashMap<>();
-                FileUtil.RETURN fileInfo = new FileUtil.RETURN(fileName, file.getSize(), file.getContentType());
-
-                if(!checkFileFormat((File)file)){
-                    fileInfo.setInfo(RETURN.ERROR_FORMAT);
-                    list.add(map);
-                    continue;
-                }
-
-                //判断文件名
-                if (StringUtil.isEmpty(fileName)) {
-                    fileInfo.setInfo(RETURN.EMPTY_FILENAME);
-                    list.add(map);
-                    continue;
-                }
-
-                //判断文件内容为空
-                if (file.isEmpty()) {
-                    fileInfo.setInfo(RETURN.EMPTY_FILE);
-                    list.add(map);
-                    continue;
-                }
-
-                File newFile = new File(path,fileName);
-
-                //尝试创建文件夹
-                if (!newFile.getParentFile().exists() && !newFile.getParentFile().mkdirs()) {
-                    fileInfo.setInfo(RETURN.MADE_DIR_FAIL);
-                    list.add(map);
-                    continue;
-                }
-
-                //尝试文件复制
-                try {
-                    file.transferTo(newFile);
-                    fileInfo.setInfo(RETURN.UPLOAD_SUCCESS);
-                }catch (Exception e){
-                    fileInfo.setInfo(RETURN.UPLOAD_ERROR);
-                }
-                list.add(map);
-            }
-        }
-        this.getService().setOutParam(Constant.FileAbout.UP_LOUD_FILE_INFO,list);
-    }
-
-    /**
-     * 检验文件格式
-     */
-    private boolean checkFileFormat(File file){
-        String format = environment.getProperty("agile.upload.include_format");
-        if(format.isEmpty())return true;
-        String[] formats = format.split(Constant.RegularAbout.COMMA, -1);
-        return ArrayUtil.contains(formats,FileUtil.getFormat(file));
     }
 
     /**
@@ -250,8 +171,4 @@ public class MainController implements EnvironmentAware {
         this.service.set(service);
     }
 
-    @Override
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
 }
