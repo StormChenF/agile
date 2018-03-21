@@ -556,8 +556,6 @@
                     <version>3.2.0</version>
                     <configuration>
                         <warName>${project.artifactId}</warName>
-                        <!--将类文件打成jar包-->
-                        <!--<archiveClasses>true</archiveClasses>-->
                         <!--将资源文件打到classes目录下-->
                         <webResources>
                             <resource>

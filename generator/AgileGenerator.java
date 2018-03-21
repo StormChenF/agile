@@ -5,9 +5,13 @@ import com.agile.common.util.StringUtil;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +23,16 @@ import java.util.Map;
  * Created by mydeathtrial on 2017/4/20
  */
 public class AgileGenerator {
+    private static Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+    static {
+        try {
+            cfg.setDirectoryForTemplateLoading(new File("./generator/template"));
+            cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DataBaseUtil.initDB();
         try {
@@ -29,6 +43,11 @@ public class AgileGenerator {
 
             //获取表信息
             ResultSet tablesData = DataBaseUtil.databaseMetaData.getTables(catalog, schema, PropertiesUtil.getProperty("agile.generator.table_name"), new String[]{"TABLE"});
+
+            List<Map<String, Object>> tableInfoList = new ArrayList<>();
+
+            //模板配置
+
 
             while (tablesData.next()) {
 
@@ -160,43 +179,45 @@ public class AgileGenerator {
 
                 //字段参数
                 data.put("columnList", columnList);
-                Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-                cfg.setDirectoryForTemplateLoading(new File("./generator"));
-                cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
+                tableInfoList.add(data);
 
-                //Entity生成器
-                Template entityTemp = cfg.getTemplate("agileTemplate/Entity.ftl");
-                String entityFileName = PropertiesUtil.getProperty("agile.generator.entity_prefix") + className + PropertiesUtil.getProperty("agile.generator.entity_suffix") + ".java";
-                File entityFile = new File("./src/main/java/com/agile/mvc/model/entity/" + entityFileName);
-                FileWriter entityFileFw = new FileWriter(entityFile);
-                BufferedWriter entityFileBw = new BufferedWriter(entityFileFw);
-                entityTemp.process(data, entityFileBw);
-                entityFileBw.flush();
-                entityFileFw.close();
+//                //Entity生成器
+//                String entityFileName = PropertiesUtil.getProperty("agile.generator.entity_prefix") + className + PropertiesUtil.getProperty("agile.generator.entity_suffix") + ".java";
+//                generatorProxy("Service.ftl","./src/main/java/com/agile/mvc/model/entity/",entityFileName,data);
+//
+                //service生成器
+                String ServiceFileName = PropertiesUtil.getProperty("agile.generator.service_prefix") + className + PropertiesUtil.getProperty("agile.generator.service_suffix") + ".java";
+                generatorProxy("Service.ftl","./src/main/java/com/agile/mvc/service/",ServiceFileName,data);
+//
 
                 //DAO生成器
-//                Template repositoryTemp = cfg.getTemplate("agileTemplate/Repository.ftl");
 //                String repositoryFileName = PropertiesUtil.getProperty("agile.generator.repository_prefix") + className + PropertiesUtil.getProperty("agile.generator.repository_suffix") + ".java";
-//                File repositoryFile = new File("./src/main/java/com/agile/mvc/model/dao/" + repositoryFileName);
-//                FileWriter repositoryFileFw = new FileWriter(repositoryFile);
-//                BufferedWriter repositoryFileBw = new BufferedWriter(repositoryFileFw);
-//                repositoryTemp.process(data, repositoryFileBw);
-//                repositoryFileBw.flush();
-//                repositoryFileFw.close();
-
-                //service生成器
-                Template serviceTemp = cfg.getTemplate("agileTemplate/Service.ftl");
-                String ServiceFileName = PropertiesUtil.getProperty("agile.generator.service_prefix") + className + PropertiesUtil.getProperty("agile.generator.service_suffix") + ".java";
-                File serviceFile = new File("./src/main/java/com/agile/mvc/service/" + ServiceFileName);
-                FileWriter serviceFileFw = new FileWriter(serviceFile);
-                BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);
-                serviceTemp.process(data, serviceFileBw);
-                serviceFileBw.flush();
-                serviceFileFw.close();
+//                generatorProxy("Repository.ftl","./src/main/java/com/agile/mvc/model/dao/",repositoryFileName,data);
             }
+            //API生成器
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("list",tableInfoList);
+            generatorProxy("API.ftl","./src/main/webapp/plus/swagger/","api.json",map);
         } catch (Exception e) {
             e.printStackTrace();
         }
         DataBaseUtil.destroyDB();
+    }
+
+    /**
+     * 生成器引擎
+     * @param templateURI 模板地址
+     * @param irectory 生成文件目录
+     * @param fileName 文件名
+     * @param data 数据
+     */
+    private static void generatorProxy(String templateURI,String directory,String fileName,Map<String, Object> data) throws IOException, TemplateException {
+        Template serviceTemp = cfg.getTemplate(templateURI);
+        File serviceFile = new File(directory+fileName);
+        FileWriter serviceFileFw = new FileWriter(serviceFile);
+        BufferedWriter serviceFileBw = new BufferedWriter(serviceFileFw);
+        serviceTemp.process(data, serviceFileBw);
+        serviceFileBw.flush();
+        serviceFileFw.close();
     }
 }

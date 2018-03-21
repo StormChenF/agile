@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -37,6 +39,18 @@ public class PropertiesUtil {
             properties.load(in);
             in.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static {
+        try {
+            URL url = PropertiesUtil.class.getResource("/com/agile/configuer/agile.properties");
+            if(url==null){
+                url = PropertiesUtil.class.getResource("/agile.properties");
+            }
+            propertiesUtil = new PropertiesUtil(new File(url.toURI()));
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
@@ -88,12 +102,4 @@ public class PropertiesUtil {
         return propertiesUtil.environment.containsProperty(var1);
     }
 
-    static {
-        try {
-            File file = new File(PropertiesUtil.class.getResource("/com/agile/configure/agile.properties").toURI());
-            propertiesUtil = new PropertiesUtil(file);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

@@ -1,23 +1,23 @@
-package com.agile.mvc.service;
+package ${servicePackage};
 
 import com.agile.common.service.MainService;
 import com.agile.common.base.RETURN;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
-import com.agile.mvc.model.entity.SysUsersEntity;
+import com.agile.mvc.model.entity.${className}Entity;
 
 /**
  * Created by 佟盟
  */
 @Service
-public class SysUsersService extends MainService {
+public class ${className}Service extends MainService {
 
     /**
      * 新增
-     * 地址：http://localhost:8080/SysUsersService/save
+     * 地址：http://localhost:8080/${className}Service/save
      */
     public RETURN save() {
-        SysUsersEntity entity = ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
+        ${className}Entity entity = ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
         if (!ObjectUtil.isValidity(entity)) return RETURN.PARAMETER_ERROR;
         dao.save(entity);
         return RETURN.SUCCESS;
@@ -25,12 +25,12 @@ public class SysUsersService extends MainService {
 
     /**
      * 删除
-     * 地址：http://localhost:8080/SysUsersService/delete
+     * 地址：http://localhost:8080/${className}Service/delete
      */
     public RETURN delete(){
         if (this.containsKey("id")){
             String[] ids = this.getInParamOfArray("id");
-            dao.deleteInBatch(SysUsersEntity.class,ids);
+            dao.deleteInBatch(${className}Entity.class,ids);
             return RETURN.SUCCESS;
         }
         return RETURN.PARAMETER_ERROR;
@@ -41,18 +41,18 @@ public class SysUsersService extends MainService {
      * 地址：http://localhost:8080/SysUsersService/update
      */
     public RETURN update() {
-        SysUsersEntity entity = ObjectUtil.getObjectFromMap(SysUsersEntity.class, this.getInParam());
-        if (ObjectUtil.isEmpty(entity.getSysUsersId())) return RETURN.PARAMETER_ERROR;
+        ${className}Entity entity = ObjectUtil.getObjectFromMap(${className}Entity.class, this.getInParam());
+        if (ObjectUtil.isEmpty(entity.get${primaryKeyPropertyName}())) return RETURN.PARAMETER_ERROR;
         dao.update(entity);
         return RETURN.SUCCESS;
     }
 
     /**
      * 查询
-     * 地址：http://localhost:8080/SysUsersService/query
+     * 地址：http://localhost:8080/${className}Service/query
      */
     public RETURN query(){
-        this.setOutParam("queryList",dao.findAll(SysUsersEntity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
+        this.setOutParam("queryList",dao.findAll(${className}Entity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
         return RETURN.SUCCESS;
     }
 }

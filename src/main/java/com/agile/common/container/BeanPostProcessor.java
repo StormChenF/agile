@@ -1,6 +1,5 @@
 package com.agile.common.container;
 
-import com.agile.common.annotation.API;
 import com.agile.common.annotation.AnnotationProcessor;
 import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.ObjectUtil;
@@ -10,7 +9,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;

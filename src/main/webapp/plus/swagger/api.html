@@ -73,14 +73,11 @@
   $(document).ready(function(){
       $.ajax({
           async:true,
-          url:'apiService/getApiInfo',
+          url:'api.json',
           success:function (data) {
-              if(data['head']['code'] !== '000001'){
-                  alert(data['head']['msg']);
-              }
               // Build a system
               window.ui = SwaggerUIBundle({
-                  spec: data['result']['apiInfo'],
+                  spec: data,
                   validatorUrl: "",
                   dom_id: '#swagger-ui',
                   deepLinking: true,
@@ -89,7 +86,7 @@
                       SwaggerUIStandalonePreset
                   ],
                   plugins: [
-                      SwaggerUIBundle.plugins.DownloadUrl
+                      // SwaggerUIBundle.plugins.DownloadUrl
                   ],
                   layout: "StandaloneLayout",
                   jsonEditor: true,
