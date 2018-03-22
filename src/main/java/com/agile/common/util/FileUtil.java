@@ -4,6 +4,9 @@ import com.agile.common.base.Constant;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -110,24 +113,15 @@ public class FileUtil extends FileUtils {
      * 文件上传
      * @param request  请求对象
      */
-    public static HashMap<String,Object> getFileFormRequest(HttpServletRequest request){
-        HashMap<String,Object> map = new HashMap<>();
+    public static Map<String, CommonsMultipartFile> getFileFormRequest(HttpServletRequest request){
+        HashMap<String,CommonsMultipartFile> map = new HashMap<>();
+        MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
 
-        //转换成多部分request
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+        for (Map.Entry<String,MultipartFile> entity : multipartRequest.getFileMap().entrySet()){
+            map.put(entity.getKey(), (CommonsMultipartFile) entity.getValue());
 
-        //获取所有文件提交的input名
-        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-
-        while (iterator.hasNext()) {
-            String inputName = iterator.next();
-            List<MultipartFile> files = multipartHttpServletRequest.getFiles(inputName);
-            for(int i = 0 ; i < files.size();i++){
-                if(!checkFileFormat((File) files.get(i)))continue;
-            }
-            map.put(inputName,files);
         }
-
         return map;
     }
 
