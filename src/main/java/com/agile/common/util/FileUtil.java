@@ -113,14 +113,14 @@ public class FileUtil extends FileUtils {
      * 文件上传
      * @param request  请求对象
      */
-    public static Map<String, CommonsMultipartFile> getFileFormRequest(HttpServletRequest request){
-        HashMap<String,CommonsMultipartFile> map = new HashMap<>();
+    public static Map<String, List<MultipartFile>> getFileFormRequest(HttpServletRequest request){
+        HashMap<String,List<MultipartFile>> map = new HashMap<>();
         MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
-
-        for (Map.Entry<String,MultipartFile> entity : multipartRequest.getFileMap().entrySet()){
-            map.put(entity.getKey(), (CommonsMultipartFile) entity.getValue());
-
+        Iterator<String> fileNames = multipartRequest.getFileNames();
+        while (fileNames.hasNext()){
+            String fileName = fileNames.next();
+            map.put(fileName, multipartRequest.getFiles(fileName));
         }
         return map;
     }
