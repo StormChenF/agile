@@ -18,5 +18,6 @@ public class JsonView extends MappingJackson2JsonView {
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         this.setPrettyPrint(true);
         this.setObjectMapper(objectMapper);
+        this.setBeanName("jsonView");
     }
 }

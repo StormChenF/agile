@@ -110,7 +110,7 @@ public class FileUtil extends FileUtils {
     }
 
     /**
-     * 文件上传
+     * 请求中获取文件数据
      * @param request  请求对象
      */
     public static Map<String, List<MultipartFile>> getFileFormRequest(HttpServletRequest request){

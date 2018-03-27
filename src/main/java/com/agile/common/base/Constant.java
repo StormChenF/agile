@@ -1,12 +1,5 @@
 package com.agile.common.base;
 
-import com.agile.common.util.ServletUtil;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by 佟盟 on 2017/9/2
  */
@@ -60,5 +53,27 @@ public class Constant {
         public final static String AFTER_PARAM = "forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]?";
         public final static String HUMP = "((?=[\\x21-\\x7e]+)[^A-Za-z0-9])";
         public final static String UPER = "[A-Z]";
+    }
+
+    /**
+     * 页面跳转方式
+     */
+    public enum JumpMethod{
+        forward("forward:","forward"),redirect("redirect:","redirect");
+        private String pre;
+        private String code;
+
+        JumpMethod(String pre, String code) {
+            this.pre = pre;
+            this.code = code;
+        }
+
+        public String getPre() {
+            return pre;
+        }
+
+        public String getCode() {
+            return code;
+        }
     }
 }

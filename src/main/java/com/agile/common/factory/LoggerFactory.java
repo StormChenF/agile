@@ -105,6 +105,6 @@ public class LoggerFactory {
         return LogFactory.getLog(clazz);
     }
     static {
-//        createLogger("spring",DispatcherServlet.class,new Level[]{Level.ALL,Level.DEBUG,Level.INFO,Level.ERROR},"org.springframework");
+        createLogger("springmvc",DispatcherServlet.class,new Level[]{Level.ALL,Level.DEBUG,Level.INFO,Level.ERROR},"org.springframework.web.servlet");
     }
 }

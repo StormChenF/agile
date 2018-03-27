@@ -20,7 +20,11 @@ public class JSONUtil{
         if(JSONUtils.isArray(object)){
             return JSONArray.fromObject(object).toString();
         }else {
-            return JSONObject.fromObject(object).toString();
+            try {
+                return JSONObject.fromObject(object).toString();
+            }catch (Exception e){
+                return null;
+            }
         }
     }
 

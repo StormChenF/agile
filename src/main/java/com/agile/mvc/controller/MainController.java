@@ -7,19 +7,14 @@ import com.agile.common.exception.NoSuchRequestServiceException;
 import com.agile.common.service.ServiceInterface;
 import com.agile.common.util.*;
 import org.apache.commons.io.FileUtils;
-import org.springframework.context.EnvironmentAware;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -32,77 +27,94 @@ import java.util.*;
 @Controller
 public class MainController {
 
-    private ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
+    private static ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
+    private static ThreadLocal<HttpServletRequest> request = new ThreadLocal<>();
 //    /**
 //     * 非法请求处理器
 //     */
 //    @RequestMapping(value = {"/","/*","/*/*/*/**"})
+//    @Order(2)
 //    public void processor() throws UnlawfulRequestException {
 //        throw new UnlawfulRequestException();
 //    }
 
     /**
      * agile框架处理器
-     * @param request 请求对象
      * @param service 服务名
      * @param method 方法名
-     * @param forward 转发信息
      * @return 响应试图数据
      */
     @RequestMapping(value = "/{service}/{method}")
-    public ModelAndView processor(
-            HttpServletRequest request,
+    public Object processor(
+            HttpServletRequest currentRequest,
             @PathVariable String service,
-            @PathVariable String method,
-            @RequestParam(value = "forward", required = false) String forward
+            @PathVariable String method
     ) throws Throwable {
+        //清理缓存
+        clear();
+
         //初始化参数
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
         service =  StringUtil.toLowerName(service);//设置服务名
         method = StringUtil.toLowerName(method);//设置方法名
         initService(service);
+        request.set(currentRequest);
 
         //调用目标方法前处理入参
-        handleRequestUrl(request);
+        handleRequestUrl();
 
         //调用目标方法
-        RETURN returnState = this.getService().executeMethod(method,this.getService());
+        RETURN returnState = getService().executeMethod(method,getService());
 
-        //判断是否转发
-        if (!StringUtil.isEmpty(forward) && RETURN.SUCCESS.equals(returnState)) {
-            StringBuilder url = new StringBuilder(forward);
-            if(!forward.startsWith(Constant.RegularAbout.SLASH)){
-                url.insert(0,Constant.RegularAbout.SLASH);
-            }
-
-            //过滤转发并获取请求参数，避免重复转发
-            String beforeParam = request.getQueryString().replaceFirst(Constant.RegularAbout.AFTER_PARAM, Constant.RegularAbout.NULL);
-
-            //服务间参数传递
-            String afterParam = StringUtil.fromMapToUrl(this.getService().getOutParam());
-
-
-            url = (StringUtil.isEmpty(beforeParam) && StringUtil.isEmpty(afterParam))?url
-                    :StringUtil.compareTo(beforeParam,afterParam)?url.append(Constant.RegularAbout.QUESTION_MARK).append(beforeParam).append(Constant.RegularAbout.AND).append(afterParam)
-                    :url.append(Constant.RegularAbout.QUESTION_MARK).append(afterParam).append(Constant.RegularAbout.AND).append(beforeParam);
-            url = url.toString().endsWith(Constant.RegularAbout.AND)?url.deleteCharAt(url.lastIndexOf(Constant.RegularAbout.AND)):url;
-
-            //转发
-            modelAndView.setView(new RedirectView(url.toString()));
-
-            return modelAndView;
+        //判断是否跳转
+        Map<String, Object> outParam = getService().getOutParam();
+        Object forward = outParam.get(Constant.JumpMethod.forward.getCode());
+        if(!ObjectUtil.isEmpty(forward) && !StringUtil.isEmpty(forward.toString()) && RETURN.SUCCESS.equals(returnState)){
+            return jump(forward.toString(),Constant.JumpMethod.forward);
+        }
+        Object redirect = outParam.get(Constant.JumpMethod.redirect.getCode());
+        if(!ObjectUtil.isEmpty(redirect) && !StringUtil.isEmpty(redirect.toString()) && RETURN.SUCCESS.equals(returnState)){
+            return jump(redirect.toString(),Constant.JumpMethod.redirect);
         }
 
         //调用目标方法后处理视图
         modelAndView.addObject(Constant.ResponseAbout.HEAD, new ResponseHead(returnState));
 
         //响应数据装填
-        modelAndView.addObject(Constant.ResponseAbout.RESULT, this.getService().getOutParam());
+        modelAndView.addObject(Constant.ResponseAbout.RESULT, getService().getOutParam());
 
-        this.getService().clear();
-        this.service.remove();
+        //清理缓存
+        clear();
 
         return modelAndView;
+    }
+
+    /**
+     * 由于线程池的使用与threadLocal冲突,前后需要清理缓存
+     */
+    private void clear(){
+        service.remove();
+        request.remove();
+    }
+
+    /**
+     * 转发
+     * @param resourceUrl 转发路径
+     * @param jumpMethod 跳转方式
+     */
+    private ModelAndView jump(String resourceUrl,Constant.JumpMethod jumpMethod){
+        String url = jumpMethod.getPre() + resourceUrl + Constant.RegularAbout.QUESTION_MARK;
+
+        //服务间参数传递
+        Map<String, Object> outParam = getService().getOutParam();
+        outParam.remove(jumpMethod.getCode());
+
+        Map<String, Object> inParam = getService().getInParam();
+        ModelAndView model = new ModelAndView(url);
+        model.setViewName(url);
+        model.addAllObjects(outParam);
+        model.addAllObjects(inParam);
+        return model;
     }
 
     /**
@@ -112,7 +124,7 @@ public class MainController {
     private void initService(String serviceName)throws NoSuchRequestServiceException {
         try {
             Object service = FactoryUtil.getBean(serviceName);
-            this.setService((ServiceInterface) service);
+            setService((ServiceInterface) service);
         }catch (Exception e){
             throw new NoSuchRequestServiceException();
         }
@@ -120,24 +132,30 @@ public class MainController {
 
     /**
      * 根据servlet请求、认证信息、目标服务名、目标方法名处理入参
-     * @param request   servlet请求
      */
-    private void handleRequestUrl(HttpServletRequest request) {
+    private void handleRequestUrl() {
+        getService().initInParam();
+        HttpServletRequest currentRequest = request.get();
         Map<String,Object> inParam = new HashMap<>();
-        if (request.getParameterMap().size()>0){
-            for (Map.Entry<String,String[]> map:request.getParameterMap().entrySet() ) {
+        if (currentRequest.getParameterMap().size()>0){
+            for (Map.Entry<String,String[]> map:currentRequest.getParameterMap().entrySet() ) {
                 inParam.put(map.getKey(),map.getValue());
             }
         }
+        Enumeration<String> attributeNames = currentRequest.getAttributeNames();
+        while (attributeNames.hasMoreElements()){
+            String attributeName = attributeNames.nextElement();
+            inParam.put(attributeName,currentRequest.getAttribute(attributeName));
+        }
 
         //判断是否存在文件上传
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-        if (multipartResolver.isMultipart(request)){
-            inParam.putAll(FileUtil.getFileFormRequest(request));
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(currentRequest.getSession().getServletContext());
+        if (multipartResolver.isMultipart(currentRequest)){
+            inParam.putAll(FileUtil.getFileFormRequest(currentRequest));
         }
 
         //将处理过的所有请求参数传入调用服务对象
-        this.getService().setInParam(inParam);
+        getService().setInParam(inParam);
     }
 
     /**
@@ -168,7 +186,7 @@ public class MainController {
     }
 
     private void setService(ServiceInterface service) {
-        this.service.set(service);
+        MainController.service.set(service);
     }
 
 }

@@ -6,10 +6,6 @@ import com.agile.common.base.RETURN;
 import com.agile.common.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 import com.agile.mvc.model.entity.DictionaryDataEntity;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -57,8 +53,10 @@ public class DictionaryDataService extends MainService {
      * 查询
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
-    public RETURN query() throws IOException {
-        this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
+    public RETURN query() {
+        this.setOutParam("forward","/SysUsersService/update");
+        this.setOutParam("e",3);
+//        this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
         return RETURN.SUCCESS;
     }
     void task1(){

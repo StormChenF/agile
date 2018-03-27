@@ -1,6 +1,5 @@
 package com.agile.common.view;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.xml.MarshallingView;

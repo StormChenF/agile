@@ -1,7 +1,9 @@
 package com.agile.common.config;
 
 import com.agile.common.properties.SpringMVCProperties;
+import com.agile.common.view.JsonView;
 import com.agile.common.viewResolver.JsonViewResolver;
+import com.agile.common.viewResolver.JumpViewResolver;
 import com.agile.common.viewResolver.XmlViewResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
+import org.springframework.web.servlet.view.InternalResourceView;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,11 +59,18 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         list.add(jsonViewResolver);
 //        list.add(xmlViewResolver);
 
-        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-        resolver.setContentNegotiationManager(manager);
-        resolver.setOrder(1);
-        resolver.setViewResolvers(list);
-        return resolver;
+        ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
+        viewResolver.setContentNegotiationManager(manager);
+        viewResolver.setOrder(1);
+        viewResolver.setViewResolvers(list);
+        return viewResolver;
+    }
+
+    @Bean
+    public ViewResolver internalResourceViewResolver(){
+        JumpViewResolver viewResolver = new JumpViewResolver();
+        viewResolver.setOrder(0);
+        return viewResolver;
     }
 
     /**
