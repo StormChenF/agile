@@ -1,55 +1,40 @@
 package com.agile.common.base;
 
+import org.springframework.validation.BeanPropertyBindingResult;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import org.springframework.data.domain.Page;
 
 /**
  * Created by 佟盟 on 2018/3/26
  */
 public class RequestWrapper extends HttpServletRequestWrapper {
-    public RequestWrapper(HttpServletRequest request) {
-        super(request);
-        this.params.putAll(request.getParameterMap());
-    }
 
-    private Map<String , String[]> params = new HashMap<>();
+    private Map<String , Object> params;
 
-    //重载一个构造方法
     public RequestWrapper(HttpServletRequest request , Map<String , Object> extendParams) {
-        this(request);
-        addAllParameters(extendParams);//这里将扩展参数写入参数表
-    }
+        super(request);
+        extendParams.remove("service");
+        extendParams.remove("method");
 
-    @Override
-    public String getParameter(String name) {//重写getParameter，代表参数从当前类中的map获取
-        String[]values = params.get(name);
-        if(values == null || values.length == 0) {
-            return null;
-        }
-        return values[0];
-    }
+        Iterator entries = extendParams.entrySet().iterator();
 
-    public String[] getParameterValues(String name) {//同上
-        return params.get(name);
-    }
+        while (entries.hasNext()) {
 
-    public void addAllParameters(Map<String , Object>otherParams) {//增加多个参数
-        for(Map.Entry<String , Object>entry : otherParams.entrySet()) {
-            addParameter(entry.getKey() , entry.getValue());
-        }
-    }
+            Map.Entry entry = (Map.Entry) entries.next();
 
-    public void addParameter(String name , Object value) {//增加参数
-        if(value != null) {
-            if(value instanceof String[]) {
-                params.put(name , (String[])value);
-            }else if(value instanceof String) {
-                params.put(name , new String[] {(String)value});
-            }else {
-                params.put(name , new String[] {String.valueOf(value)});
+            Object value = entry.getValue();
+
+            if(value instanceof Page || value instanceof BeanPropertyBindingResult){
+                entries.remove();
             }
         }
+        params = extendParams;
+    }
+
+    public Map<String , Object> getForwardParameterMap() {
+        return params;
     }
 }

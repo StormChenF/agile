@@ -1,7 +1,6 @@
 package com.agile.common.view;
 
-import com.agile.common.base.Constant;
-import com.agile.common.util.StringUtil;
+import com.agile.common.base.RequestWrapper;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.view.AbstractView;
 import javax.servlet.RequestDispatcher;
@@ -22,38 +21,18 @@ public class ForwardView extends AbstractView {
 
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        //去掉重复传参
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        model.remove("service");
-        model.remove("method");
-        for (Map.Entry<String, String[]> entity:parameterMap.entrySet()) {
-            model.remove(entity.getKey());
-        }
-
+        RequestWrapper requestWrapper = new RequestWrapper(request,model);
         //处理参数
-        RequestDispatcher rd = this.getRequestDispatcher(request, exposeModelAsRequestParameter(model));
+        RequestDispatcher rd = this.getRequestDispatcher(requestWrapper, getUrl());
         if (rd == null) {
-            throw new ServletException("Could not get RequestDispatcher for [" + this.getUrl() + "]: Check that the corresponding file exists within your web application archive!");
+            throw new ServletException("转发失败，地址:"+getUrl());
         }
-        rd.forward(request, response);
+        rd.forward(requestWrapper, response);
     }
 
     @Nullable
     private RequestDispatcher getRequestDispatcher(HttpServletRequest request, String path) {
         return request.getRequestDispatcher(path);
-    }
-
-    private String exposeModelAsRequestParameter(Map<String, Object> model) {
-        StringBuilder targetUrl = new StringBuilder(url);
-        String params = StringUtil.fromMapToUrl(model);
-        if(url.contains(Constant.RegularAbout.QUESTION_MARK)){
-            if(!url.endsWith(Constant.RegularAbout.AND)){
-                targetUrl.append(Constant.RegularAbout.AND);
-            }
-        }else{
-            targetUrl.append(Constant.RegularAbout.QUESTION_MARK);
-        }
-        return targetUrl.append(params).toString();
     }
 
     public String getUrl() {

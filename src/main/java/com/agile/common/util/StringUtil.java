@@ -4,8 +4,6 @@ import com.agile.common.base.Constant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.BeanPropertyBindingResult;
-
-import java.lang.reflect.Array;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

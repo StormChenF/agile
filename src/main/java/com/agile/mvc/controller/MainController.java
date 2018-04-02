@@ -1,5 +1,6 @@
 package com.agile.mvc.controller;
 
+import com.agile.common.base.RequestWrapper;
 import com.agile.common.base.ResponseHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
@@ -33,7 +34,6 @@ public class MainController {
 //     * 非法请求处理器
 //     */
 //    @RequestMapping(value = {"/","/*","/*/*/*/**"})
-//    @Order(2)
 //    public void processor() throws UnlawfulRequestException {
 //        throw new UnlawfulRequestException();
 //    }
@@ -54,14 +54,13 @@ public class MainController {
         clear();
 
         //初始化参数
-        ModelAndView modelAndView = new ModelAndView();//响应视图对象
         service =  StringUtil.toLowerName(service);//设置服务名
         method = StringUtil.toLowerName(method);//设置方法名
         initService(service);
         request.set(currentRequest);
 
         //处理入参
-        handleRequestUrl();
+        handleInParam();
 
         //调用目标方法
         RETURN returnState = getService().executeMethod(method,getService());
@@ -78,6 +77,7 @@ public class MainController {
         }
 
         //处理响应视图
+        ModelAndView modelAndView = new ModelAndView();//响应视图对象
         modelAndView.addObject(Constant.ResponseAbout.HEAD, new ResponseHead(returnState));
         modelAndView.addObject(Constant.ResponseAbout.RESULT, outParam);
 
@@ -140,8 +140,7 @@ public class MainController {
      */
     private void initService(String serviceName)throws NoSuchRequestServiceException {
         try {
-            Object service = FactoryUtil.getBean(serviceName);
-            setService((ServiceInterface) service);
+            service.set((ServiceInterface) FactoryUtil.getBean(serviceName));
         }catch (Exception e){
             throw new NoSuchRequestServiceException();
         }
@@ -150,12 +149,20 @@ public class MainController {
     /**
      * 根据servlet请求、认证信息、目标服务名、目标方法名处理入参
      */
-    private void handleRequestUrl() {
+    private void handleInParam() {
         getService().initInParam();
         HttpServletRequest currentRequest = request.get();
         Map<String,Object> inParam = new HashMap<>();
-        if (currentRequest.getParameterMap().size()>0){
-            for (Map.Entry<String,String[]> map:currentRequest.getParameterMap().entrySet() ) {
+        Map<String, String[]> parameterMap = currentRequest.getParameterMap();
+        if (parameterMap.size()>0){
+            for (Map.Entry<String,String[]> map:parameterMap.entrySet() ) {
+                inParam.put(map.getKey(),map.getValue());
+            }
+        }
+
+        if (currentRequest instanceof RequestWrapper){
+            Map<String, Object> forwardMap = ((RequestWrapper) currentRequest).getForwardParameterMap();
+            for (Map.Entry<String,Object> map:forwardMap.entrySet() ) {
                 inParam.put(map.getKey(),map.getValue());
             }
         }
@@ -195,10 +202,6 @@ public class MainController {
 
     private ServiceInterface getService() {
         return service.get();
-    }
-
-    private void setService(ServiceInterface service) {
-        MainController.service.set(service);
     }
 
 }
