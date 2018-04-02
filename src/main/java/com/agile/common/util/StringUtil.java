@@ -3,6 +3,7 @@ package com.agile.common.util;
 import com.agile.common.base.Constant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.BeanPropertyBindingResult;
 
 import java.lang.reflect.Array;
 import java.util.Map;
@@ -90,7 +91,7 @@ public final class StringUtil extends StringUtils {
                     mapOfString.append(Constant.RegularAbout.AND).append(entity.getKey());
                     mapOfString.append(Constant.RegularAbout.EQUAL).append(v);
                 }
-            }else if(!(value instanceof Page)){
+            }else if(!(value instanceof Page) && !(value instanceof BeanPropertyBindingResult)){
                 mapOfString.append(Constant.RegularAbout.AND).append(entity.getKey());
                 mapOfString.append(Constant.RegularAbout.EQUAL).append(entity.getValue());
             }

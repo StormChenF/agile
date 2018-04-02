@@ -43,6 +43,7 @@ public class Constant {
      */
     public static class RegularAbout {
         public final static String NULL = "";
+        public final static String COLON = ":";
         public final static String SPOT = ".";
         public final static String COMMA = ",";
         public final static String QUESTION_MARK = "?";
@@ -50,30 +51,11 @@ public class Constant {
         public final static String BACKSLASH = "\\";
         public final static String AND = "&";
         public final static String EQUAL = "=";
-        public final static String AFTER_PARAM = "forward[-_*%#$@+=()^!~`|.,/a-zA-Z0-9]+[&]?";
         public final static String HUMP = "((?=[\\x21-\\x7e]+)[^A-Za-z0-9])";
         public final static String UPER = "[A-Z]";
-    }
-
-    /**
-     * 页面跳转方式
-     */
-    public enum JumpMethod{
-        forward("forward:","forward"),redirect("redirect:","redirect");
-        private String pre;
-        private String code;
-
-        JumpMethod(String pre, String code) {
-            this.pre = pre;
-            this.code = code;
-        }
-
-        public String getPre() {
-            return pre;
-        }
-
-        public String getCode() {
-            return code;
-        }
+        public final static String HTTP = "http";
+        public final static String HTTPS = "https";
+        public final static String FORWARD = "forward";
+        public final static String REDIRECT = "redirect";
     }
 }

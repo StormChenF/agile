@@ -54,6 +54,8 @@ public class DictionaryDataService extends MainService {
      * 地址：http://localhost:8080/DictionaryDataService/query
      */
     public RETURN query() {
+        this.setOutParam("redirect","DictionaryDataService/update?ww=2");
+        this.setOutParam("e",3);
         this.setOutParam("queryList",dao.findAll(DictionaryDataEntity.class,getInParam("page",Integer.class,0),getInParam("size",Integer.class,10)));
         return RETURN.SUCCESS;
     }

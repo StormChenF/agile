@@ -45,7 +45,7 @@ public class MainController {
      * @return 响应试图数据
      */
     @RequestMapping(value = "/{service}/{method}")
-    public Object processor(
+    public ModelAndView processor(
             HttpServletRequest currentRequest,
             @PathVariable String service,
             @PathVariable String method
@@ -60,28 +60,26 @@ public class MainController {
         initService(service);
         request.set(currentRequest);
 
-        //调用目标方法前处理入参
+        //处理入参
         handleRequestUrl();
 
         //调用目标方法
         RETURN returnState = getService().executeMethod(method,getService());
 
-        //判断是否跳转
+        //获取出参
         Map<String, Object> outParam = getService().getOutParam();
-        Object forward = outParam.get(Constant.JumpMethod.forward.getCode());
-        if(!ObjectUtil.isEmpty(forward) && !StringUtil.isEmpty(forward.toString()) && RETURN.SUCCESS.equals(returnState)){
-            return jump(forward.toString(),Constant.JumpMethod.forward);
+
+        //判断是否跳转
+        if(outParam.containsKey(Constant.RegularAbout.FORWARD)){
+            return jump(Constant.RegularAbout.FORWARD);
         }
-        Object redirect = outParam.get(Constant.JumpMethod.redirect.getCode());
-        if(!ObjectUtil.isEmpty(redirect) && !StringUtil.isEmpty(redirect.toString()) && RETURN.SUCCESS.equals(returnState)){
-            return jump(redirect.toString(),Constant.JumpMethod.redirect);
+        if(outParam.containsKey(Constant.RegularAbout.REDIRECT)){
+            return jump(Constant.RegularAbout.REDIRECT);
         }
 
-        //调用目标方法后处理视图
+        //处理响应视图
         modelAndView.addObject(Constant.ResponseAbout.HEAD, new ResponseHead(returnState));
-
-        //响应数据装填
-        modelAndView.addObject(Constant.ResponseAbout.RESULT, getService().getOutParam());
+        modelAndView.addObject(Constant.ResponseAbout.RESULT, outParam);
 
         //清理缓存
         clear();
@@ -99,28 +97,41 @@ public class MainController {
 
     /**
      * 转发
-     * @param resourceUrl 转发路径
      * @param jumpMethod 跳转方式
      */
-    private ModelAndView jump(String resourceUrl,Constant.JumpMethod jumpMethod){
-        StringBuilder url = new StringBuilder(jumpMethod.getPre());
-        if(!resourceUrl.startsWith("http") && !resourceUrl.startsWith("/")){
-            url.append("/");
-        }
-        url.append(resourceUrl);
-        if(!resourceUrl.contains(Constant.RegularAbout.QUESTION_MARK)){
-            url.append(Constant.RegularAbout.QUESTION_MARK);
-        }
-
-        //服务间参数传递
+    private ModelAndView jump(String jumpMethod){
         Map<String, Object> outParam = getService().getOutParam();
-        outParam.remove(jumpMethod.getCode());
-
         Map<String, Object> inParam = getService().getInParam();
-        ModelAndView model = new ModelAndView(url.toString());
+
+        ModelAndView model = new ModelAndView(exposeJumpUrl(jumpMethod,outParam));
         model.addAllObjects(outParam);
         model.addAllObjects(inParam);
         return model;
+    }
+
+    /**
+     * 处理跳转地址及参数
+     * @param jumpMethod 跳转方式
+     * @param outParam 跳转之前的输出参数
+     * @return 用于跳转的目标地址
+     */
+    private String exposeJumpUrl(String jumpMethod,Map<String, Object> outParam){
+        //获取跳转地址
+        String resourceUrl = outParam.get(jumpMethod).toString();
+
+        StringBuilder url = new StringBuilder(jumpMethod+Constant.RegularAbout.COLON);
+        //补充斜杠
+        if(!resourceUrl.startsWith(Constant.RegularAbout.HTTP) && !resourceUrl.startsWith(Constant.RegularAbout.SLASH)){
+            url.append(Constant.RegularAbout.SLASH);
+        }
+        url.append(resourceUrl);
+        //补充问号
+        if(!resourceUrl.contains(Constant.RegularAbout.QUESTION_MARK)){
+            url.append(Constant.RegularAbout.QUESTION_MARK);
+        }
+        //移除本跳转防止死循环
+        outParam.remove(jumpMethod);
+        return url.toString();
     }
 
     /**
