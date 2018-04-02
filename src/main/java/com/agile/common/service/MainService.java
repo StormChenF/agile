@@ -97,11 +97,11 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      * @return 入参值
      */
     protected <T>T getInParam(String key,Class<T> clazz,T defaultValue) {
-        Object value = inParam.get().get(key);
+        Object[] value = (Object[]) inParam.get().get(key);
         if(ObjectUtil.isEmpty(value)){
             return defaultValue;
         }
-        Object result = ObjectUtil.cast(clazz, value);
+        Object result = ObjectUtil.cast(clazz, value[0]);
         return ObjectUtil.isEmpty(result)?null:(T)result;
     }
 

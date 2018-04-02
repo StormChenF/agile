@@ -4,6 +4,7 @@ import com.agile.common.base.Constant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 
+import java.lang.reflect.Array;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,7 +84,13 @@ public final class StringUtil extends StringUtils {
     public static String fromMapToUrl(Map<String,Object> map){
         StringBuilder mapOfString = new StringBuilder(Constant.RegularAbout.NULL);
         for (Map.Entry<String, Object> entity : map.entrySet()) {
-            if(!(entity.getValue() instanceof Page)){
+            Object value = entity.getValue();
+            if(value.getClass().isArray()){
+                for (Object v:(Object[])value) {
+                    mapOfString.append(Constant.RegularAbout.AND).append(entity.getKey());
+                    mapOfString.append(Constant.RegularAbout.EQUAL).append(v);
+                }
+            }else if(!(value instanceof Page)){
                 mapOfString.append(Constant.RegularAbout.AND).append(entity.getKey());
                 mapOfString.append(Constant.RegularAbout.EQUAL).append(entity.getValue());
             }

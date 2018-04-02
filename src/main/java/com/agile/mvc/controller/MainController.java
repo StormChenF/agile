@@ -103,15 +103,21 @@ public class MainController {
      * @param jumpMethod 跳转方式
      */
     private ModelAndView jump(String resourceUrl,Constant.JumpMethod jumpMethod){
-        String url = jumpMethod.getPre() + resourceUrl + Constant.RegularAbout.QUESTION_MARK;
+        StringBuilder url = new StringBuilder(jumpMethod.getPre());
+        if(!resourceUrl.startsWith("http") && !resourceUrl.startsWith("/")){
+            url.append("/");
+        }
+        url.append(resourceUrl);
+        if(!resourceUrl.contains(Constant.RegularAbout.QUESTION_MARK)){
+            url.append(Constant.RegularAbout.QUESTION_MARK);
+        }
 
         //服务间参数传递
         Map<String, Object> outParam = getService().getOutParam();
         outParam.remove(jumpMethod.getCode());
 
         Map<String, Object> inParam = getService().getInParam();
-        ModelAndView model = new ModelAndView(url);
-        model.setViewName(url);
+        ModelAndView model = new ModelAndView(url.toString());
         model.addAllObjects(outParam);
         model.addAllObjects(inParam);
         return model;
@@ -141,11 +147,6 @@ public class MainController {
             for (Map.Entry<String,String[]> map:currentRequest.getParameterMap().entrySet() ) {
                 inParam.put(map.getKey(),map.getValue());
             }
-        }
-        Enumeration<String> attributeNames = currentRequest.getAttributeNames();
-        while (attributeNames.hasMoreElements()){
-            String attributeName = attributeNames.nextElement();
-            inParam.put(attributeName,currentRequest.getAttribute(attributeName));
         }
 
         //判断是否存在文件上传
