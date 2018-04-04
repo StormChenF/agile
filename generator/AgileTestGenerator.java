@@ -92,6 +92,6 @@ public class AgileTestGenerator {
                 testFileFw.close();
             }
         }
-
+        System.exit(0);
     }
 }

@@ -202,6 +202,7 @@ public class AgileGenerator {
             e.printStackTrace();
         }
         DataBaseUtil.destroyDB();
+        System.exit(0);
     }
 
     /**
