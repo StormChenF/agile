@@ -31,20 +31,10 @@ import java.util.Map;
 @EnableWebMvc
 public class SpringMvcConfig implements WebMvcConfigurer {
 
-    private final JsonViewResolver jsonViewResolver;
-
-    private final XmlViewResolver xmlViewResolver;
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.setOrder(1).addResourceHandler("/**")
                 .addResourceLocations("classpath:com/agile/static/","classpath:com/agile/static/img/","classpath:com/agile/static/plus/jquery/","classpath:com/agile/static/plus/swagger/");
-    }
-
-    @Autowired
-    public SpringMvcConfig(JsonViewResolver jsonViewResolver, XmlViewResolver xmlViewResolver) {
-        this.jsonViewResolver = jsonViewResolver;
-        this.xmlViewResolver = xmlViewResolver;
     }
 
     /**
@@ -54,7 +44,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      * @return 视图解析器
      */
     @Bean
-    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager){
+    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager,JsonViewResolver jsonViewResolver,XmlViewResolver xmlViewResolver){
         List<ViewResolver> list = new ArrayList<>();
         list.add(jsonViewResolver);
 //        list.add(xmlViewResolver);

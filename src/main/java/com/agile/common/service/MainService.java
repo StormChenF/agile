@@ -1,7 +1,6 @@
 package com.agile.common.service;
 
 import com.agile.common.exception.ExceptionHandler;
-import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestMethodException;
 import com.agile.common.util.ArrayUtil;
 import com.agile.common.util.ObjectUtil;
@@ -34,7 +33,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
      * @return 返回执行结果
      */
     @Transactional
-    public RETURN executeMethod(String methodName,Object object) throws Throwable {
+    public Object executeMethod(String methodName, Object object) throws Throwable {
 
         initOutParam();
 
@@ -42,7 +41,7 @@ public class MainService extends ExceptionHandler implements ServiceInterface {
             Method method = this.getClass().getDeclaredMethod(methodName);
             //取消安全检测，提高性能
             method.setAccessible(true);
-            return (RETURN) method.invoke(object);
+            return method.invoke(object);
         }catch (NoSuchMethodException e){
             throw new NoSuchRequestMethodException("[方法:" + methodName + "]于[服务类:" + this.getClass().getName() + "]中不存在！");
         }catch (InvocationTargetException e){

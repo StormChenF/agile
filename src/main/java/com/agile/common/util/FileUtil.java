@@ -2,15 +2,20 @@ package com.agile.common.util;
 
 import com.agile.common.base.Constant;
 import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -134,5 +139,35 @@ public class FileUtil extends FileUtils {
         if(format.isEmpty())return true;
         String[] formats = format.split(Constant.RegularAbout.COMMA, -1);
         return ArrayUtil.contains(formats,FileUtil.getFormat(file));
+    }
+
+    /**
+     * 文件下载
+     * @param file 要下载的文件
+     * @return 文件下载响应
+     * @throws FileNotFoundException 文件未找到
+     */
+    public static ResponseEntity<byte[]> downloadFile(File file) throws FileNotFoundException {
+        byte[] byteFile;
+        try {
+            byteFile = FileUtils.readFileToByteArray(file);
+        }catch (IOException e){
+            throw new FileNotFoundException();
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentLength(file.length());
+        headers.setContentDispositionFormData(Constant.HeaderAbout.ATTACHMENT,new String(file.getName().getBytes(Charset.forName("UTF-8")),Charset.forName("ISO-8859-1")));
+        return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
+    }
+
+    /**
+     * 文件下载
+     * @param filePath 要下载的文件地址
+     * @return 文件下载响应
+     * @throws FileNotFoundException 文件未找到
+     */
+    public static  ResponseEntity<byte[]> downloadFile(String filePath) throws FileNotFoundException {
+        return downloadFile(new File(filePath));
     }
 }

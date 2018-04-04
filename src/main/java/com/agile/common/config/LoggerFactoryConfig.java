@@ -17,8 +17,8 @@ import java.net.URI;
 /**
  * Created by 佟盟 on 2017/11/2
  */
-@Plugin(name = "LoggerFactoryConfig", category = ConfigurationFactory.CATEGORY)
 @Order(0)
+@Plugin(name = "LoggerFactoryConfig", category = ConfigurationFactory.CATEGORY)
 public class LoggerFactoryConfig extends ConfigurationFactory {
 
     private static Configuration createConfiguration(final String name, ConfigurationBuilder<BuiltConfiguration> builder){

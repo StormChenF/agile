@@ -7,7 +7,6 @@ import com.agile.common.properties.DruidConfigProperty;
 import com.agile.common.properties.JPAConfigProperty;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -31,8 +30,6 @@ import java.util.Properties;
 public class JPAConfig {
     private static int index = 0;
 
-    private final DataSource dataSource;
-
     private DruidConfigProperty druidConfigProperty;
     private JPAConfigProperty jpaConfigProperty;
 
@@ -42,13 +39,8 @@ public class JPAConfig {
         this.jpaConfigProperty = DBConfigProperties.getJpa().get(index);
     }
 
-    @Autowired
-    public JPAConfig(@Qualifier(value = "dataSource") DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.valueOf(druidConfigProperty.getType()));
         jpaVendorAdapter.setGenerateDdl(Boolean.parseBoolean(jpaConfigProperty.getGenerateDdl()));
@@ -102,9 +94,9 @@ public class JPAConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory(dataSource).getObject());
         return transactionManager;
     }
 

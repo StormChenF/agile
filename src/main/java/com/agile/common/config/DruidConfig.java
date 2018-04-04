@@ -23,7 +23,7 @@ public class DruidConfig {
         this.druidConfigProperty = DBConfigProperties.getDruid().get(index);
     }
 
-    @Bean(initMethod = "init",destroyMethod = "close",name = "dataSource")
+    @Bean(initMethod = "init",destroyMethod = "close")
     DruidDataSource dataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
 

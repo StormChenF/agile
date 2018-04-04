@@ -7,18 +7,12 @@ import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
 import com.agile.common.service.ServiceInterface;
 import com.agile.common.util.*;
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
-import java.nio.charset.Charset;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -45,8 +39,9 @@ public class MainController {
      * @return 响应试图数据
      */
     @RequestMapping(value = "/{service}/{method}")
-    public ModelAndView processor(
+    public Object processor(
             HttpServletRequest currentRequest,
+            HttpServletResponse currentResponse,
             @PathVariable String service,
             @PathVariable String method
     ) throws Throwable {
@@ -63,7 +58,8 @@ public class MainController {
         handleInParam();
 
         //调用目标方法
-        RETURN returnState = getService().executeMethod(method,getService());
+        Object returnData = getService().executeMethod(method,getService());
+        if(!(returnData instanceof RETURN))return returnData;
 
         //获取出参
         Map<String, Object> outParam = getService().getOutParam();
@@ -78,7 +74,7 @@ public class MainController {
 
         //处理响应视图
         ModelAndView modelAndView = new ModelAndView();//响应视图对象
-        modelAndView.addObject(Constant.ResponseAbout.HEAD, new ResponseHead(returnState));
+        modelAndView.addObject(Constant.ResponseAbout.HEAD, new ResponseHead((RETURN) returnData));
         modelAndView.addObject(Constant.ResponseAbout.RESULT, outParam);
 
         //清理缓存
@@ -175,29 +171,6 @@ public class MainController {
 
         //将处理过的所有请求参数传入调用服务对象
         getService().setInParam(inParam);
-    }
-
-    /**
-     * 文件下载
-     * @param path 文件路径
-     * @param fileName 文件名
-     * @return 文件流
-     * @throws FileNotFoundException 流异常
-     */
-    @RequestMapping("/download")
-    private ResponseEntity<byte[]> downloadFile(@RequestParam(value = "path") String path ,@RequestParam(value = "fileName") String fileName) throws FileNotFoundException{
-        File file = new File(path,fileName);
-        byte[] byteFile;
-        try {
-            byteFile = FileUtils.readFileToByteArray(file);
-        }catch (IOException e){
-            throw new FileNotFoundException();
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentLength(file.length());
-        headers.setContentDispositionFormData(Constant.HeaderAbout.ATTACHMENT,new String(fileName.getBytes(Charset.forName("UTF-8")),Charset.forName("ISO-8859-1")));
-        return new ResponseEntity<>(byteFile, headers, HttpStatus.CREATED);
     }
 
     private ServiceInterface getService() {

@@ -17,12 +17,8 @@ public class KaptchaConfig {
     @Bean
     DefaultKaptcha defaultKaptcha(){
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
-        defaultKaptcha.setConfig(config());
+        defaultKaptcha.setConfig(new Config(properties()));
         return defaultKaptcha;
-    }
-
-    private Config config(){
-        return new Config(properties());
     }
 
     private Properties properties(){

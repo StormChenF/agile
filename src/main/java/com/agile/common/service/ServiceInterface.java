@@ -1,7 +1,5 @@
 package com.agile.common.service;
 
-import com.agile.common.base.RETURN;
-
 import java.util.Map;
 
 public interface ServiceInterface {
@@ -14,7 +12,7 @@ public interface ServiceInterface {
 	//提取响应参数
 	Map<String, Object> getInParam();
 	//调用请求方法
-	RETURN executeMethod(String methodName,Object object) throws Throwable;
+	Object executeMethod(String methodName, Object object) throws Throwable;
 	//初始化入参
 	public void initInParam();
 	//初始化出参
