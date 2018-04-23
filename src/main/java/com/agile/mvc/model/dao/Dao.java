@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -31,7 +32,7 @@ public class Dao {
 
     @PersistenceContext
     private EntityManager entityManager ;
-    private <T,ID>JpaRepository getRepository(Class<T> tableClass) throws NoSuchIDException {
+    private <T,ID extends Serializable>JpaRepository getRepository(Class<T> tableClass) throws NoSuchIDException {
         Field field = getIdField(tableClass);
         if(ObjectUtil.isEmpty(field)){
             throw new NoSuchIDException();
@@ -79,7 +80,7 @@ public class Dao {
         if(iterator.hasNext()){
             T obj = iterator.next();
             try {
-                getRepository(obj.getClass()).saveAll(list);
+                getRepository(obj.getClass()).save(list);
                 isTrue = true;
             } catch (NoSuchIDException e) {
                 e.printStackTrace();
@@ -123,7 +124,7 @@ public class Dao {
         if(iterator.hasNext()){
             T obj = iterator.next();
             try {
-                getRepository(obj.getClass()).saveAll(list);
+                getRepository(obj.getClass()).save(list);
             } catch (NoSuchIDException e) {
                 e.printStackTrace();
             }
@@ -139,7 +140,7 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T>Object existsById(Class<T> tableClass,Object id){
         try {
-            return getRepository(tableClass).existsById(id);
+            return getRepository(tableClass).exists((Serializable) id);
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
@@ -215,7 +216,7 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T>void deleteById(Class<T> tableClass,Object id){
         try {
-            getRepository(tableClass).deleteById(id);
+            getRepository(tableClass).delete(id);
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
@@ -303,7 +304,7 @@ public class Dao {
         List list = createObjectList(tableClass,ids);
         if(!ObjectUtil.isEmpty(list) && list.size()>0){
             try {
-                getRepository(tableClass).deleteAll(list);
+                getRepository(tableClass).deleteInBatch(list);
             } catch (NoSuchIDException e) {
                 e.printStackTrace();
             }
@@ -357,7 +358,7 @@ public class Dao {
     public <T>T findOne(T object){
         try {
             Example<T> example = Example.of(object);
-            return (T) this.getRepository(object.getClass()).findOne(example).get();
+            return (T) this.getRepository(object.getClass()).findOne(example);
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
@@ -400,7 +401,7 @@ public class Dao {
     public <T>Page findAll(T object, int page, int size){
         try {
             Example<T> example = Example.of(object);
-            return this.getRepository(object.getClass()).findAll(example,PageRequest.of(page,size));
+            return this.getRepository(object.getClass()).findAll(example,new PageRequest(page,size));
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
@@ -552,7 +553,7 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T,ID>List<T> findAll(Class<T> tableClass,Iterable<ID> ids){
         try {
-            return getRepository(tableClass).findAllById(ids);
+            return getRepository(tableClass).findAll(ids);
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
@@ -565,7 +566,7 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T,ID>List<T> findAll(Class<T> tableClass,ID[] ids){
         try {
-            return getRepository(tableClass).findAllById(ArrayUtil.asList(ids));
+            return getRepository(tableClass).findAll(ArrayUtil.asList(ids));
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }
@@ -578,7 +579,7 @@ public class Dao {
     @SuppressWarnings("unchecked")
     public <T>Page<T> findAll(Class<T> tableClass,int page, int size){
         try {
-            return getRepository(tableClass).findAll(PageRequest.of(page,size));
+            return getRepository(tableClass).findAll(new PageRequest(page,size));
         } catch (NoSuchIDException e) {
             e.printStackTrace();
         }

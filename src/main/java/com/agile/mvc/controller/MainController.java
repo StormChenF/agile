@@ -5,6 +5,7 @@ import com.agile.common.base.ResponseHead;
 import com.agile.common.base.Constant;
 import com.agile.common.base.RETURN;
 import com.agile.common.exception.NoSuchRequestServiceException;
+import com.agile.common.exception.UnlawfulRequestException;
 import com.agile.common.service.ServiceInterface;
 import com.agile.common.util.*;
 import org.springframework.stereotype.Controller;
@@ -24,13 +25,14 @@ public class MainController {
 
     private static ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
     private static ThreadLocal<HttpServletRequest> request = new ThreadLocal<>();
-//    /**
-//     * 非法请求处理器
-//     */
-//    @RequestMapping(value = {"/","/*","/*/*/*/**"})
-//    public void processor() throws UnlawfulRequestException {
-//        throw new UnlawfulRequestException();
-//    }
+
+    /**
+     * 非法请求处理器
+     */
+    @RequestMapping(value = {"/","/*","/*/*/*/**"})
+    public void processor() throws UnlawfulRequestException {
+        throw new UnlawfulRequestException();
+    }
 
     /**
      * agile框架处理器
@@ -176,5 +178,4 @@ public class MainController {
     private ServiceInterface getService() {
         return service.get();
     }
-
 }

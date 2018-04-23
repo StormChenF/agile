@@ -33,7 +33,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.setOrder(1).addResourceHandler("/**")
+        registry.setOrder(-1).addResourceHandler("/static/**")
                 .addResourceLocations("classpath:com/agile/static/","classpath:com/agile/static/img/","classpath:com/agile/static/plus/jquery/","classpath:com/agile/static/plus/swagger/");
     }
 
@@ -51,7 +51,6 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
         ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
         viewResolver.setContentNegotiationManager(manager);
-        viewResolver.setOrder(1);
         viewResolver.setViewResolvers(list);
         return viewResolver;
     }

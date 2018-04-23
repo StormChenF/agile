@@ -9,8 +9,6 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import org.apache.logging.log4j.core.config.ConfigurationFactory;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -21,17 +19,14 @@ import org.springframework.web.util.WebAppRootListener;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
-import java.io.File;
-import java.net.URL;
 
 /**
  * Created by 佟盟 on 2017/9/27
  */
-@Order(0)
 public class WebInitializer implements WebApplicationInitializer {
 
     @Override
-    public void onStartup(@NotNull ServletContext servletContext) {
+    public void onStartup(ServletContext servletContext) {
         servletContext.setInitParameter("webAppRootKey","agile.root");
         servletContext.setSessionTimeout(30);
         servletContext.setRequestCharacterEncoding("UTF-8");

@@ -1,9 +1,10 @@
 package com.agile.common.base;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.core.convert.converter.Converter;
+
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Created by 佟盟 on 2017/11/21
@@ -57,7 +58,7 @@ public class Page implements org.springframework.data.domain.Page {
         }
 
         @Override
-        public long getOffset() {
+        public int getOffset() {
             return this.offset;
         }
 
@@ -183,9 +184,8 @@ public class Page implements org.springframework.data.domain.Page {
         return totalElements;
     }
 
-    @NotNull
     @Override
-    public org.springframework.data.domain.Page map(@NotNull Function function) {
+    public org.springframework.data.domain.Page map(Converter converter) {
         return null;
     }
 

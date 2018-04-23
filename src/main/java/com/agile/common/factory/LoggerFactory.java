@@ -17,7 +17,6 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.filter.LevelRangeFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
-import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  * Created by 佟盟 on 2017/2/23
@@ -105,6 +104,7 @@ public class LoggerFactory {
         return LogFactory.getLog(clazz);
     }
     static {
-        createLogger("springmvc",DispatcherServlet.class,new Level[]{Level.ALL,Level.DEBUG,Level.INFO,Level.ERROR},"org.springframework.web.servlet");
+//        createLogger("springmvc",DispatcherServlet.class,new Level[]{Level.ALL,Level.DEBUG,Level.INFO,Level.ERROR},"org.springframework.web.servlet");
+//        createLogger("activiti",DispatcherServlet.class,new Level[]{Level.ALL,Level.DEBUG,Level.INFO,Level.ERROR},"org.activiti");
     }
 }

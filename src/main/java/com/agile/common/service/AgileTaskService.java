@@ -23,14 +23,14 @@ import java.util.concurrent.ScheduledFuture;
  * Created by 佟盟 on 2018/2/2
  */
 @Service
-public class TaskService extends MainService{
+public class AgileTaskService extends MainService{
     private final RedisService redisService;
     private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
     private static Map<String, TaskInfo> taskInfoMap = new HashMap<>();
 
     @Autowired
-    public TaskService(RedisService redisService, ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+    public AgileTaskService(RedisService redisService, ThreadPoolTaskScheduler threadPoolTaskScheduler) {
         this.redisService = redisService;
         this.threadPoolTaskScheduler = threadPoolTaskScheduler;
     }
@@ -40,10 +40,10 @@ public class TaskService extends MainService{
      */
     public class TaskInfo extends SysTaskEntity{
         private TaskTrigger trigger; //触发器
-        private TaskService.Job job; //任务
+        private AgileTaskService.Job job; //任务
         private ScheduledFuture scheduledFuture;
 
-        public TaskInfo(SysTaskEntity sysTaskEntity, TaskTrigger trigger, TaskService.Job job, ScheduledFuture scheduledFuture) {
+        public TaskInfo(SysTaskEntity sysTaskEntity, TaskTrigger trigger, AgileTaskService.Job job, ScheduledFuture scheduledFuture) {
             ObjectUtil.copyProperties(sysTaskEntity,this);
             this.trigger = trigger;
             this.job = job;
@@ -58,11 +58,11 @@ public class TaskService extends MainService{
             this.trigger = trigger;
         }
 
-        public TaskService.Job getJob() {
+        public AgileTaskService.Job getJob() {
             return job;
         }
 
-        public void setJob(TaskService.Job job) {
+        public void setJob(AgileTaskService.Job job) {
             this.job = job;
         }
 
@@ -196,7 +196,7 @@ public class TaskService extends MainService{
             TaskTrigger trigger = new TaskTrigger(sysTaskEntity.getCron(),sysTaskEntity.getSync());
 
             //新建任务
-            TaskService.Job job = new TaskService.Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
+            AgileTaskService.Job job = new AgileTaskService.Job(sysTaskEntity.getName(), trigger, sysTaskTargetEntityList);
 
             ScheduledFuture scheduledFuture = null;
             if(sysTaskEntity.getState()){

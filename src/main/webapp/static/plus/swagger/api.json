@@ -1,0 +1,3792 @@
+{
+"swagger" : "2.0",
+    "info" : {
+        "version" : "1.0.0",
+        "title" : "Agile API平台",
+        "contact" : {
+            "email" : "mydeathtrial@163.com"
+        }
+    },
+    "tags" : [
+        {
+            "name" : "DictionaryData",
+            "description" : "[系统管理]字典数据表"
+        },        {
+            "name" : "DictionaryMain",
+            "description" : "[系统管理]字典表"
+        },        {
+            "name" : "LogMain",
+            "description" : "[系统管理]日志表"
+        },        {
+            "name" : "LogTable",
+            "description" : "[系统管理]日志相关表变动信息"
+        },        {
+            "name" : "LogValue",
+            "description" : "[系统管理]日志相关字段值变动信息"
+        },        {
+            "name" : "SysAuthorities",
+            "description" : "[系统管理]权限"
+        },        {
+            "name" : "SysBtAuthoritiesResources",
+            "description" : "[系统管理]权限资源表"
+        },        {
+            "name" : "SysBtRolesAuthorities",
+            "description" : "[系统管理]角色权限表"
+        },        {
+            "name" : "SysBtRolesMoudles",
+            "description" : "[系统管理]角色模块表"
+        },        {
+            "name" : "SysBtTaskTarget",
+            "description" : "[系统管理]定时任务目标任务表"
+        },        {
+            "name" : "SysBtUsersRoles",
+            "description" : "[系统管理]用户角色表"
+        },        {
+            "name" : "SysModules",
+            "description" : "[系统管理]模块"
+        },        {
+            "name" : "SysPersistentLogins",
+            "description" : "[系统管理]登陆用户信息"
+        },        {
+            "name" : "SysResources",
+            "description" : "[系统管理]资源"
+        },        {
+            "name" : "SysRoles",
+            "description" : "[系统管理]角色"
+        },        {
+            "name" : "SysTask",
+            "description" : "[系统管理]定时任务"
+        },        {
+            "name" : "SysTaskTarget",
+            "description" : "[系统管理]目标任务表"
+        },        {
+            "name" : "SysUsers",
+            "description" : "[系统管理]用户"
+        }
+    ],
+    "schemes" : [ "http", "https" ],
+    "paths" : {
+        "/DictionaryDataService/save" :{
+            "post" : {
+                "tags":["DictionaryData"],
+                "summary" : "[系统管理]字典数据表",
+                "operationId" : "DictionaryDataService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "dicCode",
+                        "in" : "formData",
+                        "description" : "字典表_字典编码",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "字典值显示名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "value",
+                        "in" : "formData",
+                        "description" : "字典值代表值",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "isFixed",
+                        "in" : "formData",
+                        "description" : "字典值是否固定",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]字典数据表"
+            }
+        },
+        "/DictionaryDataService/delete" :{
+            "post" : {
+                "tags":["DictionaryData"],
+                "summary" : "[系统管理]字典数据表",
+                "operationId" : "DictionaryDataService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]字典数据表"
+            }
+        },
+        "/DictionaryDataService/update" :{
+            "post" : {
+                "tags":["DictionaryData"],
+                "summary" : "[系统管理]字典数据表",
+                "operationId" : "DictionaryDataService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "code",
+                        "in" : "formData",
+                        "description" : "字典编码",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "dicCode",
+                        "in" : "formData",
+                        "description" : "字典表_字典编码",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "字典值显示名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "value",
+                        "in" : "formData",
+                        "description" : "字典值代表值",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "isFixed",
+                        "in" : "formData",
+                        "description" : "字典值是否固定",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]字典数据表"
+            }
+        },
+        "/DictionaryDataService/query" :{
+            "get" : {
+                "tags":["DictionaryData"],
+                "summary" : "[系统管理]字典数据表",
+                "operationId" : "DictionaryDataService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/DictionaryDataEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]字典数据表"
+            }
+        }
+    ,
+        "/DictionaryMainService/save" :{
+            "post" : {
+                "tags":["DictionaryMain"],
+                "summary" : "[系统管理]字典表",
+                "operationId" : "DictionaryMainService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "字典名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "isConstant",
+                        "in" : "formData",
+                        "description" : "是否是常量",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]字典表"
+            }
+        },
+        "/DictionaryMainService/delete" :{
+            "post" : {
+                "tags":["DictionaryMain"],
+                "summary" : "[系统管理]字典表",
+                "operationId" : "DictionaryMainService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]字典表"
+            }
+        },
+        "/DictionaryMainService/update" :{
+            "post" : {
+                "tags":["DictionaryMain"],
+                "summary" : "[系统管理]字典表",
+                "operationId" : "DictionaryMainService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "code",
+                        "in" : "formData",
+                        "description" : "字典编码",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "字典名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "isConstant",
+                        "in" : "formData",
+                        "description" : "是否是常量",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]字典表"
+            }
+        },
+        "/DictionaryMainService/query" :{
+            "get" : {
+                "tags":["DictionaryMain"],
+                "summary" : "[系统管理]字典表",
+                "operationId" : "DictionaryMainService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/DictionaryMainEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]字典表"
+            }
+        }
+    ,
+        "/LogMainService/save" :{
+            "post" : {
+                "tags":["LogMain"],
+                "summary" : "[系统管理]日志表",
+                "operationId" : "LogMainService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "businessCode",
+                        "in" : "formData",
+                        "description" : "业务编码",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetType",
+                        "in" : "formData",
+                        "description" : "业务对象类型",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetCode",
+                        "in" : "formData",
+                        "description" : "业务对象标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "userId",
+                        "in" : "formData",
+                        "description" : "操作人",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "createTime",
+                        "in" : "formData",
+                        "description" : "操作时间",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]日志表"
+            }
+        },
+        "/LogMainService/delete" :{
+            "post" : {
+                "tags":["LogMain"],
+                "summary" : "[系统管理]日志表",
+                "operationId" : "LogMainService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]日志表"
+            }
+        },
+        "/LogMainService/update" :{
+            "post" : {
+                "tags":["LogMain"],
+                "summary" : "[系统管理]日志表",
+                "operationId" : "LogMainService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "logMainId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "businessCode",
+                        "in" : "formData",
+                        "description" : "业务编码",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetType",
+                        "in" : "formData",
+                        "description" : "业务对象类型",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetCode",
+                        "in" : "formData",
+                        "description" : "业务对象标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "userId",
+                        "in" : "formData",
+                        "description" : "操作人",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "createTime",
+                        "in" : "formData",
+                        "description" : "操作时间",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]日志表"
+            }
+        },
+        "/LogMainService/query" :{
+            "get" : {
+                "tags":["LogMain"],
+                "summary" : "[系统管理]日志表",
+                "operationId" : "LogMainService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/LogMainEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]日志表"
+            }
+        }
+    ,
+        "/LogTableService/save" :{
+            "post" : {
+                "tags":["LogTable"],
+                "summary" : "[系统管理]日志相关表变动信息",
+                "operationId" : "LogTableService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "logMainId",
+                        "in" : "formData",
+                        "description" : "日志标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "tableSchema",
+                        "in" : "formData",
+                        "description" : "数据库",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "tableName",
+                        "in" : "formData",
+                        "description" : "表名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "operationType",
+                        "in" : "formData",
+                        "description" : "操作类型",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "operationOrder",
+                        "in" : "formData",
+                        "description" : "操作顺序",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]日志相关表变动信息"
+            }
+        },
+        "/LogTableService/delete" :{
+            "post" : {
+                "tags":["LogTable"],
+                "summary" : "[系统管理]日志相关表变动信息",
+                "operationId" : "LogTableService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]日志相关表变动信息"
+            }
+        },
+        "/LogTableService/update" :{
+            "post" : {
+                "tags":["LogTable"],
+                "summary" : "[系统管理]日志相关表变动信息",
+                "operationId" : "LogTableService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "logTableId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "logMainId",
+                        "in" : "formData",
+                        "description" : "日志标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "tableSchema",
+                        "in" : "formData",
+                        "description" : "数据库",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "tableName",
+                        "in" : "formData",
+                        "description" : "表名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "operationType",
+                        "in" : "formData",
+                        "description" : "操作类型",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "operationOrder",
+                        "in" : "formData",
+                        "description" : "操作顺序",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]日志相关表变动信息"
+            }
+        },
+        "/LogTableService/query" :{
+            "get" : {
+                "tags":["LogTable"],
+                "summary" : "[系统管理]日志相关表变动信息",
+                "operationId" : "LogTableService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/LogTableEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]日志相关表变动信息"
+            }
+        }
+    ,
+        "/LogValueService/save" :{
+            "post" : {
+                "tags":["LogValue"],
+                "summary" : "[系统管理]日志相关字段值变动信息",
+                "operationId" : "LogValueService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "logTableId",
+                        "in" : "formData",
+                        "description" : "日志相关表标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "columnName",
+                        "in" : "formData",
+                        "description" : "字段",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "columnType",
+                        "in" : "formData",
+                        "description" : "字段类型",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "newValue",
+                        "in" : "formData",
+                        "description" : "新值",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "oldValue",
+                        "in" : "formData",
+                        "description" : "旧值",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "columnInfo",
+                        "in" : "formData",
+                        "description" : "字段含义",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]日志相关字段值变动信息"
+            }
+        },
+        "/LogValueService/delete" :{
+            "post" : {
+                "tags":["LogValue"],
+                "summary" : "[系统管理]日志相关字段值变动信息",
+                "operationId" : "LogValueService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]日志相关字段值变动信息"
+            }
+        },
+        "/LogValueService/update" :{
+            "post" : {
+                "tags":["LogValue"],
+                "summary" : "[系统管理]日志相关字段值变动信息",
+                "operationId" : "LogValueService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "logValueId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "logTableId",
+                        "in" : "formData",
+                        "description" : "日志相关表标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "columnName",
+                        "in" : "formData",
+                        "description" : "字段",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "columnType",
+                        "in" : "formData",
+                        "description" : "字段类型",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "newValue",
+                        "in" : "formData",
+                        "description" : "新值",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "oldValue",
+                        "in" : "formData",
+                        "description" : "旧值",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "columnInfo",
+                        "in" : "formData",
+                        "description" : "字段含义",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]日志相关字段值变动信息"
+            }
+        },
+        "/LogValueService/query" :{
+            "get" : {
+                "tags":["LogValue"],
+                "summary" : "[系统管理]日志相关字段值变动信息",
+                "operationId" : "LogValueService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/LogValueEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]日志相关字段值变动信息"
+            }
+        }
+    ,
+        "/SysAuthoritiesService/save" :{
+            "post" : {
+                "tags":["SysAuthorities"],
+                "summary" : "[系统管理]权限",
+                "operationId" : "SysAuthoritiesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "authorityMark",
+                        "in" : "formData",
+                        "description" : "权限标识",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityName",
+                        "in" : "formData",
+                        "description" : "权限名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityDesc",
+                        "in" : "formData",
+                        "description" : "权限说明",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "message",
+                        "in" : "formData",
+                        "description" : "提示信息",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "issys",
+                        "in" : "formData",
+                        "description" : "是否系统权限",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]权限"
+            }
+        },
+        "/SysAuthoritiesService/delete" :{
+            "post" : {
+                "tags":["SysAuthorities"],
+                "summary" : "[系统管理]权限",
+                "operationId" : "SysAuthoritiesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]权限"
+            }
+        },
+        "/SysAuthoritiesService/update" :{
+            "post" : {
+                "tags":["SysAuthorities"],
+                "summary" : "[系统管理]权限",
+                "operationId" : "SysAuthoritiesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysAuthorityId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityMark",
+                        "in" : "formData",
+                        "description" : "权限标识",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityName",
+                        "in" : "formData",
+                        "description" : "权限名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityDesc",
+                        "in" : "formData",
+                        "description" : "权限说明",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "message",
+                        "in" : "formData",
+                        "description" : "提示信息",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "issys",
+                        "in" : "formData",
+                        "description" : "是否系统权限",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]权限"
+            }
+        },
+        "/SysAuthoritiesService/query" :{
+            "get" : {
+                "tags":["SysAuthorities"],
+                "summary" : "[系统管理]权限",
+                "operationId" : "SysAuthoritiesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysAuthoritiesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]权限"
+            }
+        }
+    ,
+        "/SysBtAuthoritiesResourcesService/save" :{
+            "post" : {
+                "tags":["SysBtAuthoritiesResources"],
+                "summary" : "[系统管理]权限资源表",
+                "operationId" : "SysBtAuthoritiesResourcesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "resourceId",
+                        "in" : "formData",
+                        "description" : "资源唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityId",
+                        "in" : "formData",
+                        "description" : "权限唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]权限资源表"
+            }
+        },
+        "/SysBtAuthoritiesResourcesService/delete" :{
+            "post" : {
+                "tags":["SysBtAuthoritiesResources"],
+                "summary" : "[系统管理]权限资源表",
+                "operationId" : "SysBtAuthoritiesResourcesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]权限资源表"
+            }
+        },
+        "/SysBtAuthoritiesResourcesService/update" :{
+            "post" : {
+                "tags":["SysBtAuthoritiesResources"],
+                "summary" : "[系统管理]权限资源表",
+                "operationId" : "SysBtAuthoritiesResourcesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysBtAuthoritiesResourcesId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourceId",
+                        "in" : "formData",
+                        "description" : "资源唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityId",
+                        "in" : "formData",
+                        "description" : "权限唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]权限资源表"
+            }
+        },
+        "/SysBtAuthoritiesResourcesService/query" :{
+            "get" : {
+                "tags":["SysBtAuthoritiesResources"],
+                "summary" : "[系统管理]权限资源表",
+                "operationId" : "SysBtAuthoritiesResourcesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysBtAuthoritiesResourcesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]权限资源表"
+            }
+        }
+    ,
+        "/SysBtRolesAuthoritiesService/save" :{
+            "post" : {
+                "tags":["SysBtRolesAuthorities"],
+                "summary" : "[系统管理]角色权限表",
+                "operationId" : "SysBtRolesAuthoritiesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "authorityId",
+                        "in" : "formData",
+                        "description" : "权限唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]角色权限表"
+            }
+        },
+        "/SysBtRolesAuthoritiesService/delete" :{
+            "post" : {
+                "tags":["SysBtRolesAuthorities"],
+                "summary" : "[系统管理]角色权限表",
+                "operationId" : "SysBtRolesAuthoritiesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]角色权限表"
+            }
+        },
+        "/SysBtRolesAuthoritiesService/update" :{
+            "post" : {
+                "tags":["SysBtRolesAuthorities"],
+                "summary" : "[系统管理]角色权限表",
+                "operationId" : "SysBtRolesAuthoritiesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysBtRolesAuthoritiesId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "authorityId",
+                        "in" : "formData",
+                        "description" : "权限唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]角色权限表"
+            }
+        },
+        "/SysBtRolesAuthoritiesService/query" :{
+            "get" : {
+                "tags":["SysBtRolesAuthorities"],
+                "summary" : "[系统管理]角色权限表",
+                "operationId" : "SysBtRolesAuthoritiesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysBtRolesAuthoritiesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]角色权限表"
+            }
+        }
+    ,
+        "/SysBtRolesMoudlesService/save" :{
+            "post" : {
+                "tags":["SysBtRolesMoudles"],
+                "summary" : "[系统管理]角色模块表",
+                "operationId" : "SysBtRolesMoudlesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]角色模块表"
+            }
+        },
+        "/SysBtRolesMoudlesService/delete" :{
+            "post" : {
+                "tags":["SysBtRolesMoudles"],
+                "summary" : "[系统管理]角色模块表",
+                "operationId" : "SysBtRolesMoudlesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]角色模块表"
+            }
+        },
+        "/SysBtRolesMoudlesService/update" :{
+            "post" : {
+                "tags":["SysBtRolesMoudles"],
+                "summary" : "[系统管理]角色模块表",
+                "operationId" : "SysBtRolesMoudlesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysBtRolesMoudlesId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]角色模块表"
+            }
+        },
+        "/SysBtRolesMoudlesService/query" :{
+            "get" : {
+                "tags":["SysBtRolesMoudles"],
+                "summary" : "[系统管理]角色模块表",
+                "operationId" : "SysBtRolesMoudlesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysBtRolesMoudlesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]角色模块表"
+            }
+        }
+    ,
+        "/SysBtTaskTargetService/save" :{
+            "post" : {
+                "tags":["SysBtTaskTarget"],
+                "summary" : "[系统管理]定时任务目标任务表",
+                "operationId" : "SysBtTaskTargetService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysTaskId",
+                        "in" : "formData",
+                        "description" : "定时任务标志",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "sysTaskTargetId",
+                        "in" : "formData",
+                        "description" : "目标方法主键",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "order",
+                        "in" : "formData",
+                        "description" : "优先级",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]定时任务目标任务表"
+            }
+        },
+        "/SysBtTaskTargetService/delete" :{
+            "post" : {
+                "tags":["SysBtTaskTarget"],
+                "summary" : "[系统管理]定时任务目标任务表",
+                "operationId" : "SysBtTaskTargetService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]定时任务目标任务表"
+            }
+        },
+        "/SysBtTaskTargetService/update" :{
+            "post" : {
+                "tags":["SysBtTaskTarget"],
+                "summary" : "[系统管理]定时任务目标任务表",
+                "operationId" : "SysBtTaskTargetService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysBtTaskTargetId",
+                        "in" : "formData",
+                        "description" : "主键",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "sysTaskId",
+                        "in" : "formData",
+                        "description" : "定时任务标志",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "sysTaskTargetId",
+                        "in" : "formData",
+                        "description" : "目标方法主键",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "order",
+                        "in" : "formData",
+                        "description" : "优先级",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]定时任务目标任务表"
+            }
+        },
+        "/SysBtTaskTargetService/query" :{
+            "get" : {
+                "tags":["SysBtTaskTarget"],
+                "summary" : "[系统管理]定时任务目标任务表",
+                "operationId" : "SysBtTaskTargetService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysBtTaskTargetEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]定时任务目标任务表"
+            }
+        }
+    ,
+        "/SysBtUsersRolesService/save" :{
+            "post" : {
+                "tags":["SysBtUsersRoles"],
+                "summary" : "[系统管理]用户角色表",
+                "operationId" : "SysBtUsersRolesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "roleId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "userId",
+                        "in" : "formData",
+                        "description" : "用户唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]用户角色表"
+            }
+        },
+        "/SysBtUsersRolesService/delete" :{
+            "post" : {
+                "tags":["SysBtUsersRoles"],
+                "summary" : "[系统管理]用户角色表",
+                "operationId" : "SysBtUsersRolesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]用户角色表"
+            }
+        },
+        "/SysBtUsersRolesService/update" :{
+            "post" : {
+                "tags":["SysBtUsersRoles"],
+                "summary" : "[系统管理]用户角色表",
+                "operationId" : "SysBtUsersRolesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysBtUsersRolesId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "userId",
+                        "in" : "formData",
+                        "description" : "用户唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]用户角色表"
+            }
+        },
+        "/SysBtUsersRolesService/query" :{
+            "get" : {
+                "tags":["SysBtUsersRoles"],
+                "summary" : "[系统管理]用户角色表",
+                "operationId" : "SysBtUsersRolesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysBtUsersRolesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]用户角色表"
+            }
+        }
+    ,
+        "/SysModulesService/save" :{
+            "post" : {
+                "tags":["SysModules"],
+                "summary" : "[系统管理]模块",
+                "operationId" : "SysModulesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "moduleName",
+                        "in" : "formData",
+                        "description" : "模块名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleDesc",
+                        "in" : "formData",
+                        "description" : "模块说明",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleType",
+                        "in" : "formData",
+                        "description" : "模块类型",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "parent",
+                        "in" : "formData",
+                        "description" : "模块上级",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleUrl",
+                        "in" : "formData",
+                        "description" : "模块地址",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "iLevel",
+                        "in" : "formData",
+                        "description" : "菜单级别",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "leaf",
+                        "in" : "formData",
+                        "description" : "最下级",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "application",
+                        "in" : "formData",
+                        "description" : "应用名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "controller",
+                        "in" : "formData",
+                        "description" : "控制器名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "priority",
+                        "in" : "formData",
+                        "description" : "优先级",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]模块"
+            }
+        },
+        "/SysModulesService/delete" :{
+            "post" : {
+                "tags":["SysModules"],
+                "summary" : "[系统管理]模块",
+                "operationId" : "SysModulesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]模块"
+            }
+        },
+        "/SysModulesService/update" :{
+            "post" : {
+                "tags":["SysModules"],
+                "summary" : "[系统管理]模块",
+                "operationId" : "SysModulesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysModulesId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleName",
+                        "in" : "formData",
+                        "description" : "模块名称",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleDesc",
+                        "in" : "formData",
+                        "description" : "模块说明",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleType",
+                        "in" : "formData",
+                        "description" : "模块类型",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "parent",
+                        "in" : "formData",
+                        "description" : "模块上级",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleUrl",
+                        "in" : "formData",
+                        "description" : "模块地址",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "iLevel",
+                        "in" : "formData",
+                        "description" : "菜单级别",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "leaf",
+                        "in" : "formData",
+                        "description" : "最下级",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "application",
+                        "in" : "formData",
+                        "description" : "应用名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "controller",
+                        "in" : "formData",
+                        "description" : "控制器名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "priority",
+                        "in" : "formData",
+                        "description" : "优先级",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]模块"
+            }
+        },
+        "/SysModulesService/query" :{
+            "get" : {
+                "tags":["SysModules"],
+                "summary" : "[系统管理]模块",
+                "operationId" : "SysModulesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysModulesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]模块"
+            }
+        }
+    ,
+        "/SysPersistentLoginsService/save" :{
+            "post" : {
+                "tags":["SysPersistentLogins"],
+                "summary" : "[系统管理]登陆用户信息",
+                "operationId" : "SysPersistentLoginsService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "username",
+                        "in" : "formData",
+                        "description" : "用户名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "series",
+                        "in" : "formData",
+                        "description" : "序列",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "token",
+                        "in" : "formData",
+                        "description" : "认证信息",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "lastUsed",
+                        "in" : "formData",
+                        "description" : "最后时间",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]登陆用户信息"
+            }
+        },
+        "/SysPersistentLoginsService/delete" :{
+            "post" : {
+                "tags":["SysPersistentLogins"],
+                "summary" : "[系统管理]登陆用户信息",
+                "operationId" : "SysPersistentLoginsService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]登陆用户信息"
+            }
+        },
+        "/SysPersistentLoginsService/update" :{
+            "post" : {
+                "tags":["SysPersistentLogins"],
+                "summary" : "[系统管理]登陆用户信息",
+                "operationId" : "SysPersistentLoginsService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysPersistentLoginsId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "username",
+                        "in" : "formData",
+                        "description" : "用户名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "series",
+                        "in" : "formData",
+                        "description" : "序列",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "token",
+                        "in" : "formData",
+                        "description" : "认证信息",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "lastUsed",
+                        "in" : "formData",
+                        "description" : "最后时间",
+                        "required" : false,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]登陆用户信息"
+            }
+        },
+        "/SysPersistentLoginsService/query" :{
+            "get" : {
+                "tags":["SysPersistentLogins"],
+                "summary" : "[系统管理]登陆用户信息",
+                "operationId" : "SysPersistentLoginsService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysPersistentLoginsEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]登陆用户信息"
+            }
+        }
+    ,
+        "/SysResourcesService/save" :{
+            "post" : {
+                "tags":["SysResources"],
+                "summary" : "[系统管理]资源",
+                "operationId" : "SysResourcesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "resourceType",
+                        "in" : "formData",
+                        "description" : "资源类型",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourceName",
+                        "in" : "formData",
+                        "description" : "资源名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourceDesc",
+                        "in" : "formData",
+                        "description" : "资源描述",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourcePath",
+                        "in" : "formData",
+                        "description" : "资源路径",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "priority",
+                        "in" : "formData",
+                        "description" : "优先级",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "issys",
+                        "in" : "formData",
+                        "description" : "是否系统权限",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]资源"
+            }
+        },
+        "/SysResourcesService/delete" :{
+            "post" : {
+                "tags":["SysResources"],
+                "summary" : "[系统管理]资源",
+                "operationId" : "SysResourcesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]资源"
+            }
+        },
+        "/SysResourcesService/update" :{
+            "post" : {
+                "tags":["SysResources"],
+                "summary" : "[系统管理]资源",
+                "operationId" : "SysResourcesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysResourcesId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourceType",
+                        "in" : "formData",
+                        "description" : "资源类型",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourceName",
+                        "in" : "formData",
+                        "description" : "资源名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourceDesc",
+                        "in" : "formData",
+                        "description" : "资源描述",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "resourcePath",
+                        "in" : "formData",
+                        "description" : "资源路径",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "priority",
+                        "in" : "formData",
+                        "description" : "优先级",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "issys",
+                        "in" : "formData",
+                        "description" : "是否系统权限",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]资源"
+            }
+        },
+        "/SysResourcesService/query" :{
+            "get" : {
+                "tags":["SysResources"],
+                "summary" : "[系统管理]资源",
+                "operationId" : "SysResourcesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysResourcesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]资源"
+            }
+        }
+    ,
+        "/SysRolesService/save" :{
+            "post" : {
+                "tags":["SysRoles"],
+                "summary" : "[系统管理]角色",
+                "operationId" : "SysRolesService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "roleName",
+                        "in" : "formData",
+                        "description" : "角色名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleDesc",
+                        "in" : "formData",
+                        "description" : "角色说明",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "issys",
+                        "in" : "formData",
+                        "description" : "是否系统权限",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]角色"
+            }
+        },
+        "/SysRolesService/delete" :{
+            "post" : {
+                "tags":["SysRoles"],
+                "summary" : "[系统管理]角色",
+                "operationId" : "SysRolesService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]角色"
+            }
+        },
+        "/SysRolesService/update" :{
+            "post" : {
+                "tags":["SysRoles"],
+                "summary" : "[系统管理]角色",
+                "operationId" : "SysRolesService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysRolesId",
+                        "in" : "formData",
+                        "description" : "角色唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleName",
+                        "in" : "formData",
+                        "description" : "角色名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "roleDesc",
+                        "in" : "formData",
+                        "description" : "角色说明",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enable",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "issys",
+                        "in" : "formData",
+                        "description" : "是否系统权限",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "moduleId",
+                        "in" : "formData",
+                        "description" : "模块",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]角色"
+            }
+        },
+        "/SysRolesService/query" :{
+            "get" : {
+                "tags":["SysRoles"],
+                "summary" : "[系统管理]角色",
+                "operationId" : "SysRolesService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysRolesEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]角色"
+            }
+        }
+    ,
+        "/SysTaskService/save" :{
+            "post" : {
+                "tags":["SysTask"],
+                "summary" : "[系统管理]定时任务",
+                "operationId" : "SysTaskService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "定时任务名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "state",
+                        "in" : "formData",
+                        "description" : "状态",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "cron",
+                        "in" : "formData",
+                        "description" : "定时表达式",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "sync",
+                        "in" : "formData",
+                        "description" : "是否同步",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "updateTime",
+                        "in" : "formData",
+                        "description" : "更新时间",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "createTime",
+                        "in" : "formData",
+                        "description" : "创建时间",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]定时任务"
+            }
+        },
+        "/SysTaskService/delete" :{
+            "post" : {
+                "tags":["SysTask"],
+                "summary" : "[系统管理]定时任务",
+                "operationId" : "SysTaskService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]定时任务"
+            }
+        },
+        "/SysTaskService/update" :{
+            "post" : {
+                "tags":["SysTask"],
+                "summary" : "[系统管理]定时任务",
+                "operationId" : "SysTaskService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysTaskId",
+                        "in" : "formData",
+                        "description" : "主键",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "定时任务名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "state",
+                        "in" : "formData",
+                        "description" : "状态",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "cron",
+                        "in" : "formData",
+                        "description" : "定时表达式",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "sync",
+                        "in" : "formData",
+                        "description" : "是否同步",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "updateTime",
+                        "in" : "formData",
+                        "description" : "更新时间",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "createTime",
+                        "in" : "formData",
+                        "description" : "创建时间",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]定时任务"
+            }
+        },
+        "/SysTaskService/query" :{
+            "get" : {
+                "tags":["SysTask"],
+                "summary" : "[系统管理]定时任务",
+                "operationId" : "SysTaskService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysTaskEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]定时任务"
+            }
+        }
+    ,
+        "/SysTaskTargetService/save" :{
+            "post" : {
+                "tags":["SysTaskTarget"],
+                "summary" : "[系统管理]目标任务表",
+                "operationId" : "SysTaskTargetService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "方法含义名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetPackage",
+                        "in" : "formData",
+                        "description" : "包名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetClass",
+                        "in" : "formData",
+                        "description" : "类名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetMethod",
+                        "in" : "formData",
+                        "description" : "方法名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "remarks",
+                        "in" : "formData",
+                        "description" : "备注",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]目标任务表"
+            }
+        },
+        "/SysTaskTargetService/delete" :{
+            "post" : {
+                "tags":["SysTaskTarget"],
+                "summary" : "[系统管理]目标任务表",
+                "operationId" : "SysTaskTargetService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]目标任务表"
+            }
+        },
+        "/SysTaskTargetService/update" :{
+            "post" : {
+                "tags":["SysTaskTarget"],
+                "summary" : "[系统管理]目标任务表",
+                "operationId" : "SysTaskTargetService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysTaskTargetId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "方法含义名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetPackage",
+                        "in" : "formData",
+                        "description" : "包名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetClass",
+                        "in" : "formData",
+                        "description" : "类名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "targetMethod",
+                        "in" : "formData",
+                        "description" : "方法名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "remarks",
+                        "in" : "formData",
+                        "description" : "备注",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]目标任务表"
+            }
+        },
+        "/SysTaskTargetService/query" :{
+            "get" : {
+                "tags":["SysTaskTarget"],
+                "summary" : "[系统管理]目标任务表",
+                "operationId" : "SysTaskTargetService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysTaskTargetEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]目标任务表"
+            }
+        }
+    ,
+        "/SysUsersService/save" :{
+            "post" : {
+                "tags":["SysUsers"],
+                "summary" : "[系统管理]用户",
+                "operationId" : "SysUsersService_save",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "username",
+                        "in" : "formData",
+                        "description" : "用户名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "用户姓名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "password",
+                        "in" : "formData",
+                        "description" : "密码",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "dtCreate",
+                        "in" : "formData",
+                        "description" : "创建日期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "lastLogin",
+                        "in" : "formData",
+                        "description" : "最后登录日期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "deadline",
+                        "in" : "formData",
+                        "description" : "截止日期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "loginIp",
+                        "in" : "formData",
+                        "description" : "最后登录IP地址",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "vQzjgid",
+                        "in" : "formData",
+                        "description" : "所属机构ID",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "vQzjgmc",
+                        "in" : "formData",
+                        "description" : "所属机构名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "depId",
+                        "in" : "formData",
+                        "description" : "地区编号",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "depName",
+                        "in" : "formData",
+                        "description" : "地区名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enabled",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "accountNonExpired",
+                        "in" : "formData",
+                        "description" : "用户是否过期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "accountNonLocked",
+                        "in" : "formData",
+                        "description" : "用户是否锁定",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "credentialsNonExpired",
+                        "in" : "formData",
+                        "description" : "用户证书是否有效",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "保存[系统管理]用户"
+            }
+        },
+        "/SysUsersService/delete" :{
+            "post" : {
+                "tags":["SysUsers"],
+                "summary" : "[系统管理]用户",
+                "operationId" : "SysUsersService_delete",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [ {
+                    "name" : "ids",
+                    "in" : "formData",
+                    "description" : "主键字符串",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "删除[系统管理]用户"
+            }
+        },
+        "/SysUsersService/update" :{
+            "post" : {
+                "tags":["SysUsers"],
+                "summary" : "[系统管理]用户",
+                "operationId" : "SysUsersService_update",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "sysUsersId",
+                        "in" : "formData",
+                        "description" : "唯一标识",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "username",
+                        "in" : "formData",
+                        "description" : "用户名",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "name",
+                        "in" : "formData",
+                        "description" : "用户姓名",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "password",
+                        "in" : "formData",
+                        "description" : "密码",
+                        "required" : false,
+                        "type" : "string"
+                    },                    {
+                        "name" : "dtCreate",
+                        "in" : "formData",
+                        "description" : "创建日期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "lastLogin",
+                        "in" : "formData",
+                        "description" : "最后登录日期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "deadline",
+                        "in" : "formData",
+                        "description" : "截止日期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "loginIp",
+                        "in" : "formData",
+                        "description" : "最后登录IP地址",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "vQzjgid",
+                        "in" : "formData",
+                        "description" : "所属机构ID",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "vQzjgmc",
+                        "in" : "formData",
+                        "description" : "所属机构名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "depId",
+                        "in" : "formData",
+                        "description" : "地区编号",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "depName",
+                        "in" : "formData",
+                        "description" : "地区名称",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "enabled",
+                        "in" : "formData",
+                        "description" : "是否可用",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "accountNonExpired",
+                        "in" : "formData",
+                        "description" : "用户是否过期",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "accountNonLocked",
+                        "in" : "formData",
+                        "description" : "用户是否锁定",
+                        "required" : true,
+                        "type" : "string"
+                    },                    {
+                        "name" : "credentialsNonExpired",
+                        "in" : "formData",
+                        "description" : "用户证书是否有效",
+                        "required" : true,
+                        "type" : "string"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功"
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "更新[系统管理]用户"
+            }
+        },
+        "/SysUsersService/query" :{
+            "get" : {
+                "tags":["SysUsers"],
+                "summary" : "[系统管理]用户",
+                "operationId" : "SysUsersService_query",
+                "consumes" : [ "application/json" ],
+                "produces" : [ "application/json" ],
+                "parameters" : [
+                    {
+                        "name" : "page",
+                        "in" : "query",
+                        "description" : "第几页",
+                        "required" : false,
+                        "type" : "integer"
+                    },{
+                        "name" : "size",
+                        "in" : "query",
+                        "description" : "每页条数",
+                        "required" : false,
+                        "type" : "integer"
+                    }
+                ],
+                "responses" : {
+                    "000001" : {
+                        "description" : "成功",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/SysUsersEntity"
+                            }
+                        }
+                    },
+                    "300000" : {
+                        "description" : "系统程序异常"
+                    }
+                },
+                "description" : "查询[系统管理]用户"
+            }
+        }
+    
+    },
+    "securityDefinitions" : {
+        "petstore_auth" : {
+            "type" : "oauth2",
+            "authorizationUrl" : "oauth2-redirect.html",
+            "flow" : "implicit",
+            "scopes" : {
+                "write:pets" : "",
+                "read:pets" : ""
+            },
+            "api_key" : {
+                "type" : "apiKey",
+                "name" : "api_key",
+                "in" : "header"
+            }
+        }
+    },
+    "definitions" : {
+        "DictionaryDataEntity" : {
+            "type" : "object",
+            "properties" : {
+                "code" : {
+                    "type" : "INT",
+                    "description" : "字典编码"
+                },
+                "dic_code" : {
+                    "type" : "VARCHAR",
+                    "description" : "字典表_字典编码"
+                },
+                "name" : {
+                    "type" : "VARCHAR",
+                    "description" : "字典值显示名称"
+                },
+                "value" : {
+                    "type" : "VARCHAR",
+                    "description" : "字典值代表值"
+                },
+                "is_fixed" : {
+                    "type" : "BIT",
+                    "description" : "字典值是否固定"
+                }
+            }
+        },
+        "DictionaryMainEntity" : {
+            "type" : "object",
+            "properties" : {
+                "code" : {
+                    "type" : "INT",
+                    "description" : "字典编码"
+                },
+                "name" : {
+                    "type" : "VARCHAR",
+                    "description" : "字典名称"
+                },
+                "is_constant" : {
+                    "type" : "BIT",
+                    "description" : "是否是常量"
+                }
+            }
+        },
+        "LogMainEntity" : {
+            "type" : "object",
+            "properties" : {
+                "log_main_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "business_code" : {
+                    "type" : "VARCHAR",
+                    "description" : "业务编码"
+                },
+                "target_type" : {
+                    "type" : "VARCHAR",
+                    "description" : "业务对象类型"
+                },
+                "target_code" : {
+                    "type" : "VARCHAR",
+                    "description" : "业务对象标识"
+                },
+                "user_id" : {
+                    "type" : "INT",
+                    "description" : "操作人"
+                },
+                "create_time" : {
+                    "type" : "DATETIME",
+                    "description" : "操作时间"
+                }
+            }
+        },
+        "LogTableEntity" : {
+            "type" : "object",
+            "properties" : {
+                "log_table_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "log_main_id" : {
+                    "type" : "INT",
+                    "description" : "日志标识"
+                },
+                "table_schema" : {
+                    "type" : "VARCHAR",
+                    "description" : "数据库"
+                },
+                "table_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "表名"
+                },
+                "operation_type" : {
+                    "type" : "VARCHAR",
+                    "description" : "操作类型"
+                },
+                "operation_order" : {
+                    "type" : "INT",
+                    "description" : "操作顺序"
+                }
+            }
+        },
+        "LogValueEntity" : {
+            "type" : "object",
+            "properties" : {
+                "log_value_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "log_table_id" : {
+                    "type" : "INT",
+                    "description" : "日志相关表标识"
+                },
+                "column_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "字段"
+                },
+                "column_type" : {
+                    "type" : "VARCHAR",
+                    "description" : "字段类型"
+                },
+                "new_value" : {
+                    "type" : "VARCHAR",
+                    "description" : "新值"
+                },
+                "old_value" : {
+                    "type" : "VARCHAR",
+                    "description" : "旧值"
+                },
+                "column_info" : {
+                    "type" : "VARCHAR",
+                    "description" : "字段含义"
+                }
+            }
+        },
+        "SysAuthoritiesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_authority_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "authority_mark" : {
+                    "type" : "VARCHAR",
+                    "description" : "权限标识"
+                },
+                "authority_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "权限名称"
+                },
+                "authority_desc" : {
+                    "type" : "VARCHAR",
+                    "description" : "权限说明"
+                },
+                "message" : {
+                    "type" : "VARCHAR",
+                    "description" : "提示信息"
+                },
+                "enable" : {
+                    "type" : "BIT",
+                    "description" : "是否可用"
+                },
+                "issys" : {
+                    "type" : "BIT",
+                    "description" : "是否系统权限"
+                },
+                "module_id" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块"
+                }
+            }
+        },
+        "SysBtAuthoritiesResourcesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_bt_authorities_resources_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "resource_id" : {
+                    "type" : "INT",
+                    "description" : "资源唯一标识"
+                },
+                "authority_id" : {
+                    "type" : "INT",
+                    "description" : "权限唯一标识"
+                }
+            }
+        },
+        "SysBtRolesAuthoritiesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_bt_roles_authorities_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "authority_id" : {
+                    "type" : "INT",
+                    "description" : "权限唯一标识"
+                },
+                "role_id" : {
+                    "type" : "INT",
+                    "description" : "角色唯一标识"
+                }
+            }
+        },
+        "SysBtRolesMoudlesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_bt_roles_moudles_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "module_id" : {
+                    "type" : "INT",
+                    "description" : "模块唯一标识"
+                },
+                "role_id" : {
+                    "type" : "INT",
+                    "description" : "角色唯一标识"
+                }
+            }
+        },
+        "SysBtTaskTargetEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_bt_task_target_id" : {
+                    "type" : "INT",
+                    "description" : "主键"
+                },
+                "sys_task_id" : {
+                    "type" : "INT",
+                    "description" : "定时任务标志"
+                },
+                "sys_task_target_id" : {
+                    "type" : "VARCHAR",
+                    "description" : "目标方法主键"
+                },
+                "order" : {
+                    "type" : "VARCHAR",
+                    "description" : "优先级"
+                }
+            }
+        },
+        "SysBtUsersRolesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_bt_users_roles_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "role_id" : {
+                    "type" : "INT",
+                    "description" : "角色唯一标识"
+                },
+                "user_id" : {
+                    "type" : "INT",
+                    "description" : "用户唯一标识"
+                }
+            }
+        },
+        "SysModulesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_modules_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "module_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块名称"
+                },
+                "module_desc" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块说明"
+                },
+                "module_type" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块类型"
+                },
+                "parent" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块上级"
+                },
+                "module_url" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块地址"
+                },
+                "i_level" : {
+                    "type" : "VARCHAR",
+                    "description" : "菜单级别"
+                },
+                "leaf" : {
+                    "type" : "VARCHAR",
+                    "description" : "最下级"
+                },
+                "application" : {
+                    "type" : "VARCHAR",
+                    "description" : "应用名称"
+                },
+                "controller" : {
+                    "type" : "VARCHAR",
+                    "description" : "控制器名称"
+                },
+                "enable" : {
+                    "type" : "BIT",
+                    "description" : "是否可用"
+                },
+                "priority" : {
+                    "type" : "VARCHAR",
+                    "description" : "优先级"
+                }
+            }
+        },
+        "SysPersistentLoginsEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_persistent_logins_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "username" : {
+                    "type" : "VARCHAR",
+                    "description" : "用户名"
+                },
+                "series" : {
+                    "type" : "VARCHAR",
+                    "description" : "序列"
+                },
+                "token" : {
+                    "type" : "VARCHAR",
+                    "description" : "认证信息"
+                },
+                "last_used" : {
+                    "type" : "TIMESTAMP",
+                    "description" : "最后时间"
+                }
+            }
+        },
+        "SysResourcesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_resources_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "resource_type" : {
+                    "type" : "VARCHAR",
+                    "description" : "资源类型"
+                },
+                "resource_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "资源名称"
+                },
+                "resource_desc" : {
+                    "type" : "VARCHAR",
+                    "description" : "资源描述"
+                },
+                "resource_path" : {
+                    "type" : "VARCHAR",
+                    "description" : "资源路径"
+                },
+                "priority" : {
+                    "type" : "VARCHAR",
+                    "description" : "优先级"
+                },
+                "enable" : {
+                    "type" : "BIT",
+                    "description" : "是否可用"
+                },
+                "issys" : {
+                    "type" : "BIT",
+                    "description" : "是否系统权限"
+                },
+                "module_id" : {
+                    "type" : "INT",
+                    "description" : "模块"
+                }
+            }
+        },
+        "SysRolesEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_roles_id" : {
+                    "type" : "INT",
+                    "description" : "角色唯一标识"
+                },
+                "role_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "角色名称"
+                },
+                "role_desc" : {
+                    "type" : "VARCHAR",
+                    "description" : "角色说明"
+                },
+                "enable" : {
+                    "type" : "BIT",
+                    "description" : "是否可用"
+                },
+                "issys" : {
+                    "type" : "BIT",
+                    "description" : "是否系统权限"
+                },
+                "module_id" : {
+                    "type" : "VARCHAR",
+                    "description" : "模块"
+                }
+            }
+        },
+        "SysTaskEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_task_id" : {
+                    "type" : "INT",
+                    "description" : "主键"
+                },
+                "name" : {
+                    "type" : "VARCHAR",
+                    "description" : "定时任务名"
+                },
+                "state" : {
+                    "type" : "BIT",
+                    "description" : "状态"
+                },
+                "cron" : {
+                    "type" : "VARCHAR",
+                    "description" : "定时表达式"
+                },
+                "sync" : {
+                    "type" : "BIT",
+                    "description" : "是否同步"
+                },
+                "update_time" : {
+                    "type" : "DATETIME",
+                    "description" : "更新时间"
+                },
+                "create_time" : {
+                    "type" : "DATETIME",
+                    "description" : "创建时间"
+                }
+            }
+        },
+        "SysTaskTargetEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_task_target_id" : {
+                    "type" : "VARCHAR",
+                    "description" : "唯一标识"
+                },
+                "name" : {
+                    "type" : "VARCHAR",
+                    "description" : "方法含义名"
+                },
+                "target_package" : {
+                    "type" : "VARCHAR",
+                    "description" : "包名"
+                },
+                "target_class" : {
+                    "type" : "VARCHAR",
+                    "description" : "类名"
+                },
+                "target_method" : {
+                    "type" : "VARCHAR",
+                    "description" : "方法名"
+                },
+                "remarks" : {
+                    "type" : "VARCHAR",
+                    "description" : "备注"
+                }
+            }
+        },
+        "SysUsersEntity" : {
+            "type" : "object",
+            "properties" : {
+                "sys_users_id" : {
+                    "type" : "INT",
+                    "description" : "唯一标识"
+                },
+                "username" : {
+                    "type" : "VARCHAR",
+                    "description" : "用户名"
+                },
+                "name" : {
+                    "type" : "VARCHAR",
+                    "description" : "用户姓名"
+                },
+                "password" : {
+                    "type" : "VARCHAR",
+                    "description" : "密码"
+                },
+                "dt_create" : {
+                    "type" : "DATETIME",
+                    "description" : "创建日期"
+                },
+                "last_login" : {
+                    "type" : "DATETIME",
+                    "description" : "最后登录日期"
+                },
+                "deadline" : {
+                    "type" : "DATETIME",
+                    "description" : "截止日期"
+                },
+                "login_ip" : {
+                    "type" : "VARCHAR",
+                    "description" : "最后登录IP地址"
+                },
+                "v_qzjgid" : {
+                    "type" : "VARCHAR",
+                    "description" : "所属机构ID"
+                },
+                "v_qzjgmc" : {
+                    "type" : "VARCHAR",
+                    "description" : "所属机构名称"
+                },
+                "dep_id" : {
+                    "type" : "VARCHAR",
+                    "description" : "地区编号"
+                },
+                "dep_name" : {
+                    "type" : "VARCHAR",
+                    "description" : "地区名称"
+                },
+                "enabled" : {
+                    "type" : "BIT",
+                    "description" : "是否可用"
+                },
+                "account_non_expired" : {
+                    "type" : "BIT",
+                    "description" : "用户是否过期"
+                },
+                "account_non_locked" : {
+                    "type" : "BIT",
+                    "description" : "用户是否锁定"
+                },
+                "credentials_non_expired" : {
+                    "type" : "BIT",
+                    "description" : "用户证书是否有效"
+                }
+            }
+        }
+    },
+    "externalDocs" : {
+        "description" : "",
+        "url" : ""
+    }
+}
