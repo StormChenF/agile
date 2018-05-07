@@ -17,14 +17,14 @@ import org.springframework.context.annotation.Configuration;
 public class EhCacheConfig {
 
     @Bean
-    public EhCacheCacheManager ehCacheCacheManager(CacheManager cacheManager) {
-        return new EhCacheCacheManager(cacheManager);
+    public EhCacheCacheManager ehCacheCacheManager(EhCacheManagerFactoryBean ehCacheManagerFactoryBean) {
+        return new EhCacheCacheManager(ehCacheManagerFactoryBean.getObject());
     }
 
     @Bean
     EhCacheManagerFactoryBean ehCacheManagerFactoryBean(){
         EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
-        ehCacheManagerFactoryBean.setShared(true);
+        ehCacheManagerFactoryBean.setAcceptExisting(true);
         ehCacheManagerFactoryBean.setConfigLocation(configuration());
         return ehCacheManagerFactoryBean;
     }

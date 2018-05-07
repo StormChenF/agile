@@ -23,7 +23,10 @@ import java.util.*;
 @Controller
 public class MainController {
 
+    //服务缓存变量
     private static ThreadLocal<ServiceInterface> service = new ThreadLocal<>();
+
+    //request缓存变量
     private static ThreadLocal<HttpServletRequest> request = new ThreadLocal<>();
 
     /**
