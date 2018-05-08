@@ -1,7 +1,6 @@
 package com.agile.common.config;
 
 import com.agile.common.cache.ehCache.EhCacheManagerFactoryBean;
-import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.DiskStoreConfiguration;
 import net.sf.ehcache.config.PersistenceConfiguration;
@@ -78,10 +77,10 @@ public class EhCacheConfig {
                         .timeToIdleSeconds(300)
                         .timeToLiveSeconds(600)
                         .diskExpiryThreadIntervalSeconds(600))
-                .cache(new CacheConfiguration("org.hibernate.cache.spi.UpdateTimestampsCache", 10000)
+                .cache(new CacheConfiguration("hibernate.org.hibernate.cache.spi.TimestampsRegion", 10000)
                         .maxEntriesLocalHeap(5)
                         .timeToLiveSeconds(120))
-                .cache(new CacheConfiguration("org.hibernate.cache.internal.StandardQueryCache", 10000)
+                .cache(new CacheConfiguration("hibernate.org.hibernate.cache.spi.QueryResultsRegion", 10000)
                         .maxEntriesLocalHeap(5000)
                         .eternal(true));
         configuration.setName("agileManager");
