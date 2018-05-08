@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class EhCacheRegionFactory extends SingletonEhcacheRegionFactory {
     private static final AtomicInteger REFERENCE_COUNT = new AtomicInteger();
-    private Log log = LoggerFactory.createLogger("ehcahce",EhCacheRegionFactory.class);
+    private Log log = LoggerFactory.createLogger("ehcache",EhCacheRegionFactory.class);
 
     @Override
     protected CacheManager resolveCacheManager(SessionFactoryOptions settings, Map properties) {
